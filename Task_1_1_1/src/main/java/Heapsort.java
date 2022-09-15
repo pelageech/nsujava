@@ -4,17 +4,14 @@ import java.util.List;
 /**
  * Heapsort is a O(NlogN)-sort based on array (heap).
  * Array becomes a binary heap:
- *
  *          0 (item)
  *         /        \
  *      1 (item)   2 (item)
  *      /      \
  *   3 (item)  4 (item)
- *
- * and so on.
+ *                              and so on.
  */
 public class Heapsort {
-
 /**
  * @param arr start Array
  * @return Sorted Array
