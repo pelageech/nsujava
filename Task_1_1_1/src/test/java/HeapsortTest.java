@@ -1,8 +1,10 @@
-import java.util.*;
-
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 
 /**
  * Test for Heapsort (method heapsort).
@@ -46,10 +48,10 @@ public class HeapsortTest {
 
   @Test
   public void emptyListTest() {
-    List<Integer> expected = Arrays.asList();
+    List<Integer> expected = Collections.emptyList();
 
     List<Integer> actual = Heapsort.heapsort(
-        Arrays.asList()
+        Collections.emptyList()
     );
 
     Assertions.assertEquals(expected, actual);
@@ -57,10 +59,10 @@ public class HeapsortTest {
 
   @Test
   public void oneElementTest() {
-    List<Integer> expected = Arrays.asList(-6);
+    List<Integer> expected = List.of(-6);
 
     List<Integer> actual = Heapsort.heapsort(
-        Arrays.asList(-6)
+        List.of(-6)
     );
 
     Assertions.assertEquals(expected, actual);
