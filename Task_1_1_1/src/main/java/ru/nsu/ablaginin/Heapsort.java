@@ -60,15 +60,4 @@ public class Heapsort {
       heapify(integerList, n, large);
     }
   }
-
-  public static void main(String[] args) {
-    List<Integer> test = Heapsort.heapsort(
-        Arrays.asList(5, 3, 7, 1, -5, -9, 0, 5, 3)
-    );
-
-    for (Integer integer : test) {
-      System.out.print(integer + " ");
-    }
-  }
-
 }
