@@ -1,5 +1,5 @@
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 public class HeapsortTest {
 
   @Test
-
   public void theFirstTest() {
     List<Integer> expected = Arrays.asList(1, 2, 3, 4, 5);
 
@@ -20,8 +19,7 @@ public class HeapsortTest {
   }
 
   @Test
-
-  public void sortedArrayTest() {
+  public void sortedListTest() {
     List<Integer> expected = Arrays.asList(
         1, 3, 6, 10, 10, 19, 80, 900, 1000, 1010
     );
@@ -34,8 +32,7 @@ public class HeapsortTest {
   }
 
   @Test
-
-  public void reverseArrayTest() {
+  public void reverseListTest() {
     List<Integer> expected = Arrays.asList(
         1, 3, 6, 10, 10, 19, 80, 900, 1000, 1010
     );
@@ -47,4 +44,41 @@ public class HeapsortTest {
     Assertions.assertEquals(expected, actual);
   }
 
+  @Test
+  public void emptyListTest() {
+    List<Integer> expected = Arrays.asList();
+
+    List<Integer> actual = Heapsort.heapsort(
+        Arrays.asList()
+    );
+
+    Assertions.assertEquals(expected, actual);
+  }
+
+  @Test
+  public void oneElementTest() {
+    List<Integer> expected = Arrays.asList(-6);
+
+    List<Integer> actual = Heapsort.heapsort(
+        Arrays.asList(-6)
+    );
+
+    Assertions.assertEquals(expected, actual);
+  }
+
+  @Test
+  public void randomListTest() {
+    int lengthList = 100;
+    List<Integer> expected = new ArrayList<>();
+
+    for (int i = 0; i < lengthList; i++) {
+      expected.add(new Random().nextInt());
+    }
+
+    Collections.sort(expected);
+
+    List<Integer> actual = Heapsort.heapsort(expected);
+
+    Assertions.assertEquals(expected, actual);
+  }
 }

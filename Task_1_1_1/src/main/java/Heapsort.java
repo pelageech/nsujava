@@ -16,45 +16,45 @@ public class Heapsort {
   /**
    * heapsort() - main func.
    *
-   * @param arr start Array
-   * @return Sorted Array
+   * @param integerList input List
+   * @return Sorted integerList
    */
-  public static List<Integer> heapsort(List<Integer> arr) {
-    int arrsize = arr.size();
+  public static List<Integer> heapsort(List<Integer> integerList) {
+    int listSize = integerList.size();
 
-    for (int i = arrsize - 1; i >= 0; i--) {
-      heapify(arr, arrsize, i);
+    for (int i = listSize - 1; i >= 0; i--) {
+      heapify(integerList, listSize, i);
     }
 
-    for (int i = arrsize - 1; i > 0; i--) {
-      Collections.swap(arr, i, 0);
-      heapify(arr, i, 0);
+    for (int i = listSize - 1; i > 0; i--) {
+      Collections.swap(integerList, i, 0);
+      heapify(integerList, i, 0);
     }
-    return arr;
+    return integerList;
   }
 
   /**
    * heapify means that for each subtree root is the largest.
    *
-   * @param arr Array (binary heap)
-   * @param n Conditional size of arr
+   * @param integerList Binary heap
+   * @param n Conditional size of integerList
    * @param i Root of (sub-)tree
    */
-  private static void heapify(List<Integer> arr, int n, int i) {
+  private static void heapify(List<Integer> integerList, int n, int i) {
     int large = i;
     int l = 2 * i + 1;
     int r = l + 1;
 
-    if (l < n && arr.get(l) > arr.get(large)) {
+    if (l < n && integerList.get(l) > integerList.get(large)) {
       large = l;
     }
-    if (r < n && arr.get(r) > arr.get(large)) {
+    if (r < n && integerList.get(r) > integerList.get(large)) {
       large = r;
     }
 
     if (i != large) {
-      Collections.swap(arr, i, large);
-      heapify(arr, n, large);
+      Collections.swap(integerList, i, large);
+      heapify(integerList, n, large);
     }
   }
 
