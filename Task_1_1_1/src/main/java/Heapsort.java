@@ -2,8 +2,8 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Heapsort is a O(NlogN)-sort based on array (heap).
- * Array becomes a binary heap:
+ * Heapsort is a O(NlogN)-sort based on heap.
+ * Array or list becomes a binary heap:
  *          0 (item)
  *         /        \
  *      1 (item)   2 (item)
