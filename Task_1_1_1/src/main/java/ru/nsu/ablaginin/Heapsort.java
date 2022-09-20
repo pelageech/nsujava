@@ -1,8 +1,11 @@
+package ru.nsu.ablaginin;
+
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 /**
- * Heapsort is a O(NlogN)-sort based on heap.
+ * ru.nsu.ablaginin.Heapsort is a O(NlogN)-sort based on heap.
  * Array or list becomes a binary heap:
  *          0 (item)
  *         /        \
@@ -55,6 +58,16 @@ public class Heapsort {
     if (i != large) {
       Collections.swap(integerList, i, large);
       heapify(integerList, n, large);
+    }
+  }
+
+  public static void main(String[] args) {
+    List<Integer> test = Heapsort.heapsort(
+        Arrays.asList(5, 3, 7, 1, -5, -9, 0, 5, 3)
+    );
+
+    for (Integer integer : test) {
+      System.out.print(integer + " ");
     }
   }
 
