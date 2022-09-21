@@ -80,9 +80,9 @@ public class HeapsortTest {
       expected.add(new Random().nextInt());
     }
 
-    Collections.sort(expected);
-
     List<Integer> actual = Heapsort.heapsort(expected);
+
+    Collections.sort(expected);
 
     Assertions.assertEquals(expected, actual);
   }
