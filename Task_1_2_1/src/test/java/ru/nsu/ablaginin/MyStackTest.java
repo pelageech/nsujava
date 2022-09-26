@@ -67,6 +67,7 @@ class MyStackTest {
 
     MyStack nullStack = temp.popStack(-9);
     MyStack zeroPoppedStack = temp.popStack(0);
+    zeroPoppedStack.pop();
     int[] poppedArray = (int[]) temp.pop();
     MyStack poppedStackFull = temp.popStack(4);
     MyStack partialPoppedStack = temp.popStack(100);
@@ -154,9 +155,23 @@ class MyStackTest {
 
     // capacity decreasing check
 
-    biggerStack.popStack(8);
-    biggerStack.pop();
-    biggerStack.popStack(6);
+    biggerStack.push(12);
+    biggerStack.push(13);
+    biggerStack.push(14);
+    biggerStack.push(15);
+    biggerStack.push(16);
+    biggerStack.push(17);
+    biggerStack.push(18);
+    biggerStack.push(19);
+    biggerStack.push(12);
+    biggerStack.push(13);
+    biggerStack.push(14);
+    biggerStack.push(15);
+    biggerStack.push(16);
+    biggerStack.push(17);
+    biggerStack.push(18);
+    biggerStack.push(19);
+    biggerStack.popStack(31);
 
     MyStack expectedStack2 = new MyStack();
     expectedStack2.push(1);
@@ -166,6 +181,9 @@ class MyStackTest {
 
     Assertions.assertTrue(
         expectedStack2.equals(biggerStack)
+    );
+    Assertions.assertFalse(
+        expectedStack2.equals(expectedBiggerStack)
     );
   }
 

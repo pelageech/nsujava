@@ -115,15 +115,6 @@ public class MyStack {
       resultPoppedStack.push(temp[i]); // fill new stack
     }
 
-    if (2 * size < capacity) {
-      if (size >= 9) {
-        capacity = size + 1;
-      } else {
-        capacity = 10;
-      }
-      realloc(capacity);
-    }
-
     return resultPoppedStack;
   }
 
@@ -133,6 +124,15 @@ public class MyStack {
    * @return bool
    */
   public boolean equals(MyStack myStack) {
-    return Arrays.equals(arrayStack, myStack.arrayStack);
+    if (myStack.count() != size) {
+      return false;
+    }
+
+    boolean result = true;
+    for (int i = 0; i < size; i++) {
+      result &= myStack.arrayStack[i].equals(arrayStack[i]);
+    }
+
+    return result;
   }
 }
