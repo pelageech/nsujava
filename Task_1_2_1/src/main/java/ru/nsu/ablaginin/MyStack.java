@@ -26,8 +26,9 @@ public class MyStack {
   }
 
   /**
-   * @return size
    * Returns number of the stack items.
+   *
+   * @return size
    */
   public int count() {
     return size;
@@ -36,71 +37,93 @@ public class MyStack {
   /**
    * Increases the array if it is full and new item is pushed.
    */
-  private void realloc() {
-    capacity = capacity * 3 / 2;
-    arrayStack = Arrays.copyOf(arrayStack, capacity);
+  private void realloc(int newCapacity) {
+    arrayStack = Arrays.copyOf(arrayStack, newCapacity);
   }
 
   /**
-   * @param newItem
    * Inserts new element to the end of the stack.
    * A size of the stack increases by one.
+   *
+   * @param newItem item for pushing
    */
   public void push(Object newItem) {
-    if (size == capacity)
-      realloc();
+    if (size == capacity) {
+      realloc(capacity * 3 / 2);
+    }
 
     arrayStack[size++] = newItem;
   }
 
   /**
-   * @param inputSteak
    * Pushes all the elements of the stack to another one.
+   *
+   * @param inputStack stack which pushes to main stack
    */
-  public void pushStack(MyStack inputSteak) {
-    for (int i = 0; i < inputSteak.count(); i++) {
-      push(inputSteak.arrayStack[i]);
+  public void pushStack(MyStack inputStack) {
+    for (int i = 0; i < inputStack.count(); i++) {
+      push(inputStack.arrayStack[i]);
     }
   }
 
   /**
-   * @return poppedElem
    * Removes the last element from the stack and returns it.
+   * If size becomes less than capacity
+   *
+   * @return poppedElem
    */
   public Object pop() {
-    if (size == 0) return null;
+    if (size == 0) {
+      return null;
+    }
 
     Object poppedElem = arrayStack[--size];
     arrayStack[size] = null;
+
+    if (2 * size < capacity && size > 10) {
+      realloc(size + 1);
+    }
+
     return poppedElem;
   }
 
   /**
-   * @return resultPoppedStack
    * Pops 'popLength' elements from the stack to new one and returns it.
-   * If 'popLength' is equal or higher than the size of the stack, the method returns a copy of the stack.
+   * If 'popLength' is equal or higher than the size of the stack,
+   * the method returns a copy of the stack.
    * It returns null when popLength is less than zero.
+   *
+   * @return resultPoppedStack
    */
   public MyStack popStack(int popLength) {
-    if (popLength < 0) return null;
+    if (popLength < 0) {
+      return null;
+    }
 
     MyStack resultPoppedStack = new MyStack();
 
     int newLength = popLength > size ? size : popLength;
-    Object[] temp = new Object[newLength];
+    Object[] temp = new Object[newLength]; // temporary array for popping items
 
-    for (int i = 0; i < newLength; i++)
-      temp[i] = pop();
+    for (int i = 0; i < newLength; i++) {
+      temp[i] = pop(); // fill array
+    }
 
-    for (int i = newLength - 1; i >= 0; i--)
-      resultPoppedStack.push(temp[i]);
+    for (int i = newLength - 1; i >= 0; i--) {
+      resultPoppedStack.push(temp[i]); // fill new stack
+    }
+
+    if (2 * size < capacity && size > 10) {
+      realloc(size + 1);
+    }
 
     return resultPoppedStack;
   }
 
   /**
-   * @return bool
    * Returns true if two stacks are equal.
+   *
+   * @return bool
    */
   public boolean equals(MyStack myStack) {
     return Arrays.equals(arrayStack, myStack.arrayStack);
