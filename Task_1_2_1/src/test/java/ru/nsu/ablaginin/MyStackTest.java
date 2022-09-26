@@ -10,7 +10,6 @@ class MyStackTest {
     // expected
     MyStack expected = new MyStack();
     expected.push(2);
-    int expectedCount = 1;
     MyStack expectedPoppedStack = new MyStack();
     expectedPoppedStack.push(7);
     expectedPoppedStack.push(3);
@@ -31,6 +30,8 @@ class MyStackTest {
     Assertions.assertTrue(
         actual.equals(expected)
     );
+
+    int expectedCount = 1;
     Assertions.assertEquals(
         actual.count(), expectedCount
     );
@@ -52,8 +53,6 @@ class MyStackTest {
     expectedPartialPoppedStack.push(2);
     expectedPartialPoppedStack.push(7);
     expectedPartialPoppedStack.push(100);
-
-    MyStack empty = new MyStack();
 
     // actual
     MyStack temp = new MyStack();
@@ -77,6 +76,8 @@ class MyStackTest {
         poppedArray, new int[] {1, 3, 3, 7}
     );
     Assertions.assertNull(nullStack);
+
+    MyStack empty = new MyStack();
     Assertions.assertTrue(
         empty.equals(zeroPoppedStack)
     );
