@@ -154,8 +154,9 @@ class MyStackTest {
 
     // capacity decreasing check
 
-    biggerStack.popStack(10);
-    biggerStack.popStack(5);
+    biggerStack.popStack(8);
+    biggerStack.pop();
+    biggerStack.popStack(6);
 
     MyStack expectedStack2 = new MyStack();
     expectedStack2.push(1);
