@@ -151,6 +151,21 @@ class MyStackTest {
     Assertions.assertTrue(
         expectedBiggerStack.equals(biggerStack)
     );
+
+    // capacity decreasing check
+
+    biggerStack.popStack(10);
+    biggerStack.popStack(5);
+
+    MyStack expectedStack2 = new MyStack();
+    expectedStack2.push(1);
+    expectedStack2.push(2);
+    expectedStack2.push(3);
+    expectedStack2.push(4);
+
+    Assertions.assertTrue(
+        expectedStack2.equals(biggerStack)
+    );
   }
 
   @Test

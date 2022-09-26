@@ -81,7 +81,7 @@ public class MyStack {
     Object poppedElem = arrayStack[--size];
     arrayStack[size] = null;
 
-    if (2 * size < capacity && size > 10) {
+    if (2 * size < capacity && capacity >= 20) {
       capacity = size + 1;
       realloc(capacity);
     }
@@ -115,8 +115,12 @@ public class MyStack {
       resultPoppedStack.push(temp[i]); // fill new stack
     }
 
-    if (2 * size < capacity && size > 10) {
-      capacity = size + 1;
+    if (2 * size < capacity) {
+      if (size >= 9) {
+        capacity = size + 1;
+      } else {
+        capacity = 10;
+      }
       realloc(capacity);
     }
 
