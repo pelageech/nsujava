@@ -49,7 +49,8 @@ public class MyStack {
    */
   public void push(Object newItem) {
     if (size == capacity) {
-      realloc(capacity * 3 / 2);
+      capacity = capacity * 3 / 2;
+      realloc(capacity);
     }
 
     arrayStack[size++] = newItem;
@@ -81,7 +82,8 @@ public class MyStack {
     arrayStack[size] = null;
 
     if (2 * size < capacity && size > 10) {
-      realloc(size + 1);
+      capacity = size + 1;
+      realloc(capacity);
     }
 
     return poppedElem;
@@ -114,7 +116,8 @@ public class MyStack {
     }
 
     if (2 * size < capacity && size > 10) {
-      realloc(size + 1);
+      capacity = size + 1;
+      realloc(capacity);
     }
 
     return resultPoppedStack;
