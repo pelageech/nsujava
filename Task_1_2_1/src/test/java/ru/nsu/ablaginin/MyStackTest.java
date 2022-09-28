@@ -136,12 +136,8 @@ class MyStackTest {
     biggerStack.push(19);
 
     // asserts
-    Assertions.assertTrue(
-        expectedStack.equals(stack)
-    );
-    Assertions.assertTrue(
-        expectedBiggerStack.equals(biggerStack)
-    );
+    Assertions.assertEquals(expectedStack, stack);
+    Assertions.assertEquals(expectedBiggerStack, biggerStack);
   }
 
   @Test
@@ -159,11 +155,11 @@ class MyStackTest {
     actual.push(98);
     MyStack<Integer> empty = new MyStack<Integer>();
     empty.pushStack(empty);
+    MyStack<Integer> empty2 = new MyStack<>();
     actual.pushStack(empty);
 
     // asserts
-    Assertions.assertTrue(
-        expected.equals(actual)
-    );
+    Assertions.assertEquals(expected, actual);
+    Assertions.assertEquals(empty2, empty);
   }
 }
