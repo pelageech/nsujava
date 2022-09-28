@@ -1,6 +1,7 @@
 package ru.nsu.ablaginin;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * MyStack is a stack's realization.
@@ -9,10 +10,10 @@ import java.util.Arrays;
  * It has only 3 fundamental things: push, pop and count.
  * This class has extra 2 methods: push- and popStack.
  */
-public class MyStack {
+public class MyStack<T> {
   private int size;
   private int capacity;
-  private Object[] arrayStack;
+  private T[] arrayStack;
 
   /**
    * Create default stack:
@@ -22,7 +23,7 @@ public class MyStack {
   public MyStack() {
     size = 0;
     capacity = 10;
-    arrayStack = new Object[capacity];
+    arrayStack = (T[]) new Object[capacity];
   }
 
   /**
@@ -47,7 +48,7 @@ public class MyStack {
    *
    * @param newItem item for pushing
    */
-  public void push(Object newItem) {
+  public void push(T newItem) {
     if (size == capacity) {
       capacity = capacity * 3 / 2;
       realloc(capacity);
@@ -61,7 +62,7 @@ public class MyStack {
    *
    * @param inputStack stack which pushes to main stack
    */
-  public void pushStack(MyStack inputStack) {
+  public void pushStack(MyStack<T> inputStack) {
     for (int i = 0; i < inputStack.count(); i++) {
       push(inputStack.arrayStack[i]);
     }
@@ -73,18 +74,13 @@ public class MyStack {
    *
    * @return poppedElem
    */
-  public Object pop() {
+  public T pop() {
     if (size == 0) {
       return null;
     }
 
-    Object poppedElem = arrayStack[--size];
+    T poppedElem = arrayStack[--size];
     arrayStack[size] = null;
-
-    if (2 * size < capacity && capacity >= 20) {
-      capacity = size + 1;
-      realloc(capacity);
-    }
 
     return poppedElem;
   }
@@ -97,15 +93,15 @@ public class MyStack {
    *
    * @return resultPoppedStack
    */
-  public MyStack popStack(int popLength) {
+  public MyStack<T> popStack(int popLength) {
     if (popLength < 0) {
       return null;
     }
 
-    MyStack resultPoppedStack = new MyStack();
+    MyStack<T> resultPoppedStack = new MyStack<T>();
 
     int newLength = popLength > size ? size : popLength;
-    Object[] temp = new Object[newLength]; // temporary array for popping items
+    T[] temp = (T[]) new Object[newLength]; // temporary array for popping items
 
     for (int i = 0; i < newLength; i++) {
       temp[i] = pop(); // fill array
@@ -123,16 +119,25 @@ public class MyStack {
    *
    * @return bool
    */
-  public boolean equals(MyStack myStack) {
-    if (myStack.count() != size) {
-      return false;
-    }
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    MyStack<?> myStack = (MyStack<?>) o;
+    return size == myStack.size && capacity == myStack.capacity && Arrays.equals(arrayStack, myStack.arrayStack);
+  }
 
-    boolean result = true;
-    for (int i = 0; i < size; i++) {
-      result &= myStack.arrayStack[i].equals(arrayStack[i]);
-    }
 
+  /**
+   * Returns an object's hashcode
+   *
+   * @return result hashcode
+   */
+  @Override
+  public int hashCode() {
+    int result = Objects.hash(size, capacity);
+    result = 31 * result + Arrays.hashCode(arrayStack);
     return result;
   }
+
 }

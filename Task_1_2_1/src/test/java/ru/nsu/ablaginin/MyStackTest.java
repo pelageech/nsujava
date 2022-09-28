@@ -8,92 +8,82 @@ class MyStackTest {
   @Test
   public void exampleTest() {
     // expected
-    MyStack expected = new MyStack();
+    MyStack<Integer> expected = new MyStack<Integer>();
     expected.push(2);
-    MyStack expectedPoppedStack = new MyStack();
+    MyStack<Integer> expectedPoppedStack = new MyStack<Integer>();
     expectedPoppedStack.push(7);
     expectedPoppedStack.push(3);
 
     // actual
-    MyStack actual = new MyStack();
+    MyStack<Integer> actual = new MyStack<Integer>();
     actual.push(2);
     actual.push(7);
 
-    MyStack pushingSteak = new MyStack();
+    MyStack<Integer> pushingSteak = new MyStack<Integer>();
     pushingSteak.push(3);
     pushingSteak.push(5);
     actual.pushStack(pushingSteak);
     actual.pop();
-    MyStack actualPoppedStack = actual.popStack(2);
+    MyStack<Integer> actualPoppedStack = actual.popStack(2);
 
     // asserts
-    Assertions.assertTrue(
-        actual.equals(expected)
-    );
+    Assertions.assertEquals(actual, expected);
 
     int expectedCount = 1;
     Assertions.assertEquals(
         actual.count(), expectedCount
     );
-    Assertions.assertTrue(
-        expectedPoppedStack.equals(actualPoppedStack)
-    );
+    Assertions.assertEquals(expectedPoppedStack, actualPoppedStack);
   }
 
   @Test
   public void popTest() {
     // expected
-    MyStack expectedFullPoppedStack = new MyStack();
-    expectedFullPoppedStack.push("Hello");
-    expectedFullPoppedStack.push("World!");
-    expectedFullPoppedStack.push('q');
-    expectedFullPoppedStack.push(3.14);
+    MyStack<Integer> expectedFullPoppedStack = new MyStack<Integer>();
+    expectedFullPoppedStack.push(54);
+    expectedFullPoppedStack.push(27);
+    expectedFullPoppedStack.push(228);
+    expectedFullPoppedStack.push(314);
 
-    MyStack expectedPartialPoppedStack = new MyStack();
+    MyStack<Integer> expectedPartialPoppedStack = new MyStack<Integer>();
     expectedPartialPoppedStack.push(2);
     expectedPartialPoppedStack.push(7);
     expectedPartialPoppedStack.push(100);
 
     // actual
-    MyStack temp = new MyStack();
+    MyStack<Integer> temp = new MyStack<Integer>();
     temp.push(2);
     temp.push(7);
     temp.push(100);
-    temp.push("Hello");
-    temp.push("World!");
-    temp.push('q');
-    temp.push(3.14);
-    temp.push(new int[] {1, 3, 3, 7});
+    temp.push(54);
+    temp.push(27);
+    temp.push(228);
+    temp.push(314);
+    temp.push(99);
 
-    MyStack nullStack = temp.popStack(-9);
-    MyStack zeroPoppedStack = temp.popStack(0);
+    MyStack<Integer> nullStack = temp.popStack(-9);
+    MyStack<Integer> zeroPoppedStack = temp.popStack(0);
     zeroPoppedStack.pop();
-    int[] poppedArray = (int[]) temp.pop();
-    MyStack poppedStackFull = temp.popStack(4);
-    MyStack partialPoppedStack = temp.popStack(100);
+    Integer poppedInteger = temp.pop();
+    MyStack<Integer> poppedStackFull = temp.popStack(4);
+    MyStack<Integer> partialPoppedStack = temp.popStack(100);
 
     // asserts
-    Assertions.assertArrayEquals(
-        poppedArray, new int[] {1, 3, 3, 7}
+    Assertions.assertEquals(
+        99, poppedInteger
     );
     Assertions.assertNull(nullStack);
 
-    MyStack empty = new MyStack();
-    Assertions.assertTrue(
-        empty.equals(zeroPoppedStack)
-    );
-    Assertions.assertTrue(
-        expectedFullPoppedStack.equals(poppedStackFull)
-    );
-    Assertions.assertTrue(
-        partialPoppedStack.equals(expectedPartialPoppedStack)
-    );
+    MyStack<Integer> empty = new MyStack<Integer>();
+    Assertions.assertEquals(empty, zeroPoppedStack);
+    Assertions.assertEquals(expectedFullPoppedStack, poppedStackFull);
+    Assertions.assertEquals(partialPoppedStack, expectedPartialPoppedStack);
   }
 
   @Test
   public void increasingCapacityTest() {
     // expected
-    MyStack expectedStack = new MyStack();
+    MyStack<Integer> expectedStack = new MyStack<Integer>();
     expectedStack.push(1);
     expectedStack.push(2);
     expectedStack.push(3);
@@ -106,7 +96,7 @@ class MyStackTest {
     expectedStack.push(10);
     expectedStack.push(11);
 
-    MyStack expectedBiggerStack = new MyStack();
+    MyStack<Integer> expectedBiggerStack = new MyStack<Integer>();
     expectedBiggerStack = expectedStack;
 
     expectedBiggerStack.push(12);
@@ -119,7 +109,7 @@ class MyStackTest {
     expectedBiggerStack.push(19);
 
     // actual
-    MyStack stack = new MyStack();
+    MyStack<Integer> stack = new MyStack<Integer>();
 
     stack.push(1);
     stack.push(2);
@@ -133,7 +123,7 @@ class MyStackTest {
     stack.push(10);
     stack.push(11);
 
-    MyStack biggerStack = new MyStack();
+    MyStack<Integer> biggerStack = new MyStack<Integer>();
     biggerStack = stack;
 
     biggerStack.push(12);
@@ -152,55 +142,22 @@ class MyStackTest {
     Assertions.assertTrue(
         expectedBiggerStack.equals(biggerStack)
     );
-
-    // capacity decreasing check
-
-    biggerStack.push(12);
-    biggerStack.push(13);
-    biggerStack.push(14);
-    biggerStack.push(15);
-    biggerStack.push(16);
-    biggerStack.push(17);
-    biggerStack.push(18);
-    biggerStack.push(19);
-    biggerStack.push(12);
-    biggerStack.push(13);
-    biggerStack.push(14);
-    biggerStack.push(15);
-    biggerStack.push(16);
-    biggerStack.push(17);
-    biggerStack.push(18);
-    biggerStack.push(19);
-    biggerStack.popStack(31);
-
-    MyStack expectedStack2 = new MyStack();
-    expectedStack2.push(1);
-    expectedStack2.push(2);
-    expectedStack2.push(3);
-    expectedStack2.push(4);
-
-    Assertions.assertTrue(
-        expectedStack2.equals(biggerStack)
-    );
-    Assertions.assertFalse(
-        expectedStack2.equals(expectedBiggerStack)
-    );
   }
 
   @Test
   public void emptyStackTest() {
     // expected
-    MyStack expected = new MyStack();
+    MyStack<Integer> expected = new MyStack<Integer>();
     expected.push(27);
     expected.push(54);
     expected.push(98);
 
     // actual
-    MyStack actual = new MyStack();
+    MyStack<Integer> actual = new MyStack<Integer>();
     actual.push(27);
     actual.push(54);
     actual.push(98);
-    MyStack empty = new MyStack();
+    MyStack<Integer> empty = new MyStack<Integer>();
     empty.pushStack(empty);
     actual.pushStack(empty);
 
