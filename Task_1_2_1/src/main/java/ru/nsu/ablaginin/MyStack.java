@@ -121,15 +121,21 @@ public class MyStack<T> {
    */
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     MyStack<?> myStack = (MyStack<?>) o;
-    return size == myStack.size && capacity == myStack.capacity && Arrays.equals(arrayStack, myStack.arrayStack);
+    return size == myStack.size
+        && capacity == myStack.capacity
+        && Arrays.equals(arrayStack, myStack.arrayStack);
   }
 
 
   /**
-   * Returns an object's hashcode
+   * Returns an object's hashcode.
    *
    * @return result hashcode
    */
