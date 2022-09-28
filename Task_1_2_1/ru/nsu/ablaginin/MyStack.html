@@ -26,7 +26,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -114,14 +114,14 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <main role="main">
 <div class="header">
 <div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">ru.nsu.ablaginin</a></div>
-<h2 title="Class MyStack" class="title">Class MyStack</h2>
+<h2 title="Class MyStack" class="title">Class MyStack&lt;T&gt;</h2>
 </div>
 <div class="contentContainer">
 <ul class="inheritance">
 <li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
-<li>ru.nsu.ablaginin.MyStack</li>
+<li>ru.nsu.ablaginin.MyStack&lt;T&gt;</li>
 </ul>
 </li>
 </ul>
@@ -129,7 +129,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <ul class="blockList">
 <li class="blockList">
 <hr>
-<pre>public class <span class="typeNameLabel">MyStack</span>
+<pre>public class <span class="typeNameLabel">MyStack&lt;T&gt;</span>
 extends java.lang.Object</pre>
 <div class="block">MyStack is a stack's realization.
  What is a stack? A stack is a data structure which uses LIFO
@@ -189,35 +189,42 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#equals(ru.nsu.ablaginin.MyStack)">equals</a></span>&#8203;(<a href="MyStack.html" title="class in ru.nsu.ablaginin">MyStack</a>&nbsp;myStack)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#equals(java.lang.Object)">equals</a></span>&#8203;(java.lang.Object&nbsp;o)</code></th>
 <td class="colLast">
 <div class="block">Returns true if two stacks are equal.</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code>java.lang.Object</code></td>
+<td class="colFirst"><code>int</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#hashCode()">hashCode</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns an object's hashcode</div>
+</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code><a href="MyStack.html" title="type parameter in MyStack">T</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#pop()">pop</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Removes the last element from the stack and returns it.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
-<td class="colFirst"><code><a href="MyStack.html" title="class in ru.nsu.ablaginin">MyStack</a></code></td>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code><a href="MyStack.html" title="class in ru.nsu.ablaginin">MyStack</a>&lt;<a href="MyStack.html" title="type parameter in MyStack">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#popStack(int)">popStack</a></span>&#8203;(int&nbsp;popLength)</code></th>
 <td class="colLast">
 <div class="block">Pops 'popLength' elements from the stack to new one and returns it.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#push(java.lang.Object)">push</a></span>&#8203;(java.lang.Object&nbsp;newItem)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#push(T)">push</a></span>&#8203;(<a href="MyStack.html" title="type parameter in MyStack">T</a>&nbsp;newItem)</code></th>
 <td class="colLast">
 <div class="block">Inserts new element to the end of the stack.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#pushStack(ru.nsu.ablaginin.MyStack)">pushStack</a></span>&#8203;(<a href="MyStack.html" title="class in ru.nsu.ablaginin">MyStack</a>&nbsp;inputStack)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#pushStack(ru.nsu.ablaginin.MyStack)">pushStack</a></span>&#8203;(<a href="MyStack.html" title="class in ru.nsu.ablaginin">MyStack</a>&lt;<a href="MyStack.html" title="type parameter in MyStack">T</a>&gt;&nbsp;inputStack)</code></th>
 <td class="colLast">
 <div class="block">Pushes all the elements of the stack to another one.</div>
 </td>
@@ -228,7 +235,7 @@ extends java.lang.Object</pre>
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
-<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
+<code>clone, finalize, getClass, notify, notifyAll, toString, wait, wait, wait</code></li>
 </ul>
 </li>
 </ul>
@@ -284,11 +291,13 @@ extends java.lang.Object</pre>
 </ul>
 <a id="push(java.lang.Object)">
 <!--   -->
+</a><a id="push(T)">
+<!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>push</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;push&#8203;(java.lang.Object&nbsp;newItem)</pre>
+<pre class="methodSignature">public&nbsp;void&nbsp;push&#8203;(<a href="MyStack.html" title="type parameter in MyStack">T</a>&nbsp;newItem)</pre>
 <div class="block">Inserts new element to the end of the stack.
  A size of the stack increases by one.</div>
 <dl>
@@ -303,7 +312,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>pushStack</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;pushStack&#8203;(<a href="MyStack.html" title="class in ru.nsu.ablaginin">MyStack</a>&nbsp;inputStack)</pre>
+<pre class="methodSignature">public&nbsp;void&nbsp;pushStack&#8203;(<a href="MyStack.html" title="class in ru.nsu.ablaginin">MyStack</a>&lt;<a href="MyStack.html" title="type parameter in MyStack">T</a>&gt;&nbsp;inputStack)</pre>
 <div class="block">Pushes all the elements of the stack to another one.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -317,7 +326,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>pop</h4>
-<pre class="methodSignature">public&nbsp;java.lang.Object&nbsp;pop()</pre>
+<pre class="methodSignature">public&nbsp;<a href="MyStack.html" title="type parameter in MyStack">T</a>&nbsp;pop()</pre>
 <div class="block">Removes the last element from the stack and returns it.
  If size becomes less than capacity</div>
 <dl>
@@ -332,7 +341,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>popStack</h4>
-<pre class="methodSignature">public&nbsp;<a href="MyStack.html" title="class in ru.nsu.ablaginin">MyStack</a>&nbsp;popStack&#8203;(int&nbsp;popLength)</pre>
+<pre class="methodSignature">public&nbsp;<a href="MyStack.html" title="class in ru.nsu.ablaginin">MyStack</a>&lt;<a href="MyStack.html" title="type parameter in MyStack">T</a>&gt;&nbsp;popStack&#8203;(int&nbsp;popLength)</pre>
 <div class="block">Pops 'popLength' elements from the stack to new one and returns it.
  If 'popLength' is equal or higher than the size of the stack,
  the method returns a copy of the stack.
@@ -343,17 +352,35 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
-<a id="equals(ru.nsu.ablaginin.MyStack)">
+<a id="equals(java.lang.Object)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>equals</h4>
+<pre class="methodSignature">public&nbsp;boolean&nbsp;equals&#8203;(java.lang.Object&nbsp;o)</pre>
+<div class="block">Returns true if two stacks are equal.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code>equals</code>&nbsp;in class&nbsp;<code>java.lang.Object</code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>bool</dd>
+</dl>
+</li>
+</ul>
+<a id="hashCode()">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>equals</h4>
-<pre class="methodSignature">public&nbsp;boolean&nbsp;equals&#8203;(<a href="MyStack.html" title="class in ru.nsu.ablaginin">MyStack</a>&nbsp;myStack)</pre>
-<div class="block">Returns true if two stacks are equal.</div>
+<h4>hashCode</h4>
+<pre class="methodSignature">public&nbsp;int&nbsp;hashCode()</pre>
+<div class="block">Returns an object's hashcode</div>
 <dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code>hashCode</code>&nbsp;in class&nbsp;<code>java.lang.Object</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>bool</dd>
+<dd>result hashcode</dd>
 </dl>
 </li>
 </ul>
