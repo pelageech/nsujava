@@ -79,10 +79,18 @@ public class MyStack<T> {
       return null;
     }
 
-    T poppedElem = arrayStack[--size];
-    arrayStack[size] = null;
+    return arrayStack[--size];
+  }
 
-    return poppedElem;
+  /**
+   * The constructor creates a stack using an array.
+   *
+   * @param array a fundament for a new stack
+   */
+  private MyStack(T[] array) {
+    size = array.length;
+    capacity = size * 3 / 2;
+    arrayStack = array;
   }
 
   /**
@@ -98,20 +106,14 @@ public class MyStack<T> {
       return null;
     }
 
-    MyStack<T> resultPoppedStack = new MyStack<T>();
+    int startPoint = popLength > size ? 0 : size - popLength;
+    int endPoint = size;
 
-    int newLength = popLength > size ? size : popLength;
-    T[] temp = (T[]) new Object[newLength]; // temporary array for popping items
+    // temporary array for popping items
+    T[] temp = Arrays.copyOfRange(arrayStack, startPoint, endPoint);
+    size = startPoint;
 
-    for (int i = 0; i < newLength; i++) {
-      temp[i] = pop(); // fill array
-    }
-
-    for (int i = newLength - 1; i >= 0; i--) {
-      resultPoppedStack.push(temp[i]); // fill new stack
-    }
-
-    return resultPoppedStack;
+    return new MyStack<>(temp);
   }
 
   /**
@@ -129,8 +131,9 @@ public class MyStack<T> {
     }
     MyStack<?> myStack = (MyStack<?>) o;
     return size == myStack.size
-        && capacity == myStack.capacity
-        && Arrays.equals(arrayStack, myStack.arrayStack);
+        && Arrays.asList(arrayStack).subList(0, size).equals(
+             Arrays.asList(myStack.arrayStack).subList(0, size)
+         );
   }
 
 
@@ -141,7 +144,7 @@ public class MyStack<T> {
    */
   @Override
   public int hashCode() {
-    int result = Objects.hash(size, capacity);
+    int result = Objects.hash(size);
     result = 31 * result + Arrays.hashCode(arrayStack);
     return result;
   }
