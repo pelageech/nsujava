@@ -75,7 +75,10 @@ public class MyStack<T> {
       return null;
     }
 
-    return arrayStack[--size];
+    T result = arrayStack[--size];
+    arrayStack[size] = null;
+
+    return result;
   }
 
   /**
