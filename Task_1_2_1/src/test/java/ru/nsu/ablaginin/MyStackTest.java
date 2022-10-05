@@ -362,7 +362,8 @@ class MyStackTest {
     Assertions.assertTrue(actual);
   }
 
-  public void hashcode() {
+  @Test
+  public void hashcodeTest() {
     // expected
     MyStack<Integer> stack1 = new MyStack<>();
     stack1.push(1);
