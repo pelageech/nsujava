@@ -36,13 +36,6 @@ public class MyStack<T> {
   }
 
   /**
-   * Increases the array if it is full and new item is pushed.
-   */
-  private void realloc(int newCapacity) {
-    arrayStack = Arrays.copyOf(arrayStack, newCapacity);
-  }
-
-  /**
    * Inserts new element to the end of the stack.
    * A size of the stack increases by one.
    *
@@ -50,7 +43,7 @@ public class MyStack<T> {
    */
   public void push(T newItem) {
     if (size == capacity) {
-      capacity = capacity * 3 / 2;
+      capacity = Math.round(capacity * FACTOR_ARRAY_REALLOC);
       realloc(capacity);
     }
 
@@ -80,17 +73,6 @@ public class MyStack<T> {
     }
 
     return arrayStack[--size];
-  }
-
-  /**
-   * The constructor creates a stack using an array.
-   *
-   * @param array a fundament for a new stack
-   */
-  private MyStack(T[] array) {
-    size = array.length;
-    capacity = size * 3 / 2;
-    arrayStack = array;
   }
 
   /**
@@ -148,5 +130,25 @@ public class MyStack<T> {
     result = 31 * result + Arrays.hashCode(arrayStack);
     return result;
   }
+
+  /**
+   * Increases the array if it is full and new item is pushed.
+   */
+  private void realloc(int newCapacity) {
+    arrayStack = Arrays.copyOf(arrayStack, newCapacity);
+  }
+
+  /**
+   * The constructor creates a stack using an array.
+   *
+   * @param array a fundament for a new stack
+   */
+  private MyStack(T[] array) {
+    size = array.length;
+    capacity = Math.round(size * FACTOR_ARRAY_REALLOC);
+    arrayStack = array;
+  }
+
+  private static final float FACTOR_ARRAY_REALLOC = 1.5f;
 
 }
