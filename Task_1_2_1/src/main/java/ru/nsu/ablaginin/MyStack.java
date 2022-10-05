@@ -11,9 +11,12 @@ import java.util.Objects;
  * This class has extra 2 methods: push- and popStack.
  */
 public class MyStack<T> {
-  private int size;
-  private int capacity;
+  private static final float FACTOR_ARRAY_REALLOC = 1.5f;
+
   private T[] arrayStack;
+  private int capacity;
+  private int size;
+
 
   /**
    * Create default stack:
@@ -148,7 +151,4 @@ public class MyStack<T> {
     capacity = Math.round(size * FACTOR_ARRAY_REALLOC);
     arrayStack = array;
   }
-
-  private static final float FACTOR_ARRAY_REALLOC = 1.5f;
-
 }
