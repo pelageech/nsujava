@@ -37,7 +37,7 @@ class MyStackTest {
   }
 
   @Test
-  public void popTest() {
+  public void poppingTest() {
     // expected
     MyStack<Integer> expectedFullPoppedStack = new MyStack<Integer>();
     expectedFullPoppedStack.push(54);
@@ -161,5 +161,241 @@ class MyStackTest {
     // asserts
     Assertions.assertEquals(expected, actual);
     Assertions.assertEquals(empty2, empty);
+  }
+
+  @Test
+  public void countTest() {
+    // expected
+    Integer expected = 11;
+
+    // actual
+    MyStack<Integer> stack = new MyStack<>();
+    stack.push(9);
+    stack.push(10);
+    stack.push(1);
+    stack.push(-1);
+    stack.push(0);
+    stack.push(2);
+    stack.push(8);
+    stack.push(19);
+    stack.push(1);
+    stack.push(92);
+    stack.push(54);
+
+    Integer actual = stack.count();
+
+    // asserts
+    Assertions.assertEquals(expected, actual);
+  }
+
+  @Test
+  public void pushTest() {
+    // expected
+    MyStack<Integer> expected = new MyStack<>();
+    expected.push(9);
+    expected.push(10);
+    expected.push(1);
+    expected.push(-1);
+    expected.push(0);
+    expected.push(2);
+    expected.push(8);
+    expected.push(19);
+    expected.push(1);
+    expected.push(92);
+    expected.push(54);
+
+    // actual
+    MyStack<Integer> stack = new MyStack<>();
+    stack.push(9);
+    stack.push(10);
+    stack.push(1);
+    stack.push(-1);
+    stack.push(0);
+    stack.push(2);
+    stack.push(8);
+    stack.push(19);
+    stack.push(1);
+    stack.push(92);
+    stack.push(54);
+
+    // asserts
+    Assertions.assertNotNull(stack);
+    Assertions.assertEquals(expected, stack);
+  }
+
+  @Test
+  public void pushStackTest() {
+    // expected
+    MyStack<Integer> expected = new MyStack<>();
+    expected.push(9);
+    expected.push(10);
+    expected.push(1);
+    expected.push(-1);
+    expected.push(0);
+    expected.push(2);
+    expected.push(8);
+    expected.push(19);
+    expected.push(1);
+    expected.push(92);
+    expected.push(54);
+    expected.push(8);
+    expected.push(19);
+    expected.push(1);
+    expected.push(92);
+    expected.push(54);
+
+    // actual
+    MyStack<Integer> stack = new MyStack<>();
+    stack.push(9);
+    stack.push(10);
+    stack.push(1);
+    stack.push(-1);
+    stack.push(0);
+    stack.push(2);
+    stack.push(8);
+    stack.push(19);
+    stack.push(1);
+    stack.push(92);
+    stack.push(54);
+
+    MyStack<Integer> stack2 = new MyStack<>();
+    stack2.push(8);
+    stack2.push(19);
+    stack2.push(1);
+    stack2.push(92);
+    stack2.push(54);
+
+    stack.pushStack(stack2);
+
+    // asserts
+    Assertions.assertEquals(expected, stack);
+  }
+
+  @Test
+  public void popTest() {
+    // expected
+    MyStack<Integer> expected = new MyStack<>();
+    expected.push(1);
+    expected.push(2);
+    expected.push(3);
+
+    // actual
+    MyStack<Integer> actual = new MyStack<>();
+    actual.push(1);
+    actual.push(2);
+    actual.push(3);
+    actual.push(4);
+    actual.push(5);
+    actual.pop();
+    actual.pop();
+
+    // asserts
+    Assertions.assertEquals(expected, actual);
+  }
+
+  @Test
+  public void popStackTest() {
+    //expected
+    MyStack<Integer> expected = new MyStack<>();
+    expected.push(3);
+    expected.push(8);
+    expected.push(2);
+
+    // actual
+    MyStack<Integer> actual = new MyStack<>();
+    actual.push(3);
+    actual.push(8);
+    actual.push(2);
+    actual.push(31);
+    actual.push(13);
+    actual.push(3);
+    actual.push(1113);
+    actual.push(31);
+    actual.push(311);
+    actual.push(1113);
+    actual.push(11113);
+    actual.push(13);
+    actual.push(3);
+    actual.push(31);
+    actual.push(31);
+    actual.push(13);
+    actual.popStack(13);
+
+    // asserts
+    Assertions.assertEquals(expected, actual);
+  }
+
+  @Test
+  public void equalsTest() {
+    // expected
+
+    // actual
+    MyStack<Integer> stack1 = new MyStack<>();
+    stack1.push(1);
+    stack1.push(2);
+    stack1.push(3);
+    stack1.push(4);
+    stack1.push(5);
+    stack1.push(6);
+    stack1.push(7);
+    stack1.pop();
+    stack1.popStack(3);
+    stack1.push(4);
+    stack1.push(5);
+    stack1.push(6);
+    stack1.push(7);
+    stack1.push(8);
+
+    MyStack<Integer> stack2 = new MyStack<>();
+    stack2.push(1);
+    stack2.push(2);
+    stack2.push(3);
+    stack2.push(4);
+    stack2.push(5);
+    stack2.push(6);
+    stack2.push(7);
+    stack2.push(8);
+
+    boolean actual = stack1.equals(stack2);
+
+    // asserts
+    Assertions.assertTrue(actual);
+  }
+
+  public void hashcode() {
+    // expected
+    MyStack<Integer> stack1 = new MyStack<>();
+    stack1.push(1);
+    stack1.push(2);
+    stack1.push(3);
+    stack1.push(4);
+    stack1.push(5);
+    stack1.push(6);
+    stack1.push(7);
+    stack1.pop();
+    stack1.popStack(3);
+    stack1.push(4);
+    stack1.push(5);
+    stack1.push(6);
+    stack1.push(7);
+    stack1.push(8);
+
+    int expected = stack1.hashCode();
+
+    // actual
+    MyStack<Integer> stack2 = new MyStack<>();
+    stack2.push(1);
+    stack2.push(2);
+    stack2.push(3);
+    stack2.push(4);
+    stack2.push(5);
+    stack2.push(6);
+    stack2.push(7);
+    stack2.push(8);
+
+    int actual = stack2.hashCode();
+
+    // asserts
+    Assertions.assertEquals(expected, actual);
   }
 }
