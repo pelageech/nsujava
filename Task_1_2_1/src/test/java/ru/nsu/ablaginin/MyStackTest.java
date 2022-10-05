@@ -166,7 +166,6 @@ class MyStackTest {
   @Test
   public void countTest() {
     // expected
-    Integer expected = 11;
 
     // actual
     MyStack<Integer> stack = new MyStack<>();
@@ -185,6 +184,7 @@ class MyStackTest {
     Integer actual = stack.count();
 
     // asserts
+    Integer expected = 11;
     Assertions.assertEquals(expected, actual);
   }
 
@@ -380,8 +380,6 @@ class MyStackTest {
     stack1.push(7);
     stack1.push(8);
 
-    int expected = stack1.hashCode();
-
     // actual
     MyStack<Integer> stack2 = new MyStack<>();
     stack2.push(1);
@@ -396,6 +394,7 @@ class MyStackTest {
     int actual = stack2.hashCode();
 
     // asserts
+    int expected = stack1.hashCode();
     Assertions.assertEquals(expected, actual);
   }
 }
