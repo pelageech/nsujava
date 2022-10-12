@@ -66,7 +66,7 @@ class BreadthFirstSearchIteratorTest {
 
     BreadthFirstSearchIterator<Integer> bfs = new BreadthFirstSearchIterator<>(tree);
     tree.add(4);
-    Assertions.assertThrows(ConcurrentModificationException.class, () -> bfs.next());
+    Assertions.assertThrows(ConcurrentModificationException.class, bfs::next);
   }
 
   @Test

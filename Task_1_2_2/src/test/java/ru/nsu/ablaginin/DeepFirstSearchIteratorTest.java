@@ -67,7 +67,7 @@ class DeepFirstSearchIteratorTest {
 
     DeepFirstSearchIterator<Integer> dfs = new DeepFirstSearchIterator<>(tree);
     tree.add(4);
-    Assertions.assertThrows(ConcurrentModificationException.class, () -> dfs.next());
+    Assertions.assertThrows(ConcurrentModificationException.class, dfs::next);
   }
 
   @Test
