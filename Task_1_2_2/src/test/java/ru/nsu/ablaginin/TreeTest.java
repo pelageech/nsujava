@@ -1,13 +1,10 @@
 package ru.nsu.ablaginin;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 class TreeTest {
 
@@ -113,7 +110,7 @@ class TreeTest {
     List<Tree<Integer>> expectedChildren = Arrays.asList(c1, c2, c3);
 
     // asserts
-    assertNull(nil);
+    Assertions.assertNull(nil);
     Assertions.assertEquals(expectedValue, actualValue);
     Assertions.assertEquals(expectedChildren, actualChildren);
   }
@@ -134,8 +131,8 @@ class TreeTest {
     contrast.add(2);
 
     // asserts
-    assertEquals(a, b);
-    assertNotEquals(a, contrast);
+    Assertions.assertEquals(a, b);
+    Assertions.assertNotEquals(a, contrast);
   }
 
   @Test
@@ -155,8 +152,8 @@ class TreeTest {
     contrast.add(2);
 
     // asserts
-    assertEquals(a.hashCode(), b.hashCode());
-    assertNotEquals(a.hashCode(), contrast.hashCode());
+    Assertions.assertEquals(a.hashCode(), b.hashCode());
+    Assertions.assertNotEquals(a.hashCode(), contrast.hashCode());
   }
 
   @Test
@@ -170,16 +167,16 @@ class TreeTest {
     c1.add(5);
     c2.add(6);
 
-    List<Integer> actualListDFS = new ArrayList<>();
+    List<Integer> actualListDfs = new ArrayList<>();
     for (Tree<Integer> i : tree) {
-      actualListDFS.add(i.getValue());
+      actualListDfs.add(i.getValue());
     }
 
     tree.setTypeIteration(Tree.IteratorTree.BFS);
 
-    List<Integer> actualListBFS = new ArrayList<>();
+    List<Integer> actualListBfs = new ArrayList<>();
     for (Tree<Integer> i : tree) {
-      actualListBFS.add(i.getValue());
+      actualListBfs.add(i.getValue());
     }
 
     // expected
@@ -187,8 +184,8 @@ class TreeTest {
     List<Integer> expectedListBFS = Arrays.asList(1, 2, 3, 4, 5, 6);
 
     // asserts
-    assertEquals(expectedListDFS, actualListDFS);
-    assertEquals(expectedListBFS, actualListBFS);
+    Assertions.assertEquals(expectedListDFS, actualListDfs);
+    Assertions.assertEquals(expectedListBFS, actualListBfs);
   }
 
   @Test
@@ -229,7 +226,7 @@ class TreeTest {
     Integer expectedCountChildren = 7;
 
     // asserts
-    assertEquals(expectedList, actualList);
-    assertEquals(expectedCountChildren, actualCountChildren);
+    Assertions.assertEquals(expectedList, actualList);
+    Assertions.assertEquals(expectedCountChildren, actualCountChildren);
   }
 }
