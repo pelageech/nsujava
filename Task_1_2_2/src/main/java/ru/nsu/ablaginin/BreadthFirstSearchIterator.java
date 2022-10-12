@@ -12,7 +12,6 @@ import java.util.List;
  * all the tree's vertices will be concerned by the algorithm.
  */
 public class BreadthFirstSearchIterator<T> implements Iterator<Tree<T>> {
-  private Tree<T> current;
   private final int modCounter;
   private final List<Tree<T>> queue;
 
@@ -44,10 +43,12 @@ public class BreadthFirstSearchIterator<T> implements Iterator<Tree<T>> {
    */
   @Override
   public Tree<T> next() {
-    current = (Tree<T>) queue.remove(0);
+    Tree<T> current = queue.remove(0);
+
     if (modCounter != current.getModCounter()) {
       throw new ConcurrentModificationException();
     }
+
     queue.addAll(current.getChildren());
     return current;
   }

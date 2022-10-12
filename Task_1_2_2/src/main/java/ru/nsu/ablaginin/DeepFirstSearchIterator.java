@@ -11,7 +11,6 @@ import java.util.Stack;
  * all the tree's vertices will be concerned by the algorithm.
  */
 public class DeepFirstSearchIterator<T> implements Iterator<Tree<T>> {
-  private Tree<T> current;
   private final int modCounter;
   private final Stack<Tree<T>> stack;
 
@@ -43,10 +42,12 @@ public class DeepFirstSearchIterator<T> implements Iterator<Tree<T>> {
    */
   @Override
   public Tree<T> next() {
-    current = stack.pop();
+    Tree<T> current = stack.pop();
+
     if (modCounter != current.getModCounter()) {
       throw new ConcurrentModificationException();
     }
+
     stack.addAll(current.getChildren());
     return current;
   }
