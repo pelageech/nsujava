@@ -187,9 +187,9 @@ public class Tree<T> implements Iterable<Tree<T>> {
   @Override
   public Iterator<Tree<T>> iterator() {
 
-    return typeIteration == IteratorTree.BFS ?
-        new BreadthFirstSearchIterator<>(this) :
-        new DeepFirstSearchIterator<>(this);
+    return typeIteration == IteratorTree.BFS
+        ? new BreadthFirstSearchIterator<>(this)
+        : new DeepFirstSearchIterator<>(this);
   }
 
   private Tree(T value, Tree<T> root, Tree<T> parent, List<Tree<T>> children) {
