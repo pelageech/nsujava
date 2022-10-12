@@ -13,7 +13,7 @@ import java.util.Objects;
  *  - children(V) = [U] - get all the V's children
  * Description of the construction of Tree:
  * - root is a Tree;
- * - T is a Tree, (V <- T) and not (U <- T)
+ * - T is a Tree, (V (- T) and not (U (- T)
  *   if T' is such that parent(U) = V and (T'\U = T), then T' is a Tree
  */
 public class Tree<T> implements Iterable<Tree<T>> {
@@ -114,8 +114,8 @@ public class Tree<T> implements Iterable<Tree<T>> {
    * Vertex's children is added to the parent's children.
    * Call `( 2 ).remove`:
    *                  ( 0 )                               (     0     )
-   *                 /  |  \                            /    /    \     \
-   *            ( 1 ) (-2-) ( 3 )        |====>     ( 1 ) ( 5 )  ( 6 ) ( 3 )
+   *                 /  |  \          -----\            /    /    \     \
+   *            ( 1 ) (-2-) ( 3 )     -----/        ( 1 ) ( 5 )  ( 6 ) ( 3 )
    *           /     /    \                        /
    *        ( 4 ) ( 5 )  ( 6 )                  ( 4 )
    * So, ( 0 ) has 4 children now.
