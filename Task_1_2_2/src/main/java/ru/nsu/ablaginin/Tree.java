@@ -8,13 +8,12 @@ import java.util.Objects;
 /**
  * Tree is a hierarchical data structure.
  * If we have some vertex V and vertex U, then
- * we can define the relations for each element of the tree:<br>
- *  - parent(U) = V - V is a U's parent<br>
- *  - children(V) = [U] - get all the V's children<br>
- * <p></p>
- * Description of the construction of Tree:<br>
- * - root is a Tree;<br>
- * - T is a Tree, (V <- T) and not (U <- T)<br>
+ * we can define the relations for each element of the tree:
+ *  - parent(U) = V - V is a U's parent
+ *  - children(V) = [U] - get all the V's children
+ * Description of the construction of Tree:
+ * - root is a Tree;
+ * - T is a Tree, (V <- T) and not (U <- T)
  *   if T' is such that parent(U) = V and (T'\U = T), then T' is a Tree
  */
 public class Tree<T> implements Iterable<Tree<T>> {
