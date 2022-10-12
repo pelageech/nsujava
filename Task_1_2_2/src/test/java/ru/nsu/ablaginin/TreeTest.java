@@ -128,7 +128,8 @@ class TreeTest {
 
     Tree<Integer> contrast = new Tree<>(1);
     contrast.add(2);
-    contrast.add(2);
+    contrast.add(3);
+    contrast.getChildren().get(0).add(4);
 
     // asserts
     Assertions.assertEquals(a, b);
