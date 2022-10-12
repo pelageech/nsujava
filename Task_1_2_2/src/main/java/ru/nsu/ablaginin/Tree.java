@@ -17,9 +17,9 @@ import java.util.Objects;
  *   if T' is such that parent(U) = V and (T'\U = T), then T' is a Tree
  */
 public class Tree<T> implements Iterable<Tree<T>> {
-  private final List<Tree<T>> children;
-  private int modCounter;
-  private Tree<T> parent;
+  private final List<Tree<T>> children; // vertex's children
+  private int modCounter; // a counter of tree's mods (for iterators)
+  private Tree<T> parent; // vertex's parent
   private final Tree<T> root;
   private final T value;
 
@@ -88,6 +88,16 @@ public class Tree<T> implements Iterable<Tree<T>> {
    */
   public T getValue() {
     return value;
+  }
+
+  /**
+   * The method lets change the iteration's type.
+   * There are two types: DFS and BFS.
+   *
+   * @param newType type of the iteration
+   */
+  public void setTypeIteration(IteratorTree newType) {
+    typeIteration = newType;
   }
 
   /**
@@ -170,27 +180,16 @@ public class Tree<T> implements Iterable<Tree<T>> {
   }
 
   /**
-   * The method lets change the iteration's type.
-   * There are two types: DFS and BFS.
-   *
-   * @param newType type of the iteration
-   */
-  public void setTypeIteration(IteratorTree newType) {
-    typeIteration = newType;
-  }
-
-  /**
    * Returns the iterator.
    *
    * @return iterator
    */
   @Override
   public Iterator<Tree<T>> iterator() {
-    if (typeIteration == IteratorTree.BFS) {
-      return new BreadthFirstSearchIterator<T>(this);
-    }
 
-    return new DeepFirstSearchIterator<T>(this);
+    return typeIteration == IteratorTree.BFS ?
+        new BreadthFirstSearchIterator<>(this) :
+        new DeepFirstSearchIterator<>(this);
   }
 
   private Tree(T value, Tree<T> root, Tree<T> parent, List<Tree<T>> children) {
