@@ -180,12 +180,12 @@ class TreeTest {
     }
 
     // expected
-    List<Integer> expectedListDFS = Arrays.asList(1, 3, 6, 2, 5, 4);
-    List<Integer> expectedListBFS = Arrays.asList(1, 2, 3, 4, 5, 6);
+    List<Integer> expectedListDfs = Arrays.asList(1, 3, 6, 2, 5, 4);
+    List<Integer> expectedListBfs = Arrays.asList(1, 2, 3, 4, 5, 6);
 
     // asserts
-    Assertions.assertEquals(expectedListDFS, actualListDfs);
-    Assertions.assertEquals(expectedListBFS, actualListBfs);
+    Assertions.assertEquals(expectedListDfs, actualListDfs);
+    Assertions.assertEquals(expectedListBfs, actualListBfs);
   }
 
   @Test
