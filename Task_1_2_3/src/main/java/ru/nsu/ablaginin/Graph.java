@@ -1,126 +1,131 @@
 package ru.nsu.ablaginin;
 
 import java.util.*;
-import java.lang.Integer;
 
 public class Graph<T extends Comparable<T>> {
 
-  private final Map<T, Vertex> vertexes;
-  private final Map<T, List<Edge>> edges;
+  private final Map<T, Vertex<T>> vertexes;
+  private final Map<T, List<Edge<T>>> edges;
 
   public Graph() {
-    vertexes = new Hashtable<>();
-    edges = new Hashtable<>();
+    vertexes = new HashMap<>();
+    edges = new HashMap<>();
   }
 
-  public Vertex addVertex(T key) {
+  public Graph(T[] vertsArray, int[][] matrix) {
+    vertexes = new HashMap<>();
+    edges = new HashMap<>();
+
+    int len = vertsArray.length;
+    addAll(vertsArray);
+
+    for (int i = 0; i < len; i++) {
+      for (int j = 0; j < len; j++) {
+        addEdge(vertsArray[i], vertsArray[j], matrix[i][j]);
+      }
+    }
+  }
+
+  public Graph(T[] vertsArray, List<T>[] listVertexes, List<Integer>[] weights) {
+    vertexes = new HashMap<>();
+    edges = new HashMap<>();
+
+    int len = vertsArray.length;
+    addAll(vertsArray);
+
+    for (int i = 0; i < len; i++) {
+      for (int j = 0; j < listVertexes[i].size(); j++) {
+        addEdge(vertsArray[i], listVertexes[i].get(j), weights[i].get(j));
+      }
+    }
+  }
+
+  public void addVertex(T key) {
     if (vertexes.containsKey(key)) {
-      return null;
+      return;
     }
 
-    Vertex v = new Vertex(key);
+    Vertex<T> v = new Vertex<>(key);
     vertexes.put(key, v);
 
-    return v;
   }
 
-  public void addEdge(Vertex v1, Vertex v2, Integer weight) {
-    Edge e = new Edge(v1, v2, weight);
-    if (!edges.containsKey(v1.key)) {
-      edges.put(v1.key, new ArrayList<>());
+  public void addAll(T[] keys) {
+    for (T k : keys) {
+      addVertex(k);
+    }
+  }
+
+  public void addEdge(Vertex<T> v1, Vertex<T> v2, Integer weight) {
+    if (weight == 0) {
+      return;
     }
 
-    edges.get(v1.key).add(e);
+    Edge<T> e = new Edge<>(v1, v2, weight);
+    if (!edges.containsKey(v1.getKey())) {
+      edges.put(v1.getKey(), new ArrayList<>());
+    }
+
+    edges.get(v1.getKey()).add(e);
   }
 
   public void addEdge(T key1, T key2, Integer weight) {
-    Vertex v1 = vertexes.get(key1);
-    Vertex v2 = vertexes.get(key2);
+    Vertex<T> v1 = vertexes.get(key1);
+    Vertex<T> v2 = vertexes.get(key2);
     addEdge(v1, v2, weight);
   }
 
-  public List<Vertex> dijkstra(Vertex start) {
-    List<Vertex> result = new ArrayList<>();
+  public List<Vertex<T>> dijkstra(Vertex<T> start) {
+    List<Vertex<T>> result = new ArrayList<>();
 
-    vertexes.forEach((k, v) -> {
+    vertexes.forEach((k, v) -> { // add all the vertixes to result and init ones
       result.add(v);
-      v.visited = false;
-      v.value = ~(1 << 31) >> 1;
+      v.setVisited(false);
+      v.setValue(~(0b11 << 30));
     });
-    PriorityQueue<Vertex> pq = new PriorityQueue<>(
-        Comparator.comparingInt((Vertex x) -> x.value)
+
+    PriorityQueue<Vertex<T>> pq = new PriorityQueue<>(
+        Comparator.comparingInt(Vertex::getValue)
     );
 
-    pq.add(start);
-    start.value = 0;
-    start.visited = true;
+    pq.add(start); // init the first Vertex<T>
+    start.setValue(0);
+    start.setVisited(true);
 
-    while(pq.size() > 0) {
-      Vertex cur = pq.remove();
+    while (pq.size() > 0) {
+      Vertex<T> cur = pq.remove();
+      List<Edge<T>> currEdgeList = edges.get(cur.getKey()); // get connected vertexes
 
-      List<Edge> currEdgeList = edges.get(cur.key);
-      if (currEdgeList == null) continue;
+      if (currEdgeList == null) {
+        continue;
+      }
+
       for (var i : currEdgeList) {
-        i.to.value = Math.min(i.to.value, i.from.value + i.weight);
+        Vertex<T> from = i.getFrom();
+        Vertex<T> to = i.getTo();
 
-        if (!i.to.visited) {
-          i.to.visited = true;
-          pq.add(i.to);
+        to.setValue(
+            Math.min(to.getValue(), from.getValue() + i.getWeight())
+        );
+
+        if (!to.isVisited()) {
+          to.setVisited(true);
+          pq.add(to);
         }
       }
+
     }
 
-    result.sort(Comparator.comparingInt((Vertex v) -> v.value));
+    result.sort(Comparator.comparingInt(Vertex::getValue));
 
     return result;
   }
 
-  public List<Vertex> dijkstra(T keyStart) {
+  public List<Vertex<T>> dijkstra(T keyStart) {
     if (!vertexes.containsKey(keyStart)) {
       return null;
     }
 
     return dijkstra(vertexes.get(keyStart));
   }
-
-  public static void main(String[] args) {
-    Graph<Integer> G = new Graph<>();
-    G.addVertex(3);
-    Graph<Integer>.Vertex v = G.addVertex(1);
-    G.addVertex(4);
-    G.addVertex(2);
-    G.addEdge(2, 3, 1);
-    G.addEdge(1, 2, 5);
-    G.addEdge(1, 4, 9);
-    G.addEdge(3, 4, 2);
-
-
-    List<Graph<Integer>.Vertex> l = G.dijkstra(v);
-    for (var i : l) {
-      System.out.println(i.key + " " + i.value);
-    }
-  }
-
-  private class Vertex {
-    private final T key;
-    private Integer value;
-    private boolean visited;
-
-    public Vertex(T key) {
-      this.key = key;
-    }
-  }
-
-  private class Edge {
-    private final Vertex from;
-    private final Vertex to;
-    private final Integer weight;
-
-    public Edge(Vertex f, Vertex t, Integer w) {
-      from = f;
-      to = t;
-      weight = w;
-    }
-  }
-
 }
