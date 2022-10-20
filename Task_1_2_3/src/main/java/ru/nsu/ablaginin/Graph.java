@@ -17,7 +17,7 @@ public class Graph<T extends Comparable<T>> {
     edges = new HashMap<>();
 
     int len = vertsArray.length;
-    addAll(vertsArray);
+    addAllVertexes(vertsArray);
 
     for (int i = 0; i < len; i++) {
       for (int j = 0; j < len; j++) {
@@ -31,7 +31,7 @@ public class Graph<T extends Comparable<T>> {
     edges = new HashMap<>();
 
     int len = vertsArray.length;
-    addAll(vertsArray);
+    addAllVertexes(vertsArray);
 
     for (int i = 0; i < len; i++) {
       for (int j = 0; j < listVertexes[i].size(); j++) {
@@ -40,42 +40,61 @@ public class Graph<T extends Comparable<T>> {
     }
   }
 
-  public void addVertex(T key) {
+  public boolean addVertex(T key) {
     if (vertexes.containsKey(key)) {
-      return;
+      return false;
     }
 
     Vertex<T> v = new Vertex<>(key);
+    edges.put(v.getKey(), new ArrayList<>());
     vertexes.put(key, v);
-
+    return true;
   }
 
-  public void addAll(T[] keys) {
+  public int addAllVertexes(T[] keys) {
+    int count = 0;
     for (T k : keys) {
-      addVertex(k);
+      count = addVertex(k) ? count + 1 : count;
     }
+    return count;
   }
 
-  public void addEdge(Vertex<T> v1, Vertex<T> v2, Integer weight) {
-    if (weight == 0) {
-      return;
-    }
-
-    Edge<T> e = new Edge<>(v1, v2, weight);
-    if (!edges.containsKey(v1.getKey())) {
-      edges.put(v1.getKey(), new ArrayList<>());
-    }
-
-    edges.get(v1.getKey()).add(e);
+  public boolean deleteVertex(T key) {
+    edges.remove(key);
+    return vertexes.remove(key) != null;
   }
 
-  public void addEdge(T key1, T key2, Integer weight) {
+  public boolean addEdge(T key1, T key2, Integer weight) {
+    if (weight <= 0) {
+      return false;
+    }
+
     Vertex<T> v1 = vertexes.get(key1);
     Vertex<T> v2 = vertexes.get(key2);
-    addEdge(v1, v2, weight);
+
+    Edge<T> e = new Edge<>(v1, v2, weight);
+
+    edges.get(v1.getKey()).add(e);
+    return true;
   }
 
-  public List<Vertex<T>> dijkstra(Vertex<T> start) {
+  public boolean deleteEdge(T key1, T key2) {
+    List<Edge<T>> e = edges.get(key1);
+    for (int i = 0; i < e.size(); i++) {
+      if (e.get(i).getTo().getKey() == key2) {
+        e.remove(i);
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public List<Vertex<T>> dijkstra(T keyStart) {
+    if (!vertexes.containsKey(keyStart)) {
+      return null;
+    }
+    Vertex<T> start = vertexes.get(keyStart);
+
     List<Vertex<T>> result = new ArrayList<>();
 
     vertexes.forEach((k, v) -> { // add all the vertixes to result and init ones
@@ -121,11 +140,16 @@ public class Graph<T extends Comparable<T>> {
     return result;
   }
 
-  public List<Vertex<T>> dijkstra(T keyStart) {
-    if (!vertexes.containsKey(keyStart)) {
-      return null;
-    }
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Graph<?> graph = (Graph<?>) o;
+    return Objects.equals(vertexes, graph.vertexes) && Objects.equals(edges, graph.edges);
+  }
 
-    return dijkstra(vertexes.get(keyStart));
+  @Override
+  public int hashCode() {
+    return Objects.hash(vertexes, edges);
   }
 }

@@ -1,5 +1,7 @@
 package ru.nsu.ablaginin;
 
+import java.util.Objects;
+
 public class Vertex<T extends Comparable<T>> {
   private final T key;
   private Integer value;
@@ -27,5 +29,18 @@ public class Vertex<T extends Comparable<T>> {
 
   public void setVisited(boolean visited) {
     this.visited = visited;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Vertex<?> vertex = (Vertex<?>) o;
+    return Objects.equals(key, vertex.key);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(key);
   }
 }

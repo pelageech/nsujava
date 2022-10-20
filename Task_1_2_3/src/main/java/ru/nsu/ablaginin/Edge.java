@@ -1,5 +1,7 @@
 package ru.nsu.ablaginin;
 
+import java.util.Objects;
+
 public class Edge<T extends Comparable<T>> {
   private final Vertex<T> from;
   private final Vertex<T> to;
@@ -23,4 +25,16 @@ public class Edge<T extends Comparable<T>> {
     return to;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Edge<?> edge = (Edge<?>) o;
+    return Objects.equals(from, edge.from) && Objects.equals(to, edge.to) && Objects.equals(weight, edge.weight);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(from, to, weight);
+  }
 }
