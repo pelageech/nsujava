@@ -5,12 +5,19 @@ import java.util.Objects;
 /**
  * Edge connects vertexes in graph.
  *
- * @param from start vertex
- * @param to end vertex
- * @param weight "weight" of the edge
  * @param <T> type of vertex's name, must be Comparable
  */
-record Edge<T extends Comparable<T>>(Vertex<T> from, Vertex<T> to, Integer weight) {
+public class Edge<T extends Comparable<T>> {
+  private final Vertex<T> from;
+  private final Vertex<T> to;
+  private final Integer weight;
+
+  public Edge(Vertex<T> v1, Vertex<T> v2, Integer w) {
+    from = v1;
+    to = v2;
+    weight = w;
+  }
+
   public Integer getWeight() {
     return weight;
   }
