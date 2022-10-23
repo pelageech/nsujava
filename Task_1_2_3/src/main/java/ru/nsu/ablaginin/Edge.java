@@ -33,12 +33,11 @@ record Edge<T extends Comparable<T>>(Vertex<T> from, Vertex<T> to, Integer weigh
     }
     Edge<?> edge = (Edge<?>) o;
     return Objects.equals(from, edge.from)
-        && Objects.equals(to, edge.to)
-        && Objects.equals(weight, edge.weight);
+        && Objects.equals(to, edge.to);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(from, to, weight);
+    return Objects.hash(from, to);
   }
 }

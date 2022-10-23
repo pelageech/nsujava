@@ -16,6 +16,8 @@ public class Vertex<T extends Comparable<T>> {
 
   public Vertex(T key) {
     this.key = key;
+    this.value = 0;
+    this.visited = false;
   }
 
   public T getKey() {
