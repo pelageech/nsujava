@@ -15,8 +15,8 @@ import java.util.PriorityQueue;
  *  - V1 from-vertex
  *  - V2 to-vertex
  *  - w - weight of the edge (for example a distant between two cities).
- * Simple graph means that for each E1 = (V1, V2, w) and E2 = (V1, V2, w') =>
- * => w = w' and E1 = E2.
+ * Simple graph means that for each E1 = (V1, V2, w) and E2 = (V1, V2, w')
+ * we have w = w' and E1 = E2.
  *
  * @param <T> type of vertex's name, must be Comparable
  */
