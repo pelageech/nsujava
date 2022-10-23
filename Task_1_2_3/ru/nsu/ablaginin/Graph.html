@@ -176,6 +176,14 @@ extends java.lang.Object</pre>
 </td>
 </tr>
 <tr class="altColor">
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(T%5B%5D,int%5B%5D%5B%5D,int)">Graph</a></span>&#8203;(<a href="Graph.html" title="type parameter in Graph">T</a>[]&nbsp;vertexArray,
+     int[][]&nbsp;incidentMatrix,
+     int&nbsp;edgeCount)</code></th>
+<td class="colLast">
+<div class="block">Implements a graph from matrix of incidence.</div>
+</td>
+</tr>
+<tr class="rowColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(T%5B%5D,java.util.List%5B%5D,java.util.List%5B%5D)">Graph</a></span>&#8203;(<a href="Graph.html" title="type parameter in Graph">T</a>[]&nbsp;vertexArray,
      java.util.List&lt;<a href="Graph.html" title="type parameter in Graph">T</a>&gt;[]&nbsp;vertexList,
      java.util.List&lt;java.lang.Integer&gt;[]&nbsp;weights)</code></th>
@@ -314,7 +322,7 @@ extends java.lang.Object</pre>
 </a><a id="&lt;init&gt;(T[],java.util.List[],java.util.List[])">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>Graph</h4>
 <pre>public&nbsp;Graph&#8203;(<a href="Graph.html" title="type parameter in Graph">T</a>[]&nbsp;vertexArray,
@@ -329,6 +337,26 @@ extends java.lang.Object</pre>
 <dd><code>vertexArray</code> - array of existing vertexes</dd>
 <dd><code>vertexList</code> - list of adjacency</dd>
 <dd><code>weights</code> - list of weights</dd>
+</dl>
+</li>
+</ul>
+<a id="&lt;init&gt;(java.lang.Comparable[],int[][][],int)">
+<!--   -->
+</a><a id="&lt;init&gt;(T[],int[][],int)">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>Graph</h4>
+<pre>public&nbsp;Graph&#8203;(<a href="Graph.html" title="type parameter in Graph">T</a>[]&nbsp;vertexArray,
+             int[][]&nbsp;incidentMatrix,
+             int&nbsp;edgeCount)</pre>
+<div class="block">Implements a graph from matrix of incidence.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>vertexArray</code> - array of existing vertexes</dd>
+<dd><code>incidentMatrix</code> - matrix with edges</dd>
+<dd><code>edgeCount</code> - count of edges</dd>
 </dl>
 </li>
 </ul>
