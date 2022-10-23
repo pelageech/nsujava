@@ -154,7 +154,7 @@ class GraphTest {
   @Test
   void adjacencyMatrix() throws IOException {
     // actual
-    File file = new File("input_1.txt");
+    File file = new File("src/test/resources/input_1.txt");
     Scanner sc = new Scanner(file);
 
 
@@ -191,7 +191,7 @@ class GraphTest {
     }
 
     // expected
-    File file1 = new File("output_1.txt");
+    File file1 = new File("src/test/resources/output_1.txt");
     Scanner sc1 = new Scanner(file1);
 
     List<Integer[][]> expected = new ArrayList<>();
@@ -219,7 +219,7 @@ class GraphTest {
   public void adjacencyList() throws FileNotFoundException {
 
     // actual
-    File file = new File("input_2.txt");
+    File file = new File("src/test/resources/input_2.txt");
     Scanner sc = new Scanner(file);
 
     int vertexCount = sc.nextInt();
@@ -264,7 +264,7 @@ class GraphTest {
     }
 
     // expected
-    File file1 = new File("output_2.txt");
+    File file1 = new File("src/test/resources/output_2.txt");
     Scanner sc1 = new Scanner(file1);
 
     int v = 8;
