@@ -284,4 +284,72 @@ class GraphTest {
       assertArrayEquals(expected.get(i), actual.get(i));
     }
   }
+
+  @Test
+  public void incidentMatrix() throws IOException{
+
+    // actual
+    File file = new File("src/test/resources/input_3.txt");
+    Scanner sc = new Scanner(file);
+
+
+    int vertexCount = sc.nextInt();
+    String[] vertexArray = new String[vertexCount];
+    for (int i = 0; i < vertexCount; i++) {
+      vertexArray[i] = sc.next();
+    }
+
+    int edgeCount = sc.nextInt();
+    int[][] edgeMatrix = new int[edgeCount][vertexCount];
+
+    for (int i = 0; i < edgeCount; i++) {
+      for (int j = 0; j < vertexCount; j++) {
+        edgeMatrix[i][j] = sc.nextInt();
+      }
+    }
+
+    Graph<String> graph = new Graph<>(vertexArray, edgeMatrix, edgeCount);
+
+    List<String[][]> actual = new ArrayList<>();
+
+    int tests = sc.nextInt();
+
+    for (int i = 0; i < tests; i++) {
+      actual.add(new String[2][vertexCount]);
+    }
+
+    for (int j = 0; j < tests; j++) {
+      List<Vertex<String>> l1 = graph.dijkstra(sc.next());
+      for (int i = 0; i < vertexCount; i++) {
+        actual.get(j)[0][i] = l1.get(i).getKey();
+        if (l1.get(i).getValue() != null) {
+          actual.get(j)[1][i] = l1.get(i).getValue().toString();
+        }
+        else {
+          actual.get(j)[1][i] = "noway";
+        }
+      }
+    }
+
+    // expected
+    File file1 = new File("src/test/resources/output_3.txt");
+    Scanner sc1 = new Scanner(file1);
+
+    int v = 6, t = 3;
+
+    List<String[][]> expected = new ArrayList<>();
+
+    for (int i = 0; i < t; i++) {
+      expected.add(new String[2][v]);
+      for (int j = 0; j < v; j++) {
+        expected.get(i)[0][j] = sc1.next();
+        expected.get(i)[1][j] = sc1.next();
+      }
+    }
+
+    // asserts
+    for (int i = 0; i < t; i++) {
+      assertArrayEquals(expected.get(i), actual.get(i));
+    }
+  }
 }

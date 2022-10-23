@@ -78,13 +78,45 @@ public class Graph<T extends Comparable<T>> {
   }
 
   /**
+   *  Implements a graph from matrix of incidence.
+   *
+   * @param vertexArray array of existing vertexes
+   * @param incidentMatrix matrix with edges
+   * @param edgeCount count of edges
+   */
+  public Graph(T[] vertexArray, int[][] incidentMatrix, int edgeCount) {
+    vertexes = new HashMap<>();
+    edges = new HashMap<>();
+
+    int len = vertexArray.length;
+    addAllVertexes(vertexArray);
+
+    for (int i = 0; i < edgeCount; i++) {
+      int weight = -1;
+      T k1 = null; T k2 = null;
+      for (int j = 0; j < len; j++) {
+        if (incidentMatrix[i][j] > 0) {
+          k1 = vertexArray[j];
+          weight = incidentMatrix[i][j];
+        }
+        if (incidentMatrix[i][j] < 0) {
+          k2 = vertexArray[j];
+        }
+      }
+      if (k1 != null && k2 != null) {
+        addEdge(k1, k2, weight);
+      }
+    }
+  }
+
+  /**
    * Adds new vertex to the graph.
    *
    * @param key key for new vertex
    * @return if the vertex is added, returns true
    */
   public boolean addVertex(T key) {
-    if (vertexes.containsKey(key)) {
+    if (vertexes.containsKey(key) || key == null) {
       return false;
     }
 
@@ -128,7 +160,7 @@ public class Graph<T extends Comparable<T>> {
    * @return if edge is added, returns true
    */
   public boolean addEdge(T key1, T key2, Integer weight) {
-    if (weight <= 0) {
+    if (weight <= 0 || key1 == null || key2 == null) {
       return false;
     }
 
@@ -222,6 +254,9 @@ public class Graph<T extends Comparable<T>> {
     }
 
     result.sort(Comparator.comparingInt(Vertex::getValue));
+    for (int i = result.size() - 1; !result.get(i).isVisited(); i--) {
+      result.get(i).setValue(null);
+    }
 
     return result;
   }
