@@ -93,7 +93,8 @@ public class Graph<T extends Comparable<T>> {
 
     for (int i = 0; i < edgeCount; i++) {
       int weight = -1;
-      T k1 = null; T k2 = null;
+      T k1 = null;
+      T k2 = null;
       for (int j = 0; j < len; j++) {
         if (incidentMatrix[i][j] > 0) {
           k1 = vertexArray[j];

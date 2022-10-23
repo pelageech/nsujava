@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
 import org.junit.jupiter.api.Test;
 
 class GraphTest {
@@ -286,7 +287,7 @@ class GraphTest {
   }
 
   @Test
-  public void incidentMatrix() throws IOException{
+  public void incidentMatrix() throws IOException {
 
     // actual
     File file = new File("src/test/resources/input_3.txt");
@@ -324,8 +325,7 @@ class GraphTest {
         actual.get(j)[0][i] = l1.get(i).getKey();
         if (l1.get(i).getValue() != null) {
           actual.get(j)[1][i] = l1.get(i).getValue().toString();
-        }
-        else {
+        } else {
           actual.get(j)[1][i] = "noway";
         }
       }
@@ -335,7 +335,8 @@ class GraphTest {
     File file1 = new File("src/test/resources/output_3.txt");
     Scanner sc1 = new Scanner(file1);
 
-    int v = 6, t = 3;
+    int v = 6;
+    int t = 3;
 
     List<String[][]> expected = new ArrayList<>();
 
