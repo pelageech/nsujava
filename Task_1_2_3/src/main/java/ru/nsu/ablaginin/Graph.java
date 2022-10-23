@@ -60,10 +60,10 @@ public class Graph<T extends Comparable<T>> {
    * "Weights" contains appropriating weights of edges.
    *
    * @param vertexArray array of existing vertexes
-   * @param listVertexes list of adjacency
+   * @param vertexList list of adjacency
    * @param weights list of weights
    */
-  public Graph(T[] vertexArray, List<T>[] listVertexes, List<Integer>[] weights) {
+  public Graph(T[] vertexArray, List<T>[] vertexList, List<Integer>[] weights) {
     vertexes = new HashMap<>();
     edges = new HashMap<>();
 
@@ -71,8 +71,8 @@ public class Graph<T extends Comparable<T>> {
     addAllVertexes(vertexArray);
 
     for (int i = 0; i < len; i++) {
-      for (int j = 0; j < listVertexes[i].size(); j++) {
-        addEdge(vertexArray[i], listVertexes[i].get(j), weights[i].get(j));
+      for (int j = 0; j < vertexList[i].size(); j++) {
+        addEdge(vertexArray[i], vertexList[i].get(j), weights[i].get(j));
       }
     }
   }
