@@ -1,11 +1,13 @@
 package ru.nsu.ablaginin;
 
-import org.junit.jupiter.api.Test;
-
-import java.io.*;
-import java.util.*;
-
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class GraphTest {
 
@@ -73,6 +75,7 @@ class GraphTest {
     graph.addEdge("one", "three", 1);
     boolean t = graph.addEdge("three", "two", 5);
     boolean f = graph.addEdge("two", "three", -3);
+    boolean f2 = graph.addEdge("one", "two", 5);
 
     // expected
     Graph<String> expected = new Graph<>();
@@ -85,6 +88,7 @@ class GraphTest {
     assertEquals(expected, graph);
     assertTrue(t);
     assertFalse(f);
+    assertFalse(f2);
   }
 
   @Test
@@ -168,14 +172,13 @@ class GraphTest {
     Graph<Integer> graph = new Graph<>(vertexArray, weights);
 
     List<Integer[][]> actual = new ArrayList<>();
+    int c = sc.nextInt();
 
-    actual.add(new Integer[2][vertexCount]);
-    actual.add(new Integer[2][vertexCount]);
-    actual.add(new Integer[2][vertexCount]);
-    actual.add(new Integer[2][vertexCount]);
-    actual.add(new Integer[2][vertexCount]);
+    for (int i = 0; i < c; i++) {
+      actual.add(new Integer[2][vertexCount]);
+    }
 
-    for (int j = 0; j < 5; j++) {
+    for (int j = 0; j < c; j++) {
       List<Vertex<Integer>> l1 = graph.dijkstra(sc.nextInt());
       for (int i = 0; i < vertexCount; i++) {
         actual.get(j)[0][i] = l1.get(i).getKey();
@@ -204,6 +207,76 @@ class GraphTest {
 
     // asserts
     for (int i = 0; i < 5; i++) {
+      assertArrayEquals(expected.get(i), actual.get(i));
+    }
+  }
+
+  @Test
+  public void adjacencyList() throws FileNotFoundException {
+
+    // actual
+    File file = new File("input_2.txt");
+    Scanner sc = new Scanner(file);
+
+    int vertexCount = sc.nextInt();
+    String[] vertexArray = new String[vertexCount];
+    List<String>[] vertexList = new List[vertexCount];
+    List<Integer>[] weights = new List[vertexCount];
+
+    for (int i = 0; i < vertexCount; i++) {
+      vertexList[i] = new ArrayList<>();
+      weights[i] = new ArrayList<>();
+    }
+
+    for (int i = 0; i < vertexCount; i++) {
+      vertexArray[i] = sc.next();
+    }
+
+    for (int i = 0; i < vertexCount; i++) {
+      int adjs = sc.nextInt();
+
+      for (int j = 0; j < adjs; j++) {
+        vertexList[i].add(sc.next());
+        weights[i].add(sc.nextInt());
+      }
+    }
+
+    Graph<String> graph = new Graph<>(vertexArray, vertexList, weights);
+
+    List<String[][]> actual = new ArrayList<>();
+
+    int tests = sc.nextInt();
+
+    for (int i = 0; i < tests; i++) {
+      actual.add(new String[2][vertexCount]);
+    }
+
+    for (int j = 0; j < tests; j++) {
+      List<Vertex<String>> l1 = graph.dijkstra(sc.next());
+      for (int i = 0; i < vertexCount; i++) {
+        actual.get(j)[0][i] = l1.get(i).getKey();
+        actual.get(j)[1][i] = l1.get(i).getValue().toString();
+      }
+    }
+
+    // expected
+    File file1 = new File("output_2.txt");
+    Scanner sc1 = new Scanner(file1);
+
+    int v = 8;
+
+    List<String[][]> expected = new ArrayList<>();
+
+    for (int i = 0; i < 3; i++) {
+      expected.add(new String[2][v]);
+      for (int j = 0; j < v; j++) {
+        expected.get(i)[0][j] = sc1.next();
+        expected.get(i)[1][j] = sc1.next();
+      }
+    }
+
+    // asserts
+    for (int i = 0; i < 3; i++) {
       assertArrayEquals(expected.get(i), actual.get(i));
     }
   }
