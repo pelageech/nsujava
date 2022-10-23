@@ -20,6 +20,10 @@ class GraphTest {
 
     // actual
     Graph<String> graph = new Graph<>();
+    boolean t = graph.addVertex("one");
+    boolean f = graph.addVertex("one");
+    assertTrue(t);
+    assertFalse(f);
 
     // expected
     Graph<String> expected = new Graph<>();
@@ -27,8 +31,6 @@ class GraphTest {
 
     // asserts
     assertEquals(expected, graph);
-    assertTrue(graph.addVertex("one"));
-    assertFalse(graph.addVertex("one"));
   }
 
   @Test
@@ -53,6 +55,10 @@ class GraphTest {
     // actual
     Graph<String> graph = new Graph<>();
     graph.addAllVertexes(new String[]{"one", "two", "three", "four"});
+    boolean t = graph.deleteVertex("three");
+    boolean f = graph.deleteVertex("three");
+    assertTrue(t);
+    assertFalse(f);
 
     // expected
     Graph<String> expected = new Graph<>();
@@ -60,8 +66,6 @@ class GraphTest {
 
     // asserts
     assertEquals(expected, graph);
-    assertTrue(graph.deleteVertex("three"));
-    assertFalse(graph.deleteVertex("three"));
   }
 
   @Test
@@ -73,6 +77,12 @@ class GraphTest {
 
     graph.addEdge("one", "two", 3);
     graph.addEdge("one", "three", 1);
+    boolean t = graph.addEdge("three", "two", 5);
+    boolean f = graph.addEdge("two", "three", -3);
+    boolean f2 = graph.addEdge("one", "two", 5);
+    assertTrue(t);
+    assertFalse(f);
+    assertFalse(f2);
 
     // expected
     Graph<String> expected = new Graph<>();
@@ -83,9 +93,6 @@ class GraphTest {
 
     // asserts
     assertEquals(expected, graph);
-    assertTrue(graph.addEdge("three", "two", 5));
-    assertFalse(graph.addEdge("two", "three", -3));
-    assertFalse(graph.addEdge("one", "two", 5));
   }
 
   @Test
@@ -98,6 +105,10 @@ class GraphTest {
     graph.addEdge("one", "three", 1);
     graph.addEdge("three", "two", 5);
     graph.addEdge("two", "three", 3);
+    boolean t = graph.deleteEdge("two", "three");
+    boolean f = graph.deleteEdge("two", "three");
+    assertTrue(t);
+    assertFalse(f);
 
     // expected
     Graph<String> expected = new Graph<>();
@@ -108,8 +119,6 @@ class GraphTest {
 
     // asserts
     assertEquals(expected, graph);
-    assertTrue(graph.deleteEdge("two", "three"));
-    assertFalse(graph.deleteEdge("two", "three"));
   }
 
   @Test
