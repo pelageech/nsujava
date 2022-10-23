@@ -2,17 +2,7 @@ package ru.nsu.ablaginin;
 
 import java.util.Objects;
 
-public class Edge<T extends Comparable<T>> {
-  private final Vertex<T> from;
-  private final Vertex<T> to;
-  private final Integer weight;
-
-  public Edge(Vertex<T> f, Vertex<T> t, Integer w) {
-    from = f;
-    to = t;
-    weight = w;
-  }
-
+record Edge<T extends Comparable<T>> (Vertex<T> from, Vertex<T> to, Integer weight) {
   public Integer getWeight() {
     return weight;
   }
