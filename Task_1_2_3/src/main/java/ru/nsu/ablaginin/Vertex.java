@@ -14,6 +14,11 @@ public class Vertex<T extends Comparable<T>> {
   private Integer value;
   private boolean visited;
 
+  /**
+   * Implements one vertex.
+   *
+   * @param key key of new vertex
+   */
   public Vertex(T key) {
     this.key = key;
     this.value = 0;
