@@ -7,23 +7,7 @@ import java.util.Objects;
  *
  * @param <T> type of vertex's name, must be Comparable
  */
-public class Edge<T extends Comparable<T>> {
-  private final Vertex<T> from;
-  private final Vertex<T> to;
-  private final Integer weight;
-
-  /**
-   * Implements one edge.
-   *
-   * @param v1 from-vertex
-   * @param v2 to-vertex
-   * @param w weight of the edge
-   */
-  public Edge(Vertex<T> v1, Vertex<T> v2, Integer w) {
-    from = v1;
-    to = v2;
-    weight = w;
-  }
+record Edge<T extends Comparable<T>> (Vertex<T> from, Vertex<T> to, Integer weight) {
 
   public Integer getWeight() {
     return weight;
