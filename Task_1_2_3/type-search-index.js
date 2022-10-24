@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"ru.nsu.ablaginin","l":"Edge"},{"p":"ru.nsu.ablaginin","l":"Graph"},{"p":"ru.nsu.ablaginin","l":"Vertex"}]
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"ru.nsu.ablaginin","l":"Graph"},{"p":"ru.nsu.ablaginin","l":"Vertex"}];updateSearchResults();
