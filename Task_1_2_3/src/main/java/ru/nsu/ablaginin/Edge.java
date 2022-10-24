@@ -7,7 +7,7 @@ import java.util.Objects;
  *
  * @param <T> type of vertex's name, must be Comparable
  */
-record Edge<T extends Comparable<T>> (Vertex<T> from, Vertex<T> to, Integer weight) {
+record Edge<T extends Comparable<T>>(Vertex<T> from, Vertex<T> to, Integer weight) {
 
   public Integer getWeight() {
     return weight;
