@@ -25,12 +25,16 @@ public class Graph<T extends Comparable<T>> {
   private final Map<T, Vertex<T>> vertexes;
   private final Map<T, List<Edge<T>>> edges;
 
+  {
+    vertexes = new HashMap<>();
+    edges = new HashMap<>();
+  }
+
   /**
    * Implements an empty graph.
    */
   public Graph() {
-    vertexes = new HashMap<>();
-    edges = new HashMap<>();
+
   }
 
   /**
@@ -40,9 +44,6 @@ public class Graph<T extends Comparable<T>> {
    * @param matrix matrix of adjacency
    */
   public Graph(T[] vertexArray, int[][] matrix) {
-    vertexes = new HashMap<>();
-    edges = new HashMap<>();
-
     int len = vertexArray.length;
     addAllVertexes(vertexArray);
 
@@ -64,9 +65,6 @@ public class Graph<T extends Comparable<T>> {
    * @param weights list of weights
    */
   public Graph(T[] vertexArray, List<T>[] vertexList, List<Integer>[] weights) {
-    vertexes = new HashMap<>();
-    edges = new HashMap<>();
-
     int len = vertexArray.length;
     addAllVertexes(vertexArray);
 
@@ -85,9 +83,6 @@ public class Graph<T extends Comparable<T>> {
    * @param edgeCount count of edges
    */
   public Graph(T[] vertexArray, int[][] incidentMatrix, int edgeCount) {
-    vertexes = new HashMap<>();
-    edges = new HashMap<>();
-
     int len = vertexArray.length;
     addAllVertexes(vertexArray);
 
