@@ -5,9 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -152,9 +150,10 @@ class GraphTest {
   }
 
   @Test
-  void adjacencyMatrixTest() throws IOException {
+  void adjacencyMatrixTest() {
     // actual
-    File file = new File("src/test/resources/input_1.txt");
+    InputStream file = getClass().getClassLoader().getResourceAsStream("input_1.txt");
+    assert file != null;
     Scanner sc = new Scanner(file);
 
 
@@ -191,7 +190,8 @@ class GraphTest {
     }
 
     // expected
-    File file1 = new File("src/test/resources/output_1.txt");
+    InputStream file1 = getClass().getClassLoader().getResourceAsStream("output_1.txt");
+    assert file1 != null;
     Scanner sc1 = new Scanner(file1);
 
     List<Integer[][]> expected = new ArrayList<>();
@@ -216,10 +216,11 @@ class GraphTest {
   }
 
   @Test
-  public void adjacencyListTest() throws FileNotFoundException {
+  public void adjacencyListTest() {
 
     // actual
-    File file = new File("src/test/resources/input_2.txt");
+    InputStream file = getClass().getClassLoader().getResourceAsStream("input_2.txt");
+    assert file != null;
     Scanner sc = new Scanner(file);
 
     int vertexCount = sc.nextInt();
@@ -264,7 +265,8 @@ class GraphTest {
     }
 
     // expected
-    File file1 = new File("src/test/resources/output_2.txt");
+    InputStream file1 = getClass().getClassLoader().getResourceAsStream("output_2.txt");
+    assert file1 != null;
     Scanner sc1 = new Scanner(file1);
 
     int v = 8;
@@ -286,10 +288,11 @@ class GraphTest {
   }
 
   @Test
-  public void incidentMatrixTest() throws IOException {
+  public void incidentMatrixTest() {
 
     // actual
-    File file = new File("src/test/resources/input_3.txt");
+    InputStream file = getClass().getClassLoader().getResourceAsStream("input_3.txt");
+    assert file != null;
     Scanner sc = new Scanner(file);
 
 
@@ -331,7 +334,8 @@ class GraphTest {
     }
 
     // expected
-    File file1 = new File("src/test/resources/output_3.txt");
+    InputStream file1 = getClass().getClassLoader().getResourceAsStream("output_3.txt");
+    assert file1 != null;
     Scanner sc1 = new Scanner(file1);
 
     int v = 6;
