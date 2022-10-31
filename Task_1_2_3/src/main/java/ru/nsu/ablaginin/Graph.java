@@ -183,7 +183,7 @@ public class Graph<T extends Comparable<T>> {
   public boolean deleteEdge(T key1, T key2) {
     List<Edge<T>> e = edges.get(key1);
     for (int i = 0; i < e.size(); i++) {
-      if (e.get(i).getTo().getKey() == key2) {
+      if (e.get(i).to().getKey() == key2) {
         e.remove(i);
         return true;
       }
@@ -234,11 +234,11 @@ public class Graph<T extends Comparable<T>> {
       }
 
       for (var i : currEdgeList) {
-        Vertex<T> from = i.getFrom();
-        Vertex<T> to = i.getTo();
+        Vertex<T> from = i.from();
+        Vertex<T> to = i.to();
 
         to.setValue(
-            Math.min(to.getValue(), from.getValue() + i.getWeight())
+            Math.min(to.getValue(), from.getValue() + i.weight())
         );
 
         if (!to.isVisited()) {
@@ -277,7 +277,7 @@ public class Graph<T extends Comparable<T>> {
   private boolean checkEdge(Vertex<T> v1, Vertex<T> v2) {
     List<Edge<T>> e = edges.get(v1.getKey());
     for (Edge<T> edge : e) {
-      if (edge.getTo().getKey() == v2.getKey()) {
+      if (edge.to().getKey() == v2.getKey()) {
         return true;
       }
     }

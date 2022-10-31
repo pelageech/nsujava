@@ -14,7 +14,7 @@ class EdgeTest {
 
     Edge<Integer> e = new Edge<>(v1, v2, 88);
 
-    assertEquals(88, (int) e.getWeight());
+    assertEquals(88, (int) e.weight());
   }
 
   @Test
@@ -24,7 +24,7 @@ class EdgeTest {
 
     Edge<Integer> e = new Edge<>(v1, v2, 88);
 
-    assertEquals(v1, e.getFrom());
+    assertEquals(v1, e.from());
   }
 
   @Test
@@ -34,7 +34,7 @@ class EdgeTest {
 
     Edge<Integer> e = new Edge<>(v1, v2, 88);
 
-    assertEquals(v2, e.getTo());
+    assertEquals(v2, e.to());
   }
 
   @Test

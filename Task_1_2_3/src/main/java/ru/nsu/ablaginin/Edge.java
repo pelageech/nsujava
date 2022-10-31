@@ -9,18 +9,6 @@ import java.util.Objects;
  */
 record Edge<T extends Comparable<T>>(Vertex<T> from, Vertex<T> to, Integer weight) {
 
-  public Integer getWeight() {
-    return weight;
-  }
-
-  public Vertex<T> getFrom() {
-    return from;
-  }
-
-  public Vertex<T> getTo() {
-    return to;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
