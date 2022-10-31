@@ -11,39 +11,39 @@ import org.junit.jupiter.api.Test;
 class VertexTest {
 
   @Test
-  void getKey() {
+  void getKeyTest() {
     Vertex<Integer> v = new Vertex<>(4);
     assertEquals(4, (int) v.getKey());
   }
 
   @Test
-  void getValue() {
+  void getValueTest() {
     Vertex<Integer> v = new Vertex<>(4);
     assertEquals(0, (int) v.getValue());
   }
 
   @Test
-  void isVisited() {
+  void isVisitedTest() {
     Vertex<Integer> v = new Vertex<>(4);
     assertFalse(v.isVisited());
   }
 
   @Test
-  void setValue() {
+  void setValueTest() {
     Vertex<Integer> v = new Vertex<>(4);
     v.setValue(10);
     assertEquals(10, v.getValue());
   }
 
   @Test
-  void setVisited() {
+  void setVisitedTest() {
     Vertex<Integer> v = new Vertex<>(4);
     v.setVisited(true);
     assertTrue(v.isVisited());
   }
 
   @Test
-  void testEquals() {
+  void equalsTest() {
     Vertex<Integer> v1 = new Vertex<>(4);
     v1.setValue(10);
     Vertex<Integer> v2 = new Vertex<>(4);
@@ -57,7 +57,7 @@ class VertexTest {
   }
 
   @Test
-  void testHashCode() {
+  void hashCodeTest() {
     Vertex<Integer> v1 = new Vertex<>(4);
     v1.setValue(10);
     Vertex<Integer> v2 = new Vertex<>(4);

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 class EdgeTest {
 
   @Test
-  void getWeight() {
+  void getWeightTest() {
     Vertex<Integer> v1 = new Vertex<>(27);
     Vertex<Integer> v2 = new Vertex<>(54);
 
@@ -18,7 +18,7 @@ class EdgeTest {
   }
 
   @Test
-  void getFrom() {
+  void getFromTest() {
     Vertex<Integer> v1 = new Vertex<>(27);
     Vertex<Integer> v2 = new Vertex<>(54);
 
@@ -28,7 +28,7 @@ class EdgeTest {
   }
 
   @Test
-  void getTo() {
+  void getToTest() {
     Vertex<Integer> v1 = new Vertex<>(27);
     Vertex<Integer> v2 = new Vertex<>(54);
 
@@ -38,7 +38,7 @@ class EdgeTest {
   }
 
   @Test
-  void testEquals() {
+  void equalsTest() {
     Vertex<Integer> v1 = new Vertex<>(27);
     Vertex<Integer> v2 = new Vertex<>(54);
     Vertex<Integer> v3 = new Vertex<>(14);
@@ -53,7 +53,7 @@ class EdgeTest {
   }
 
   @Test
-  void testHashCode() {
+  void hashCodeTest() {
     Vertex<Integer> v1 = new Vertex<>(27);
     Vertex<Integer> v2 = new Vertex<>(54);
     Vertex<Integer> v3 = new Vertex<>(14);

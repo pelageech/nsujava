@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 class GraphTest {
 
   @Test
-  void addVertex() {
+  void addVertexTest() {
 
     // actual
     Graph<String> graph = new Graph<>();
@@ -34,7 +34,7 @@ class GraphTest {
   }
 
   @Test
-  void addAllVertexes() {
+  void addAllVertexesTest() {
 
     // actual
     Graph<String> graph = new Graph<>();
@@ -50,7 +50,7 @@ class GraphTest {
   }
 
   @Test
-  void deleteVertex() {
+  void deleteVertexTest() {
 
     // actual
     Graph<String> graph = new Graph<>();
@@ -69,7 +69,7 @@ class GraphTest {
   }
 
   @Test
-  void addEdge() {
+  void addEdgeTest() {
 
     // actual
     Graph<String> graph = new Graph<>();
@@ -96,7 +96,7 @@ class GraphTest {
   }
 
   @Test
-  void deleteEdge() {
+  void deleteEdgeTest() {
     // actual
     Graph<String> graph = new Graph<>();
     graph.addAllVertexes(new String[]{"one", "two", "three"});
@@ -122,7 +122,7 @@ class GraphTest {
   }
 
   @Test
-  void dijkstra() {
+  void dijkstraTest() {
 
     // actual
     Graph<String> graph = new Graph<>();
@@ -152,7 +152,7 @@ class GraphTest {
   }
 
   @Test
-  void adjacencyMatrix() throws IOException {
+  void adjacencyMatrixTest() throws IOException {
     // actual
     File file = new File("src/test/resources/input_1.txt");
     Scanner sc = new Scanner(file);
@@ -216,7 +216,7 @@ class GraphTest {
   }
 
   @Test
-  public void adjacencyList() throws FileNotFoundException {
+  public void adjacencyListTest() throws FileNotFoundException {
 
     // actual
     File file = new File("src/test/resources/input_2.txt");
@@ -286,7 +286,7 @@ class GraphTest {
   }
 
   @Test
-  public void incidentMatrix() throws IOException {
+  public void incidentMatrixTest() throws IOException {
 
     // actual
     File file = new File("src/test/resources/input_3.txt");
