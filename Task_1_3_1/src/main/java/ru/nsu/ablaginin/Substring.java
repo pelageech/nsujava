@@ -20,18 +20,24 @@ public class Substring {
   }
 
   // Rabin-Cap algorithm
-
   public List<Integer> algorithmRabinKarp(String substring) {
+    if (string == null || substring == null) {
+      return null;
+    }
+    List<Integer> pointerArray = new ArrayList<>();
+
     int beg = 0;
     int end = substring.length();
+
+    int strLen = string.length();
+    if (end > strLen) {
+      return pointerArray;
+    }
 
     xFactor = powMod(x, end - 1);
     currentHash = hash(string, end);
     long substringHash = hash(substring, end);
 
-    int strLen = string.length();
-
-    List<Integer> pointerArray = new ArrayList<>();
     while (true) {
       if (
           currentHash == substringHash
@@ -53,15 +59,15 @@ public class Substring {
   // module arithmetic
 
   private long addMod(long a, long b) {
-    return ((a + b) % _MOD);
+    return fastMod(a + b);
   }
 
   private long mulMod(long a, long b) {
-    return ((a * b) % _MOD);
+    return fastMod(a * b);
   }
 
   private long subMod(long a, long b) {
-    return ((a - b) + _MOD) % _MOD;
+    return fastMod((a - b) + _MOD);
   }
 
   private long powMod(long x, long y) { // fast pow % _MOD, O(logN)
@@ -77,6 +83,12 @@ public class Substring {
     }
 
     return res;
+  }
+
+  private long fastMod(long value) {
+    value = (value >> 31) + (value & _MOD);
+    value = (value >> 31) + (value & _MOD);
+    return value == _MOD ? 0 : value;
   }
 
   // hash func
