@@ -12,7 +12,7 @@ public class FileSubstring {
     this.is = is;
   }
 
-  public List<List<Integer>> findSubstring(String substring) {
+  public List<LinePointers> findSubstring(String substring) {
     Scanner sc;
     if (is != null) {
       sc = new Scanner(is);
@@ -20,13 +20,18 @@ public class FileSubstring {
       return null;
     }
 
-    List<List<Integer>> substringPointersList = new ArrayList<>();
+    List<LinePointers> substringPointersList = new ArrayList<>();
 
+    int curLine = 1;
     while (sc.hasNextLine()) {
       String current = sc.nextLine();
       Substring sub = new Substring(current);
 
-      substringPointersList.add(sub.algorithmRabinKarp(substring));
+      List<Integer> pointers = sub.algorithmRabinKarp(substring);
+      if (pointers.size() > 0) {
+        substringPointersList.add(new LinePointers(curLine, pointers));
+      }
+      curLine++;
     }
 
     return substringPointersList;

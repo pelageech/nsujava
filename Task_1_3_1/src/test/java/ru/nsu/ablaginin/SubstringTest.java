@@ -1,6 +1,5 @@
 package ru.nsu.ablaginin;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -8,7 +7,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import org.junit.jupiter.api.Test;
-import ru.nsu.ablaginin.Substring;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,6 +27,23 @@ class SubstringTest {
 
     // asserts
     assertEquals(expected, actual);
+  }
+
+  @Test
+  public void OverSubstringTest() {
+
+    // actual
+    String str = "Hello World!";
+    String find = "Hello World! Bye-Bye World!";
+
+    Substring sub = new Substring(str);
+
+    List<Integer> actual = sub.algorithmRabinKarp(find);
+
+    // expected
+
+    // asserts
+    assertTrue(actual.isEmpty());
   }
 
   @Test
@@ -83,5 +98,18 @@ class SubstringTest {
 
     // asserts
     assertArrayEquals(expected, actual);
+  }
+
+  @Test
+  public void nullTest() {
+    String str = "Hi!";
+
+    Substring sub1 = new Substring(str);
+    List<Integer> nullList1 = sub1.algorithmRabinKarp(null);
+    assertNull(nullList1);
+
+    Substring sub2 = new Substring(null);
+    List<Integer> nullList2 = sub2.algorithmRabinKarp(str);
+    assertNull(nullList2);
   }
 }
