@@ -76,6 +76,9 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Substring</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Class Substring defines an algorithm of
+ searching substring in the string.
+ The Rabin-Carp's algorithm was used for these aims.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -88,7 +91,10 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String)" class="member-name-link">Substring</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;inputString)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">The constructor creates an object
+ that receives an inputString.</div>
+</div>
 </div>
 </section>
 </li>
@@ -105,7 +111,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#algorithmRabinKarp(java.lang.String)" class="member-name-link">algorithmRabinKarp</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;substring)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Rabin-Carp's algorithm uses polynomial hash for searching.</div>
+</div>
 </div>
 </div>
 </div>
@@ -127,6 +135,13 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(java.lang.String)">
 <h3>Substring</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Substring</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;inputString)</span></div>
+<div class="block">The constructor creates an object
+ that receives an inputString.
+ Also, it generates magic number in a range [2.._MOD - 1].</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>inputString</code> - fixed string</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -141,6 +156,22 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="algorithmRabinKarp(java.lang.String)">
 <h3>algorithmRabinKarp</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;</span>&nbsp;<span class="element-name">algorithmRabinKarp</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;substring)</span></div>
+<div class="block">Rabin-Carp's algorithm uses polynomial hash for searching.
+ For fixed prime number `_MOD` and random `magic` the hash
+ of string(s[1..N]) is sum(s[i] * magic^(N-i)) i (- [1..N].
+ So, if we compare hashes, and they're different, that means
+ the substrings are different. But there are probability of
+ coliseum, it's probability less than 1 / N^(c-2), c is more than 2,
+ and _MOD is more than N^c. It's EXTREMELY little.
+ So, we don't want to rehash a new substring in the string,
+ we should use the formula: hash(s[i+1..m+i+1]) =
+ = ( hash(s[i..m+i]) - s[i] * x^(m - 1) ) * x + s[m+i+1].</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>substring</code> - substring that's supposed to be found</dd>
+<dt>Returns:</dt>
+<dd>list of pointers</dd>
+</dl>
 </section>
 </li>
 </ul>
