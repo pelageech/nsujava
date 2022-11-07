@@ -38,7 +38,7 @@ class SubstringTest {
 
     // actual
     String str = "Hello World!";
-    String find = "Hello World! Bye-Bye World!";
+    String find = "Hello World! Bye Bye World!";
 
     Substring sub = new Substring(str);
 
