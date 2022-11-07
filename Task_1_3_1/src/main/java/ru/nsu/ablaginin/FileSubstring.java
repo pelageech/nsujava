@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 /**
  * FileSubstring contains InputStream for searching
- * a substring in a whole text
+ * a substring in a whole text.
  */
 public class FileSubstring {
   private final InputStream is;

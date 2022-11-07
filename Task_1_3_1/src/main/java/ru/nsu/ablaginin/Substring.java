@@ -7,7 +7,6 @@ import java.util.Random;
 /**
  * Class Substring defines an algorithm of
  * searching substring in the string.
- *
  * The Rabin-Carp's algorithm was used for these aims.
  */
 public class Substring {
