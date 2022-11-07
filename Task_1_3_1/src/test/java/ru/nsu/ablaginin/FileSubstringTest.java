@@ -1,14 +1,14 @@
 package ru.nsu.ablaginin;
 
-import org.junit.jupiter.api.Test;
-
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class FileSubstringTest {
   @Test
@@ -63,7 +63,7 @@ class FileSubstringTest {
   }
 
   @Test
-  public void WarAndPeaceTest() {
+  public void warAndPeaceTest() {
     // actual
     Scanner isc = null;
     InputStream fin = getClass().getClassLoader().getResourceAsStream("f2.in");
@@ -110,5 +110,13 @@ class FileSubstringTest {
 
     // asserts
     assertEquals(expected, actual);
+  }
+
+  @Test
+  public void nullInputStreamTest() {
+    InputStream isc = null;
+    FileSubstring fileSubstring = new FileSubstring(isc);
+
+    assertNull(fileSubstring.findSubstring("Hello"));
   }
 }

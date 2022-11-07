@@ -8,7 +8,11 @@ import java.util.List;
 import java.util.Scanner;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class SubstringTest {
   @Test
@@ -30,7 +34,7 @@ class SubstringTest {
   }
 
   @Test
-  public void OverSubstringTest() {
+  public void overSubstringTest() {
 
     // actual
     String str = "Hello World!";
