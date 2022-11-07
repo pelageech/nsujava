@@ -41,6 +41,7 @@ public class Substring {
    * So, we don't want to rehash a new substring in the string,
    * we should use the formula: hash(s[i+1..m+i+1]) =
    * = ( hash(s[i..m+i]) - s[i] * x^(m - 1) ) * x + s[m+i+1].
+   *
    * @param substring substring that's supposed to be found
    * @return list of pointers
    */

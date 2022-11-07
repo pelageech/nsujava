@@ -1,5 +1,11 @@
 package ru.nsu.ablaginin;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -8,18 +14,12 @@ import java.util.List;
 import java.util.Scanner;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-
 class SubstringTest {
   @Test
   public void algorithmRabinKarpTest() {
 
     // actual
-    String str = "Have you ever had a cat? I think they're the cutest category of pets! I do love cats!";
+    String str = "Ever had a cat? I think they're the cutest category of pets! I do love cats!";
     String find = "cat";
 
     Substring sub = new Substring(str);
