@@ -5,13 +5,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * FileSubstring contains InputStream for searching
+ * a substring in a whole text
+ */
 public class FileSubstring {
   private final InputStream is;
 
+  /**
+   * The constructor creates an object with a fixed
+   * inputStream parameter.
+   *
+   * @param is inputStream
+   */
   public FileSubstring(InputStream is) {
     this.is = is;
   }
 
+  /**
+   * For each line we use Rabin-Carp's algorithm.
+   *
+   * @param substring substring that's supposed to be found
+   * @return a list of a lists with pointers for each line
+   */
   public List<LinePointers> findSubstring(String substring) {
     Scanner sc;
     if (is != null) {
