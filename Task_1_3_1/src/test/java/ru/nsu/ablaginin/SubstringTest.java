@@ -19,7 +19,8 @@ class SubstringTest {
   public void algorithmRabinKarpTest() {
 
     // actual
-    String str = "Ever had a cat? I think they're the cutest category of pets! I do love cats!";
+    String str = "Have you ever had a cat? I think they're the cutest " +
+        "category of pets! I do love cats!";
     String find = "cat";
 
     Substring sub = new Substring(str);
@@ -38,7 +39,7 @@ class SubstringTest {
 
     // actual
     String str = "Hello World!";
-    String find = "Hello World! Bye Bye World!";
+    String find = "Hello World! Bye-Bye World!";
 
     Substring sub = new Substring(str);
 
