@@ -1,120 +1,133 @@
 package ru.nsu.ablaginin;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import org.junit.jupiter.api.Test;
 
 class SubstringTest {
   @Test
-  public void algorithmRabinKarpTest() {
-
-    // actual
-    String str = "Have you ever had a cat? I think they're the cutest "
-        + "category of pets! I do love cats!";
-    String find = "cat";
-
-    Substring sub = new Substring(str);
-
-    List<Integer> actual = sub.algorithmRabinKarp(find);
-
-    // expected
-    List<Integer> expected = Arrays.asList(20, 52, 80);
-
-    // asserts
-    assertEquals(expected, actual);
-  }
-
-  @Test
-  public void overSubstringTest() {
-
-    // actual
-    String str = "Hello World!";
-    String find = "Hello World! Bye-Bye World!";
-
-    Substring sub = new Substring(str);
-
-    List<Integer> actual = sub.algorithmRabinKarp(find);
-
-    // expected
-
-    // asserts
-    assertTrue(actual.isEmpty());
-  }
-
-  @Test
   public void commonTest() throws IOException {
 
     // actual
     Scanner isc = null;
-    InputStream fin = getClass().getClassLoader().getResourceAsStream("1.in");
+    InputStream fin = getClass().getClassLoader().getResourceAsStream("f1.in");
     if (fin != null) {
       isc = new Scanner(fin);
     } else {
       fail();
     }
 
-    String input = isc.nextLine();
-    Substring ss = new Substring(input);
-
-    int c = isc.nextInt();
-    @SuppressWarnings("unchecked")
-    List<Integer>[] actual = new ArrayList[c];
-
-    isc.nextLine();
-    for (int i = 0; i < c; i++) {
-      String sub = isc.nextLine();
-      actual[i] = ss.algorithmRabinKarp(sub);
+    String textInputString = isc.nextLine();
+    InputStream textStream = getClass().getClassLoader().getResourceAsStream(textInputString);
+    if (textStream == null) {
+      fail();
     }
 
-    fin.close();
+    Substring fsub = new Substring(textStream);
+
+    List<LinePointers> actual;
+    String find = isc.nextLine();
+
+    actual = fsub.algorithmRabinKarp(find);
 
     // expected
-    Scanner osc = null;
-    InputStream fout = getClass().getClassLoader().getResourceAsStream("1.out");
-    if (fout != null) {
-      osc = new Scanner(fout);
+    List<LinePointers> expected = new ArrayList<>();
+    expected.add(new LinePointers(1, List.of(2)));
+    expected.add(new LinePointers(2, List.of(2)));
+    expected.add(new LinePointers(3, List.of(7, 24)));
+
+    // asserts
+    assertEquals(expected, actual);
+  }
+
+  @Test
+  public void warAndPeaceTest() throws IOException {
+    // actual
+    Scanner isc = null;
+    InputStream fin = getClass().getClassLoader().getResourceAsStream("f2.in");
+    if (fin != null) {
+      isc = new Scanner(fin);
     } else {
       fail();
     }
 
-    @SuppressWarnings("unchecked")
-    List<Integer>[] expected = new ArrayList[c];
-
-    for (int i = 0; i < c; i++) {
-      expected[i] = new ArrayList<>();
-
-      int p = osc.nextInt();
-      for (int j = 0; j < p; j++) {
-        expected[i].add(osc.nextInt());
-      }
+    String textInputString = isc.nextLine();
+    InputStream textStream = getClass().getClassLoader().getResourceAsStream(textInputString);
+    if (textStream == null) {
+      fail();
     }
 
-    fout.close();
+    Substring fsub = new Substring(textStream);
+
+    List<LinePointers> actual;
+    String find = isc.nextLine();
+
+    actual = fsub.algorithmRabinKarp(find);
+
+    // expected
+    List<LinePointers> expected = new ArrayList<>();
+    expected.add(new LinePointers(2967, List.of(37)));
+    expected.add(new LinePointers(3258, List.of(158)));
+    expected.add(new LinePointers(3323, List.of(25, 38)));
+    expected.add(new LinePointers(4058, List.of(687)));
+    expected.add(new LinePointers(12310, List.of(67)));
+    expected.add(new LinePointers(12655, List.of(1033)));
+    expected.add(new LinePointers(12772, List.of(507)));
+    expected.add(new LinePointers(13749, List.of(1459)));
+    expected.add(new LinePointers(16153, List.of(48, 216)));
 
     // asserts
-    assertArrayEquals(expected, actual);
+    assertEquals(expected, actual);
   }
 
   @Test
-  public void nullTest() {
-    String str = "Hi!";
+  public void nullInputStreamTest() throws IOException {
 
-    Substring sub1 = new Substring(str);
-    List<Integer> nullList1 = sub1.algorithmRabinKarp(null);
-    assertNull(nullList1);
+    // actual
+    InputStream isc = getClass().getClassLoader().getResourceAsStream("f1.in");
+    InputStream isc1 = null;
 
-    Substring sub2 = new Substring(null);
-    List<Integer> nullList2 = sub2.algorithmRabinKarp(str);
-    assertNull(nullList2);
+    Substring fileSubstr = new Substring(isc);
+    Substring fileSubstring = new Substring(isc1);
+
+    // asserts
+    assertNull(fileSubstring.algorithmRabinKarp("Hello"));
+    assertNull(fileSubstr.algorithmRabinKarp(""));
+    assertNull(fileSubstr.algorithmRabinKarp(null));
+  }
+
+  @Test
+  public void overStringTest() throws IOException {
+
+    // actual
+    Scanner isc = null;
+    InputStream fin = getClass().getClassLoader().getResourceAsStream("f3.in");
+    if (fin != null) {
+      isc = new Scanner(fin);
+    } else {
+      fail();
+    }
+
+    String textInputString = isc.nextLine();
+    InputStream textStream = getClass().getClassLoader().getResourceAsStream(textInputString);
+    if (textStream == null) {
+      fail();
+    }
+    Substring fsub = new Substring(textStream);
+
+    List<LinePointers> actual;
+    String find = isc.nextLine();
+
+    actual = fsub.algorithmRabinKarp(find);
+
+    // asserts
+    assertNull(actual);
   }
 }
