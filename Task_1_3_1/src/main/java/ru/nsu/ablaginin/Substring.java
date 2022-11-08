@@ -12,6 +12,8 @@ import java.util.Random;
 /**
  * Class Substring defines an algorithm of
  * searching substring in the file.
+ * It takes an item byte-by-byte and tries to search
+ * a coincidence.
  * The Rabin-Carp's algorithm was used for these aims.
  */
 public class Substring {
@@ -26,7 +28,7 @@ public class Substring {
 
   /**
    * The constructor creates an object
-   * that receives an inputString.
+   * that receives an inputStream.
    * Also, it generates magic number in a range [2.._MOD - 1].
    *
    * @param inputStream fixed string
@@ -77,7 +79,7 @@ public class Substring {
       if (nextChar == -1) {
         return null;
       }
-      currentString.append((char)nextChar);
+      currentString.append((char) nextChar);
     }
     // count first hash
     currentHash = hash(currentString.toString(), subLength);
@@ -123,7 +125,7 @@ public class Substring {
 
       // get the next substring
       currentString.deleteCharAt(0);
-      currentString.append((char)nextChar);
+      currentString.append((char) nextChar);
 
       prevChar = currentString.charAt(0); // change prevChar
     }
