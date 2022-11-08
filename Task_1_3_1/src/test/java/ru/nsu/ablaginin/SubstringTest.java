@@ -39,9 +39,11 @@ class SubstringTest {
 
     // expected
     List<LinePointers> expected = new ArrayList<>();
-    expected.add(new LinePointers(1, List.of(2)));
+    expected.add(new LinePointers(1, List.of(0)));
     expected.add(new LinePointers(2, List.of(2)));
-    expected.add(new LinePointers(3, List.of(7, 24)));
+    expected.add(new LinePointers(3, List.of(2)));
+    expected.add(new LinePointers(4, List.of(7, 24)));
+    expected.add(new LinePointers(5, List.of(1)));
 
     // asserts
     assertEquals(expected, actual);

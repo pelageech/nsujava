@@ -86,7 +86,7 @@ public class Substring {
 
     prevChar = currentString.charAt(0);
     int currentLine = 1; // line in which we're searching
-    int lineOffset = 2; // offset in the line
+    int lineOffset = subLength - 1; // offset in the line
 
     // algorithm itself
     while (true) {
