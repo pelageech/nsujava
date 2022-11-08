@@ -1,16 +1,23 @@
 package ru.nsu.ablaginin;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+
 /**
  * Class Substring defines an algorithm of
- * searching substring in the string.
+ * searching substring in the file.
  * The Rabin-Carp's algorithm was used for these aims.
  */
 public class Substring {
-  private final String string;
+  private final InputStream inputStream;
+
+  private final StringBuilder currentString; // substring in the string
   private long currentHash; // hash of substring in the string
 
   private static final long _MOD = ~(1 << 31); // prime number for `mod`
@@ -22,11 +29,11 @@ public class Substring {
    * that receives an inputString.
    * Also, it generates magic number in a range [2.._MOD - 1].
    *
-   * @param inputString fixed string
+   * @param inputStream fixed string
    */
-  public Substring(String inputString) {
-    string = inputString;
-
+  public Substring(InputStream inputStream) {
+    this.inputStream = inputStream;
+    currentString = new StringBuilder();
     magic = generateMagic();
   }
 
@@ -45,40 +52,83 @@ public class Substring {
    * @param substring substring that's supposed to be found
    * @return list of pointers
    */
-  public List<Integer> algorithmRabinKarp(String substring) {
-    if (string == null || substring == null) {
+  public List<LinePointers> algorithmRabinKarp(String substring) throws IOException {
+    // null check
+    if (inputStream == null || substring == null || substring.equals("")) {
       return null;
     }
-    List<Integer> pointerArray = new ArrayList<>();
+    // prepare reader
+    Reader reader = new InputStreamReader(inputStream);
 
-    int beg = 0;
-    int end = substring.length();
+    // result list of pointers for each line
+    List<LinePointers> pointerList = new ArrayList<>();
 
-    int strLen = string.length();
-    if (end > strLen) {
-      return pointerArray;
+    // algorithm config
+    int subLength = substring.length();
+    long substringHash = hash(substring, subLength);
+    magicFactor = powMod(magic, subLength - 1);
+
+    int prevChar; // char that will be deleted
+    int nextChar; // char that will be added
+
+    // get first `subLength` chars
+    for (int i = 0; i < subLength; i++) {
+      nextChar = reader.read();
+      if (nextChar == -1) {
+        return null;
+      }
+      currentString.append((char)nextChar);
     }
+    // count first hash
+    currentHash = hash(currentString.toString(), subLength);
 
-    magicFactor = powMod(magic, end - 1);
-    currentHash = hash(string, end);
-    long substringHash = hash(substring, end);
+    prevChar = currentString.charAt(0);
+    int currentLine = 1; // line in which we're searching
+    int lineOffset = 2; // offset in the line
 
+    // algorithm itself
     while (true) {
+
+      // compare hashes and substrings
       if (
           currentHash == substringHash
-          && substring.equals(string.substring(beg, end))
+          && substring.equals(currentString.toString())
       ) {
-        pointerArray.add(beg);
+        LinePointers temp = pointerList.size() - 1 >= 0
+            ? pointerList.get(pointerList.size() - 1)
+            : null;
+
+        if (temp == null || temp.line() != currentLine) {
+          pointerList.add(new LinePointers(currentLine, new ArrayList<>()));
+          temp = pointerList.get(pointerList.size() - 1);
+        }
+
+        temp.pointers().add(lineOffset - subLength + 1);
       }
 
-      if (end == strLen) {
+      // read next char
+      nextChar = reader.read();
+      if (nextChar == -1) {
         break;
       }
+      lineOffset++; // increase the offset
 
-      nextHash(string.charAt(beg++), string.charAt(end++));
+      // increase currentLine on `\n`
+      if (nextChar == '\n') {
+        currentLine++;
+        lineOffset = -1; // we aren't in the beginning of the next line
+      }
+      // count new hash
+      nextHash(prevChar, nextChar);
+
+      // get the next substring
+      currentString.deleteCharAt(0);
+      currentString.append((char)nextChar);
+
+      prevChar = currentString.charAt(0); // change prevChar
     }
 
-    return pointerArray;
+    return pointerList;
   }
 
   // module arithmetic
@@ -116,7 +166,6 @@ public class Substring {
     return value == _MOD ? 0 : value;
   }
 
-  // hash func
   private long hash(String str, int to) {
     long hash = 0;
     long factor = 1;
@@ -132,7 +181,7 @@ public class Substring {
 
   // get next hash by formula: hash(s[i+1..m+i+1]) =
   // = ( hash(s[i..m+i]) - s[i] * x^(m - 1) ) * x + s[m+i+1]
-  private void nextHash(char prevChar, char newChar) {
+  private void nextHash(int prevChar, int newChar) {
     long atom1 = mulMod(prevChar, magicFactor);
     currentHash = subMod(currentHash, atom1);
     currentHash = mulMod(currentHash, magic);
