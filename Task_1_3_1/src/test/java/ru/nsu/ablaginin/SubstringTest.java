@@ -2,6 +2,7 @@ package ru.nsu.ablaginin;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
@@ -98,10 +99,9 @@ class SubstringTest {
 
     // actual
     InputStream isc = getClass().getClassLoader().getResourceAsStream("f1.in");
-    InputStream isc1 = null;
 
     Substring fileSubstr = new Substring(isc);
-    Substring fileSubstring = new Substring(isc1);
+    Substring fileSubstring = new Substring(null);
 
     // asserts
     assertNull(fileSubstring.algorithmRabinKarp("Hello"));
@@ -139,8 +139,31 @@ class SubstringTest {
 
   @Test
   public void largeFileTest() {
-    InputStream textStream = getClass().getClassLoader().getResourceAsStream("test.txt");
+    assertTrue(createSparseFile());
+    InputStream textStream;
+    do {
+      textStream = getClass().getClassLoader().getResourceAsStream("test.txt");
+    } while (textStream == null);
+
     Substring fsub = new Substring(textStream);
-    fsub.algorithmRabinKarp("jjifjiweiweurihbfmnfskdfjiewjf");
+    List<LinePointers> actual = fsub.algorithmRabinKarp("jjifjiweiweurihbfmnfskdfjiewjf");
+
+    assertTrue(actual.isEmpty());
+  }
+
+  private boolean createSparseFile() {
+    boolean success = true;
+    // String command = "fsutil file createnew ./src/test/resources/test.txt 20000000000";
+    String command = "dd if=/dev/zero of=./src/test/resources/test.txt bs=1 count=1 seek=200000";
+    Process p;
+    try {
+      p = Runtime.getRuntime().exec(command);
+
+      p.waitFor();
+      p.destroy();
+    } catch (IOException | InterruptedException e) {
+      fail(e.getLocalizedMessage());
+    }
+    return success;
   }
 }
