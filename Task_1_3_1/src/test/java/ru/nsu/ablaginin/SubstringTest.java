@@ -5,12 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -142,13 +139,17 @@ class SubstringTest {
   }
 
   @Test
-  public void largeFileTest() throws IOException {
-    RandomAccessFile f = new RandomAccessFile("./src/test/resources/text.txt", "rw");
-    f.setLength(200000L);
+  public void largeFileTest() {
+    try {
+      RandomAccessFile f = new RandomAccessFile("./src/test/resources/text.txt", "rw");
+      f.setLength(20000000000L);
 
-    Substring fsub = new Substring(Channels.newInputStream(f.getChannel()));
-    List<LinePointers> actual = fsub.algorithmRabinKarp("jjifjiweiweurihbfmnfskdfjiewjf");
+      Substring fsub = new Substring(Channels.newInputStream(f.getChannel()));
+      List<LinePointers> actual = fsub.algorithmRabinKarp("jjifjiweiweurihbfmnfskdfjiewjf");
 
-    assertTrue(actual.isEmpty());
+      assertTrue(actual.isEmpty());
+    } catch (Exception c) {
+      fail();
+    }
   }
 }
