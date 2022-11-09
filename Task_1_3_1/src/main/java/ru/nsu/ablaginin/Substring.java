@@ -134,7 +134,7 @@ public class Substring {
       }
 
       return pointerList;
-    } catch(IOException e) {
+    } catch (IOException e) {
       return null;
     }
   }
