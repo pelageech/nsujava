@@ -7,13 +7,14 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import org.junit.jupiter.api.Test;
 
 class SubstringTest {
   @Test
-  public void commonTest() throws IOException {
+  public void commonTest() {
 
     // actual
     Scanner isc = null;
@@ -45,12 +46,15 @@ class SubstringTest {
     expected.add(new LinePointers(4, List.of(7, 24)));
     expected.add(new LinePointers(5, List.of(1)));
 
+    for (var i : actual) {
+      System.out.println(i.line() + " " + Arrays.toString(i.pointers().toArray(new Integer[0])));
+    }
     // asserts
     assertEquals(expected, actual);
   }
 
   @Test
-  public void warAndPeaceTest() throws IOException {
+  public void warAndPeaceTest() {
     // actual
     Scanner isc = null;
     InputStream fin = getClass().getClassLoader().getResourceAsStream("f2.in");
@@ -90,7 +94,7 @@ class SubstringTest {
   }
 
   @Test
-  public void nullInputStreamTest() throws IOException {
+  public void nullInputStreamTest() {
 
     // actual
     InputStream isc = getClass().getClassLoader().getResourceAsStream("f1.in");
@@ -106,7 +110,7 @@ class SubstringTest {
   }
 
   @Test
-  public void overStringTest() throws IOException {
+  public void overStringTest() {
 
     // actual
     Scanner isc = null;
@@ -131,5 +135,12 @@ class SubstringTest {
 
     // asserts
     assertNull(actual);
+  }
+
+  @Test
+  public void largeFileTest() {
+    InputStream textStream = getClass().getClassLoader().getResourceAsStream("test.txt");
+    Substring fsub = new Substring(textStream);
+    fsub.algorithmRabinKarp("jjifjiweiweurihbfmnfskdfjiewjf");
   }
 }
