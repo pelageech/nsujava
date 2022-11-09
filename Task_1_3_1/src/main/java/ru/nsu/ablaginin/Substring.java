@@ -1,5 +1,6 @@
 package ru.nsu.ablaginin;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -54,83 +55,88 @@ public class Substring {
    * @param substring substring that's supposed to be found
    * @return list of pointers
    */
-  public List<LinePointers> algorithmRabinKarp(String substring) throws IOException {
+  public List<LinePointers> algorithmRabinKarp(String substring) {
     // null check
     if (inputStream == null || substring == null || substring.equals("")) {
       return null;
     }
-    // prepare reader
-    Reader reader = new InputStreamReader(inputStream);
 
-    // result list of pointers for each line
-    List<LinePointers> pointerList = new ArrayList<>();
+    try {
+      // prepare reader
+      Reader reader = new BufferedReader(new InputStreamReader(inputStream));
 
-    // algorithm config
-    int subLength = substring.length();
-    long substringHash = hash(substring, subLength);
-    magicFactor = powMod(magic, subLength - 1);
+      // result list of pointers for each line
+      List<LinePointers> pointerList = new ArrayList<>();
 
-    int prevChar; // char that will be deleted
-    int nextChar; // char that will be added
+      // algorithm config
+      int subLength = substring.length();
+      long substringHash = hash(substring, subLength);
+      magicFactor = powMod(magic, subLength - 1);
 
-    // get first `subLength` chars
-    for (int i = 0; i < subLength; i++) {
-      nextChar = reader.read();
-      if (nextChar == -1) {
-        return null;
+      int prevChar; // char that will be deleted
+      int nextChar; // char that will be added
+
+      // get first `subLength` chars
+      for (int i = 0; i < subLength; i++) {
+        nextChar = reader.read();
+        if (nextChar == -1) {
+          return null;
+        }
+        currentString.append((char) nextChar);
       }
-      currentString.append((char) nextChar);
-    }
-    // count first hash
-    currentHash = hash(currentString.toString(), subLength);
+      // count first hash
+      currentHash = hash(currentString.toString(), subLength);
 
-    prevChar = currentString.charAt(0);
-    int currentLine = 1; // line in which we're searching
-    int lineOffset = subLength - 1; // offset in the line
+      prevChar = currentString.charAt(0);
+      int currentLine = 1; // line in which we're searching
+      int lineOffset = subLength - 1; // offset in the line
 
-    // algorithm itself
-    while (true) {
+      // algorithm itself
+      while (true) {
 
-      // compare hashes and substrings
-      if (
-          currentHash == substringHash
-          && substring.equals(currentString.toString())
-      ) {
-        LinePointers temp = pointerList.size() - 1 >= 0
-            ? pointerList.get(pointerList.size() - 1)
-            : null;
+        // compare hashes and substrings
+        if (
+            currentHash == substringHash
+                && substring.equals(currentString.toString())
+        ) {
+          LinePointers temp = pointerList.size() - 1 >= 0
+              ? pointerList.get(pointerList.size() - 1)
+              : null;
 
-        if (temp == null || temp.line() != currentLine) {
-          pointerList.add(new LinePointers(currentLine, new ArrayList<>()));
-          temp = pointerList.get(pointerList.size() - 1);
+          if (temp == null || temp.line() != currentLine) {
+            pointerList.add(new LinePointers(currentLine, new ArrayList<>()));
+            temp = pointerList.get(pointerList.size() - 1);
+          }
+
+          temp.pointers().add(lineOffset - subLength + 1);
         }
 
-        temp.pointers().add(lineOffset - subLength + 1);
+        // read next char
+        nextChar = reader.read();
+        if (nextChar == -1) {
+          break;
+        }
+        lineOffset++; // increase the offset
+
+        // increase currentLine on `\n`
+        if (nextChar == '\n') {
+          currentLine++;
+          lineOffset = -1; // we aren't in the beginning of the next line
+        }
+        // count new hash
+        nextHash(prevChar, nextChar);
+
+        // get the next substring
+        currentString.deleteCharAt(0);
+        currentString.append((char) nextChar);
+
+        prevChar = currentString.charAt(0); // change prevChar
       }
 
-      // read next char
-      nextChar = reader.read();
-      if (nextChar == -1) {
-        break;
-      }
-      lineOffset++; // increase the offset
-
-      // increase currentLine on `\n`
-      if (nextChar == '\n') {
-        currentLine++;
-        lineOffset = -1; // we aren't in the beginning of the next line
-      }
-      // count new hash
-      nextHash(prevChar, nextChar);
-
-      // get the next substring
-      currentString.deleteCharAt(0);
-      currentString.append((char) nextChar);
-
-      prevChar = currentString.charAt(0); // change prevChar
+      return pointerList;
+    } catch(IOException e) {
+      return null;
     }
-
-    return pointerList;
   }
 
   // module arithmetic
