@@ -153,8 +153,8 @@ class SubstringTest {
 
   private boolean createSparseFile() {
     boolean success = true;
-    // String command = "fsutil file createnew ./src/test/resources/test.txt 20000000000";
-    String command = "dd if=/dev/zero of=./src/test/resources/test.txt bs=1 count=1 seek=200000";
+    String command = "fsutil file createnew ./src/test/resources/test.txt 20000000000";
+    // String command = "dd if=/dev/zero of=./src/test/resources/test.txt bs=1 count=1 seek=200000";
     Process p;
     try {
       p = Runtime.getRuntime().exec(command);
