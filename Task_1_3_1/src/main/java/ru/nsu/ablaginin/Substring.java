@@ -61,10 +61,7 @@ public class Substring {
       return null;
     }
 
-    try {
-      // prepare reader
-      Reader reader = new BufferedReader(new InputStreamReader(inputStream));
-
+    try (Reader reader = new BufferedReader(new InputStreamReader(inputStream))) {
       // result list of pointers for each line
       List<LinePointers> pointerList = new ArrayList<>();
 
