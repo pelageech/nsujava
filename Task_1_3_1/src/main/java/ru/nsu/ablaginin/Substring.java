@@ -138,19 +138,19 @@ public class Substring {
 
   // module arithmetic
 
-  private long addMod(long a, long b) {
+  private static long addMod(long a, long b) {
     return fastMod(a + b);
   }
 
-  private long mulMod(long a, long b) {
+  private static long mulMod(long a, long b) {
     return fastMod(a * b);
   }
 
-  private long subMod(long a, long b) {
+  private static long subMod(long a, long b) {
     return fastMod((a - b) + _MOD);
   }
 
-  private long powMod(long x, long y) { // fast pow % _MOD, O(logN)
+  private static long powMod(long x, long y) { // fast pow % _MOD, O(logN)
     long res = 1;
 
     while (y > 0) {
@@ -165,10 +165,15 @@ public class Substring {
     return res;
   }
 
-  private long fastMod(long value) {
+  private static long fastMod(long value) {
     value = (value >> 31) + (value & _MOD);
     value = (value >> 31) + (value & _MOD);
     return value == _MOD ? 0 : value;
+  }
+
+  private static long generateMagic() {
+    Random rand = new Random();
+    return rand.nextInt(2, (int) _MOD);
   }
 
   private long hash(String str, int to) {
@@ -191,10 +196,5 @@ public class Substring {
     currentHash = subMod(currentHash, atom1);
     currentHash = mulMod(currentHash, magic);
     currentHash = addMod(currentHash, newChar);
-  }
-
-  private long generateMagic() {
-    Random rand = new Random();
-    return rand.nextInt(2, (int) _MOD);
   }
 }
