@@ -22,7 +22,7 @@ class SubstringTest {
     // actual
     try (InputStream fin = getClass().getClassLoader().getResourceAsStream("f1.in");
          Scanner isc = new Scanner(Objects.requireNonNull(fin))
-    ){
+    ) {
       String textInputString = isc.nextLine();
       InputStream textStream = getClass().getClassLoader().getResourceAsStream(textInputString);
       if (textStream == null) {
