@@ -30,3 +30,6 @@ java {
         languageVersion = JavaLanguageVersion.of(17)
     }
 }
+
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
