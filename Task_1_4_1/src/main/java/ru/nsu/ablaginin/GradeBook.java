@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Student's Grade Book helps students (really?!) save
@@ -16,30 +17,28 @@ import java.util.Map;
 public class GradeBook {
   private static final int MAX_SEMESTER = 99;
 
-  private int excellentCount;
-  private int gradesCount;
-  private boolean isThereSatisfiedGrade;
+  private int globalExcellentGrades;
+  private int globalGrades;
+  private int globalSatisfiedGrades;
 
   // user fields
   private int currentSemester;
   private int diplomaGrade;
   private boolean redDiploma;
-  private boolean increasedScholarship;
-  private final List<Map<String, Integer>> gradeBook;
+  private final List<Map<String, GradeBookRecord>> gradeBook;
 
   /**
    * The constructor creates an empty grade book
    * with the first semester.
    */
   public GradeBook() {
-    excellentCount = 0;
-    gradesCount = 0;
-    isThereSatisfiedGrade = false;
+    globalExcellentGrades = 0;
+    globalGrades = 0;
+    globalSatisfiedGrades = 0;
 
     currentSemester = 1;
     diplomaGrade = 0;
     redDiploma = false;
-    increasedScholarship = true;
     gradeBook = new ArrayList<>();
 
     gradeBook.add(new HashMap<>());
@@ -56,7 +55,6 @@ public class GradeBook {
       return false;
     }
 
-    increasedScholarship = true;
     gradeBook.add(new HashMap<>());
     currentSemester++;
     return true;
@@ -64,42 +62,85 @@ public class GradeBook {
 
   /**
    * Adds a new grade in the grade book.
-   * If the subject already has a grade, you can
-   * edit it.
+   * If the subject already has a grade, the method
+   * replaces the current record with new one.
    * If semester is zero, the current semester is used.
    *
    * @param semester what semester adds
-   * @param subject what subject add
-   * @param grade what's the grade
+   * @param record all the fields in the gradeBook's row
    * @return true on successful adding a grade
    */
-  public boolean addGrade(int semester, String subject, int grade) {
+  public boolean putRecord(int semester, GradeBookRecord record) {
 
-    int semesterAdd = semester == 0 ? currentSemester : semester;
+    // check null fields in the record
+    if (record.grade() == null || record.subject() == null) {
+      return false;
+    }
+
+    int semesterIsUsed = semester == 0 ? currentSemester : semester;
 
     // correctness of grade
-    if (grade > 5 || grade < 2) {
+    if (record.grade() > 5 || record.grade() < 2) {
       return false;
     }
 
     // get the semester
-    Map<String, Integer> curr = gradeBook.get(semesterAdd - 1);
-    if (curr == null) {
+    try {
+      Map<String, GradeBookRecord> currentPage = gradeBook.get(semesterIsUsed - 1);
+
+      GradeBookRecord prevRecord = currentPage.put(record.subject(), record);
+      if (prevRecord != null) {
+        checkPreviousGrade(prevRecord.grade());
+      }
+
+      // grade counters update
+      globalExcellentGrades = record.grade() == 5 ? globalExcellentGrades + 1 : globalExcellentGrades;
+      globalGrades++;
+
+      // check buns
+      checkRedDiploma(record.grade());
+      return true;
+
+    } catch (IndexOutOfBoundsException e) {
       return false;
     }
-    // try to put the new value
-    if (curr.put(subject, grade) == null) {
+  }
+
+  /**
+   * Removes a record from the book.
+   * If a semester is null, the current semester is used.
+   *
+   * @param semester what semester remove from
+   * @param subject name of the subject
+   * @return true on successful removing
+   */
+  public boolean removeRecord(int semester, String subject) {
+    int semesterIsUsed = semester == 0 ? currentSemester : semester;
+
+    try {
+      Map<String, GradeBookRecord> currentPage = gradeBook.get(semesterIsUsed - 1);
+      return currentPage.remove(subject) != null;
+    } catch (IndexOutOfBoundsException e) {
       return false;
     }
+  }
 
-    // grade counters update
-    excellentCount = grade == 5 ? excellentCount + 1 : excellentCount;
-    gradesCount++;
+  /**
+   * Checks if a student deserves increased scholarship.
+   *
+   * @return true if a student deserves increased scholarship
+   */
+  public boolean isIncreasedScholarship() {
+    Map<String, GradeBookRecord> currentPage = gradeBook.get(currentSemester - 1);
 
-    // check buns
-    checkRedDiploma(grade);
-    checkIncreasedScholarship(semesterAdd, grade);
-    return true;
+    AtomicBoolean result = new AtomicBoolean(true);
+    currentPage.forEach((k, v) -> {
+      if (v.grade() != 5) {
+        result.set(false);
+      }
+    });
+
+    return result.get();
   }
 
   // Setters
@@ -118,7 +159,7 @@ public class GradeBook {
 
   // Getters
 
-  public List<Map<String, Integer>> getGradeBook() {
+  public List<Map<String, GradeBookRecord>> getGradeBook() {
     return gradeBook;
   }
 
@@ -130,27 +171,21 @@ public class GradeBook {
     return currentSemester;
   }
 
-  public boolean isIncreasedScholarship() {
-    return increasedScholarship;
-  }
-
   public boolean isRedDiploma() {
     return redDiploma;
   }
 
   private void checkRedDiploma(int grade) {
-    isThereSatisfiedGrade = isThereSatisfiedGrade && grade > 3;
-    redDiploma = 4 * excellentCount > 3 * gradesCount
-        && !isThereSatisfiedGrade
-        && diplomaGrade == 5;
+    globalSatisfiedGrades = grade > 3 ? globalSatisfiedGrades : globalSatisfiedGrades + 1;
+    redDiploma = diplomaGrade == 5 && 4 * globalExcellentGrades > 3 * globalGrades
+        && globalSatisfiedGrades == 0;
   }
 
-  private void checkIncreasedScholarship(int semester, int grade) {
-    if (semester != currentSemester) {
-      return;
-    }
-    if (grade != 5) {
-      increasedScholarship = false;
+  private void checkPreviousGrade(int grade) {
+    if (grade == 3) {
+      globalSatisfiedGrades--;
+    } else if (grade == 5) {
+      globalExcellentGrades--;
     }
   }
 }
