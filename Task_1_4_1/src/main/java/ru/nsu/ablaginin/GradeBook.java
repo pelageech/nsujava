@@ -71,7 +71,9 @@ public class GradeBook {
    * @return true on successful adding a grade
    */
   public boolean putRecord(int semester, GradeBookRecord record) {
-
+    if (record == null) {
+      return false;
+    }
     // check null fields in the record
     if (record.grade() == null || record.subject() == null) {
       return false;
@@ -94,7 +96,9 @@ public class GradeBook {
       }
 
       // grade counters update
-      globalExcellentGrades = record.grade() == 5 ? globalExcellentGrades + 1 : globalExcellentGrades;
+      globalExcellentGrades = record.grade() == 5
+          ? globalExcellentGrades + 1
+          : globalExcellentGrades;
       globalGrades++;
 
       // check buns
@@ -119,7 +123,18 @@ public class GradeBook {
 
     try {
       Map<String, GradeBookRecord> currentPage = gradeBook.get(semesterIsUsed - 1);
-      return currentPage.remove(subject) != null;
+      GradeBookRecord record = currentPage.remove(subject);
+      if (record == null) {
+        return false;
+      }
+      globalGrades--;
+      if (record.grade() == 5) {
+        globalExcellentGrades--;
+      } else if (record.grade() == 3) {
+        globalSatisfiedGrades--;
+      }
+      checkRedDiploma(0);
+      return true;
     } catch (IndexOutOfBoundsException e) {
       return false;
     }
@@ -155,6 +170,7 @@ public class GradeBook {
       return;
     }
     this.diplomaGrade = diplomaGrade;
+    checkRedDiploma(0);
   }
 
   // Getters
@@ -176,8 +192,8 @@ public class GradeBook {
   }
 
   private void checkRedDiploma(int grade) {
-    globalSatisfiedGrades = grade > 3 ? globalSatisfiedGrades : globalSatisfiedGrades + 1;
-    redDiploma = diplomaGrade == 5 && 4 * globalExcellentGrades > 3 * globalGrades
+    globalSatisfiedGrades = grade > 3 || grade == 0 ? globalSatisfiedGrades : globalSatisfiedGrades + 1;
+    redDiploma = diplomaGrade == 5 && 4 * globalExcellentGrades >= 3 * globalGrades
         && globalSatisfiedGrades == 0;
   }
 
