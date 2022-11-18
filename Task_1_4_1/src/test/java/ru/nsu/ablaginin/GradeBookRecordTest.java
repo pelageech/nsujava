@@ -1,11 +1,10 @@
 package ru.nsu.ablaginin;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class GradeBookRecordTest {
   @Test
