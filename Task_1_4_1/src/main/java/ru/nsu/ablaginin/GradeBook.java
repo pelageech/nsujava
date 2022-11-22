@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -17,11 +18,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class GradeBook {
   private static final int MAX_SEMESTER = 99;
 
+  private static long id_counter = 0;
+
   private int globalExcellentGrades;
   private int globalGrades;
   private int globalSatisfiedGrades;
 
   // user fields
+  private final String studentName;
+  private final long studentID;
   private int currentSemester;
   private int diplomaGrade;
   private boolean redDiploma;
@@ -31,7 +36,10 @@ public class GradeBook {
    * The constructor creates an empty grade book
    * with the first semester.
    */
-  public GradeBook() {
+  public GradeBook(String name) {
+    studentName = name.concat("");
+    studentID = id_counter++;
+
     globalExcellentGrades = 0;
     globalGrades = 0;
     globalSatisfiedGrades = 0;
@@ -128,11 +136,8 @@ public class GradeBook {
         return false;
       }
       globalGrades--;
-      if (record.grade() == 5) {
-        globalExcellentGrades--;
-      } else if (record.grade() == 3) {
-        globalSatisfiedGrades--;
-      }
+      checkPreviousGrade(record.grade());
+
       checkRedDiploma(0);
       return true;
     } catch (IndexOutOfBoundsException e) {
@@ -165,15 +170,25 @@ public class GradeBook {
    *
    * @param diplomaGrade grade to set
    */
-  public void setDiplomaGrade(int diplomaGrade) {
+  public boolean setDiplomaGrade(int diplomaGrade) {
     if (diplomaGrade < 2 || diplomaGrade > 5) {
-      return;
+      return false;
     }
     this.diplomaGrade = diplomaGrade;
     checkRedDiploma(0);
+    return true;
   }
 
   // Getters
+
+
+  public String getStudentName() {
+    return studentName;
+  }
+
+  public long getStudentID() {
+    return studentID;
+  }
 
   public List<Map<String, GradeBookRecord>> getGradeBook() {
     return gradeBook;
@@ -203,5 +218,18 @@ public class GradeBook {
     } else if (grade == 5) {
       globalExcellentGrades--;
     }
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    GradeBook book = (GradeBook) o;
+    return studentID == book.studentID;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(studentID);
   }
 }
