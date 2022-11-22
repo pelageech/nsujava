@@ -2,17 +2,20 @@ package ru.nsu.ablaginin;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Map;
 
 class GradeBookTest {
   @Test
   public void putRecordTest() {
-    GradeBook book = new GradeBook();
+    GradeBook book = new GradeBook("Благинин Артём Сергеевич");
 
     assertTrue(
         book.putRecord(0, new GradeBookRecord(
@@ -62,7 +65,7 @@ class GradeBookTest {
 
   @Test
   public void newSemesterTest() {
-    GradeBook book = new GradeBook();
+    GradeBook book = new GradeBook("Благинин Артём Сергеевич");
 
     assertFalse(book.newSemester());
 
@@ -90,7 +93,7 @@ class GradeBookTest {
 
   @Test
   public void removeRecordTest() {
-    GradeBook book = new GradeBook();
+    GradeBook book = new GradeBook("Благинин Артём Сергеевич");
     book.putRecord(0, new GradeBookRecord(
         "ДУ и ТФКП",
         5,
@@ -140,7 +143,7 @@ class GradeBookTest {
 
   @Test
   public void isIncreasedScholarshipTest() {
-    GradeBook book = new GradeBook();
+    GradeBook book = new GradeBook("Благинин Артём Сергеевич");
     book.putRecord(0, new GradeBookRecord(
         "ДУ и ТФКП",
         5,
@@ -214,7 +217,7 @@ class GradeBookTest {
 
   @Test
   public void setDiplomaGradeTest() {
-    GradeBook book = new GradeBook();
+    GradeBook book = new GradeBook("Благинин Артём Сергеевич");
 
     book.putRecord(0, new GradeBookRecord(
         "ДУ и ТФКП",
@@ -349,7 +352,9 @@ class GradeBookTest {
         "Иртегов Д. В.",
         null
     ));
+    assertFalse(book.setDiplomaGrade(6));
     book.setDiplomaGrade(5);
+    assertEquals(5, book.getDiplomaGrade());
     assertTrue(
         book.isRedDiploma()
     );
@@ -384,5 +389,127 @@ class GradeBookTest {
     assertFalse(
         book.isRedDiploma()
     );
+  }
+
+  @Test
+  public void myGradeBookTest() {
+    GradeBook temp = new GradeBook("Жмышенко Валерий Альбертович");
+    GradeBook book = new GradeBook("Благинин Артём Сергеевич");
+    assertNotEquals(temp, book);
+    assertNotEquals(temp.hashCode(), book.hashCode());
+
+    book.putRecord(0, new GradeBookRecord(
+        "Введение в алгебру и анализ",
+        5,
+        "Васкевич",
+        new GregorianCalendar(2021, Calendar.JANUARY, 12)
+    ));
+    book.putRecord(4, new GradeBookRecord(
+        "Введение в дискретную математику и математическую логику",
+        5,
+        "Власов Д. Ю.",
+        null
+    ));
+    book.putRecord(0, new GradeBookRecord(
+        "Декларативное программирование",
+        5,
+        "Куталев Андрей Витальевич",
+        null
+    ));
+    book.putRecord(0, new GradeBookRecord(
+        "Императивное программирование",
+        5,
+        "Гатилов С. Ю.",
+        null
+    ));
+    book.putRecord(0, new GradeBookRecord(
+        "История России",
+        5,
+        "Оплаканская",
+        null
+    ));
+    book.putRecord(0, new GradeBookRecord(
+        "Основы культуры речи",
+        5,
+        "Заворина",
+        null
+    ));
+    book.putRecord(0, new GradeBookRecord(
+        "Иностранный язык",
+        5,
+        "Kathrine",
+        null
+    ));
+    book.putRecord(0, new GradeBookRecord(
+        "Физкультура и спорт",
+        5,
+        "Шумейко",
+        null
+    ));
+    book.putRecord(0, new GradeBookRecord(
+        "Цифровые платформы",
+        5,
+        "Иртегов Д. В.",
+        null
+    ));
+
+    assertEquals("Благинин Артём Сергеевич", book.getStudentName());
+    assertTrue(book.isIncreasedScholarship());
+    assertEquals(5, book.getStudentID());
+
+    book.newSemester();
+    List<Map<String, GradeBookRecord>> lmap = book.getGradeBook();
+    assertEquals(2, lmap.size());
+
+    book.putRecord(0, new GradeBookRecord(
+        "Введение в алгебру и анализ",
+        5,
+        "Васкевич",
+        new GregorianCalendar(2021, Calendar.JANUARY, 12)
+    ));
+    book.putRecord(0, new GradeBookRecord(
+        "Введение в дискретную математику и математическую логику",
+        5,
+        "Власов Д. Ю.",
+        null
+    ));
+    book.putRecord(0, new GradeBookRecord(
+        "Декларативное программирование",
+        5,
+        "Куталев Андрей Витальевич",
+        null
+    ));
+    book.putRecord(0, new GradeBookRecord(
+        "Императивное программирование",
+        5,
+        "Гатилов С. Ю.",
+        null
+    ));
+    book.putRecord(0, new GradeBookRecord(
+        "Измерительный практикум",
+        5,
+        "Брагин",
+        null
+    ));
+    book.putRecord(0, new GradeBookRecord(
+        "Иностранный язык",
+        5,
+        "Kathrine",
+        null
+    ));
+    book.putRecord(0, new GradeBookRecord(
+        "Физкультура и спорт",
+        5,
+        "Шумейко",
+        null
+    ));
+    book.putRecord(0, new GradeBookRecord(
+        "Цифровые платформы",
+        4,
+        "Иртегов Д. В.",
+        null
+    ));
+
+    assertFalse(book.isIncreasedScholarship());
   }
 }
