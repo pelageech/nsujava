@@ -5,12 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.Test;
-
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.Test;
 
 class GradeBookTest {
   @Test
@@ -455,7 +454,7 @@ class GradeBookTest {
 
     assertEquals("Благинин Артём Сергеевич", book.getStudentName());
     assertTrue(book.isIncreasedScholarship());
-    assertEquals(5, book.getStudentID());
+    assertEquals(5, book.getStudentId());
 
     book.newSemester();
     List<Map<String, GradeBookRecord>> lmap = book.getGradeBook();

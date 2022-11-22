@@ -26,7 +26,7 @@ public class GradeBook {
 
   // user fields
   private final String studentName;
-  private final long studentID;
+  private final long studentId;
   private int currentSemester;
   private int diplomaGrade;
   private boolean redDiploma;
@@ -38,7 +38,7 @@ public class GradeBook {
    */
   public GradeBook(String name) {
     studentName = name.concat("");
-    studentID = id_counter++;
+    studentId = id_counter++;
 
     globalExcellentGrades = 0;
     globalGrades = 0;
@@ -186,8 +186,8 @@ public class GradeBook {
     return studentName;
   }
 
-  public long getStudentID() {
-    return studentID;
+  public long getStudentId() {
+    return studentId;
   }
 
   public List<Map<String, GradeBookRecord>> getGradeBook() {
@@ -207,8 +207,11 @@ public class GradeBook {
   }
 
   private void checkRedDiploma(int grade) {
-    globalSatisfiedGrades = grade > 3 || grade == 0 ? globalSatisfiedGrades : globalSatisfiedGrades + 1;
-    redDiploma = diplomaGrade == 5 && 4 * globalExcellentGrades >= 3 * globalGrades
+    globalSatisfiedGrades = grade > 3 || grade == 0
+        ? globalSatisfiedGrades
+        : globalSatisfiedGrades + 1;
+    redDiploma = diplomaGrade == 5
+        && 4 * globalExcellentGrades >= 3 * globalGrades
         && globalSatisfiedGrades == 0;
   }
 
@@ -222,14 +225,18 @@ public class GradeBook {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     GradeBook book = (GradeBook) o;
-    return studentID == book.studentID;
+    return studentId == book.studentId;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(studentID);
+    return Objects.hash(studentId);
   }
 }
