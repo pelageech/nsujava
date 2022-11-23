@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Student's Grade Book helps students (really?!) save
@@ -153,14 +152,7 @@ public class GradeBook {
   public boolean isIncreasedScholarship() {
     Map<String, GradeBookRecord> currentPage = gradeBook.get(currentSemester - 1);
 
-    AtomicBoolean result = new AtomicBoolean(true);
-    currentPage.forEach((k, v) -> {
-      if (v.grade() != 5) {
-        result.set(false);
-      }
-    });
-
-    return result.get();
+    return currentPage.values().stream().allMatch(n -> n.grade() == 5);
   }
 
   // Setters
