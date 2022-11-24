@@ -1,10 +1,10 @@
 package ru.nsu.ablaginin;
 
+import java.lang.NullPointerException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.lang.NullPointerException;
 
 /**
  * Student's Grade Book helps students (really?!) save
