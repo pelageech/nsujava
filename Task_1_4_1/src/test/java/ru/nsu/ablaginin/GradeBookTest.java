@@ -3,15 +3,26 @@ package ru.nsu.ablaginin;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 
 class GradeBookTest {
+
+  @Test
+  public void equalsTest() {
+    GradeBook book = new GradeBook("Papa");
+
+    assertEquals(book, book);
+    assertNotEquals(book, null);
+  }
+
   @Test
   public void putRecordTest() {
     GradeBook book = new GradeBook("Благинин Артём Сергеевич");
@@ -19,46 +30,39 @@ class GradeBookTest {
     assertTrue(
         book.putRecord(0, new GradeBookRecord(
           "Math",
-          4,
+          Grade.GOOD,
           null,
           null
         ))
     );
     book.putRecord(1, new GradeBookRecord(
         "Music",
-        5,
-        "Orlova M. S.",
-        new GregorianCalendar(2020, Calendar.MAY, 23)
+        Grade.EXCELLENT,
+        Optional.of("Orlova M. S."),
+        Optional.of(new GregorianCalendar(2020, Calendar.MAY, 23))
     ));
     assertFalse(
         book.putRecord(2, new GradeBookRecord(
             "WHAT",
-            5,
-            "Popova P. P.",
-            new GregorianCalendar(2020, Calendar.MAY, 23)
+            Grade.EXCELLENT,
+            Optional.of("Popova P. P."),
+            Optional.of(new GregorianCalendar(2020, Calendar.MAY, 23))
         ))
     );
 
     // null checks
-    boolean result = book.putRecord(0, null);
-    result |= book.putRecord(0, new GradeBookRecord(
+    assertThrows(NullPointerException.class, () -> book.putRecord(0, null));
+    assertThrows(NullPointerException.class, () -> book.putRecord(0, new GradeBookRecord(
         null,
-        3,
-        null,
-        null
-    ));
-    result |= book.putRecord(0, new GradeBookRecord(
-        "Silly",
-        100,
+        Grade.SATISFIED,
         null,
         null
-    ));
-    assertFalse(result);
+    )));
     assertTrue(book.putRecord(1, new GradeBookRecord(
         "Music",
-        3,
-        "Orlova M. S.",
-        new GregorianCalendar(2020, Calendar.MAY, 23)
+        Grade.SATISFIED,
+        Optional.of("Orlova M. S."),
+        Optional.of(new GregorianCalendar(2020, Calendar.MAY, 23))
     )));
   }
 
@@ -70,9 +74,9 @@ class GradeBookTest {
 
     book.putRecord(1, new GradeBookRecord(
         "Music",
-        5,
-        "Orlova M. S.",
-        new GregorianCalendar(2020, Calendar.MAY, 23)
+        Grade.EXCELLENT,
+        Optional.of("Orlova M. S."),
+        Optional.of(new GregorianCalendar(2020, Calendar.MAY, 23))
     ));
 
     assertTrue(book.newSemester());
@@ -81,9 +85,9 @@ class GradeBookTest {
     for (int i = 0; i < 98; i++) {
       book.putRecord(1, new GradeBookRecord(
           "Music",
-          5,
-          "Orlova M. S.",
-          new GregorianCalendar(2020, Calendar.MAY, 23)
+          Grade.EXCELLENT,
+          Optional.of("Orlova M. S."),
+          Optional.of(new GregorianCalendar(2020, Calendar.MAY, 23))
       ));
       book.newSemester();
     }
@@ -95,33 +99,33 @@ class GradeBookTest {
     GradeBook book = new GradeBook("Благинин Артём Сергеевич");
     book.putRecord(0, new GradeBookRecord(
         "ДУ и ТФКП",
-        5,
-        "Хмиль А. В.",
+        Grade.EXCELLENT,
+        Optional.of("Хмиль А. В."),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "Введение в ИИ",
-        4,
-        "Серый А. С.",
+        Grade.GOOD,
+        Optional.of("Серый А. С."),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "ООП",
-        5,
-        "Шадрина А. А,",
+        Grade.EXCELLENT,
+        Optional.of("Шадрина А. А,"),
         null
     ));
     book.newSemester();
     book.putRecord(0, new GradeBookRecord(
         "Императивное программирование",
-        4,
-        "Гатилов С. Ю.",
+        Grade.GOOD,
+        Optional.of("Гатилов С. Ю."),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "Операционные системы",
-        3,
-        "Иртегов Д. В.",
+        Grade.SATISFIED,
+        Optional.of("Иртегов Д. В."),
         null
     ));
     assertTrue(
@@ -145,32 +149,32 @@ class GradeBookTest {
     GradeBook book = new GradeBook("Благинин Артём Сергеевич");
     book.putRecord(0, new GradeBookRecord(
         "ДУ и ТФКП",
-        5,
-        "Хмиль А. В.",
+        Grade.EXCELLENT,
+        Optional.of("Хмиль А. В."),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "Введение в ИИ",
-        4,
-        "Серый А. С.",
+        Grade.GOOD,
+        Optional.of("Серый А. С."),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "ООП",
-        5,
-        "Шадрина А. А,",
+        Grade.EXCELLENT,
+        Optional.of("Шадрина А. А,"),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "Императивное программирование",
-        4,
-        "Гатилов С. Ю.",
+        Grade.GOOD,
+        Optional.of("Гатилов С. Ю."),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "Операционные системы",
-        3,
-        "Иртегов Д. В.",
+        Grade.SATISFIED,
+        Optional.of("Иртегов Д. В."),
         null
     ));
 
@@ -181,32 +185,32 @@ class GradeBookTest {
     book.newSemester();
     book.putRecord(0, new GradeBookRecord(
         "ДУ и ТФКП",
-        5,
-        "Хмиль А. В.",
+        Grade.EXCELLENT,
+        Optional.of("Хмиль А. В."),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "Введение в ИИ",
-        5,
-        "Серый А. С.",
+        Grade.EXCELLENT,
+        Optional.of("Серый А. С."),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "ООП",
-        5,
-        "Шадрина А. А,",
+        Grade.EXCELLENT,
+        Optional.of("Шадрина А. А,"),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "Императивное программирование",
-        5,
-        "Гатилов С. Ю.",
+        Grade.EXCELLENT,
+        Optional.of("Гатилов С. Ю."),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "Операционные системы",
-        5,
-        "Иртегов Д. В.",
+        Grade.EXCELLENT,
+        Optional.of("Иртегов Д. В."),
         null
     ));
     assertTrue(
@@ -220,32 +224,32 @@ class GradeBookTest {
 
     book.putRecord(0, new GradeBookRecord(
         "ДУ и ТФКП",
-        5,
-        "Хмиль А. В.",
+        Grade.EXCELLENT,
+        Optional.of("Хмиль А. В."),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "Введение в ИИ",
-        4,
-        "Серый А. С.",
+        Grade.GOOD,
+        Optional.of("Серый А. С."),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "ООП",
-        5,
-        "Шадрина А. А,",
+        Grade.EXCELLENT,
+        Optional.of("Шадрина А. А,"),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "Императивное программирование",
-        4,
-        "Гатилов С. Ю.",
+        Grade.GOOD,
+        Optional.of("Гатилов С. Ю."),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "Операционные системы",
-        4,
-        "Иртегов Д. В.",
+        Grade.GOOD,
+        Optional.of("Иртегов Д. В."),
         null
     ));
 
@@ -256,63 +260,63 @@ class GradeBookTest {
     book.newSemester();
     book.putRecord(0, new GradeBookRecord(
         "ДУ и ТФКП",
-        5,
-        "Хмиль А. В.",
+        Grade.EXCELLENT,
+        Optional.of("Хмиль А. В."),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "Введение в ИИ",
-        5,
-        "Серый А. С.",
+        Grade.EXCELLENT,
+        Optional.of("Серый А. С."),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "ООП",
-        5,
-        "Шадрина А. А,",
+        Grade.EXCELLENT,
+        Optional.of("Шадрина А. А,"),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "Императивное программирование",
-        5,
-        "Гатилов С. Ю.",
+        Grade.EXCELLENT,
+        Optional.of("Гатилов С. Ю."),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "Операционные системы",
-        5,
-        "Иртегов Д. В.",
+        Grade.EXCELLENT,
+        Optional.of("Иртегов Д. В."),
         null
     ));
     book.newSemester();
     book.putRecord(0, new GradeBookRecord(
         "ДУ и ТФКП",
-        5,
-        "Хмиль А. В.",
+        Grade.EXCELLENT,
+        Optional.of("Хмиль А. В."),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "Введение в ИИ",
-        4,
-        "Серый А. С.",
+        Grade.GOOD,
+        Optional.of("Серый А. С."),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "ООП",
-        5,
-        "Шадрина А. А,",
+        Grade.EXCELLENT,
+        Optional.of("Шадрина А. А,"),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "Императивное программирование",
-        5,
-        "Гатилов С. Ю.",
+        Grade.EXCELLENT,
+        Optional.of("Гатилов С. Ю."),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "Операционные системы",
-        5,
-        "Иртегов Д. В.",
+        Grade.EXCELLENT,
+        Optional.of("Иртегов Д. В."),
         null
     ));
 
@@ -323,45 +327,44 @@ class GradeBookTest {
     book.newSemester();
     book.putRecord(0, new GradeBookRecord(
         "ДУ и ТФКП",
-        5,
-        "Хмиль А. В.",
+        Grade.EXCELLENT,
+        Optional.of("Хмиль А. В."),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "Введение в ИИ",
-        5,
-        "Серый А. С.",
+        Grade.EXCELLENT,
+        Optional.of("Серый А. С."),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "ООП",
-        5,
-        "Шадрина А. А,",
+        Grade.EXCELLENT,
+        Optional.of("Шадрина А. А,"),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "Императивное программирование",
-        5,
-        "Гатилов С. Ю.",
+        Grade.EXCELLENT,
+        Optional.of("Гатилов С. Ю."),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "Операционные системы",
-        4,
-        "Иртегов Д. В.",
+        Grade.GOOD,
+        Optional.of("Иртегов Д. В."),
         null
     ));
-    assertFalse(book.setDiplomaGrade(6));
-    book.setDiplomaGrade(5);
-    assertEquals(5, book.getDiplomaGrade());
+    book.setDiplomaGrade(Grade.EXCELLENT);
+    assertEquals(Grade.EXCELLENT, book.getDiplomaGrade());
     assertTrue(
         book.isRedDiploma()
     );
 
     book.putRecord(0, new GradeBookRecord(
         "Операционные системы-2",
-        4,
-        "Иртегов Д. В.",
+        Grade.GOOD,
+        Optional.of("Иртегов Д. В."),
         null
     ));
     assertFalse(
@@ -371,8 +374,8 @@ class GradeBookTest {
     book.removeRecord(0, "Операционные системы-2");
     book.putRecord(0, new GradeBookRecord(
         "Операционные системы",
-        3,
-        "Иртегов Д. В.",
+        Grade.SATISFIED,
+        Optional.of("Иртегов Д. В."),
         null
     ));
     assertFalse(
@@ -384,7 +387,7 @@ class GradeBookTest {
         book.isRedDiploma()
     );
 
-    book.setDiplomaGrade(4);
+    book.setDiplomaGrade(Grade.GOOD);
     assertFalse(
         book.isRedDiploma()
     );
@@ -399,113 +402,113 @@ class GradeBookTest {
 
     book.putRecord(0, new GradeBookRecord(
         "Введение в алгебру и анализ",
-        5,
-        "Васкевич",
-        new GregorianCalendar(2021, Calendar.JANUARY, 12)
+        Grade.EXCELLENT,
+        Optional.of("Васкевич"),
+        Optional.of(new GregorianCalendar(2021, Calendar.JANUARY, 12))
     ));
     book.putRecord(4, new GradeBookRecord(
         "Введение в дискретную математику и математическую логику",
-        5,
-        "Власов Д. Ю.",
+        Grade.EXCELLENT,
+        Optional.of("Власов Д. Ю."),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "Декларативное программирование",
-        5,
-        "Куталев Андрей Витальевич",
+        Grade.EXCELLENT,
+        Optional.of("Куталев Андрей Витальевич"),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "Императивное программирование",
-        5,
-        "Гатилов С. Ю.",
+        Grade.EXCELLENT,
+        Optional.of("Гатилов С. Ю."),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "История России",
-        5,
-        "Оплаканская",
+        Grade.EXCELLENT,
+        Optional.of("Оплаканская"),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "Основы культуры речи",
-        5,
-        "Заворина",
+        Grade.EXCELLENT,
+        Optional.of("Заворина"),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "Иностранный язык",
-        5,
-        "Kathrine",
+        Grade.EXCELLENT,
+        Optional.of("Kathrine"),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "Физкультура и спорт",
-        5,
-        "Шумейко",
+        Grade.EXCELLENT,
+        Optional.of("Шумейко"),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "Цифровые платформы",
-        5,
-        "Иртегов Д. В.",
+        Grade.EXCELLENT,
+        Optional.of("Иртегов Д. В."),
         null
     ));
 
     assertEquals("Благинин Артём Сергеевич", book.getStudentName());
     assertTrue(book.isIncreasedScholarship());
-    assertEquals(5, book.getStudentId());
+    assertEquals(6, book.getStudentId());
 
     book.newSemester();
-    List<Map<String, GradeBookRecord>> lmap = book.getGradeBook();
+    List<SubjectToGrade> lmap = book.getGradeBook();
     assertEquals(2, lmap.size());
 
     book.putRecord(0, new GradeBookRecord(
         "Введение в алгебру и анализ",
-        5,
-        "Васкевич",
-        new GregorianCalendar(2021, Calendar.JANUARY, 12)
+        Grade.EXCELLENT,
+        Optional.of("Васкевич"),
+        Optional.of(new GregorianCalendar(2021, Calendar.JANUARY, 12))
     ));
     book.putRecord(0, new GradeBookRecord(
         "Введение в дискретную математику и математическую логику",
-        5,
-        "Власов Д. Ю.",
+        Grade.EXCELLENT,
+        Optional.of("Власов Д. Ю."),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "Декларативное программирование",
-        5,
-        "Куталев Андрей Витальевич",
+        Grade.EXCELLENT,
+        Optional.of("Куталев Андрей Витальевич"),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "Императивное программирование",
-        5,
-        "Гатилов С. Ю.",
+        Grade.EXCELLENT,
+        Optional.of("Гатилов С. Ю."),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "Измерительный практикум",
-        5,
-        "Брагин",
+        Grade.EXCELLENT,
+        Optional.of("Брагин"),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "Иностранный язык",
-        5,
-        "Kathrine",
+        Grade.EXCELLENT,
+        Optional.of("Kathrine"),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "Физкультура и спорт",
-        5,
-        "Шумейко",
+        Grade.EXCELLENT,
+        Optional.of("Шумейко"),
         null
     ));
     book.putRecord(0, new GradeBookRecord(
         "Цифровые платформы",
-        4,
-        "Иртегов Д. В.",
+        Grade.GOOD,
+        Optional.of("Иртегов Д. В."),
         null
     ));
 
