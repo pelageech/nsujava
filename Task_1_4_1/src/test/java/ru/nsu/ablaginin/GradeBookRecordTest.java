@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Optional;
-
 import org.junit.jupiter.api.Test;
 
 class GradeBookRecordTest {
