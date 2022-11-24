@@ -72,36 +72,34 @@ public class GradeBook {
     if (record == null) {
       throw new NullPointerException();
     }
+    if (semester < 0 || semester > currentSemester) {
+      throw new IllegalArgumentException();
+    }
 
     int semesterIsUsed = semester == 0 ? currentSemester : semester;
 
     // get the semester
-    try {
-      Map<String, GradeBookRecord> currentPage = gradeBook.get(semesterIsUsed - 1);
+    Map<String, GradeBookRecord> currentPage = gradeBook.get(semesterIsUsed - 1);
 
-      GradeBookRecord prevRecord = currentPage.put(record.subject(), record);
-      if (prevRecord != null) {
-        checkPreviousGrade(prevRecord.grade());
-      }
-
-      // grade counters update
-      globalGrades++;
-
-      globalExcellentGrades = record.grade() == Grade.EXCELLENT
-          ? globalExcellentGrades + 1
-          : globalExcellentGrades;
-
-      globalSatisfiedGrades = record.grade() == Grade.SATISFIED
-          ? globalSatisfiedGrades + 1
-          : globalSatisfiedGrades;
-
-      // check buns
-      checkRedDiploma();
-      return true;
-
-    } catch (IndexOutOfBoundsException e) {
-      return false;
+    GradeBookRecord prevRecord = currentPage.put(record.subject(), record);
+    if (prevRecord != null) {
+      checkPreviousGrade(prevRecord.grade());
     }
+
+    // grade counters update
+    globalGrades++;
+
+    globalExcellentGrades = record.grade() == Grade.EXCELLENT
+        ? globalExcellentGrades + 1
+        : globalExcellentGrades;
+
+    globalSatisfiedGrades = record.grade() == Grade.SATISFIED
+        ? globalSatisfiedGrades + 1
+        : globalSatisfiedGrades;
+
+    // check buns
+    checkRedDiploma();
+    return true;
   }
 
   /**
@@ -113,24 +111,23 @@ public class GradeBook {
    * @return true on successful removing
    */
   public boolean removeRecord(int semester, String subject) {
+    if (semester < 0 || semester > currentSemester) {
+      throw new IllegalArgumentException();
+    }
     int semesterIsUsed = semester == 0 ? currentSemester : semester;
 
-    try {
-      Map<String, GradeBookRecord> currentPage = gradeBook.get(semesterIsUsed - 1);
-      GradeBookRecord record = currentPage.remove(subject);
-      if (record == null) {
-        return false;
-      }
-      globalGrades--;
-      checkPreviousGrade(record.grade());
-
-      redDiploma = diplomaGrade == Grade.EXCELLENT
-          && 4 * globalExcellentGrades >= 3 * globalGrades
-          && globalSatisfiedGrades == 0;
-      return true;
-    } catch (IndexOutOfBoundsException e) {
+    Map<String, GradeBookRecord> currentPage = gradeBook.get(semesterIsUsed - 1);
+    GradeBookRecord record = currentPage.remove(subject);
+    if (record == null) {
       return false;
     }
+    globalGrades--;
+    checkPreviousGrade(record.grade());
+
+    redDiploma = diplomaGrade == Grade.EXCELLENT
+        && 4 * globalExcellentGrades >= 3 * globalGrades
+        && globalSatisfiedGrades == 0;
+    return true;
   }
 
   /**

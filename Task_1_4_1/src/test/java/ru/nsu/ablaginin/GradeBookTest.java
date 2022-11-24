@@ -41,7 +41,7 @@ class GradeBookTest {
         Optional.of("Orlova M. S."),
         Optional.of(new GregorianCalendar(2020, Calendar.MAY, 23))
     ));
-    assertFalse(
+    assertThrows(IllegalArgumentException.class, () ->
         book.putRecord(2, new GradeBookRecord(
             "WHAT",
             Grade.EXCELLENT,
@@ -136,7 +136,7 @@ class GradeBookTest {
     );
 
     // null checks
-    assertFalse(
+    assertThrows(IllegalArgumentException.class, () ->
         book.removeRecord(3, "Операционные системы")
     );
     assertFalse(
@@ -406,12 +406,12 @@ class GradeBookTest {
         Optional.of("Васкевич"),
         Optional.of(new GregorianCalendar(2021, Calendar.JANUARY, 12))
     ));
-    book.putRecord(4, new GradeBookRecord(
+    assertThrows(IllegalArgumentException.class, () -> book.putRecord(4, new GradeBookRecord(
         "Введение в дискретную математику и математическую логику",
         Grade.EXCELLENT,
         Optional.of("Власов Д. Ю."),
         null
-    ));
+    )));
     book.putRecord(0, new GradeBookRecord(
         "Декларативное программирование",
         Grade.EXCELLENT,
