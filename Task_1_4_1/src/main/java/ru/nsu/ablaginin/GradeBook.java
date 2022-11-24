@@ -1,10 +1,10 @@
 package ru.nsu.ablaginin;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.lang.NullPointerException;
 
 /**
  * Student's Grade Book helps students (really?!) save
@@ -19,17 +19,17 @@ public class GradeBook {
 
   private static long id_counter = 0;
 
-  private int globalExcellentGrades;
-  private int globalGrades;
-  private int globalSatisfiedGrades;
+  private int globalExcellentGrades = 0;
+  private int globalGrades = 0;
+  private int globalSatisfiedGrades = 0;
 
   // user fields
   private final String studentName;
   private final long studentId;
-  private int currentSemester;
-  private int diplomaGrade;
-  private boolean redDiploma;
-  private final List<Map<String, GradeBookRecord>> gradeBook;
+  private int currentSemester = 1;
+  private Grade diplomaGrade = Grade.BAD;
+  private boolean redDiploma = false;
+  private final List<SubjectToGrade> gradeBook = new ArrayList<>();
 
   /**
    * The constructor creates an empty grade book
@@ -39,16 +39,7 @@ public class GradeBook {
     studentName = name.concat("");
     studentId = id_counter++;
 
-    globalExcellentGrades = 0;
-    globalGrades = 0;
-    globalSatisfiedGrades = 0;
-
-    currentSemester = 1;
-    diplomaGrade = 0;
-    redDiploma = false;
-    gradeBook = new ArrayList<>();
-
-    gradeBook.add(new HashMap<>());
+    gradeBook.add(new SubjectToGrade());
   }
 
   /**
@@ -62,7 +53,7 @@ public class GradeBook {
       return false;
     }
 
-    gradeBook.add(new HashMap<>());
+    gradeBook.add(new SubjectToGrade());
     currentSemester++;
     return true;
   }
@@ -79,19 +70,10 @@ public class GradeBook {
    */
   public boolean putRecord(int semester, GradeBookRecord record) {
     if (record == null) {
-      return false;
-    }
-    // check null fields in the record
-    if (record.grade() == null || record.subject() == null) {
-      return false;
+      throw new NullPointerException();
     }
 
     int semesterIsUsed = semester == 0 ? currentSemester : semester;
-
-    // correctness of grade
-    if (record.grade() > 5 || record.grade() < 2) {
-      return false;
-    }
 
     // get the semester
     try {
@@ -103,13 +85,18 @@ public class GradeBook {
       }
 
       // grade counters update
-      globalExcellentGrades = record.grade() == 5
-          ? globalExcellentGrades + 1
-          : globalExcellentGrades;
       globalGrades++;
 
+      globalExcellentGrades = record.grade() == Grade.EXCELLENT
+          ? globalExcellentGrades + 1
+          : globalExcellentGrades;
+
+      globalSatisfiedGrades = record.grade() == Grade.SATISFIED
+          ? globalSatisfiedGrades + 1
+          : globalSatisfiedGrades;
+
       // check buns
-      checkRedDiploma(record.grade());
+      checkRedDiploma();
       return true;
 
     } catch (IndexOutOfBoundsException e) {
@@ -137,7 +124,9 @@ public class GradeBook {
       globalGrades--;
       checkPreviousGrade(record.grade());
 
-      checkRedDiploma(0);
+      redDiploma = diplomaGrade == Grade.EXCELLENT
+          && 4 * globalExcellentGrades >= 3 * globalGrades
+          && globalSatisfiedGrades == 0;
       return true;
     } catch (IndexOutOfBoundsException e) {
       return false;
@@ -152,7 +141,7 @@ public class GradeBook {
   public boolean isIncreasedScholarship() {
     Map<String, GradeBookRecord> currentPage = gradeBook.get(currentSemester - 1);
 
-    return currentPage.values().stream().allMatch(n -> n.grade() == 5);
+    return currentPage.values().stream().allMatch(n -> n.grade() == Grade.EXCELLENT);
   }
 
   // Setters
@@ -162,13 +151,11 @@ public class GradeBook {
    *
    * @param diplomaGrade grade to set
    */
-  public boolean setDiplomaGrade(int diplomaGrade) {
-    if (diplomaGrade < 2 || diplomaGrade > 5) {
-      return false;
-    }
+  public void setDiplomaGrade(Grade diplomaGrade) {
     this.diplomaGrade = diplomaGrade;
-    checkRedDiploma(0);
-    return true;
+    redDiploma = diplomaGrade == Grade.EXCELLENT
+        && 4 * globalExcellentGrades >= 3 * globalGrades
+        && globalSatisfiedGrades == 0;
   }
 
   // Getters
@@ -182,11 +169,11 @@ public class GradeBook {
     return studentId;
   }
 
-  public List<Map<String, GradeBookRecord>> getGradeBook() {
+  public List<SubjectToGrade> getGradeBook() {
     return gradeBook;
   }
 
-  public int getDiplomaGrade() {
+  public Grade getDiplomaGrade() {
     return diplomaGrade;
   }
 
@@ -198,19 +185,16 @@ public class GradeBook {
     return redDiploma;
   }
 
-  private void checkRedDiploma(int grade) {
-    globalSatisfiedGrades = grade > 3 || grade == 0
-        ? globalSatisfiedGrades
-        : globalSatisfiedGrades + 1;
-    redDiploma = diplomaGrade == 5
+  private void checkRedDiploma() {
+    redDiploma = diplomaGrade == Grade.EXCELLENT
         && 4 * globalExcellentGrades >= 3 * globalGrades
         && globalSatisfiedGrades == 0;
   }
 
-  private void checkPreviousGrade(int grade) {
-    if (grade == 3) {
+  private void checkPreviousGrade(Grade grade) {
+    if (grade == Grade.SATISFIED) {
       globalSatisfiedGrades--;
-    } else if (grade == 5) {
+    } else if (grade == Grade.EXCELLENT) {
       globalExcellentGrades--;
     }
   }
