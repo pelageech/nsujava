@@ -50,13 +50,12 @@ class GradeBookTest {
     );
 
     // null checks
-    assertThrows(NullPointerException.class, () -> book.putRecord(0, null));
-    assertThrows(NullPointerException.class, () -> book.putRecord(0, new GradeBookRecord(
+    book.putRecord(0, new GradeBookRecord(
         null,
         Grade.SATISFIED,
         null,
         null
-    )));
+    ));
     assertTrue(book.putRecord(1, new GradeBookRecord(
         "Music",
         Grade.SATISFIED,
@@ -137,9 +136,6 @@ class GradeBookTest {
     // null checks
     assertThrows(IllegalArgumentException.class, () ->
         book.removeRecord(3, "Операционные системы")
-    );
-    assertFalse(
-        book.removeRecord(1, null)
     );
   }
 
@@ -456,7 +452,7 @@ class GradeBookTest {
 
     assertEquals("Благинин Артём Сергеевич", book.getStudentName());
     assertTrue(book.isIncreasedScholarship());
-    assertEquals(6, book.getStudentId());
+    assertEquals(7, book.getStudentId());
 
     book.newSemester();
     List<SubjectToGrade> lmap = book.getGradeBook();
@@ -512,5 +508,38 @@ class GradeBookTest {
     ));
 
     assertFalse(book.isIncreasedScholarship());
+  }
+
+  @Test
+  public void toStringTest() {
+    var book = new GradeBook("Artyom");
+    book.putRecord(0, new GradeBookRecord(
+        "Maths",
+        Grade.EXCELLENT,
+        Optional.of("Galina"),
+        Optional.of(new GregorianCalendar(2022, Calendar.DECEMBER, 12))
+    ));
+    book.putRecord(0, new GradeBookRecord(
+        "Maths-2",
+        Grade.EXCELLENT,
+        Optional.of("Galina"),
+        Optional.of(new GregorianCalendar(2022, Calendar.DECEMBER, 12))
+    ));
+    book.putRecord(0, new GradeBookRecord(
+        "Maths-3",
+        Grade.GOOD,
+        Optional.of("Galina"),
+        Optional.of(new GregorianCalendar(2022, Calendar.DECEMBER, 12))
+    ));
+
+    book.newSemester();
+    book.putRecord(0, new GradeBookRecord(
+        "Maths-3",
+        Grade.GOOD,
+        Optional.of("Galina"),
+        Optional.of(new GregorianCalendar(2022, Calendar.DECEMBER, 12))
+    ));
+
+    System.out.println(book);
   }
 }
