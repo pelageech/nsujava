@@ -1,11 +1,10 @@
 package ru.nsu.ablaginin;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Student's Grade Book helps students (really?!) save
