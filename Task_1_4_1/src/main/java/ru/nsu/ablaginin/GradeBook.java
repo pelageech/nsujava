@@ -1,10 +1,13 @@
 package ru.nsu.ablaginin;
 
-import java.lang.NullPointerException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Student's Grade Book helps students (really?!) save
@@ -35,7 +38,7 @@ public class GradeBook {
    * The constructor creates an empty grade book
    * with the first semester.
    */
-  public GradeBook(String name) {
+  public GradeBook(@NotNull String name) {
     studentName = name.concat("");
     studentId = id_counter++;
 
@@ -49,7 +52,7 @@ public class GradeBook {
    */
   public boolean newSemester() {
     if (currentSemester == MAX_SEMESTER
-        || gradeBook.get(currentSemester - 1).size() == 0) {
+        || gradeBook.get(currentSemester - 1).getMap().size() == 0) {
       return false;
     }
 
@@ -68,10 +71,7 @@ public class GradeBook {
    * @param record all the fields in the gradeBook's row
    * @return true on successful adding a grade
    */
-  public boolean putRecord(int semester, GradeBookRecord record) {
-    if (record == null) {
-      throw new NullPointerException();
-    }
+  public boolean putRecord(int semester, @NotNull GradeBookRecord record) {
     if (semester < 0 || semester > currentSemester) {
       throw new IllegalArgumentException();
     }
@@ -79,7 +79,7 @@ public class GradeBook {
     int semesterIsUsed = semester == 0 ? currentSemester : semester;
 
     // get the semester
-    Map<String, GradeBookRecord> currentPage = gradeBook.get(semesterIsUsed - 1);
+    Map<String, GradeBookRecord> currentPage = gradeBook.get(semesterIsUsed - 1).getMap();
 
     GradeBookRecord prevRecord = currentPage.put(record.subject(), record);
     if (prevRecord != null) {
@@ -110,13 +110,13 @@ public class GradeBook {
    * @param subject name of the subject
    * @return true on successful removing
    */
-  public boolean removeRecord(int semester, String subject) {
+  public boolean removeRecord(int semester, @NotNull String subject) {
     if (semester < 0 || semester > currentSemester) {
       throw new IllegalArgumentException();
     }
     int semesterIsUsed = semester == 0 ? currentSemester : semester;
 
-    Map<String, GradeBookRecord> currentPage = gradeBook.get(semesterIsUsed - 1);
+    Map<String, GradeBookRecord> currentPage = gradeBook.get(semesterIsUsed - 1).getMap();
     GradeBookRecord record = currentPage.remove(subject);
     if (record == null) {
       return false;
@@ -136,7 +136,7 @@ public class GradeBook {
    * @return true if a student deserves increased scholarship
    */
   public boolean isIncreasedScholarship() {
-    Map<String, GradeBookRecord> currentPage = gradeBook.get(currentSemester - 1);
+    Map<String, GradeBookRecord> currentPage = gradeBook.get(currentSemester - 1).getMap();
 
     return currentPage.values().stream().allMatch(n -> n.grade() == Grade.EXCELLENT);
   }
@@ -148,7 +148,7 @@ public class GradeBook {
    *
    * @param diplomaGrade grade to set
    */
-  public void setDiplomaGrade(Grade diplomaGrade) {
+  public void setDiplomaGrade(@NotNull Grade diplomaGrade) {
     this.diplomaGrade = diplomaGrade;
     redDiploma = diplomaGrade == Grade.EXCELLENT
         && 4 * globalExcellentGrades >= 3 * globalGrades
@@ -211,5 +211,49 @@ public class GradeBook {
   @Override
   public int hashCode() {
     return Objects.hash(studentId);
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder result = new StringBuilder("Name: ");
+    result.append(this.studentName);
+
+    for (int i = 1; i <= currentSemester; i++) {
+      result.append("\n\n");
+      var map = this.gradeBook.get(i - 1).getMap();
+      if (map.size() == 0) {
+        continue;
+      }
+
+      result.append("Semester ").append(i).append("\n");
+      map.forEach((k, v) -> {
+        result.append(v);
+        result.append('\n');
+      });
+    }
+
+    result.append("\nDiploma grade: ");
+    if (diplomaGrade == Grade.BAD) {
+      result.append("Not yet\n");
+    } else {
+      result.append(diplomaGrade).append('\n');
+      result.append("Is red diploma: ").append(isRedDiploma()).append('\n');
+    }
+
+    if (this.gradeBook.get(currentSemester - 1).getMap().size() > 0) {
+      result.append("Is increased scholarship: ").append(isIncreasedScholarship()).append('\n');
+    }
+    return result.toString();
+  }
+
+  public static void main(String[] args) {
+    var book = new GradeBook("A B S");
+    book.putRecord(0, new GradeBookRecord(
+        "fjdsofj",
+        Grade.EXCELLENT,
+        Optional.empty(),
+        Optional.of(new GregorianCalendar(2022, Calendar.MAY, 24))
+    ));
+    System.out.println(book);
   }
 }
