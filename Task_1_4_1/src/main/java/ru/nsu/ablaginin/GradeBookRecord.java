@@ -27,9 +27,9 @@ public record GradeBookRecord(@NotNull String subject, @NotNull Grade grade,
     if (date.isPresent()) {
       dateString = format.format(date.get().getTime());
     }
-    return "subject='" + subject + '\'' +
-        ", grade=" + grade +
-        ", teacher=" + teacherString +
-        ", date=" + dateString;
+    return "subject='" + subject + '\''
+        + ", grade=" + grade
+        + ", teacher=" + teacherString
+        + ", date=" + dateString;
   }
 }

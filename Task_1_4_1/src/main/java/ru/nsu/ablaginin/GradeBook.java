@@ -245,15 +245,4 @@ public class GradeBook {
     }
     return result.toString();
   }
-
-  public static void main(String[] args) {
-    var book = new GradeBook("A B S");
-    book.putRecord(0, new GradeBookRecord(
-        "fjdsofj",
-        Grade.EXCELLENT,
-        Optional.empty(),
-        Optional.of(new GregorianCalendar(2022, Calendar.MAY, 24))
-    ));
-    System.out.println(book);
-  }
 }
