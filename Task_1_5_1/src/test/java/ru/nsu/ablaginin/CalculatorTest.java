@@ -6,11 +6,18 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 class CalculatorTest {
+
   @Test
   public void ordinaryTest() {
     String[] input = new String[]{"sin", "+", "-", "1", "2", "1"};
     Calculator calc = new Calculator();
     assertEquals(0, calc.readAndSolve(input));
+  }
+
+  @Test
+  public void ordinaryFromStringTest() {
+    Calculator calc = new Calculator();
+    assertEquals(0, calc.solveFromString("sin + - 1 2 1"));
   }
 
   @Test
@@ -28,10 +35,17 @@ class CalculatorTest {
   }
 
   @Test
-  public void complicatedTest() {
-    String[] input = new String[]{"+", "-", "*", "13", "-", "sin", "*", "3", "4", "3", "*", "sin", "0", "cos", "+", "5", "-", "0", "1", "-", "^", "9", "2", "^", "6", "+", "cos", "0", "sin", "1.9411", "1"};
+  public void complicatedOneTest() {
+    String[] input = new String[]{"+", "-", "*", "13", "-", "sin", "*", "3", "4", "3", "*", "sin", "0", "cos", "+", "5", "-", "0", "1", "-", "^", "9", "2", "^", "6", "+", "cos", "0", "sin", "1.9411"};
     Calculator calc = new Calculator();
     assertEquals(3.1416785965751544, calc.readAndSolve(input));
+  }
+
+  @Test
+  public void complicatedTwoTest() {
+    String input = "- sqrt ^ 9 + ^ sin + 3 ^ 2 5 2 ^ cos 35 2 / 66 + 2 * 2 / 2 4";
+    Calculator calc = new Calculator();
+    assertEquals(-19, calc.solveFromString(input));
   }
 
   @Test
