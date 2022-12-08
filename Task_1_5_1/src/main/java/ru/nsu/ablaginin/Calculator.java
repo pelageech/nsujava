@@ -43,9 +43,13 @@ public class Calculator {
     }
 
     if (nums.size() > 1) {
-      System.out.println("Warning: Last " + (nums.size() - numsEnd) + " number(s) ain't used!");
+      System.out.println("Warning: Last " + (nums.size() - 1) + " number(s) ain't used!");
     }
 
     return nums.get(numsEnd - 1);
+  }
+
+  public Double solveFromString(@NotNull String input) {
+    return readAndSolve(input.split(" "));
   }
 }
