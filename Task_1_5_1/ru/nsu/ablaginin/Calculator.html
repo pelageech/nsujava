@@ -76,6 +76,20 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Calculator</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Class Calculator implements methods that solve mathematics
+ expressions. It supports all the real numbers including
+ + and - Infinity.
+ Supported operations must be described in enum Operations.
+ Currently, it is:
+  - sum;
+  - sub;
+  - mul;
+  - div;
+  - pow;
+  - log (with variadic base);
+  - sin;
+  - cos;
+  - sqrt;</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -105,10 +119,16 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Double.html" title="class or interface in java.lang" class="external-link">Double</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#readAndSolve(java.lang.String%5B%5D)" class="member-name-link">readAndSolve</a><wbr>(@NotNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;argv)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Takes an expression written in array form and solves an expression.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Double.html" title="class or interface in java.lang" class="external-link">Double</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#solveFromString(java.lang.String)" class="member-name-link">solveFromString</a><wbr>(@NotNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;input)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">The method takes an expression in a convenient expression form
+ and solves it parsing string to string array and using the
+ `readAndSolve` method.</div>
+</div>
 </div>
 </div>
 </div>
@@ -145,6 +165,23 @@ loadScripts(document, 'script');</script>
 <h3>readAndSolve</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Double.html" title="class or interface in java.lang" class="external-link">Double</a></span>&nbsp;<span class="element-name">readAndSolve</span><wbr><span class="parameters">(@NotNull
  @NotNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;argv)</span></div>
+<div class="block">Takes an expression written in array form and solves an expression.
+ Each element of the array is an atom of an expression.
+ The method reads an array from the end, numbers are pushed to stack,
+ if an algorithm sees an operation, it takes numbers from the stack,
+ calculates an intermediate answer and pushes it back.
+ The answer is the last element in the stack.
+ Throws IllegalArgumentException on
+ - empty array;
+ - illegal operation;
+ - too low numbers.
+ The method puts warning in stdin if there are more numbers than it's needed.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>argv</code> - an array of atomic items of expression in prefix form</dd>
+<dt>Returns:</dt>
+<dd>a real number that is an answer</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -152,6 +189,15 @@ loadScripts(document, 'script');</script>
 <h3>solveFromString</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Double.html" title="class or interface in java.lang" class="external-link">Double</a></span>&nbsp;<span class="element-name">solveFromString</span><wbr><span class="parameters">(@NotNull
  @NotNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;input)</span></div>
+<div class="block">The method takes an expression in a convenient expression form
+ and solves it parsing string to string array and using the
+ `readAndSolve` method.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>input</code> - an expression in string form</dd>
+<dt>Returns:</dt>
+<dd>a real number that is an answer</dd>
+</dl>
 </section>
 </li>
 </ul>

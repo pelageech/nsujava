@@ -82,6 +82,9 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public enum </span><span class="element-name type-name-label">Operation</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Enum.html" title="class or interface in java.lang" class="external-link">Enum</a>&lt;<a href="Operation.html" title="enum class in ru.nsu.ablaginin">Operation</a>&gt;</span></div>
+<div class="block">Operation contains atomic mathematics operations.
+ They're divided into two groups: single- and two-argument
+ operations.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -156,16 +159,22 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="Operation.html" title="enum class in ru.nsu.ablaginin">Operation</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parse(java.lang.String)" class="member-name-link">parse</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;op)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Parses string to enum.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static double</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#singleArgOperation(ru.nsu.ablaginin.Operation,double)" class="member-name-link">singleArgOperation</a><wbr>(@NotNull <a href="Operation.html" title="enum class in ru.nsu.ablaginin">Operation</a>&nbsp;op,
  double&nbsp;num)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Applies the operation to one input number.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static double</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#twoArgOperation(ru.nsu.ablaginin.Operation,double,double)" class="member-name-link">twoArgOperation</a><wbr>(@NotNull <a href="Operation.html" title="enum class in ru.nsu.ablaginin">Operation</a>&nbsp;op,
  double&nbsp;a,
  double&nbsp;b)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Applies the operation to two input numbers.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="Operation.html" title="enum class in ru.nsu.ablaginin">Operation</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#valueOf(java.lang.String)" class="member-name-link">valueOf</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
@@ -320,6 +329,13 @@ not permitted.)</div>
 <section class="detail" id="parse(java.lang.String)">
 <h3>parse</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="Operation.html" title="enum class in ru.nsu.ablaginin">Operation</a></span>&nbsp;<span class="element-name">parse</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;op)</span></div>
+<div class="block">Parses string to enum.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>op</code> - an operation in a string form</dd>
+<dt>Returns:</dt>
+<dd>appropriate enum</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -328,6 +344,14 @@ not permitted.)</div>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">singleArgOperation</span><wbr><span class="parameters">(@NotNull
  @NotNull <a href="Operation.html" title="enum class in ru.nsu.ablaginin">Operation</a>&nbsp;op,
  double&nbsp;num)</span></div>
+<div class="block">Applies the operation to one input number.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>op</code> - a single-argument operation</dd>
+<dd><code>num</code> - an argument</dd>
+<dt>Returns:</dt>
+<dd>an answer</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -337,6 +361,15 @@ not permitted.)</div>
  @NotNull <a href="Operation.html" title="enum class in ru.nsu.ablaginin">Operation</a>&nbsp;op,
  double&nbsp;a,
  double&nbsp;b)</span></div>
+<div class="block">Applies the operation to two input numbers.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>op</code> - an operation</dd>
+<dd><code>a</code> - the first argument</dd>
+<dd><code>b</code> - the second argument</dd>
+<dt>Returns:</dt>
+<dd>an answer</dd>
+</dl>
 </section>
 </li>
 </ul>
