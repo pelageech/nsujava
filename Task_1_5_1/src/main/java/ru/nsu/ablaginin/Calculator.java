@@ -48,22 +48,27 @@ public class Calculator {
     for (int i = argv.length - 1; i >= 0; i--) {
 
       try {
+
+        // if the current argv[i] is a number
         nums.add(Double.parseDouble(argv[i]));
         numsEnd++;
       } catch (NumberFormatException e) {
 
+        // if it's an operation
         var op = Operation.parse(argv[i]);
 
         if (Operation.singleArg.contains(op)) { // one argument
           if (numsEnd == 0) {
             throw new IllegalArgumentException("Too low nums!");
           }
+
           var x = nums.get(numsEnd - 1);
           nums.set(numsEnd - 1, Operation.singleArgOperation(op, x));
         } else if (Operation.twoArg.contains(op)) { // two arguments
           if (numsEnd < 2) {
             throw new IllegalArgumentException("Too low nums!");
           }
+
           var x = nums.remove(--numsEnd);
           var y = nums.get(numsEnd - 1);
           nums.set(numsEnd - 1, Operation.twoArgOperation(op, x, y));
