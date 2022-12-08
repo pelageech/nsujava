@@ -26,7 +26,10 @@ class OperationTest {
     assertTrue(Operation.singleArgOperation(Operation.SIN, Math.PI) < Math.ulp(1.0));
     assertEquals(1.0, Operation.singleArgOperation(Operation.COS, 0.0));
     assertEquals(2.0, Operation.singleArgOperation(Operation.SQRT, 4.0));
-    assertThrows(IllegalArgumentException.class, () -> Operation.singleArgOperation(Operation.DIV, 4));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> Operation.singleArgOperation(Operation.DIV, 4)
+    );
   }
 
   @Test
@@ -36,6 +39,9 @@ class OperationTest {
     assertEquals(10, Operation.twoArgOperation(Operation.MUL, 2, 5));
     assertEquals(2, Operation.twoArgOperation(Operation.DIV, 4, 2));
     assertEquals(3, Operation.twoArgOperation(Operation.LOG, 2, 8));
-    assertThrows(IllegalArgumentException.class, () -> Operation.twoArgOperation(Operation.INVALID, 4, 4));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> Operation.twoArgOperation(Operation.INVALID, 4, 4)
+    );
   }
 }
