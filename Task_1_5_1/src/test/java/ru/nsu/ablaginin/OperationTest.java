@@ -23,7 +23,7 @@ class OperationTest {
 
   @Test
   public void singleArgOperationTest() {
-    assertTrue(Operation.singleArgOperation(Operation.SIN, Math.PI) < Math.ulp(1.0));
+    assertEquals(Operation.singleArgOperation(Operation.SIN, Math.PI), Math.sin(Math.PI));
     assertEquals(1.0, Operation.singleArgOperation(Operation.COS, 0.0));
     assertEquals(2.0, Operation.singleArgOperation(Operation.SQRT, 4.0));
     assertThrows(

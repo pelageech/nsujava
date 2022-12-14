@@ -9,22 +9,25 @@ class CalculatorTest {
 
   @Test
   public void ordinaryTest() {
+    var res = Math.sin(1 - 2 + 1);
     String[] input = new String[]{"sin", "+", "-", "1", "2", "1"};
     Calculator calc = new Calculator();
-    assertEquals(0, calc.readAndSolve(input));
+    assertEquals(res, calc.readAndSolve(input));
   }
 
   @Test
   public void ordinaryFromStringTest() {
+    var res = Math.sin(1 - 2 + 1);
     Calculator calc = new Calculator();
-    assertEquals(0, calc.solveFromString("sin + - 1 2 1"));
+    assertEquals(res, calc.solveFromString("sin + - 1 2 1"));
   }
 
   @Test
   public void singleOpTest() {
+    var res = Math.sqrt(Math.cos(Math.sin(0)));
     String[] input = new String[]{"sqrt", "cos", "sin", "0"};
     Calculator calc = new Calculator();
-    assertEquals(1, calc.readAndSolve(input));
+    assertEquals(res, calc.readAndSolve(input));
   }
 
   @Test
@@ -34,6 +37,14 @@ class CalculatorTest {
     };
     Calculator calc = new Calculator();
     assertEquals(14, calc.readAndSolve(input));
+  }
+
+  @Test
+  public void complicatedTest() {
+    double ans = Math.pow(Math.sin(3), 5) * 9 + Math.cos(3. / 7.);
+    String input = "+ * ^ sin 3 5 9 cos / 3 7";
+    Calculator calc = new Calculator();
+    assertEquals(ans, calc.solveFromString(input));
   }
 
   @Test
@@ -52,14 +63,6 @@ class CalculatorTest {
     String input = "- sqrt ^ 9    +    ^ sin     + 3 ^ 2 5 2 ^      cos 35 2 / 66 + 2 * 2 / 2 4";
     Calculator calc = new Calculator();
     assertEquals(-19, calc.solveFromString(input));
-  }
-
-  @Test
-  public void complicatedTest() {
-    double ans = Math.pow(Math.sin(3), 5) * 9 + Math.cos(3. / 7.);
-    String input = "+ * ^ sin 3 5 9 cos / 3 7";
-    Calculator calc = new Calculator();
-    assertEquals(ans, calc.solveFromString(input));
   }
 
   @Test
