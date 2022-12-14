@@ -56,7 +56,7 @@ class CalculatorTest {
 
   @Test
   public void complicatedTest() {
-    double ans = Math.pow(Math.sin(3), 5)*9 + Math.cos(3./7.);
+    double ans = Math.pow(Math.sin(3), 5) * 9 + Math.cos(3. / 7.);
     String input = "+ * ^ sin 3 5 9 cos / 3 7";
     Calculator calc = new Calculator();
     assertEquals(ans, calc.solveFromString(input));
