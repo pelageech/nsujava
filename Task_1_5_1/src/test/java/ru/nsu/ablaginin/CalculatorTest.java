@@ -49,7 +49,7 @@ class CalculatorTest {
 
   @Test
   public void complicatedTwoTest() {
-    String input = "- sqrt ^ 9 + ^ sin + 3 ^ 2 5 2 ^ cos 35 2 / 66 + 2 * 2 / 2 4";
+    String input = "- sqrt ^ 9    +    ^ sin     + 3 ^ 2 5 2 ^      cos 35 2 / 66 + 2 * 2 / 2 4";
     Calculator calc = new Calculator();
     assertEquals(-19, calc.solveFromString(input));
   }

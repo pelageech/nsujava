@@ -95,6 +95,6 @@ public class Calculator {
    * @return a real number that is an answer
    */
   public Double solveFromString(@NotNull String input) {
-    return readAndSolve(input.split(" "));
+    return readAndSolve(input.trim().replaceAll("\\s{2,}", " ").split(" "));
   }
 }
