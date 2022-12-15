@@ -19,7 +19,7 @@ class CalculatorTest {
   public void ordinaryFromStringTest() {
     var res = Math.sin(1 - 2 + 1);
     Calculator calc = new Calculator();
-    assertEquals(res, calc.solveFromString("sin + - 1 2 1"));
+    assertEquals(res, calc.solveFromString("sin + - 1 2 1 0"));
   }
 
   @Test
