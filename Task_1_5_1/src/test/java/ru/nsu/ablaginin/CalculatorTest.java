@@ -32,7 +32,7 @@ class CalculatorTest {
 
   @Test
   public void twoOpTest() {
-    double result = Operation.twoArgOperation (
+    double result = Operation.twoArgOperation(
         Operation.LOG, 2, (Math.pow(2, 16) / (2 * 2)) + 9 - 9
     );
     String[] input = new String[]{
