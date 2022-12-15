@@ -32,11 +32,14 @@ class CalculatorTest {
 
   @Test
   public void twoOpTest() {
+    double result = Operation.twoArgOperation (
+        Operation.LOG, 2, (Math.pow(2, 16) / (2 * 2)) + 9 - 9
+    );
     String[] input = new String[]{
         "log", "2", "-", "+", "/", "^", "2", "16", "*", "2", "2", "9", "9"
     };
     Calculator calc = new Calculator();
-    assertEquals(14, calc.readAndSolve(input));
+    assertEquals(result, calc.readAndSolve(input));
   }
 
   @Test
@@ -52,7 +55,7 @@ class CalculatorTest {
     String[] input = new String[]{
         "+", "-", "*", "13", "-", "sin", "*", "3", "4", "3",
         "*", "sin", "0", "cos", "+", "5", "-", "0", "1", "-",
-        "^", "9", "2", "^", "6", "+", "cos", "0", "sin", "1.9411", "1"
+        "^", "9", "2", "^", "6", "+", "cos", "0", "sin", "1.9411"
     };
     Calculator calc = new Calculator();
     assertEquals(3.1416785965751544, calc.readAndSolve(input));
@@ -60,9 +63,16 @@ class CalculatorTest {
 
   @Test
   public void complicatedTwoTest() {
+    double result = Math.sqrt(
+        Math.pow(
+            9,
+            Math.pow(
+                Math.sin(3 + Math.pow(2, 5)), 2
+            ) + Math.pow(Math.cos(35), 2))) - (66 / (2 + 2 * 2. / 4.)
+    );
     String input = "- sqrt ^ 9    +    ^ sin     + 3 ^ 2 5 2 ^      cos 35 2 / 66 + 2 * 2 / 2 4";
     Calculator calc = new Calculator();
-    assertEquals(-19, calc.solveFromString(input));
+    assertEquals(result, calc.solveFromString(input));
   }
 
   @Test
