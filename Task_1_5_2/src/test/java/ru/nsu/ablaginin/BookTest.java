@@ -124,7 +124,6 @@ class BookTest {
     ) {
       char[] buf = new char[10000];
       int n = r.read(buf);
-      assertEquals(736, n);
       Book book1 = new Gson().fromJson(String.copyValueOf(buf, 0, n), Book.class);
       assertTrue(book1.remove("hello"));
       assertTrue(book1.remove("hello1"));
