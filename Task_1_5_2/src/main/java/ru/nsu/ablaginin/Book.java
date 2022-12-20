@@ -19,7 +19,6 @@ import java.util.Calendar;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
@@ -169,16 +168,15 @@ public class Book {
     op.addOption(show);
 
     CommandLineParser parser = new DefaultParser();
-    HelpFormatter formatter = new HelpFormatter();
 
     try {
       CommandLine cmd = parser.parse(op, argv);
 
       // try to open file and deal with it
       Book book = new Book();
-      try (Reader r = new InputStreamReader(
+      try (Reader r = new BufferedReader(new InputStreamReader(
           new FileInputStream(FILE_NAME)
-      )
+      ))
       ) {
         book = new Gson().fromJson(r, Book.class);
         if (book == null) {
@@ -214,7 +212,10 @@ public class Book {
 
     File f = new File(FILE_NAME);
 
-    f.createNewFile(); // create file if it doesn't exist
+    if (f.createNewFile()) { // create file if it doesn't exist
+      System.out.println("Created file");
+    }
+
     try (Writer w = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f)))
     ) {
       Gson gson = new GsonBuilder()
