@@ -19,6 +19,7 @@ import java.util.Calendar;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
@@ -168,6 +169,7 @@ public class Book {
     op.addOption(show);
 
     CommandLineParser parser = new DefaultParser();
+    HelpFormatter formatter = new HelpFormatter();
 
     try {
       CommandLine cmd = parser.parse(op, argv);
@@ -201,6 +203,7 @@ public class Book {
     } catch (IOException e) {
       System.out.println("IO error");
     } catch (ParseException e) {
+      formatter.printHelp("Book", op);
       throw new RuntimeException(e);
     }
 
