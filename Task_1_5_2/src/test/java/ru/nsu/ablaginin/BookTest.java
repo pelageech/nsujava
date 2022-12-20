@@ -1,6 +1,10 @@
 package ru.nsu.ablaginin;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import com.google.gson.Gson;
 import java.io.BufferedReader;
@@ -93,7 +97,7 @@ class BookTest {
       txt[1] = '}';
       f.write(txt);
     } catch (FileNotFoundException ignored) {
-
+      System.out.println("New file will be created");
     } catch (IOException e) {
       fail();
     }
