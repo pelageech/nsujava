@@ -89,7 +89,8 @@ class BookTest {
   public void commandLineParseTest() {
     File file = new File(FILE_NAME);
 
-    try ( // create an empty json file `{}`
+    // create an empty json file `{}`
+    try (
         FileOutputStream f = new FileOutputStream(file, false)
     ) {
       var txt = new byte[2];
