@@ -1,9 +1,10 @@
 package ru.nsu.ablaginin;
 
-import com.google.gson.Gson;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
+import com.google.gson.Gson;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -11,10 +12,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.text.ParseException;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class BookTest {
+  private static final String FILE_NAME = "./book.json";
+  
   @Test
   public void toStringTest() {
     Book book = new Book();
@@ -81,8 +83,10 @@ class BookTest {
 
   @Test
   public void commandLineParseTest() {
+    File file = new File(FILE_NAME);
+
     try (
-        FileOutputStream f = new FileOutputStream("./book.json", false)
+        FileOutputStream f = new FileOutputStream(file, false)
     ){
       var txt = new byte[2];
       txt[0] = '{';
@@ -109,10 +113,14 @@ class BookTest {
     String[] argv7 = "-add hello worldworld".split(" ");
     book.commandLineParse(argv7);
     String[] argv8 = "-show 2020-12-12 2023-12-31 ello hell hello1".split(" ");
+    String[] argv9 = "-show 2020-12-12".split(" ");
+    String[] argv10 = "-show ello hell hello1".split(" ");
     book.commandLineParse(argv8);
+    assertThrows(RuntimeException.class, () -> book.commandLineParse(argv9));
+    assertThrows(RuntimeException.class, () -> book.commandLineParse(argv10));
 
     try (
-        Reader r = new BufferedReader(new InputStreamReader(new FileInputStream("./book.json")))
+        Reader r = new BufferedReader(new InputStreamReader(new FileInputStream(FILE_NAME)))
     ) {
       char[] buf = new char[10000];
       int n = r.read(buf);
@@ -125,5 +133,48 @@ class BookTest {
     } catch (Exception e) {
       fail();
     }
+    assertTrue(file.delete());
+  }
+
+  @Test
+  public void addNotFoundFileTest() {
+    File file = new File(FILE_NAME);
+
+    Book book = new Book();
+    String[] argv1 = "-add hello world".split(" ");
+    book.commandLineParse(argv1);
+
+    try (
+        Reader r = new BufferedReader(new InputStreamReader(new FileInputStream(file)))
+    ) {
+      char[] buf = new char[10000];
+      int n = r.read(buf);
+      Book book1 = new Gson().fromJson(String.copyValueOf(buf, 0, n), Book.class);
+      assertNotNull(book1);
+      assertTrue(book1.remove("hello"));
+    } catch (Exception e) {
+      fail();
+    }
+    assertTrue(file.delete());
+  }
+
+  @Test
+  public void exceptionOneTest() {
+    File file = new File(FILE_NAME);
+
+    Book book = new Book();
+    String[] argv1 = "-rm hello".split(" ");
+    assertThrows(IllegalArgumentException.class, () -> book.commandLineParse(argv1));
+
+    try {
+
+      assertTrue(file.createNewFile());
+
+      String[] argv2 = "-add hello world".split(" ");
+      assertThrows(RuntimeException.class, () -> book.commandLineParse(argv2));
+    } catch (IOException e) {
+      fail();
+    }
+    assertTrue(file.delete());
   }
 }

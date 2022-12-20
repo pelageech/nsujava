@@ -14,6 +14,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -35,6 +36,7 @@ import java.util.Calendar;
  * -show from to argv... : prints records in a period containing all the substrings from argv
  */
 public class Book {
+  private static final String FILE_NAME = "book.json";
   private final MapBookRecord book = new MapBookRecord();
 
   /**
@@ -155,78 +157,87 @@ public class Book {
 
       // try to open file and deal with it
       Book book = new Book();
-      try (
-          Reader r = new BufferedReader(new InputStreamReader(new FileInputStream("book.json")))
+      try (Reader r = new BufferedReader(new InputStreamReader(
+          new FileInputStream(FILE_NAME)
+      ))
       ) {
         book = new Gson().fromJson(r, Book.class);
         if (book == null) {
           throw new ParseException("Couldn't parse the existing file");
         }
-      } catch (IOException ignored) {
+      } catch (FileNotFoundException e) { // if file doesn't exist, good if add
         if (!cmd.hasOption("add")) {
-          System.out.println("Operation can't be complete because file doesn't exist");
-          System.exit(1);
+          throw new IllegalArgumentException("Operation can't be complete " +
+              "because file doesn't exist");
         }
       }
 
       if (cmd.hasOption("add")) {
-        String[] insertArgs = cmd.getOptionValues("add");
-        book.insert(insertArgs[0], insertArgs[1]);
-
-        File f = new File("book.json");
-        f.createNewFile(); // create file if it doesn't exist
-
-        try (
-            Writer w = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f)))
-        ) {
-          Gson gson = new GsonBuilder()
-              .setPrettyPrinting()
-              .create();
-          gson.toJson(book, Book.class, w);
-        }
+        add(book, cmd);
       }
       if (cmd.hasOption("rm")) {
-
-        String removeArg = cmd.getOptionValue("rm");
-        book.remove(removeArg);
-
-        try (Writer w = new BufferedWriter(
-            new OutputStreamWriter(new FileOutputStream("book.json"))
-        )) {
-          Gson gson = new GsonBuilder()
-              .setPrettyPrinting()
-              .create();
-          gson.toJson(book, Book.class, w);
-        }
+        rm(book, cmd);
       }
       if (cmd.hasOption("show")) {
-
-        String[] showArgs = cmd.getOptionValues("show");
-
-        if (showArgs == null) {
-          System.out.println(book);
-        } else if (showArgs.length >= 2) {
-          String[] substrings = Arrays.copyOfRange(showArgs, 2, showArgs.length);
-
-          try {
-            System.out.println(
-                book.toStringInterval(showArgs[0], showArgs[1], substrings)
-            );
-          } catch (java.text.ParseException e) {
-            System.out.println("Incorrect date format");
-          }
-        } else {
-          throw new ParseException("Not enough arguments");
-        }
+        show(book, cmd);
       }
     } catch (IOException e) {
       System.out.println("IO error");
     } catch (ParseException e) {
-      System.out.println(e.getMessage());
-      formatter.printHelp("Book", op);
-
-      System.exit(1);
+      throw new RuntimeException(e);
     }
 
+  }
+
+  private void add(Book book, CommandLine cmd) throws IOException {
+    String[] insertArgs = cmd.getOptionValues("add");
+    book.insert(insertArgs[0], insertArgs[1]);
+
+    File f = new File(FILE_NAME);
+    if (!f.createNewFile()) { // create file if it doesn't exist
+      throw new IOException("Couldn't create file");
+    }
+    try (Writer w = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f)))
+    ) {
+      Gson gson = new GsonBuilder()
+          .setPrettyPrinting()
+          .create();
+      gson.toJson(book, Book.class, w);
+    }
+  }
+
+  private void rm(Book book, CommandLine cmd) throws IOException {
+    String removeArg = cmd.getOptionValue("rm");
+    book.remove(removeArg);
+
+    try (Writer w = new BufferedWriter(
+        new OutputStreamWriter(new FileOutputStream(FILE_NAME))
+    )) {
+      Gson gson = new GsonBuilder()
+          .setPrettyPrinting()
+          .create();
+      gson.toJson(book, Book.class, w);
+    }
+  }
+
+  private void show(Book book, CommandLine cmd) throws ParseException {
+    String[] showArgs = cmd.getOptionValues("show");
+
+    if (showArgs == null) {
+      System.out.println(book);
+    } else if (showArgs.length >= 2) {
+      String[] substrings = Arrays.copyOfRange(showArgs, 2, showArgs.length);
+
+      try {
+        System.out.println(
+            book.toStringInterval(showArgs[0], showArgs[1], substrings)
+        );
+      } catch (java.text.ParseException e) {
+        System.out.println("Incorrect date format");
+        throw new RuntimeException(e);
+      }
+    } else {
+      throw new ParseException("Not enough arguments");
+    }
   }
 }
