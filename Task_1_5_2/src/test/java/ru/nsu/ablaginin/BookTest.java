@@ -91,7 +91,7 @@ class BookTest {
 
     try (
         FileOutputStream f = new FileOutputStream(file, false)
-    ){
+    ) {
       var txt = new byte[2];
       txt[0] = '{';
       txt[1] = '}';
