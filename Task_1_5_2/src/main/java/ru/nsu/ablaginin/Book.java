@@ -2,14 +2,6 @@ package ru.nsu.ablaginin;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
-import org.jetbrains.annotations.NotNull;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -24,12 +16,19 @@ import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Book is a console application that allows you to
  * keep a book with some important records.
  * The book saves to JSON file.
- *
  * -add  key value       : inserts a record to the book
  * -rm   key             : removes a record from the book
  * -show                 : prints a book
@@ -71,7 +70,11 @@ public class Book {
    * @param substrings array of strings
    * @return string with records
    */
-  public String toStringInterval(@NotNull Calendar from, @NotNull Calendar to, @NotNull String[] substrings) {
+  public String toStringInterval(
+      @NotNull Calendar from,
+      @NotNull Calendar to,
+      @NotNull String[] substrings
+  ) {
     StringBuilder result = new StringBuilder();
 
     book.getMap().forEach((k, v) -> {
@@ -89,12 +92,20 @@ public class Book {
     return result.toString();
   }
 
+  /**
+   * Takes all the records for a period containing
+   * all the substrings from an array and returns them.
+   *
+   * @param fromString start date string
+   * @param toString finish date string
+   * @param substrings array of strings
+   * @return string with records
+   */
   public String toStringInterval(
       @NotNull String fromString,
       @NotNull String toString,
       @NotNull String[] substrings) throws java.text.ParseException {
 
-    String result;
     var format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     format.applyPattern("yyyy-MM-dd");
 
@@ -103,9 +114,7 @@ public class Book {
     Calendar to = Calendar.getInstance();
     to.setTime(format.parse(toString));
 
-    result = toStringInterval(from, to, substrings);
-
-    return result;
+    return toStringInterval(from, to, substrings);
   }
 
   /**
@@ -126,6 +135,16 @@ public class Book {
     return result.toString();
   }
 
+  /**
+   * Takes parameters of a command line and deals
+   * with them.
+   * It supports such parameters like
+   * add
+   * rm
+   * show in 2 representations (with args and without)
+   *
+   * @param argv parameters
+   */
   public void commandLineParse(@NotNull String[] argv) {
     //public static void main(String[] argv) {
     Options op = new Options();
@@ -143,8 +162,8 @@ public class Book {
     op.addOption(remove);
 
     // `show` option
-    Option show = new Option("show", "show table. Can search for records between" +
-        " several dates and comparing patterns");
+    Option show = new Option("show", "show table. Can search for records between"
+        + " several dates and comparing patterns");
     show.setArgs(22);
     show.setOptionalArg(true);
     op.addOption(show);
@@ -167,8 +186,8 @@ public class Book {
         }
       } catch (FileNotFoundException e) { // if file doesn't exist, good if add
         if (!cmd.hasOption("add")) {
-          throw new IllegalArgumentException("Operation can't be complete " +
-              "because file doesn't exist");
+          throw new IllegalArgumentException("Operation can't be complete "
+              + "because file doesn't exist");
         }
       }
 
