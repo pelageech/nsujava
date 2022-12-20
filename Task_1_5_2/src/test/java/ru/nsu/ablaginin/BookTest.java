@@ -138,12 +138,11 @@ class BookTest {
 
   @Test
   public void addNotFoundFileTest() {
-    File file = new File(FILE_NAME);
 
     Book book = new Book();
     String[] argv1 = "-add hello world".split(" ");
     book.commandLineParse(argv1);
-
+    File file = new File(FILE_NAME);
     try (
         Reader r = new BufferedReader(new InputStreamReader(new FileInputStream(file)))
     ) {
@@ -161,7 +160,6 @@ class BookTest {
   @Test
   public void exceptionOneTest() {
     File file = new File(FILE_NAME);
-
     Book book = new Book();
     String[] argv1 = "-rm hello".split(" ");
     assertThrows(IllegalArgumentException.class, () -> book.commandLineParse(argv1));

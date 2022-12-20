@@ -176,9 +176,9 @@ public class Book {
 
       // try to open file and deal with it
       Book book = new Book();
-      try (Reader r = new BufferedReader(new InputStreamReader(
+      try (Reader r = new InputStreamReader(
           new FileInputStream(FILE_NAME)
-      ))
+      )
       ) {
         book = new Gson().fromJson(r, Book.class);
         if (book == null) {
@@ -213,9 +213,8 @@ public class Book {
     book.insert(insertArgs[0], insertArgs[1]);
 
     File f = new File(FILE_NAME);
-    if (!f.createNewFile()) { // create file if it doesn't exist
-      throw new IOException("Couldn't create file");
-    }
+
+    f.createNewFile(); // create file if it doesn't exist
     try (Writer w = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f)))
     ) {
       Gson gson = new GsonBuilder()
