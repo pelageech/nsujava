@@ -89,7 +89,7 @@ class BookTest {
   public void commandLineParseTest() {
     File file = new File(FILE_NAME);
 
-    try (
+    try ( // create an empty json file `{}`
         FileOutputStream f = new FileOutputStream(file, false)
     ) {
       var txt = new byte[2];
@@ -101,7 +101,10 @@ class BookTest {
     } catch (IOException e) {
       fail();
     }
+
     Book book = new Book();
+
+    // valid
     String[] argv1 = "-add hello world".split(" ");
     book.commandLineParse(argv1);
     String[] argv2 = "-add hello1 world1".split(" ");
@@ -117,6 +120,8 @@ class BookTest {
     String[] argv7 = "-add hello worldworld".split(" ");
     book.commandLineParse(argv7);
     String[] argv8 = "-show 2020-12-12 2023-12-31 ello hell hello1".split(" ");
+
+    // invalid
     String[] argv9 = "-show 2020-12-12".split(" ");
     String[] argv10 = "-show ello hell hello1".split(" ");
     book.commandLineParse(argv8);
@@ -128,8 +133,9 @@ class BookTest {
     ) {
       char[] buf = new char[10000];
       int n = r.read(buf);
-      assertTrue(n > 0);
+      assertTrue(n > 0); // check if we read something
       Book book1 = new Gson().fromJson(String.copyValueOf(buf, 0, n), Book.class);
+
       assertTrue(book1.remove("hello"));
       assertTrue(book1.remove("hello1"));
       assertFalse(book1.remove("hello2"));
@@ -137,15 +143,17 @@ class BookTest {
     } catch (Exception e) {
       fail();
     }
-    assertTrue(file.delete());
+    assertTrue(file.delete()); // created file must be deleted
   }
 
   @Test
   public void addNotFoundFileTest() {
-
     Book book = new Book();
+
+    // file doesn't exist but will be created
     String[] argv1 = "-add hello world".split(" ");
     book.commandLineParse(argv1);
+
     File file = new File(FILE_NAME);
     try (
         Reader r = new BufferedReader(new InputStreamReader(new FileInputStream(file)))
@@ -153,24 +161,29 @@ class BookTest {
       char[] buf = new char[10000];
       int n = r.read(buf);
       Book book1 = new Gson().fromJson(String.copyValueOf(buf, 0, n), Book.class);
+
       assertNotNull(book1);
       assertTrue(book1.remove("hello"));
     } catch (Exception e) {
       fail();
     }
+
     assertTrue(file.delete());
   }
 
   @Test
   public void exceptionOneTest() {
     File file = new File(FILE_NAME);
+
     Book book = new Book();
+
+    // it's illegal
     String[] argv1 = "-rm hello".split(" ");
     assertThrows(IllegalArgumentException.class, () -> book.commandLineParse(argv1));
 
+    // catch an exception to the bad json file
     try {
-
-      assertTrue(file.createNewFile());
+      assertTrue(file.createNewFile()); // empty file is bad
 
       String[] argv2 = "-add hello world".split(" ");
       assertThrows(RuntimeException.class, () -> book.commandLineParse(argv2));

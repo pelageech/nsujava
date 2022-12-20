@@ -184,8 +184,8 @@ public class Book {
         if (book == null) {
           throw new ParseException("Couldn't parse the existing file");
         }
-      } catch (FileNotFoundException e) { // if file doesn't exist, good if add
-        if (!cmd.hasOption("add")) {
+      } catch (FileNotFoundException e) { // if file doesn't exist
+        if (!cmd.hasOption("add")) { // but it's good if there's `add`
           throw new IllegalArgumentException("Operation can't be complete "
               + "because file doesn't exist");
         }
@@ -219,6 +219,7 @@ public class Book {
       System.out.println("Created file");
     }
 
+    // serialisation
     try (Writer w = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f)))
     ) {
       Gson gson = new GsonBuilder()
@@ -232,6 +233,7 @@ public class Book {
     String removeArg = cmd.getOptionValue("rm");
     book.remove(removeArg);
 
+    // serialisation
     try (Writer w = new BufferedWriter(
         new OutputStreamWriter(new FileOutputStream(FILE_NAME))
     )) {
@@ -245,14 +247,18 @@ public class Book {
   private void show(Book book, CommandLine cmd) throws ParseException {
     String[] showArgs = cmd.getOptionValues("show");
 
-    if (showArgs == null) {
+    if (showArgs == null) { // show without args
       System.out.println(book);
-    } else if (showArgs.length >= 2) {
+    } else if (showArgs.length >= 2) { // args: date1 date2 arg1 ...
+      // arg1, arg2,..
       String[] substrings = Arrays.copyOfRange(showArgs, 2, showArgs.length);
+
+      String dateFrom = showArgs[0];
+      String dateTo = showArgs[1];
 
       try {
         System.out.println(
-            book.toStringInterval(showArgs[0], showArgs[1], substrings)
+            book.toStringInterval(dateFrom, dateTo, substrings)
         );
       } catch (java.text.ParseException e) {
         System.out.println("Incorrect date format");
