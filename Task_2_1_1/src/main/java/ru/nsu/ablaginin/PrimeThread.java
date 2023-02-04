@@ -2,8 +2,20 @@ package ru.nsu.ablaginin;
 
 import java.util.Arrays;
 
+/**
+ * Contains functions that use threads.
+ */
 public class PrimeThread {
 
+  /**
+   * A thread version of the function containsNotPrime in Prime class.
+   * Returns true if the array contains at least one non-prime
+   * number.
+   *
+   * @param arr an input array
+   * @param cores number of threads
+   * @return boolean
+   */
   public static boolean parallelContainsNotPrime(int[] arr, int cores) {
     // algorithm starts here
     int len = arr.length;
