@@ -1,15 +1,19 @@
 package ru.nsu.ablaginin;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Arrays;
-import java.util.Scanner;
-import java.util.concurrent.atomic.AtomicBoolean;
 
-public class Prime {
+public class Prime extends Thread {
+
+  private boolean result = false;
+  private final int[] array;
+
   public static final int CORES = 6;
 
-  public boolean isNotPrime(int a) {
+  public Prime(int[] array) {
+    this.array = Arrays.copyOf(array, array.length);
+  }
+
+  public static boolean isNotPrime(int a) {
     if (a < 2)  {
       throw new IllegalArgumentException("Number must be >= 2");
     }
@@ -23,7 +27,16 @@ public class Prime {
     return b;
   }
 
-  public boolean containsNotPrime(int[] arr) {
-    return Arrays.stream(arr).anyMatch(this::isNotPrime);
+  public boolean containsNotPrime() {
+    return Arrays.stream(array).anyMatch(Prime::isNotPrime);
+  }
+
+  public boolean getResult() {
+    return result;
+  }
+
+  @Override
+  public void run() {
+    result = containsNotPrime();
   }
 }

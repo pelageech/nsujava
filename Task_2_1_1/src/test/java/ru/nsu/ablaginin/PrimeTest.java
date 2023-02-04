@@ -27,8 +27,8 @@ class PrimeTest {
         arr[i] = sc.nextInt();
       }
 
-      Prime prime = new Prime();
-      assertFalse(prime.containsNotPrime(arr));
+      Prime prime = new Prime(arr);
+      assertFalse(prime.containsNotPrime());
     } catch (IOException e) {
       fail();
     }
@@ -49,56 +49,8 @@ class PrimeTest {
       for (int i = 0; i < n; i++) {
         arr[i] = sc.nextInt();
       }
-      Prime prime = new Prime();
 
-      // algorithm starts here
-      int len = arr.length;
-      int threadLen = len / CORES;
-      int remains = len % CORES;
-      int from;
-      int to = 0;
-
-      AtomicBoolean result = new AtomicBoolean(false);
-
-      // separate an array into `CORES` parts
-      int[][] subArrays = new int[CORES][];
-      for (int i = 0; i < CORES; i++) {
-        from = to;
-        to = (i + 1) * threadLen;
-        if (remains > 0) {
-          remains--;
-          to++;
-        }
-        subArrays[i] = Arrays.copyOfRange(arr, from, to);
-      }
-
-      // init an array of threads
-      Thread[] threads = new Thread[CORES];
-
-      // init tasks for all the threads
-      for (int i = 0; i < CORES; i++) {
-        int finalI = i;
-        Runnable task = () -> {
-          boolean b = prime.containsNotPrime(subArrays[finalI]);
-          if (b) {
-            result.set(true);
-          }
-        };
-        Thread th = new Thread(task);
-        threads[i] = th;
-        th.start();
-      }
-
-      // use `join` to wait for all the threads
-      for (int i = 0; i < CORES; i++) {
-        try {
-          threads[i].join();
-        } catch (InterruptedException e) {
-          throw new RuntimeException(e);
-        }
-      }
-
-      assertFalse(result.get());
+      assertFalse(PrimeThread.parallelContainsNotPrime(arr, 8));
     } catch (IOException e) {
       fail();
     }
@@ -119,8 +71,7 @@ class PrimeTest {
       for (int i = 0; i < n; i++) {
         arr[i] = sc.nextInt();
       }
-      Prime prime = new Prime();
-      assertFalse(Arrays.stream(arr).parallel().anyMatch(prime::isNotPrime));
+      assertFalse(Arrays.stream(arr).parallel().anyMatch(Prime::isNotPrime));
     } catch (IOException e) {
       fail();
     }
