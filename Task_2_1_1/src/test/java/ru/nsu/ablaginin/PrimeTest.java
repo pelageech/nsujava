@@ -1,20 +1,17 @@
 package ru.nsu.ablaginin;
 
-import org.junit.jupiter.api.Test;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Scanner;
-import java.util.concurrent.atomic.AtomicBoolean;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static ru.nsu.ablaginin.Prime.CORES;
 
 class PrimeTest {
   @Test
   public void singleThreadTest() {
-    long tm_stp = System.nanoTime();
+    long timestamp = System.nanoTime();
     try (InputStream is = getClass().getClassLoader().getResourceAsStream("1.in")) {
       assertNotNull(is);
 
@@ -32,12 +29,12 @@ class PrimeTest {
     } catch (IOException e) {
       fail();
     }
-    System.out.println("Single thread: " + (System.nanoTime() - tm_stp) + " ns.");
+    System.out.println("Single thread: " + (System.nanoTime() - timestamp) + " ns.");
   }
 
   @Test
   public void multiThreadTest() {
-    long tm_stp = System.nanoTime();
+    long timestamp = System.nanoTime();
     try (InputStream is = getClass().getClassLoader().getResourceAsStream("1.in")) {
       assertNotNull(is);
 
@@ -54,12 +51,12 @@ class PrimeTest {
     } catch (IOException e) {
       fail();
     }
-    System.out.println("Multi thread: " + (System.nanoTime() - tm_stp) + " ns.");
+    System.out.println("Multi thread: " + (System.nanoTime() - timestamp) + " ns.");
   }
 
   @Test
   public void parallelStreamTest() {
-    long tm_stp = System.nanoTime();
+    long timestamp = System.nanoTime();
     try (InputStream is = getClass().getClassLoader().getResourceAsStream("1.in")) {
       assertNotNull(is);
 
@@ -76,6 +73,6 @@ class PrimeTest {
       fail();
     }
 
-    System.out.println("Parallel stream: " + (System.nanoTime() - tm_stp) + " ns.");
+    System.out.println("Parallel stream: " + (System.nanoTime() - timestamp) + " ns.");
   }
 }
