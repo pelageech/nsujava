@@ -132,6 +132,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public class <span class="typeNameLabel">PrimeThread</span>
 extends java.lang.Object</pre>
+<div class="block">Contains functions that use threads.</div>
 </li>
 </ul>
 </div>
@@ -177,7 +178,9 @@ extends java.lang.Object</pre>
 <td class="colFirst"><code>static boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#parallelContainsNotPrime(int%5B%5D,int)">parallelContainsNotPrime</a></span>&#8203;(int[]&nbsp;arr,
                         int&nbsp;cores)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">A thread version of the function containsNotPrime in Prime class.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -230,6 +233,16 @@ extends java.lang.Object</pre>
 <h4>parallelContainsNotPrime</h4>
 <pre class="methodSignature">public static&nbsp;boolean&nbsp;parallelContainsNotPrime&#8203;(int[]&nbsp;arr,
                                                int&nbsp;cores)</pre>
+<div class="block">A thread version of the function containsNotPrime in Prime class.
+ Returns true if the array contains at least one non-prime
+ number.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>arr</code> - an input array</dd>
+<dd><code>cores</code> - number of threads</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>boolean</dd>
+</dl>
 </li>
 </ul>
 </li>

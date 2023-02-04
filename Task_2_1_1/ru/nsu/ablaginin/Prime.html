@@ -141,6 +141,11 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public class <span class="typeNameLabel">Prime</span>
 extends java.lang.Thread</pre>
+<div class="block">Class Prime contains functions for searching
+ prime numbers. The function isNotPrime returns true if
+ the number IS NOT prime.
+ The function containsNotPrime returns true if the input
+ array contains NOT prime number.</div>
 </li>
 </ul>
 </div>
@@ -209,7 +214,9 @@ extends java.lang.Thread</pre>
 </tr>
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(int%5B%5D)">Prime</a></span>&#8203;(int[]&nbsp;array)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Constructs a new object.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -232,7 +239,10 @@ extends java.lang.Thread</pre>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#containsNotPrime()">containsNotPrime</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns true if the array contains at least one non-prime
+ number.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
@@ -242,7 +252,9 @@ extends java.lang.Thread</pre>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>static boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isNotPrime(int)">isNotPrime</a></span>&#8203;(int&nbsp;a)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns true if the number is not prime.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>void</code></td>
@@ -310,6 +322,12 @@ extends java.lang.Thread</pre>
 <li class="blockList">
 <h4>Prime</h4>
 <pre>public&nbsp;Prime&#8203;(int[]&nbsp;array)</pre>
+<div class="block">Constructs a new object. Use it if you want to
+ use `containsNotPrime`.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>array</code> - input array</dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -329,6 +347,13 @@ extends java.lang.Thread</pre>
 <li class="blockList">
 <h4>isNotPrime</h4>
 <pre class="methodSignature">public static&nbsp;boolean&nbsp;isNotPrime&#8203;(int&nbsp;a)</pre>
+<div class="block">Returns true if the number is not prime.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>a</code> - an input number</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>true if the number is not prime</dd>
+</dl>
 </li>
 </ul>
 <a id="containsNotPrime()">
@@ -338,6 +363,12 @@ extends java.lang.Thread</pre>
 <li class="blockList">
 <h4>containsNotPrime</h4>
 <pre class="methodSignature">public&nbsp;boolean&nbsp;containsNotPrime()</pre>
+<div class="block">Returns true if the array contains at least one non-prime
+ number.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>boolean</dd>
+</dl>
 </li>
 </ul>
 <a id="getResult()">
