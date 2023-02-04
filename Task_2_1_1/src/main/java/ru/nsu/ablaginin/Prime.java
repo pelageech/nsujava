@@ -37,7 +37,7 @@ public class Prime extends Thread {
       throw new IllegalArgumentException("Number must be >= 2");
     }
     boolean b = false;
-    for (int i = 2; i*i <= a; i++) {
+    for (int i = 2; i * i <= a; i++) {
       if (a % i == 0) {
         b = true;
         break;
