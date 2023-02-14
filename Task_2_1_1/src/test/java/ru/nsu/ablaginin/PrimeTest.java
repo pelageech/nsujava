@@ -4,13 +4,15 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.concurrent.ForkJoinPool;
+
 import org.junit.jupiter.api.Test;
 
 class PrimeTest {
+  public static final int CORES = 8;
   @Test
   public void singleThreadTest() {
     long timestamp = System.nanoTime();
@@ -28,7 +30,7 @@ class PrimeTest {
 
       Prime prime = new Prime(arr);
       assertFalse(prime.containsNotPrime());
-    } catch (IOException e) {
+    } catch (Exception e) {
       fail();
     }
     System.out.println("Single thread: " + (System.nanoTime() - timestamp) + " ns.");
@@ -49,8 +51,8 @@ class PrimeTest {
         arr[i] = sc.nextInt();
       }
 
-      assertFalse(PrimeThread.parallelContainsNotPrime(arr, 8));
-    } catch (IOException e) {
+      assertFalse(PrimeThread.parallelContainsNotPrime(arr, CORES));
+    } catch (Exception e) {
       fail();
     }
     System.out.println("Multi thread: " + (System.nanoTime() - timestamp) + " ns.");
@@ -70,8 +72,12 @@ class PrimeTest {
       for (int i = 0; i < n; i++) {
         arr[i] = sc.nextInt();
       }
-      assertFalse(Arrays.stream(arr).parallel().anyMatch(Prime::isNotPrime));
-    } catch (IOException e) {
+      ForkJoinPool myPool = new ForkJoinPool(CORES);
+      boolean b = myPool.submit(
+          () -> Arrays.stream(arr).parallel().anyMatch(Prime::isNotPrime)
+      ).get();
+      assertFalse(b);
+    } catch (Exception e) {
       fail();
     }
 
