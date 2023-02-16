@@ -8,11 +8,11 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.concurrent.ForkJoinPool;
-
 import org.junit.jupiter.api.Test;
 
 class PrimeTest {
   public static final int CORES = 8;
+
   @Test
   public void singleThreadTest() {
     long timestamp = System.nanoTime();
