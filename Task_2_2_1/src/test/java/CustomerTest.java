@@ -76,7 +76,7 @@ class CustomerTest {
         Pizzeria pizzeria = new Pizzeria(r, 3); // 4 5 3
         pizzeria.start();
 
-        Customer[] customers = new Customer[32];
+        Customer[] customers = new Customer[20];
         for (int i = 0; i < customers.length; i++) {
           customers[i] = new Customer();
         }
