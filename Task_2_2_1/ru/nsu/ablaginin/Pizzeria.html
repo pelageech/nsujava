@@ -82,6 +82,9 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Pizzeria</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Thread.html" title="class or interface in java.lang" class="external-link">Thread</a></span></div>
+<div class="block">You're welcome to our recently opened pizzeria!
+ You can make an order, and our chefs will cook it for you, and
+ our couriers will deliver it ASAP.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -113,7 +116,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.io.Reader,int)" class="member-name-link">Pizzeria</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/Reader.html" title="class or interface in java.io" class="external-link">Reader</a>&nbsp;r,
  int&nbsp;storageCapacity)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">A constructor of pizzeria.</div>
+</div>
 </div>
 </section>
 </li>
@@ -138,7 +143,9 @@ loadScripts(document, 'script');</script>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#orderPizza(int,int,java.lang.String)" class="member-name-link">orderPizza</a><wbr>(int&nbsp;deliveringTime,
  int&nbsp;cookingTime,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;order)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Every customer who calls the function gets FutureTask.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#run()" class="member-name-link">run</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
@@ -174,6 +181,12 @@ loadScripts(document, 'script');</script>
 <h3>Pizzeria</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Pizzeria</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/Reader.html" title="class or interface in java.io" class="external-link">Reader</a>&nbsp;r,
  int&nbsp;storageCapacity)</span></div>
+<div class="block">A constructor of pizzeria.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>r</code> - Reader - info about a team</dd>
+<dd><code>storageCapacity</code> - how many pizzas can be stored</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -190,6 +203,16 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/FutureTask.html" title="class or interface in java.util.concurrent" class="external-link">FutureTask</a>&lt;<a href="Pizza.html" title="class in ru.nsu.ablaginin">Pizza</a>&gt;</span>&nbsp;<span class="element-name">orderPizza</span><wbr><span class="parameters">(int&nbsp;deliveringTime,
  int&nbsp;cookingTime,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;order)</span></div>
+<div class="block">Every customer who calls the function gets FutureTask.
+ He must use .get() to take a pizza from the item.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>deliveringTime</code> - time for delivering</dd>
+<dd><code>cookingTime</code> - time for cooking</dd>
+<dd><code>order</code> - wishing pizza</dd>
+<dt>Returns:</dt>
+<dd>item of waiting for pizza</dd>
+</dl>
 </section>
 </li>
 <li>
