@@ -9,6 +9,11 @@ import java.util.concurrent.FutureTask;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * You're welcome to our recently opened pizzeria!
+ * You can make an order, and our chefs will cook it for you, and
+ * our couriers will deliver it ASAP.
+ */
 public class Pizzeria extends Thread {
   private final AtomicInteger offerId = new AtomicInteger(0);
 
@@ -19,6 +24,12 @@ public class Pizzeria extends Thread {
 
   private final BlockingDeque<Order> orders = new LinkedBlockingDeque<>();
 
+  /**
+   * A constructor of pizzeria.
+   *
+   * @param r Reader - info about a team
+   * @param storageCapacity how many pizzas can be stored
+   */
   public Pizzeria(Reader r, int storageCapacity) {
     Gson gson = new Gson();
 
@@ -33,6 +44,15 @@ public class Pizzeria extends Thread {
     storage = new LinkedBlockingDeque<>(storageCapacity);
   }
 
+  /**
+   * Every customer who calls the function gets FutureTask.
+   * He must use .get() to take a pizza from the item.
+   *
+   * @param deliveringTime time for delivering
+   * @param cookingTime time for cooking
+   * @param order wishing pizza
+   * @return item of waiting for pizza
+   */
   public FutureTask<Pizza> orderPizza(int deliveringTime, int cookingTime, String order) {
     Callable<Pizza> task = () -> {
       Order newOrder = addOffer(deliveringTime, cookingTime, order);
