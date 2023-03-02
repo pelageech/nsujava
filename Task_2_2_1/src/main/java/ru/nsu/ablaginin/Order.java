@@ -6,7 +6,6 @@ import java.util.concurrent.LinkedBlockingDeque;
 /**
  * Order is a class that contains information about an order for
  * cooking pizza. There id, cooking time, delivering time and a wish.
- *
  * Blocking deque is needed for blocking until a pizza is delivered.
  */
 public final class Order {

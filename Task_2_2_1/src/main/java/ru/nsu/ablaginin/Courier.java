@@ -2,7 +2,7 @@ package ru.nsu.ablaginin;
 
 import java.util.concurrent.TimeUnit;
 
-public class Courier extends Thread{
+public class Courier extends Thread {
   private final Pizzeria pizzeria;
   public final CourierInfo courierInfo;
   private int current = 0;
@@ -31,10 +31,20 @@ public class Courier extends Thread{
     }
 
     while (current != 0) {
-      System.out.println("Order " + orders[current-1].order().id() + ": delivering by " + courierInfo.name());
-      TimeUnit.SECONDS.sleep(orders[current-1].order().deliveringTime());
-      orders[current-1].order().putPizza(orders[current-1].pizza());
-      System.out.println("Order " + orders[current-1].order().id() + ": delivered! " + courierInfo.name());
+      System.out.println(
+          "Order "
+              + orders[current - 1].order().id()
+              + ": delivering by "
+              + courierInfo.name()
+      );
+      TimeUnit.SECONDS.sleep(orders[current - 1].order().deliveringTime());
+      orders[current - 1].order().putPizza(orders[current - 1].pizza());
+      System.out.println(
+          "Order "
+              + orders[current - 1].order().id()
+              + ": delivered! "
+              + courierInfo.name()
+      );
       current--;
     }
   }
