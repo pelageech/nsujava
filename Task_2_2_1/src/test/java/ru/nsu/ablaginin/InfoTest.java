@@ -1,9 +1,17 @@
 package ru.nsu.ablaginin;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class InfoTest {
-  EmployeeInfo e = new EmployeeInfo("Kolya", 22, "male");
-  ChefInfo chefInfo = new ChefInfo("Kolya", 23, "male");
-  CourierInfo courierInfo = new CourierInfo("Kolyan", 24, "male", 3);
+
+  @Test
+  public void coverage() {
+    EmployeeInfo employeeInfo = new EmployeeInfo("Kolya", 22, "male");
+    ChefInfo chefInfo = new ChefInfo("Kolya", 23, "male");
+    CourierInfo courierInfo = new CourierInfo("Kolyan", 24, "male", 3);
+
+    employeeInfo.age();
+    chefInfo.age();
+    courierInfo.age();
+  }
 }
