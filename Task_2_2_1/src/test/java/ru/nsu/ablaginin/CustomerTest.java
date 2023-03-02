@@ -1,3 +1,9 @@
+package ru.nsu.ablaginin;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -5,11 +11,6 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
-import ru.nsu.ablaginin.Customer;
-import ru.nsu.ablaginin.Pizza;
-import ru.nsu.ablaginin.Pizzeria;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class CustomerTest {
   @Test
