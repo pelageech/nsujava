@@ -82,6 +82,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Courier</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Thread.html" title="class or interface in java.lang" class="external-link">Thread</a></span></div>
+<div class="block">A courier delivers pizzas to clients.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -122,7 +123,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(ru.nsu.ablaginin.Pizzeria,ru.nsu.ablaginin.CourierInfo)" class="member-name-link">Courier</a><wbr>(<a href="Pizzeria.html" title="class in ru.nsu.ablaginin">Pizzeria</a>&nbsp;pizzeria,
  <a href="CourierInfo.html" title="class in ru.nsu.ablaginin">CourierInfo</a>&nbsp;courierInfo)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">A constructor of a courier.</div>
+</div>
 </div>
 </section>
 </li>
@@ -139,7 +142,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#deliver()" class="member-name-link">deliver</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">A courier delivers pizzas to clients.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#run()" class="member-name-link">run</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
@@ -182,6 +187,12 @@ loadScripts(document, 'script');</script>
 <h3>Courier</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Courier</span><wbr><span class="parameters">(<a href="Pizzeria.html" title="class in ru.nsu.ablaginin">Pizzeria</a>&nbsp;pizzeria,
  <a href="CourierInfo.html" title="class in ru.nsu.ablaginin">CourierInfo</a>&nbsp;courierInfo)</span></div>
+<div class="block">A constructor of a courier.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>pizzeria</code> - where one's works</dd>
+<dd><code>courierInfo</code> - info about a courier</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -197,9 +208,13 @@ loadScripts(document, 'script');</script>
 <h3>deliver</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">deliver</span>()
              throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></span></div>
+<div class="block">A courier delivers pizzas to clients. One's takes pizzas as many as possible
+ and starts delivering. Since a courier can take more than one pizza, the first
+ action of taking is blocked, and then next ones aren't. If there aren't pizza in store,
+ and a courier has a pizza, one's leaves for delivering.</div>
 <dl class="notes">
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></code></dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></code> - blocking</dd>
 </dl>
 </section>
 </li>
