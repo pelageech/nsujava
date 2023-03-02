@@ -19,7 +19,7 @@ public class Customer {
     try {
       return pizzeria.orderPizza(deliveringTime, cookingTime, wish).get();
     } catch (Exception e) {
-      throw new RuntimeException("Order was unsuccessful:(");
+      throw new RuntimeException("Order was unsuccessful:(" + e);
     }
   }
 
