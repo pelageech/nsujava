@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Chef cooks pizza. Information about one's is got from ChefInfo.
  */
-public final class Chef extends Employee<ChefInfo> {
+public final class Chef extends EmployeeThread<ChefInfo> {
   private final Pizzeria pizzeria;
   private final ChefInfo chefInfo;
 

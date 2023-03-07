@@ -5,11 +5,11 @@ package ru.nsu.ablaginin;
  *
  * @param <T> info about employee
  */
-public abstract class Employee<T extends EmployeeInfo> extends Thread {
+public abstract class EmployeeThread<T extends EmployeeInfo> extends Thread {
   final Pizzeria pizzeria;
   final T info;
 
-  public Employee(Pizzeria pizzeria, T employeeInfo) {
+  public EmployeeThread(Pizzeria pizzeria, T employeeInfo) {
     this.pizzeria = pizzeria;
     info = employeeInfo;
   }

@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * A courier delivers pizzas to clients.
  */
-public class Courier extends Employee<CourierInfo> {
+public class Courier extends EmployeeThread<CourierInfo> {
   private int current = 0;
   private final OrderPizzaUnion[] orders;
 
