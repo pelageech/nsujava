@@ -5,9 +5,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * A courier delivers pizzas to clients.
  */
-public class Courier extends Thread {
-  private final Pizzeria pizzeria;
-  public final CourierInfo courierInfo;
+public class Courier extends Employee<CourierInfo> {
   private int current = 0;
   private final OrderPizzaUnion[] orders;
 
@@ -18,8 +16,7 @@ public class Courier extends Thread {
    * @param courierInfo info about a courier
    */
   public Courier(Pizzeria pizzeria, CourierInfo courierInfo) {
-    this.pizzeria = pizzeria;
-    this.courierInfo = courierInfo;
+    super(pizzeria, courierInfo);
 
     if (courierInfo.capacity() < 1) {
       throw new IllegalArgumentException();
@@ -35,10 +32,10 @@ public class Courier extends Thread {
    *
    * @throws InterruptedException blocking
    */
-  public void deliver() throws InterruptedException {
+  public void work() throws InterruptedException {
     orders[current++] = pizzeria.getPizzaFromStoreBlocking();
 
-    while (current < courierInfo.capacity()) {
+    while (current < info.capacity()) {
       OrderPizzaUnion newOrder = pizzeria.getPizzaFromStoreNotBlocking();
       if (newOrder != null) {
         orders[current++] = newOrder;
@@ -52,7 +49,7 @@ public class Courier extends Thread {
           "Order "
               + orders[current - 1].order().id()
               + ": delivering by "
-              + courierInfo.name()
+              + info.name()
       );
       TimeUnit.SECONDS.sleep(orders[current - 1].order().deliveringTime());
       orders[current - 1].order().putPizza(orders[current - 1].pizza());
@@ -60,20 +57,9 @@ public class Courier extends Thread {
           "Order "
               + orders[current - 1].order().id()
               + ": delivered! "
-              + courierInfo.name()
+              + info.name()
       );
       current--;
-    }
-  }
-
-  @Override
-  public void run() {
-    while (true) {
-      try {
-        deliver();
-      } catch (InterruptedException e) {
-        System.out.println(e.getMessage());
-      }
     }
   }
 }

@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Chef cooks pizza. Information about one's is got from ChefInfo.
  */
-final class Chef extends Thread {
+final class Chef extends Employee<ChefInfo> {
   private final Pizzeria pizzeria;
   private final ChefInfo chefInfo;
 
@@ -17,6 +17,8 @@ final class Chef extends Thread {
    * @param chefInfo info about a chef
    */
   public Chef(Pizzeria pizzeria, ChefInfo chefInfo) {
+    super(pizzeria, chefInfo);
+
     if (chefInfo.age() < 0 || chefInfo.age() > 140) {
       throw new IllegalArgumentException();
     }
@@ -33,22 +35,11 @@ final class Chef extends Thread {
    *
    * @throws InterruptedException sleep blocks
    */
-  public void cookPizza() throws InterruptedException {
+  public void work() throws InterruptedException {
     Order order = pizzeria.takeOffer();
     TimeUnit.SECONDS.sleep(order.cookingTime());
     System.out.println("Chef " + chefInfo.name() + " has cooked a pizza for order " + order.id());
     Pizza pizza = new Pizza(order.order());
     pizzeria.storePizza(order, pizza);
-  }
-
-  @Override
-  public void run() {
-    while (true) {
-      try {
-        cookPizza();
-      } catch (InterruptedException e) {
-        System.out.println(e.getMessage());
-      }
-    }
   }
 }
