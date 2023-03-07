@@ -1,5 +1,10 @@
 package ru.nsu.ablaginin;
 
+/**
+ * Class is about employee in pizzeria.
+ *
+ * @param <T> info about employee
+ */
 public abstract class Employee<T extends EmployeeInfo> extends Thread {
   final Pizzeria pizzeria;
   final T info;
