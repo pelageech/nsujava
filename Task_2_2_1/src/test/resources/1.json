@@ -1,0 +1,56 @@
+{
+  "chefs" : [
+    {
+      "name" : "Valera",
+      "age" : 54,
+      "gender" : "male"
+    },
+    {
+      "name" : "Ivan",
+      "age" : 27,
+      "gender" : "male"
+    },
+    {
+      "name" : "Liza",
+      "age" : 25,
+      "gender" : "female"
+    },
+    {
+      "name" : "Sergey",
+      "age" : 32,
+      "gender" : "female"
+    }
+  ],
+  "couriers" : [
+    {
+      "name" : "Valera",
+      "age" : 54,
+      "gender" : "male",
+      "capacity" : 2
+    },
+    {
+      "name" : "Zhenya",
+      "age" : 22,
+      "gender" : "male",
+      "capacity" : 1
+    },
+    {
+      "name" : "Olya",
+      "age" : 25,
+      "gender" : "male",
+      "capacity" : 1
+    },
+    {
+      "name" : "Nastya",
+      "age" : 24,
+      "gender" : "male",
+      "capacity" : 3
+    },
+    {
+      "name" : "Michael",
+      "age" : 23,
+      "gender" : "male",
+      "capacity" : 4
+    }
+  ]
+}
