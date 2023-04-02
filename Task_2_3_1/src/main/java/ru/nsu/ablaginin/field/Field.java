@@ -2,6 +2,10 @@ package ru.nsu.ablaginin.field;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import ru.nsu.ablaginin.snake.Snake;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Field {
   private final int width;
@@ -10,6 +14,7 @@ public class Field {
   private final int rows;
   private final int squareSize;
 
+  private final List<Snake> snakes = new ArrayList<>();
   private Food food;
 
   public Field(int columns, int rows, int squareSize) {
@@ -51,5 +56,17 @@ public class Field {
 
   public int getSquareSize() {
     return squareSize;
+  }
+
+  public Food getFood() {
+    return food;
+  }
+
+  public void setFood(Food food) {
+    this.food = food;
+  }
+
+  public List<Snake> getSnakes() {
+    return snakes;
   }
 }

@@ -3,7 +3,6 @@ package ru.nsu.ablaginin.field;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import ru.nsu.ablaginin.snake.Snake;
-import ru.nsu.ablaginin.snake.SnakeAtField;
 
 import java.awt.*;
 import java.util.List;
@@ -24,7 +23,7 @@ public class FoodController {
     this.field = field;
   }
 
-  public Food generateFood(List<Snake> snakes) {
+  public static Food generateFood(Field field, List<Snake> snakes) {
     Point foodPoint;
     Image foodImage;
     start:
@@ -43,7 +42,7 @@ public class FoodController {
 
       var str = FOODS[(int)(Math.random() * FOODS.length)];
       System.out.println(str);
-      foodImage = new Image(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(str)));
+      foodImage = new Image(Objects.requireNonNull(FoodController.class.getClassLoader().getResourceAsStream(str)));
       foodPoint = new Point(foodX, foodY);
       break;
     }
