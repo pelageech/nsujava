@@ -16,6 +16,7 @@ import ru.nsu.ablaginin.field.Field;
 import ru.nsu.ablaginin.field.Food;
 import ru.nsu.ablaginin.field.FoodController;
 import ru.nsu.ablaginin.snake.Snake;
+import ru.nsu.ablaginin.snake.SnakeBot;
 import ru.nsu.ablaginin.snake.SnakeHuman;
 
 import java.awt.*;
@@ -50,7 +51,7 @@ public class Main extends Application {
 
   @Override
   public void start(Stage primaryStage) throws Exception {
-    field = new Field(25, 25, 10);
+    field = new Field(25, 25, 30);
 
     Group root = new Group();
     Canvas canvas = new Canvas(field.getWidth(), field.getHeight());
@@ -63,8 +64,9 @@ public class Main extends Application {
     primaryStage.show();
 
     GraphicsContext gc = canvas.getGraphicsContext2D();
-    snakes = new Snake[1];
+    snakes = new Snake[2];
     snakes[0] = new SnakeHuman(field, new Point(field.getColumns() / 2, field.getRows() / 2), 1, scene);
+    snakes[1] = new SnakeBot(field, new Point(15, 15), 1);
     for (var th : snakes) {
       th.start();
     }
