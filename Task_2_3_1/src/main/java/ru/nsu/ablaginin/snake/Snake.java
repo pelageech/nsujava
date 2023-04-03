@@ -1,8 +1,13 @@
 package ru.nsu.ablaginin.snake;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.util.Duration;
 import ru.nsu.ablaginin.field.Field;
 import ru.nsu.ablaginin.field.Food;
 import ru.nsu.ablaginin.field.FoodController;
@@ -10,8 +15,11 @@ import ru.nsu.ablaginin.field.FoodController;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
-public abstract class Snake extends Thread {
+public class Snake {
   public static final int BODY_SIZE = 3;
   private final List<Point> body = new ArrayList<>();
   private final Point head;
@@ -19,6 +27,7 @@ public abstract class Snake extends Thread {
   private int velocity;
   private Field field;
   private boolean gameOver = false;
+  private final Timer timer = new Timer();
 
   Snake(Field field, Point spawn, int velocity) {
 
@@ -38,7 +47,19 @@ public abstract class Snake extends Thread {
     head = body.get(0);
   }
 
-  abstract void changeDirection();
+  public void changeDirection(Scene scene) {
+    scene.setOnKeyPressed(event -> {
+      Direction newDirection = this.getDirection();
+      var code = event.getCode();
+      switch (code) {
+        case W, UP -> newDirection = newDirection != Direction.DOWN ? Direction.UP : newDirection;
+        case A, LEFT -> newDirection = newDirection != Direction.RIGHT ? Direction.LEFT : newDirection;
+        case S, DOWN -> newDirection = newDirection != Direction.UP ? Direction.DOWN : newDirection;
+        case D, RIGHT -> newDirection = newDirection != Direction.LEFT ? Direction.RIGHT : newDirection;
+      }
+      this.setDirection(newDirection);
+    });
+  }
 
   public void eatFood(Food food) {
     if (head.x == food.point().x && head.y == food.point().y) {
@@ -116,8 +137,27 @@ public abstract class Snake extends Thread {
     return gameOver;
   }
 
-  @Override
+  public Timer getTimer() {
+    return timer;
+  }
+
+  public void runTask(Snake snake, Timer timer) {
+    if (snake.isGameOver()) {
+      timer.cancel();
+      return;
+    }
+    snake.move();
+    snake.gameOver();
+    snake.eatFood(field.getFood());
+  }
+
   public void run() {
-    changeDirection();
+    changeDirection(getField().getScene());
+    timer.schedule(new TimerTask() {
+      @Override
+      public void run() {
+        runTask(Snake.this, timer);
+      }
+    }, 0, 130);
   }
 }

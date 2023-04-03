@@ -1,5 +1,6 @@
 package ru.nsu.ablaginin.field;
 
+import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import ru.nsu.ablaginin.snake.Snake;
@@ -14,17 +15,19 @@ public class Field {
   private final int rows;
   private final int squareSize;
 
+  private final Scene scene;
   private final List<Snake> snakes = new ArrayList<>();
   private final FoodController controller;
   private Food food;
 
-  public Field(int columns, int rows, int squareSize) {
+  public Field(int columns, int rows, int squareSize, Scene scene) {
     this.columns = columns;
     this.rows = rows;
     this.squareSize = squareSize;
     width = squareSize * columns;
     height = squareSize * rows;
     controller = new FoodController(this);
+    this.scene = scene;
   }
 
   public void drawField(GraphicsContext gc) {
@@ -74,5 +77,9 @@ public class Field {
 
   public FoodController getController() {
     return controller;
+  }
+
+  public Scene getScene() {
+    return scene;
   }
 }

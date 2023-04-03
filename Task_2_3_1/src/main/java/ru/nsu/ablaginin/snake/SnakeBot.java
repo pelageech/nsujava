@@ -3,43 +3,128 @@ package ru.nsu.ablaginin.snake;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.robot.Robot;
 import javafx.util.Duration;
 import ru.nsu.ablaginin.field.Field;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class SnakeBot extends Snake{
-  public SnakeBot(Field field, Point spawn, int velocity) {
+  private Robot robot;
+  public SnakeBot(Field field, Point spawn, int velocity, Robot robot) {
     super(field, spawn, velocity);
+    this.robot = robot;
   }
 
-  @Override
-  void changeDirection() {
-    System.out.println("ROBOT DOLBOEB");
-    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), event -> {
-      System.out.println("ROBOT DOLBOEB");
-      var foodPoint = getField().getFood().point();
-      var head = getHead();
-      if (foodPoint.x - head.x > 0 && getDirection() != Direction.LEFT) {
+  private void behaviourOne() {
+    var foodPoint = getField().getFood().point();
+    var head = getHead();
+
+    if (foodPoint.x - head.x > 0 && getDirection() != Direction.LEFT) {
+      setDirection(Direction.RIGHT);
+    } else if (foodPoint.x - head.x < 0 && getDirection() != Direction.RIGHT) {
+      setDirection(Direction.LEFT);
+    } else {
+      if (foodPoint.y - head.y > 0 && getDirection() != Direction.UP) {
+        setDirection(Direction.DOWN);
+      } else if (foodPoint.y - head.y < 0 && getDirection() != Direction.DOWN) {
+        setDirection(Direction.UP);
+      }
+    }
+  }
+
+  public void behaviourTwo() {
+    var foodPoint = getField().getFood().point();
+    var head = getHead();
+
+    var directions = whereToBend();
+
+    if (foodPoint.x - head.x > 0) {
+      if (getDirection() != Direction.LEFT) {
         setDirection(Direction.RIGHT);
-      } else if (foodPoint.x - head.x < 0 && getDirection() != Direction.RIGHT) {
-        setDirection(Direction.LEFT);
       } else {
-        if (foodPoint.y - head.y > 0 && getDirection() != Direction.UP) {
+        if (directions.contains(Direction.DOWN)) {
           setDirection(Direction.DOWN);
-        } else if (foodPoint.y - head.y < 0 && getDirection() != Direction.DOWN) {
+        } else {
           setDirection(Direction.UP);
         }
       }
-    }));
-    timeline.setCycleCount(Animation.INDEFINITE);
-    timeline.play();
+    } else if (foodPoint.x - head.x < 0) {
+      if (getDirection() != Direction.RIGHT) {
+        setDirection(Direction.LEFT);
+      } else {
+        if (directions.contains(Direction.DOWN)) {
+          setDirection(Direction.DOWN);
+        } else {
+          setDirection(Direction.UP);
+        }
+      }
+    } else {
+      if (foodPoint.y - head.y > 0) {
+        if (getDirection() != Direction.UP) {
+          setDirection(Direction.DOWN);
+        } else {
+          if (directions.contains(Direction.LEFT)) {
+            setDirection(Direction.LEFT);
+          } else {
+            setDirection(Direction.RIGHT);
+          }
+        }
+      } else if (foodPoint.y - head.y < 0) {
+        if (getDirection() != Direction.DOWN) {
+          setDirection(Direction.UP);
+        } else {
+          if (directions.contains(Direction.LEFT)) {
+            setDirection(Direction.LEFT);
+          } else {
+            setDirection(Direction.RIGHT);
+          }
+        }
+      }
+    }
+  }
+
+  private List<Direction> whereToBend() {
+    List<Direction> result = new ArrayList<>();
+
+    var head = getHead();
+    var columns = getField().getColumns();
+    var rows = getField().getRows();
+
+    if (head.x == 0) {
+      result.add(Direction.RIGHT);
+    } else if (head.x == columns - 1) {
+      result.add(Direction.LEFT);
+    } else {
+      result.add(Direction.RIGHT);
+      result.add(Direction.LEFT);
+    }
+
+    if (head.y == 0) {
+      result.add(Direction.DOWN);
+    } else if (head.y == rows - 1) {
+      result.add(Direction.UP);
+    } else {
+      result.add(Direction.DOWN);
+      result.add(Direction.UP);
+    }
+
+    return result;
   }
 
   @Override
-  public void run() {
-    super.run();
+  public void changeDirection(Scene scene) {
+  }
+
+  @Override
+  public void runTask(Snake snake, Timer timer) {
+    behaviourOne();
+    super.runTask(snake, timer);
   }
 }
