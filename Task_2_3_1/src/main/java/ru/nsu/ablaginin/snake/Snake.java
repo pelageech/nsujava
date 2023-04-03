@@ -1,6 +1,8 @@
 package ru.nsu.ablaginin.snake;
 
 import javafx.scene.Scene;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 import ru.nsu.ablaginin.field.Field;
 import ru.nsu.ablaginin.field.Food;
 import ru.nsu.ablaginin.field.FoodController;
@@ -9,7 +11,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Snake {
+public abstract class Snake extends Thread {
   public static final int BODY_SIZE = 3;
   private final List<Point> body = new ArrayList<>();
   private final Point head;
@@ -38,15 +40,12 @@ public abstract class Snake {
 
   abstract void changeDirection();
 
-  void eatFood(Food food) {
-    if (food == null) {
-      return;
-    }
+  public void eatFood(Food food) {
     if (head.x == food.point().x && head.y == food.point().y) {
       var deltaX = body.get(body.size() - 2).x - body.get(body.size() - 1).x;
       var deltaY = body.get(body.size() - 2).y - body.get(body.size() - 1).y;
       body.add(new Point(body.get(body.size() - 1).x + deltaX, body.get(body.size() - 1).y + deltaY));
-      field.setFood(FoodController.generateFood(field, new ArrayList<>()));
+      field.setFood(field.getController().generateFood(field.getSnakes()));
     }
   }
 
@@ -79,6 +78,16 @@ public abstract class Snake {
     }
   }
 
+  public void drawSnake(GraphicsContext gc) {
+    var squareSize = field.getSquareSize();
+    gc.setFill(Color.web("4674E9"));
+    gc.fillRoundRect(head.x * squareSize, head.y * squareSize, squareSize - 1, squareSize - 1, squareSize, squareSize);
+
+    for (int i = 1; i < body.size(); i++) {
+      gc.fillRoundRect(body.get(i).x * squareSize, body.get(i).y * squareSize, squareSize - 1, squareSize - 1, squareSize / 2., squareSize / 2.);
+    }
+  }
+
   public List<Point> getBody() {
     return body;
   }
@@ -105,5 +114,10 @@ public abstract class Snake {
 
   public boolean isGameOver() {
     return gameOver;
+  }
+
+  @Override
+  public void run() {
+    changeDirection();
   }
 }

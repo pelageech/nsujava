@@ -15,6 +15,7 @@ public class Field {
   private final int squareSize;
 
   private final List<Snake> snakes = new ArrayList<>();
+  private final FoodController controller;
   private Food food;
 
   public Field(int columns, int rows, int squareSize) {
@@ -23,11 +24,12 @@ public class Field {
     this.squareSize = squareSize;
     width = squareSize * columns;
     height = squareSize * rows;
+    controller = new FoodController(this);
   }
 
   public void drawField(GraphicsContext gc) {
-    for (int i = 0; i < rows; i++) {
-      for (int j = 0; j < columns; j++) {
+    for (int i = 0; i < columns; i++) {
+      for (int j = 0; j < rows; j++) {
         if ((i + j) % 2 == 0) {
           gc.setFill(Color.web("AAD751"));
         } else {
@@ -68,5 +70,9 @@ public class Field {
 
   public List<Snake> getSnakes() {
     return snakes;
+  }
+
+  public FoodController getController() {
+    return controller;
   }
 }

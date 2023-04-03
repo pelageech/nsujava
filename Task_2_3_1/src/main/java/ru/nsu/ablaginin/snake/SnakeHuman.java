@@ -29,4 +29,9 @@ public class SnakeHuman extends Snake {
       this.setDirection(newDirection);
     });
   }
+
+  @Override
+  public void run() {
+    super.run();
+  }
 }

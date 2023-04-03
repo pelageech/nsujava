@@ -8,13 +8,15 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import ru.nsu.ablaginin.field.Field;
 import ru.nsu.ablaginin.field.Food;
 import ru.nsu.ablaginin.field.FoodController;
+import ru.nsu.ablaginin.snake.Snake;
 import ru.nsu.ablaginin.snake.SnakeHuman;
-import ru.nsu.ablaginin.snake.SnakeThread;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -23,22 +25,32 @@ import java.util.List;
 
 public class Main extends Application {
   private Field field;
-  private FoodController foodController;
-  private SnakeThread[] snakes;
+  private Snake[] snakes;
+  private Timeline timeline;
 
   private void run(GraphicsContext gc) {
+    for (var s : snakes) {
+      if (s.isGameOver()) {
+        gc.setFill(Color.RED);
+        gc.setFont(new Font("Arial", 70));
+        gc.fillText("Game over!", field.getWidth() / 2., field.getHeight() / 2.);
+        timeline.stop();
+        return;
+      }
+    }
     field.drawField(gc);
-    foodController.drawFood(field.getFood(), gc);
+    field.getController().drawFood(field.getFood(), gc);
     for (var s : snakes) {
       s.drawSnake(gc);
+      s.move();
+      s.gameOver();
+      s.eatFood(field.getFood());
     }
   }
 
   @Override
   public void start(Stage primaryStage) throws Exception {
-    field = new Field(15, 15, 50);
-    foodController = new FoodController(field);
-
+    field = new Field(25, 25, 10);
 
     Group root = new Group();
     Canvas canvas = new Canvas(field.getWidth(), field.getHeight());
@@ -51,16 +63,16 @@ public class Main extends Application {
     primaryStage.show();
 
     GraphicsContext gc = canvas.getGraphicsContext2D();
-    snakes = new SnakeThread[1];
-    snakes[0] = new SnakeThread(new SnakeHuman(field, new Point(5, 5), 1, scene), gc);
+    snakes = new Snake[1];
+    snakes[0] = new SnakeHuman(field, new Point(field.getColumns() / 2, field.getRows() / 2), 1, scene);
     for (var th : snakes) {
       th.start();
     }
 
 
-    field.setFood(FoodController.generateFood(field, field.getSnakes()));
+    field.setFood(field.getController().generateFood(field.getSnakes()));
     run(gc);
-    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(130), event -> run(gc)));
+    timeline = new Timeline(new KeyFrame(Duration.millis(100), event -> run(gc)));
     timeline.setCycleCount(Animation.INDEFINITE);
     timeline.play();
   }

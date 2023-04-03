@@ -5,6 +5,8 @@ import javafx.scene.image.Image;
 import ru.nsu.ablaginin.snake.Snake;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,30 +25,35 @@ public class FoodController {
     this.field = field;
   }
 
-  public static Food generateFood(Field field, List<Snake> snakes) {
+  public Food generateFood(Point[] except) {
     Point foodPoint;
     Image foodImage;
+    var str = FOODS[(int)(Math.random() * FOODS.length)];
     start:
     while (true) {
-      int foodX = (int)(Math.random() * field.getRows());
-      int foodY = (int)(Math.random() * field.getColumns());
+      int foodX = (int)(Math.random() * field.getColumns());
+      int foodY = (int)(Math.random() * field.getRows());
 
-      for (var snake : snakes) {
-        var body = snake.getBody();
-        for (var p : body) {
-          if (p.getX() == foodX && p.getY() == foodY) {
-            continue start;
-          }
+      for (var p : except) {
+        if (p.x == foodX && p.y == foodY) {
+          continue start;
         }
       }
 
-      var str = FOODS[(int)(Math.random() * FOODS.length)];
       System.out.println(str);
       foodImage = new Image(Objects.requireNonNull(FoodController.class.getClassLoader().getResourceAsStream(str)));
       foodPoint = new Point(foodX, foodY);
       break;
     }
     return new Food(foodImage, foodPoint);
+  }
+
+  public Food generateFood(List<Snake> snakes) {
+    List<Point> exceptPoints = new ArrayList<>();
+    for (var s : snakes) {
+      exceptPoints.addAll(s.getBody());
+    }
+    return this.generateFood(exceptPoints.toArray(new Point[0]));
   }
 
   public void drawFood(Food food, GraphicsContext gc) {
