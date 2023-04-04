@@ -29,7 +29,15 @@ public class FoodController {
     foodInputStreams = new ArrayList<>();
     for (String food : FOODS) {
       var is = getClass().getClassLoader().getResourceAsStream(food);
-      foodInputStreams.add(is);
+      if (is != null) {
+        foodInputStreams.add(is);
+        System.out.println("Image " + food + " has been successfully opened!");
+      } else {
+        System.out.println("Image " + food + " won't open!");
+      }
+    }
+    if (foodInputStreams.size() == 0) {
+      throw new IllegalArgumentException("there isn't any images opened");
     }
   }
 
