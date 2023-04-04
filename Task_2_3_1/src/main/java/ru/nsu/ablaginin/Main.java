@@ -24,6 +24,7 @@ public class Main extends Application {
 
     List<SnakeProperty> bots = new ArrayList<>();
     bots.add(new SnakeProperty(new Point(12, 12), 1, Direction.DOWN));
+    bots.add(new SnakeProperty(new Point(20, 20), 1, Direction.DOWN));
     builder.setBots(bots);
 
     var field = builder.build();

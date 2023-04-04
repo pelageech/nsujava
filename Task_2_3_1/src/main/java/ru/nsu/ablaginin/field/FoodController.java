@@ -20,13 +20,13 @@ public class FoodController {
       "img/food5.png"
   };
 
-  private final List<InputStream> foodInputStreams;
+  private final List<Image> foodImages = new ArrayList<>();
 
   private final Field field;
 
   public FoodController(Field field) {
     this.field = field;
-    foodInputStreams = new ArrayList<>();
+    List<InputStream> foodInputStreams = new ArrayList<>();
     for (String food : FOODS) {
       var is = getClass().getClassLoader().getResourceAsStream(food);
       if (is != null) {
@@ -39,12 +39,15 @@ public class FoodController {
     if (foodInputStreams.size() == 0) {
       throw new IllegalArgumentException("there isn't any images opened");
     }
+
+    for (var is : foodInputStreams) {
+      foodImages.add(new Image(is));
+    }
   }
 
   public Food generateFood(Point[] except) {
     Point foodPoint;
-    var chosenImage = foodInputStreams.get((int)(Math.random() * foodInputStreams.size()));
-    var foodImage = new Image(chosenImage);
+    var foodImage = foodImages.get((int)(Math.random() * foodImages.size()));
 
     start:
     while (true) {

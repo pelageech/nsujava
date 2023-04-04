@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Timer;
 
 public class SnakeBot extends Snake{
-  private Robot robot;
+  private final Robot robot;
   public SnakeBot(Field field, Point spawn, int velocity, Direction startDirection, Robot robot) {
     super(field, spawn, velocity, startDirection);
     this.robot = robot;
