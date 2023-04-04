@@ -5,6 +5,7 @@ import javafx.scene.image.Image;
 import ru.nsu.ablaginin.snake.Snake;
 
 import java.awt.*;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,16 +20,24 @@ public class FoodController {
       "img/food5.png"
   };
 
+  private final List<InputStream> foodInputStreams;
+
   private final Field field;
 
   public FoodController(Field field) {
     this.field = field;
+    foodInputStreams = new ArrayList<>();
+    for (String food : FOODS) {
+      var is = getClass().getClassLoader().getResourceAsStream(food);
+      foodInputStreams.add(is);
+    }
   }
 
   public Food generateFood(Point[] except) {
     Point foodPoint;
-    Image foodImage;
-    var str = FOODS[(int)(Math.random() * FOODS.length)];
+    var chosenImage = foodInputStreams.get((int)(Math.random() * foodInputStreams.size()));
+    var foodImage = new Image(chosenImage);
+
     start:
     while (true) {
       int foodX = (int)(Math.random() * field.getColumns());
@@ -40,8 +49,6 @@ public class FoodController {
         }
       }
 
-      System.out.println(str);
-      foodImage = new Image(Objects.requireNonNull(FoodController.class.getClassLoader().getResourceAsStream(str)));
       foodPoint = new Point(foodX, foodY);
       break;
     }
