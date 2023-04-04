@@ -1,65 +1,47 @@
 package ru.nsu.ablaginin.snake;
 
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.util.Duration;
 import ru.nsu.ablaginin.field.Field;
 import ru.nsu.ablaginin.field.Food;
-import ru.nsu.ablaginin.field.FoodController;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
 
-public class Snake {
-  public static final int BODY_SIZE = 3;
+public abstract class Snake {
+  private static final int INIT_BODY_SIZE = 3;
   private final List<Point> body = new ArrayList<>();
   private final Point head;
-  private Direction direction = Direction.UP;
-  private int velocity;
-  private Field field;
+  private Direction direction;
+  private final int velocity;
+  private final Field field;
   private boolean gameOver = false;
   private final Timer timer = new Timer();
 
-  Snake(Field field, Point spawn, int velocity) {
+  public Snake(Field field, Point spawn, int velocity, Direction startDirection) {
 
     this.field = field;
     field.getSnakes().add(this);
 
     this.velocity = velocity;
+    this.direction = startDirection;
 
     if (spawn.x < 0 || spawn.x >= field.getColumns()
         || spawn.y < 0 || spawn.y >= field.getRows()) {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("body of the snake is out of the field");
     }
 
-    for (int i = 0; i < BODY_SIZE; i++) {
+    for (int i = 0; i < INIT_BODY_SIZE; i++) {
       body.add(new Point(spawn.x, spawn.y));
     }
     head = body.get(0);
   }
 
-  public void changeDirection(Scene scene) {
-    scene.setOnKeyPressed(event -> {
-      Direction newDirection = this.getDirection();
-      var code = event.getCode();
-      switch (code) {
-        case W, UP -> newDirection = newDirection != Direction.DOWN ? Direction.UP : newDirection;
-        case A, LEFT -> newDirection = newDirection != Direction.RIGHT ? Direction.LEFT : newDirection;
-        case S, DOWN -> newDirection = newDirection != Direction.UP ? Direction.DOWN : newDirection;
-        case D, RIGHT -> newDirection = newDirection != Direction.LEFT ? Direction.RIGHT : newDirection;
-      }
-      this.setDirection(newDirection);
-    });
-  }
+  public abstract void keyEventBehaviour(Scene scene);
 
   public void eatFood(Food food) {
     if (head.x == food.point().x && head.y == food.point().y) {
@@ -152,12 +134,16 @@ public class Snake {
   }
 
   public void run() {
-    changeDirection(getField().getScene());
+    keyEventBehaviour(getField().getScene());
     timer.schedule(new TimerTask() {
       @Override
       public void run() {
         runTask(Snake.this, timer);
       }
     }, 0, 130);
+  }
+
+  public void stop() {
+    timer.cancel();
   }
 }

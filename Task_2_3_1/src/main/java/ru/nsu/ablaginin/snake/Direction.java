@@ -1,6 +1,6 @@
 package ru.nsu.ablaginin.snake;
 
-enum Direction {
+public enum Direction {
   LEFT,
   DOWN,
   RIGHT,

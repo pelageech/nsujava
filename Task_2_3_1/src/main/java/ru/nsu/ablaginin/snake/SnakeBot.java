@@ -1,24 +1,18 @@
 package ru.nsu.ablaginin.snake;
 
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
 import javafx.scene.robot.Robot;
-import javafx.util.Duration;
 import ru.nsu.ablaginin.field.Field;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
-import java.util.TimerTask;
 
 public class SnakeBot extends Snake{
   private Robot robot;
-  public SnakeBot(Field field, Point spawn, int velocity, Robot robot) {
-    super(field, spawn, velocity);
+  public SnakeBot(Field field, Point spawn, int velocity, Direction startDirection, Robot robot) {
+    super(field, spawn, velocity, startDirection);
     this.robot = robot;
   }
 
@@ -119,7 +113,7 @@ public class SnakeBot extends Snake{
   }
 
   @Override
-  public void changeDirection(Scene scene) {
+  public void keyEventBehaviour(Scene scene) {
   }
 
   @Override
