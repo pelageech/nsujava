@@ -74,13 +74,4 @@ public class FoodController {
     return this.generateFood(exceptPoints.toArray(new Point[0]));
   }
 
-  public void drawFood(Food food, GraphicsContext gc) {
-    gc.drawImage(food.image(),
-        food.point().x * field.getSquareSize(),
-        food.point().y * field.getSquareSize(),
-        field.getSquareSize(),
-        field.getSquareSize()
-    );
-  }
-
 }

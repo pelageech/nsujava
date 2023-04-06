@@ -117,8 +117,8 @@ public class SnakeBot extends Snake{
   }
 
   @Override
-  public void runTask(Snake snake, Timer timer) {
+  public void runTask() {
     behaviourOne();
-    super.runTask(snake, timer);
+    super.runTask();
   }
 }

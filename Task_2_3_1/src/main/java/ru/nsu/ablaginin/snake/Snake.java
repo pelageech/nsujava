@@ -123,24 +123,24 @@ public abstract class Snake {
     return timer;
   }
 
-  public void runTask(Snake snake, Timer timer) {
-    if (snake.isGameOver()) {
+  public void runTask() {
+    if (this.isGameOver()) {
       timer.cancel();
       return;
     }
-    snake.move();
-    snake.gameOver();
-    snake.eatFood(field.getFood());
+    this.move();
+    this.gameOver();
+    this.eatFood(field.getFood());
   }
 
   public void run() {
-    keyEventBehaviour(getField().getScene());
     timer.schedule(new TimerTask() {
       @Override
       public void run() {
-        runTask(Snake.this, timer);
+        runTask();
+        keyEventBehaviour(getField().getScene());
       }
-    }, 0, 130);
+    }, 0, 100);
   }
 
   public void stop() {

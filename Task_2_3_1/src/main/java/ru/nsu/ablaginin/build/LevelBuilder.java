@@ -4,7 +4,9 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.robot.Robot;
+import ru.nsu.ablaginin.field.Barrier;
 import ru.nsu.ablaginin.field.Field;
 import ru.nsu.ablaginin.snake.Direction;
 import ru.nsu.ablaginin.snake.Snake;
@@ -22,6 +24,7 @@ public class LevelBuilder {
   private final SnakeProperty humanProperty;
   private List<SnakeProperty> botProperties = new ArrayList<>();
   private final List<Snake> snake = new ArrayList<>();
+  private List<Barrier> barriers = new ArrayList<>();
 
   private GraphicsContext gc;
 
@@ -38,6 +41,7 @@ public class LevelBuilder {
 
     Field field = new Field(columns, rows, squareSize, scene);
     field.setFood(field.getController().generateFood(field.getSnakes()));
+    field.setBarriers(barriers);
 
     Canvas canvas = new Canvas(field.getWidth(), field.getHeight());
     root.getChildren().add(canvas);
@@ -57,32 +61,20 @@ public class LevelBuilder {
     return field;
   }
 
-  public int getColumns() {
-    return columns;
+  public void setBots(List<SnakeProperty> properties) {
+    this.botProperties = List.copyOf(properties);
   }
 
   public void setColumns(int columns) {
     this.columns = columns;
   }
 
-  public int getRows() {
-    return rows;
-  }
-
   public void setRows(int rows) {
     this.rows = rows;
   }
 
-  public int getSquareSize() {
-    return squareSize;
-  }
-
-  public void setSquareSize(int squareSize) {
-    this.squareSize = squareSize;
-  }
-
-  public void setBots(List<SnakeProperty> properties) {
-    this.botProperties = List.copyOf(properties);
+  public void addBarriers(List<Barrier> barriers) {
+    this.barriers = List.copyOf(barriers);
   }
 
   public GraphicsContext getGc() {

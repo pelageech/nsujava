@@ -19,6 +19,7 @@ public class Field {
   private final List<Snake> snakes = new ArrayList<>();
   private final FoodController controller;
   private Food food;
+  private List<Barrier> barriers = new ArrayList<>();
 
   public Field(int columns, int rows, int squareSize, Scene scene) {
     this.columns = columns;
@@ -40,6 +41,9 @@ public class Field {
         }
         gc.fillRect(i * squareSize, j * squareSize, squareSize, squareSize);
       }
+    }
+    for (var b : barriers) {
+      b.drawBarrier(gc, squareSize);
     }
   }
 
@@ -81,5 +85,9 @@ public class Field {
 
   public Scene getScene() {
     return scene;
+  }
+
+  public void setBarriers(List<Barrier> barriers) {
+    this.barriers = barriers;
   }
 }

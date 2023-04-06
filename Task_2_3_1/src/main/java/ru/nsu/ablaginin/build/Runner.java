@@ -19,7 +19,7 @@ public class Runner {
 
   private void iteration() {
     field.drawField(gc);
-    field.getController().drawFood(field.getFood(), gc);
+    field.getFood().drawFood(gc, field.getSquareSize());
     for (var s : field.getSnakes()) {
       if (!s.isGameOver()) {
         s.drawSnake(gc);
