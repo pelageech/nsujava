@@ -48,7 +48,7 @@ public abstract class Snake {
       var deltaX = body.get(body.size() - 2).x - body.get(body.size() - 1).x;
       var deltaY = body.get(body.size() - 2).y - body.get(body.size() - 1).y;
       body.add(new Point(body.get(body.size() - 1).x + deltaX, body.get(body.size() - 1).y + deltaY));
-      field.setFood(field.getController().generateFood(field.getSnakes()));
+      field.setFood(field.getController().generateFood(field.getSnakes(), field.getBarriers()));
     }
   }
 
@@ -75,6 +75,12 @@ public abstract class Snake {
     }
     for (int i = 1; i < body.size(); i++) {
       if (head.getX() == body.get(i).getX() && head.getY() == body.get(i).getY()) {
+        gameOver = true;
+        break;
+      }
+    }
+    for (var b : field.getBarriers()) {
+      if (b.x == head.x && b.y == head.y) {
         gameOver = true;
         break;
       }

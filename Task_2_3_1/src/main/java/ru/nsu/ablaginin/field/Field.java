@@ -90,4 +90,8 @@ public class Field {
   public void setBarriers(List<Barrier> barriers) {
     this.barriers = barriers;
   }
+
+  public List<Barrier> getBarriers() {
+    return barriers;
+  }
 }

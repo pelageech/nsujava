@@ -8,6 +8,7 @@ import java.awt.*;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
@@ -66,11 +67,13 @@ public class FoodController {
     return new Food(foodImage, foodPoint);
   }
 
-  public Food generateFood(List<Snake> snakes) {
+  public Food generateFood(List<Snake> snakes, List<Barrier> barriers) {
     List<Point> exceptPoints = new ArrayList<>();
     for (var s : snakes) {
       exceptPoints.addAll(s.getBody());
     }
+
+    exceptPoints.addAll(barriers);
     return this.generateFood(exceptPoints.toArray(new Point[0]));
   }
 

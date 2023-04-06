@@ -40,7 +40,8 @@ public class LevelBuilder {
     Scene scene = new Scene(root);
 
     Field field = new Field(columns, rows, squareSize, scene);
-    field.setFood(field.getController().generateFood(field.getSnakes()));
+
+    field.setFood(field.getController().generateFood(field.getSnakes(), field.getBarriers()));
     field.setBarriers(barriers);
 
     Canvas canvas = new Canvas(field.getWidth(), field.getHeight());
