@@ -1,53 +1,66 @@
 package ru.nsu.ablaginin;
 
+import lombok.Cleanup;
+import ru.nsu.ablaginin.controller.Controller;
+import ru.nsu.ablaginin.model.BotSnake;
+import ru.nsu.ablaginin.model.Field;
+import ru.nsu.ablaginin.model.HumanSnake;
+import ru.nsu.ablaginin.model.bricks.Aim;
+import ru.nsu.ablaginin.model.bricks.Direction;
 import javafx.application.Application;
-import javafx.scene.control.Button;
-import javafx.scene.robot.Robot;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import ru.nsu.ablaginin.build.LevelBuilder;
-import ru.nsu.ablaginin.build.Runner;
-import ru.nsu.ablaginin.build.SnakeProperty;
-import ru.nsu.ablaginin.field.Barrier;
-import ru.nsu.ablaginin.snake.Direction;
 
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Main extends Application {
-  LevelBuilder builder;
-  Runner runner;
+  public static final int WIDTH = 675;
+  public static final int HEIGHT = 540;
+
+  private Controller controller;
+  public static void main(String[] args) {
+    launch(args);
+  }
 
   @Override
-  public void start(Stage primaryStage) {
-    builder = new LevelBuilder(
-        35, 35, 20,
-        new SnakeProperty(new Point(5, 5), 1, Direction.RIGHT)
-    );
-    List<SnakeProperty> bots = new ArrayList<>();
-    bots.add(new SnakeProperty(new Point(12, 12), 1, Direction.DOWN));
-    bots.add(new SnakeProperty(new Point(20, 20), 1, Direction.DOWN));
-    builder.setBots(bots);
-    builder.addBarriers(Arrays.asList(new Barrier(2, 3), new Barrier(2,4), new Barrier(8, 8)));
+  public void start(Stage primaryStage) throws Exception {
+    Group root = new Group();
+    Canvas canvas = new Canvas(WIDTH, HEIGHT);
+    root.getChildren().add(canvas);
+    Scene scene = new Scene(root);
 
-    var field = builder.build();
+    Field field = new Field(WIDTH, HEIGHT, 45);
 
+    HumanSnake humanSnake = new HumanSnake(5, 5, 1, Direction.DOWN, new Aim(10));
+    humanSnake.configureChangingDirection(scene);
+
+    List<BotSnake> botSnakes = new ArrayList<>();
+    botSnakes.add(new BotSnake(10, 10, 1, Direction.LEFT, new Aim(5)));
+
+
+    var gc = canvas.getGraphicsContext2D();
+    List<Image> images = new ArrayList<>();
+
+    for (int i = 1; i < 6; i++) {
+      @Cleanup var is = getClass().getClassLoader().getResourceAsStream("img/food" + i + ".png");
+      if (is != null) {
+        images.add(new Image(is));
+      }
+    }
+    controller = new Controller(gc, field, humanSnake, botSnakes, 150, images);
+    controller.load();
     primaryStage.setTitle("Snake");
+    primaryStage.setScene(scene);
     primaryStage.setResizable(false);
-    primaryStage.setScene(field.getScene());
     primaryStage.show();
-
-    runner = new Runner(field, builder.getGc());
-    runner.run(100);
   }
 
   @Override
   public void stop() throws Exception {
-    runner.stop();
-  }
-
-  public static void main(String[] args) {
-    launch(args);
+    controller.stop();
   }
 }

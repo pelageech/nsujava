@@ -47,6 +47,9 @@ dependencies {
     implementation('com.github.almasb:fxgl:17') {
         exclude(group: 'org.openjfx')
     }
+    implementation 'org.projectlombok:lombok:1.18.26'
+    compileOnly 'org.projectlombok:lombok:1.18.26'
+    annotationProcessor 'org.projectlombok:lombok:1.18.26'
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")

@@ -11,6 +11,7 @@ module ru.nsu.ablaginin {
   requires eu.hansolo.tilesfx;
   requires com.almasb.fxgl.all;
   requires java.desktop;
+  requires lombok;
 
   opens ru.nsu.ablaginin to javafx.fxml;
   exports ru.nsu.ablaginin;
