@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'jacoco'
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.10'
     id 'org.beryx.jlink' version '2.24.1'
@@ -15,9 +16,6 @@ repositories {
 ext {
     junitVersion = '5.8.2'
 }
-
-sourceCompatibility = '17'
-targetCompatibility = '17'
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
@@ -41,7 +39,7 @@ dependencies {
     implementation('net.synedra:validatorfx:0.4.0')
     implementation('org.kordamp.ikonli:ikonli-javafx:12.3.0')
     implementation('org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0')
-    implementation('eu.hansolo:tilesfx:11.48') {
+    implementation('eu.hansolo:tilesfx:17.1.17') {
         exclude(group: 'org.openjfx')
     }
     implementation('com.github.almasb:fxgl:17') {
@@ -69,4 +67,15 @@ jlink {
 
 jlinkZip {
     group = 'distribution'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
 }
