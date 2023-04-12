@@ -1,4 +1,4 @@
-package ru.nsu.ablaginin.model;
+package ru.nsu.ablaginin.model.ingame;
 
 import javafx.scene.image.Image;
 import lombok.Getter;

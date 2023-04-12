@@ -1,7 +1,7 @@
-package ru.nsu.ablaginin.model;
+package ru.nsu.ablaginin.model.ingame;
 
-import ru.nsu.ablaginin.model.bricks.Aim;
-import ru.nsu.ablaginin.model.bricks.Direction;
+import ru.nsu.ablaginin.model.ingame.bricks.Aim;
+import ru.nsu.ablaginin.model.ingame.bricks.Direction;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -99,18 +99,10 @@ public class BotSnake extends Snake {
   private Point nextPoint(Direction direction, Point current) {
     Point next = (Point) current.clone();
     switch (direction) {
-      case UP -> {
-        next.y--;
-      }
-      case RIGHT -> {
-        next.x++;
-      }
-      case DOWN -> {
-        next.y++;
-      }
-      case LEFT -> {
-        next.x--;
-      }
+      case UP -> next.y--;
+      case RIGHT -> next.x++;
+      case DOWN -> next.y++;
+      case LEFT -> next.x--;
     }
     return next;
   }

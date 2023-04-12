@@ -1,10 +1,11 @@
-package ru.nsu.ablaginin.view;
+package ru.nsu.ablaginin.view.ingame;
 
-import ru.nsu.ablaginin.model.Field;
+import ru.nsu.ablaginin.model.ingame.Field;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import lombok.AllArgsConstructor;
 import lombok.Setter;
+import ru.nsu.ablaginin.view.Drawable;
 
 @AllArgsConstructor
 public class DrawField implements Drawable {

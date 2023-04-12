@@ -1,4 +1,4 @@
-package ru.nsu.ablaginin.model.bricks;
+package ru.nsu.ablaginin.model.ingame.bricks;
 
 public record Aim(int foodCollect) {
   public Aim {

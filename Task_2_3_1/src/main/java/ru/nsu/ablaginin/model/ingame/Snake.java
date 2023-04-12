@@ -1,7 +1,7 @@
-package ru.nsu.ablaginin.model;
+package ru.nsu.ablaginin.model.ingame;
 
-import ru.nsu.ablaginin.model.bricks.Aim;
-import ru.nsu.ablaginin.model.bricks.Direction;
+import ru.nsu.ablaginin.model.ingame.bricks.Aim;
+import ru.nsu.ablaginin.model.ingame.bricks.Direction;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -44,18 +44,10 @@ public class Snake {
 
     if (body.size() == 1) {
       switch (direction) {
-        case UP -> {
-          deltaY = 1;
-        }
-        case RIGHT -> {
-          deltaX = -1;
-        }
-        case DOWN -> {
-          deltaY = -1;
-        }
-        case LEFT -> {
-          deltaX = 1;
-        }
+        case UP -> deltaY = 1;
+        case RIGHT -> deltaX = -1;
+        case DOWN -> deltaY = -1;
+        case LEFT -> deltaX = 1;
       }
     } else {
       deltaX = body.get(body.size() - 2).x - body.get(body.size() - 1).x;

@@ -1,6 +1,6 @@
-package ru.nsu.ablaginin.model;
+package ru.nsu.ablaginin.model.ingame;
 
-import ru.nsu.ablaginin.model.bricks.Barrier;
+import ru.nsu.ablaginin.model.ingame.bricks.Barrier;
 import lombok.Getter;
 import lombok.Setter;
 

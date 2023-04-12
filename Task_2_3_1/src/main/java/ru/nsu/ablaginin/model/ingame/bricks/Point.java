@@ -1,4 +1,4 @@
-package ru.nsu.ablaginin.model.bricks;
+package ru.nsu.ablaginin.model.ingame.bricks;
 
 import lombok.Data;
 

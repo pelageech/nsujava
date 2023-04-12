@@ -1,7 +1,7 @@
-package ru.nsu.ablaginin.model;
+package ru.nsu.ablaginin.model.ingame;
 
-import ru.nsu.ablaginin.model.bricks.Aim;
-import ru.nsu.ablaginin.model.bricks.Direction;
+import ru.nsu.ablaginin.model.ingame.bricks.Aim;
+import ru.nsu.ablaginin.model.ingame.bricks.Direction;
 import javafx.scene.Scene;
 
 public class HumanSnake extends Snake {
