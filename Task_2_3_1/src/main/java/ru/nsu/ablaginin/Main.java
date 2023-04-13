@@ -64,11 +64,14 @@ public final class Main extends Application {
     }
 
     MenuBuilder menuBuilder = new MenuBuilder(levelButtons);
-
     var exitButton = menuBuilder.buildNewMenu(gc);
 
     LevelBuilder levelBuilder = new LevelBuilder(exitButton, images);
-    // prepare menu
+
+    @Cleanup var is1 = getClass().getClassLoader().getResourceAsStream("levels/level1.json");
+    if (is1 != null) {
+      levelButtons.add(levelBuilder.buildNewLevel(gc, is1, scene));
+    }
     levelButtons.add(levelBuilder.buildNewLevel(gc, new LevelBuilder.Config(
         "Level 1",
         45,
@@ -82,6 +85,11 @@ public final class Main extends Application {
         new LevelBuilder.InitSnake[]{},
         new Barrier[]{}
     ), scene));
+
+    @Cleanup var is2 = getClass().getClassLoader().getResourceAsStream("levels/level2.json");
+    if (is2 != null) {
+      levelButtons.add(levelBuilder.buildNewLevel(gc, is2, scene));
+    }
 
     // init game
     root.getChildren().addAll(levelButtons);

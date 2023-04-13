@@ -1,5 +1,6 @@
 package ru.nsu.ablaginin.model.ingame.builder;
 
+import com.google.gson.Gson;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -17,7 +18,9 @@ import ru.nsu.ablaginin.model.menu.bricks.Button;
 import ru.nsu.ablaginin.model.menu.builder.MenuBuilder;
 
 import java.awt.*;
+import java.io.BufferedReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -78,8 +81,13 @@ public class LevelBuilder {
     return button;
   }
 
-  //public Button buildNewLevelJSON(InputStream is) {
-    // ...
-    // return buildNewLevel(...)
-  //}
+  public Button buildNewLevel(GraphicsContext gc, InputStream is, Scene scene) {
+    Gson gson = new Gson();
+    var config = gson.fromJson(new BufferedReader(new InputStreamReader(is)), Config.class);
+    if (config == null) {
+      throw new IllegalArgumentException("json wasn't parsed");
+    }
+    System.out.println(config);
+    return buildNewLevel(gc, config, scene);
+  }
 }

@@ -14,5 +14,7 @@ module ru.nsu.ablaginin {
   requires lombok;
 
   opens ru.nsu.ablaginin to javafx.fxml;
+  requires com.google.gson;
+  opens ru.nsu.ablaginin.model.ingame.builder to com.google.gson;
   exports ru.nsu.ablaginin;
 }
