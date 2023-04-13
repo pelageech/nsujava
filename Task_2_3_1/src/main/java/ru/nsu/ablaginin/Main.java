@@ -26,6 +26,7 @@ import ru.nsu.ablaginin.model.menu.bricks.Button;
 import ru.nsu.ablaginin.model.menu.builder.MenuBuilder;
 
 import java.awt.*;
+import java.nio.file.NoSuchFileException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +34,7 @@ import java.util.List;
  * Main starts an application. There can only be one working controller.
  */
 public final class Main extends Application {
-  public static final int WIDTH = 675;
+  public static final int WIDTH = 900;
   public static final int HEIGHT = 540;
   @Getter @Setter
   private Controller currentController;
@@ -63,32 +64,30 @@ public final class Main extends Application {
       }
     }
 
+    // menu and button
     MenuBuilder menuBuilder = new MenuBuilder(levelButtons);
     var exitButton = menuBuilder.buildNewMenu(gc);
 
-    LevelBuilder levelBuilder = new LevelBuilder(exitButton, images);
-
-    @Cleanup var is1 = getClass().getClassLoader().getResourceAsStream("levels/level1.json");
-    if (is1 != null) {
-      levelButtons.add(levelBuilder.buildNewLevel(gc, is1, scene));
+    // build levels
+    @Cleanup var winIs = getClass().getClassLoader().getResourceAsStream("img/win.jpg");
+    if (winIs == null) {
+      throw new NoSuchFileException("no win image");
     }
-    levelButtons.add(levelBuilder.buildNewLevel(gc, new LevelBuilder.Config(
-        "Level 1",
-        45,
-        1,
-        new LevelBuilder.InitSnake(
-            new Point(5, 5),
-            1,
-            "Up",
-            5
-        ),
-        new LevelBuilder.InitSnake[]{},
-        new Barrier[]{}
-    ), scene));
+    Image winImage = new Image(winIs);
 
-    @Cleanup var is2 = getClass().getClassLoader().getResourceAsStream("levels/level2.json");
-    if (is2 != null) {
-      levelButtons.add(levelBuilder.buildNewLevel(gc, is2, scene));
+    @Cleanup var loseIs = getClass().getClassLoader().getResourceAsStream("img/dead.jpeg");
+    if (loseIs == null) {
+      throw new NoSuchFileException("no lose image");
+    }
+    Image loseImage = new Image(loseIs);
+
+    LevelBuilder levelBuilder = new LevelBuilder(exitButton, images, winImage, loseImage);
+
+    for (int i = 0; i < 10; i++) {
+      @Cleanup var is = getClass().getClassLoader().getResourceAsStream("levels/level" + i + ".json");
+      if (is != null) {
+        levelButtons.add(levelBuilder.buildNewLevel(gc, is, scene));
+      }
     }
 
     // init game

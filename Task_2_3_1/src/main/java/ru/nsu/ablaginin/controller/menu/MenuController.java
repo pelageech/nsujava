@@ -21,20 +21,6 @@ public class MenuController implements Controller {
   @Override
   public void load() {
     drawMenu.draw(gc);
-
-    var exitButtonPoint = menu.getExitButton().getPoint();
-    menu.getExitButton().setLayoutX(exitButtonPoint.x);
-    menu.getExitButton().setLayoutY(exitButtonPoint.y);
-
-    var levelButtons = menu.getLevelButtons();
-    var width = 63;
-    var height = 20;
-
-    for (int i = 0; i < levelButtons.size(); i++) {
-      levelButtons.get(i).setMinSize(width, height);
-      levelButtons.get(i).setLayoutX(i*(width + 5));
-      levelButtons.get(i).setLayoutY(400);
-    }
   }
 
   @Override

@@ -1,0 +1,117 @@
+{
+  "name" : "CHAOS",
+  "squareSize": 12,
+  "number" : 1,
+  "human" : {
+    "spawn" : {
+      "x" : 15.0,
+      "y" : 15.0
+    },
+    "velocity" : 1,
+    "direction" : "UP",
+    "targetFood" : 12
+  },
+  "bots" : [
+    {
+      "spawn" : {
+        "x" : 5.0,
+        "y" : 5.0
+      },
+      "velocity" : 1,
+      "direction" : "UP",
+      "targetFood" : 15
+    },
+    {
+      "spawn" : {
+        "x" : 25.0,
+        "y" : 25.0
+      },
+      "velocity" : 1,
+      "direction" : "UP",
+      "targetFood" : 15
+    },
+    {
+      "spawn" : {
+        "x" : 30.0,
+        "y" : 30.0
+      },
+      "velocity" : 1,
+      "direction" : "UP",
+      "targetFood" : 15
+    },
+    {
+      "spawn" : {
+        "x" : 25.0,
+        "y" : 15.0
+      },
+      "velocity" : 1,
+      "direction" : "UP",
+      "targetFood" : 15
+    },
+    {
+      "spawn" : {
+        "x" : 5.0,
+        "y" : 25.0
+      },
+      "velocity" : 1,
+      "direction" : "UP",
+      "targetFood" : 15
+    },
+    {
+      "spawn" : {
+        "x" : 5.0,
+        "y" : 30.0
+      },
+      "velocity" : 1,
+      "direction" : "UP",
+      "targetFood" : 15
+    },
+    {
+      "spawn" : {
+        "x" : 25.0,
+        "y" : 30.0
+      },
+      "velocity" : 1,
+      "direction" : "UP",
+      "targetFood" : 15
+    },
+    {
+      "spawn" : {
+        "x" : 15.0,
+        "y" : 25.0
+      },
+      "velocity" : 1,
+      "direction" : "UP",
+      "targetFood" : 15
+    },
+    {
+      "spawn" : {
+        "x" : 3.0,
+        "y" : 35
+      },
+      "velocity" : 1,
+      "direction" : "UP",
+      "targetFood" : 15
+    },
+    {
+      "spawn" : {
+        "x" : 20.0,
+        "y" : 14.0
+      },
+      "velocity" : 1,
+      "direction" : "UP",
+      "targetFood" : 15
+    },
+    {
+      "spawn" : {
+        "x" : 15.0,
+        "y" : 7.0
+      },
+      "velocity" : 1,
+      "direction" : "UP",
+      "targetFood" : 15
+    }
+  ],
+  "barriers" : [
+  ]
+}

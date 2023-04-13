@@ -1,0 +1,33 @@
+{
+  "name" : "Tutorial",
+  "squareSize": 45,
+  "number" : 1,
+  "human" : {
+    "spawn" : {
+      "x" : 3.0,
+      "y" : 3.0
+    },
+    "velocity" : 1,
+    "direction" : "right",
+    "targetFood" : 12
+  },
+  "bots" : [],
+  "barriers" : [
+    {
+      "x" : 2,
+      "y" : 2
+    },
+    {
+      "x": 17,
+      "y": 9
+    },
+    {
+      "x": 2,
+      "y": 9
+    },
+    {
+      "x": 17,
+      "y": 2
+    }
+  ]
+}

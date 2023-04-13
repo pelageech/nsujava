@@ -17,6 +17,7 @@ public class Snake {
   @Getter private int velocity;
   @Getter @Setter private Direction direction;
   @Getter private Aim aim;
+  @Getter private int eaten = 0;
   @Getter @Setter private boolean gameOver = false;
   @Getter @Setter private boolean won = false;
   @Getter private int initX;
@@ -72,6 +73,7 @@ public class Snake {
   public boolean eatFood(Food food) {
     if (head.x == food.getX() && head.y == food.getY()) {
       growUp();
+      eaten++;
       return true;
     }
     return false;
@@ -88,5 +90,9 @@ public class Snake {
       case LEFT -> head.x -= velocity;
       case RIGHT -> head.x += velocity;
     }
+  }
+
+  public boolean win() {
+    return aim.foodCollect() == eaten;
   }
 }

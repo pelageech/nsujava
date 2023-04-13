@@ -13,11 +13,13 @@ import ru.nsu.ablaginin.model.ingame.Snake;
 import ru.nsu.ablaginin.model.menu.bricks.Button;
 import ru.nsu.ablaginin.view.ingame.DrawField;
 import ru.nsu.ablaginin.view.ingame.DrawFood;
+import ru.nsu.ablaginin.view.ingame.DrawLose;
 import ru.nsu.ablaginin.view.ingame.DrawSnake;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import lombok.Getter;
+import ru.nsu.ablaginin.view.ingame.DrawWin;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -40,6 +42,10 @@ public class InGameController implements Controller {
   private List<Snake> snakes = new ArrayList<>();
   @Getter
   private List<DrawSnake> snakesView = new ArrayList<>();
+  @Getter
+  private DrawLose drawLose;
+  @Getter
+  private DrawWin drawWin;
   private long update;
 
   public InGameController(
@@ -48,7 +54,9 @@ public class InGameController implements Controller {
       HumanSnake humanSnake,
       List<BotSnake> botSnakes,
       long timeUpdate,
-      List<Image> images
+      List<Image> images,
+      Image winImage,
+      Image loseImage
   ) {
     this.field = field;
     this.humanSnake = humanSnake;
@@ -74,6 +82,8 @@ public class InGameController implements Controller {
         )));
 
     this.images = images;
+    drawLose = new DrawLose(loseImage, field.getWidth(), field.getHeight());
+    drawWin = new DrawWin(winImage, field.getWidth(), field.getHeight());
   }
 
   public void view() {
@@ -85,9 +95,8 @@ public class InGameController implements Controller {
   }
 
   public void load() {
-    food = Food.generate(0, field.getColumns(), 0, field.getRows(), new ArrayList<>(), images);
+    food = Food.generate(0, field.getColumns(), 0, field.getRows(), field.getBarriers(), images);
     foodView.setFood(food);
-
     timer.schedule(new TimerTask() {
       @Override
       public void run() {
@@ -106,7 +115,7 @@ public class InGameController implements Controller {
             .forEach(snake -> {
                 snake.move();
                 if (die(snake)) {
-                  return;
+                  snake.setGameOver(true);
                 }
                 if (snake.eatFood(food)) {
                   List<Point> points = new ArrayList<>(snakes.stream().flatMap(s -> s.getBody().stream()).toList());
@@ -114,9 +123,27 @@ public class InGameController implements Controller {
                   food = Food.generate(0, field.getColumns(), 0, field.getRows(), points, images);
                   foodView.setFood(food);
                 }
+                snake.setWon(snake.win());
             });
-
+        view();
+        if (humanSnake.isGameOver()) {
+          stop();
+          drawLose.draw(gc);
+          return;
+        }
         snakes = snakes.stream().filter(snake -> !snake.isGameOver()).toList();
+        if (humanSnake.isWon()) {
+          stop();
+          drawWin.draw(gc);
+          return;
+        }
+        for (var s : snakes) {
+          if (s.win()) {
+            stop();
+            drawLose.draw(gc);
+            return;
+          }
+        }
       }
     }, 0, update);
   }

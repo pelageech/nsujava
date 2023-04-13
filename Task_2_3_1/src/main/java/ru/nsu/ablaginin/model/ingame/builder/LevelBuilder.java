@@ -15,7 +15,6 @@ import ru.nsu.ablaginin.model.ingame.bricks.Aim;
 import ru.nsu.ablaginin.model.ingame.bricks.Barrier;
 import ru.nsu.ablaginin.model.ingame.bricks.Direction;
 import ru.nsu.ablaginin.model.menu.bricks.Button;
-import ru.nsu.ablaginin.model.menu.builder.MenuBuilder;
 
 import java.awt.*;
 import java.io.BufferedReader;
@@ -42,6 +41,8 @@ public class LevelBuilder {
 
   private Button exitButton;
   private List<Image> fruitImages;
+  private Image winImage;
+  private Image loseImage;
 
   public Button buildNewLevel(GraphicsContext gc, Config config, Scene scene) {
     var button = new Button(config.name(), new Point());
@@ -69,7 +70,16 @@ public class LevelBuilder {
       var field = new Field(Main.WIDTH, Main.HEIGHT, config.squareSize);
       field.setBarriers(Arrays.stream(config.barriers).toList());
 
-      var newController = new InGameController(gc, field, humanSnake, botSnakes, 150, fruitImages);
+      var newController = new InGameController(
+          gc,
+          field,
+          humanSnake,
+          botSnakes,
+          150,
+          fruitImages,
+          winImage,
+          loseImage
+      );
       MainHelper.replaceController(newController);
 
       MainHelper.clearWindow();

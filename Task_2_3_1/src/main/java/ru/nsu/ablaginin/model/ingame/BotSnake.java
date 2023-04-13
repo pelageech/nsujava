@@ -63,6 +63,18 @@ public class BotSnake extends Snake {
       }
     }
 
+    for (var p : field.getBarriers()) {
+      if (p.x == head.x - 1 && p.y == head.y) {
+        allowedDirections.remove(Direction.LEFT);
+      } else if (p.x == head.x + 1 && p.y == head.y) {
+        allowedDirections.remove(Direction.RIGHT);
+      } else if (p.x == head.x && p.y == head.y - 1) {
+        allowedDirections.remove(Direction.UP);
+      } else if (p.x == head.x && p.y == head.y + 1) {
+        allowedDirections.remove(Direction.DOWN);
+      }
+    }
+
     Point next = nextPoint(direction, head);
     List<Point> body = this.getBody();
     for (int i = 0; i < body.size(); i++) {
