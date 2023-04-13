@@ -23,4 +23,14 @@ public enum Direction {
     }
     throw new IllegalStateException();
   }
+
+  public static Direction fromString(String direction) {
+    return switch (direction.toLowerCase()) {
+      case "up" -> UP;
+      case "left" -> LEFT;
+      case "right" -> RIGHT;
+      case "down" -> DOWN;
+      default -> throw new IllegalArgumentException();
+    };
+  }
 }

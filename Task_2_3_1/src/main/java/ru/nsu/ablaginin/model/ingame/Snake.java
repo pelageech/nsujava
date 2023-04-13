@@ -19,6 +19,8 @@ public class Snake {
   @Getter private Aim aim;
   @Getter @Setter private boolean gameOver = false;
   @Getter @Setter private boolean won = false;
+  @Getter private int initX;
+  @Getter private int initY;
 
   public Snake(int initX, int initY, int velocity, Direction direction, Aim aim) {
     if (velocity <= 0) {
@@ -28,7 +30,14 @@ public class Snake {
     this.velocity = velocity;
     this.direction = direction;
     this.aim = aim;
+    this.initX = initX;
+    this.initY = initY;
 
+    toStart();
+  }
+
+  public void toStart() {
+    body.clear();
     body.add(new Point(initX, initY));
     head = body.get(0);
 
