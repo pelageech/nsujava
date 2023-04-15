@@ -97,7 +97,6 @@ public class LevelBuilder {
     if (config == null) {
       throw new IllegalArgumentException("json wasn't parsed");
     }
-    System.out.println(config);
     return buildNewLevel(gc, config, scene);
   }
 }
