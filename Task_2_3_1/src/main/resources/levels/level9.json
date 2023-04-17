@@ -2,7 +2,7 @@
   "name" : "CHAOS",
   "squareSize": 12,
   "number" : 1,
-  "musicPath": "rap.mp3",
+  "musicPath": "CHAOS.mp3",
   "human" : {
     "spawn" : {
       "x" : 15.0,
