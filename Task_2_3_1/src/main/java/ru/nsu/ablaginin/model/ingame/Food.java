@@ -7,7 +7,6 @@ import java.awt.Point;
 import java.util.List;
 import java.util.Random;
 
-@AllArgsConstructor
 public record Food(int x, int y, Image image) {
   public static Food generate(int fromX, int toX, int fromY, int toY, List<? extends Point> except, List<Image> images) {
     Random random = new Random();

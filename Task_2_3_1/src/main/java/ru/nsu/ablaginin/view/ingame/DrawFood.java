@@ -13,9 +13,9 @@ public class DrawFood implements Drawable {
 
   @Override
   public void draw(GraphicsContext gc) {
-    gc.drawImage(food.getImage(),
-        food.getX() * squareSize,
-        food.getY() * squareSize,
+    gc.drawImage(food.image(),
+        food.x() * squareSize,
+        food.y() * squareSize,
         squareSize,
         squareSize
     );
