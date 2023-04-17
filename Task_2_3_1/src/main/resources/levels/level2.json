@@ -2,6 +2,7 @@
   "name" : "Level 2",
   "squareSize": 27,
   "number" : 1,
+  "musicPath": "level2.mp3",
   "human" : {
     "spawn" : {
       "x" : 2,

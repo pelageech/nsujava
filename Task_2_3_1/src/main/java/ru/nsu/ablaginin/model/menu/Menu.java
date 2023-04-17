@@ -1,13 +1,8 @@
 package ru.nsu.ablaginin.model.menu;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import ru.nsu.ablaginin.model.menu.bricks.Button;
-
-import java.awt.*;
-import java.beans.ConstructorProperties;
-import java.util.ArrayList;
+import java.awt.Point;
 import java.util.List;
 
 public class Menu {

@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.media.Media;
 import lombok.AllArgsConstructor;
 import ru.nsu.ablaginin.Main;
 import ru.nsu.ablaginin.controller.ingame.InGameController;
@@ -15,8 +16,7 @@ import ru.nsu.ablaginin.model.ingame.bricks.Aim;
 import ru.nsu.ablaginin.model.ingame.bricks.Barrier;
 import ru.nsu.ablaginin.model.ingame.bricks.Direction;
 import ru.nsu.ablaginin.model.menu.bricks.Button;
-
-import java.awt.*;
+import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -33,11 +33,12 @@ public class LevelBuilder {
       String name,
       int squareSize,
       int number,
+      String musicPath,
       InitSnake human,
       InitSnake[] bots,
       Barrier[] barriers
   ) {
-  };
+  }
 
   private Button exitButton;
   private List<Image> fruitImages;
@@ -57,7 +58,7 @@ public class LevelBuilder {
       humanSnake.configureChangingDirection(scene);
 
       List<BotSnake> botSnakes = new ArrayList<>();
-      for (var b : config.bots) {
+      for (var b : config.bots()) {
         botSnakes.add(new BotSnake(
             b.spawn().x,
             b.spawn().y,
@@ -68,7 +69,13 @@ public class LevelBuilder {
       }
 
       var field = new Field(Main.WIDTH, Main.HEIGHT, config.squareSize);
-      field.setBarriers(Arrays.stream(config.barriers).toList());
+      field.setBarriers(Arrays.stream(config.barriers()).toList());
+
+      var url = getClass().getClassLoader().getResource("music/" + config.musicPath());
+      if (url == null) {
+        throw new IllegalArgumentException("menu musicPath not found");
+      }
+      Media media = new Media(url.toExternalForm());
 
       var newController = new InGameController(
           gc,
@@ -78,7 +85,8 @@ public class LevelBuilder {
           150,
           fruitImages,
           winImage,
-          loseImage
+          loseImage,
+          media
       );
       MainHelper.replaceController(newController);
 

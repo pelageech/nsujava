@@ -1,18 +1,17 @@
 package ru.nsu.ablaginin.model.ingame;
 
-import ru.nsu.ablaginin.model.ingame.bricks.Barrier;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.util.ArrayList;
 import java.util.List;
+import ru.nsu.ablaginin.model.ingame.bricks.Barrier;
 
 public class Field {
-  @Getter private int width;
-  @Getter private int height;
-  @Getter private int squareSize;
-  @Getter private int columns;
-  @Getter private int rows;
+  @Getter private final int width;
+  @Getter private final int height;
+  @Getter private final int squareSize;
+  @Getter private final int columns;
+  @Getter private final int rows;
   @Getter @Setter private List<Barrier> barriers = new ArrayList<>();
 
   public Field(int width, int height, int squareSize) {

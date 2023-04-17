@@ -2,6 +2,7 @@
   "name" : "Level 4",
   "squareSize": 90,
   "number" : 1,
+  "musicPath": "rap.mp3",
   "human" : {
     "spawn" : {
       "x" : 0.0,

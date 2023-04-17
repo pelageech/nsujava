@@ -1,27 +1,26 @@
 package ru.nsu.ablaginin.model.ingame;
 
-import ru.nsu.ablaginin.model.ingame.bricks.Aim;
-import ru.nsu.ablaginin.model.ingame.bricks.Direction;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.awt.*;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
+import ru.nsu.ablaginin.model.ingame.bricks.Aim;
+import ru.nsu.ablaginin.model.ingame.bricks.Direction;
 
 public class Snake {
   public static final int INIT_BODY_LENGTH = 4;
 
-  @Getter private List<Point> body = new ArrayList<>();
+  @Getter private final List<Point> body = new ArrayList<>();
   @Getter private Point head;
-  @Getter private int velocity;
+  @Getter private final int velocity;
   @Getter @Setter private Direction direction;
-  @Getter private Aim aim;
+  @Getter private final Aim aim;
   @Getter private int eaten = 0;
   @Getter @Setter private boolean gameOver = false;
   @Getter @Setter private boolean won = false;
-  @Getter private int initX;
-  @Getter private int initY;
+  @Getter private final int initX;
+  @Getter private final int initY;
 
   public Snake(int initX, int initY, int velocity, Direction direction, Aim aim) {
     if (velocity <= 0) {
@@ -71,7 +70,7 @@ public class Snake {
   }
 
   public boolean eatFood(Food food) {
-    if (head.x == food.getX() && head.y == food.getY()) {
+    if (head.x == food.x() && head.y == food.y()) {
       growUp();
       eaten++;
       return true;

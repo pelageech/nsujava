@@ -1,23 +1,14 @@
 package ru.nsu.ablaginin.model.ingame;
 
 import javafx.scene.image.Image;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-
-import java.awt.*;
+import java.awt.Point;
 import java.util.List;
 import java.util.Random;
 
-public class Food {
-  @Getter private int x;
-  @Getter private int y;
-  @Getter private Image image;
-
-  public Food(int x, int y, Image image) {
-    this.x = x;
-    this.y = y;
-    this.image = image;
-  }
-
+@AllArgsConstructor
+public record Food(int x, int y, Image image) {
   public static Food generate(int fromX, int toX, int fromY, int toY, List<? extends Point> except, List<Image> images) {
     Random random = new Random();
 

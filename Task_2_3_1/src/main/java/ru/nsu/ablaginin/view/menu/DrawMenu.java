@@ -6,7 +6,6 @@ import javafx.scene.text.Font;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import ru.nsu.ablaginin.Main;
 import ru.nsu.ablaginin.model.menu.Menu;
 import ru.nsu.ablaginin.view.Drawable;
 

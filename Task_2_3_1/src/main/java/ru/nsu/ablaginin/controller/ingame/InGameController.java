@@ -1,52 +1,43 @@
 package ru.nsu.ablaginin.controller.ingame;
 
-import javafx.event.Event;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
-import ru.nsu.ablaginin.Main;
-import ru.nsu.ablaginin.controller.Controller;
-import ru.nsu.ablaginin.model.ingame.BotSnake;
-import ru.nsu.ablaginin.model.ingame.Field;
-import ru.nsu.ablaginin.model.ingame.Food;
-import ru.nsu.ablaginin.model.ingame.HumanSnake;
-import ru.nsu.ablaginin.model.ingame.Snake;
-import ru.nsu.ablaginin.model.menu.bricks.Button;
-import ru.nsu.ablaginin.view.ingame.DrawField;
-import ru.nsu.ablaginin.view.ingame.DrawFood;
-import ru.nsu.ablaginin.view.ingame.DrawLose;
-import ru.nsu.ablaginin.view.ingame.DrawSnake;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import lombok.Getter;
-import ru.nsu.ablaginin.view.ingame.DrawWin;
-
-import java.awt.*;
+import ru.nsu.ablaginin.controller.Controller;
+import ru.nsu.ablaginin.model.ingame.*;
+import ru.nsu.ablaginin.view.ingame.*;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class InGameController implements Controller {
-  private GraphicsContext gc;
-  private Timer timer = new Timer("controller");
-  private Field field;
+  private final GraphicsContext gc;
+  private MediaPlayer player;
+  private Media lose;
+  private Media win;
+  private final Timer timer = new Timer("controller");
+  private final Field field;
   @Getter
-  private DrawField fieldView;
+  private final DrawField fieldView;
   private Food food;
   @Getter
-  private DrawFood foodView;
-  private List<Image> images;
-  private HumanSnake humanSnake;
-  private List<BotSnake> botSnakes;
+  private final DrawFood foodView;
+  private final List<Image> images;
+  private final HumanSnake humanSnake;
+  private final List<BotSnake> botSnakes;
   private List<Snake> snakes = new ArrayList<>();
   @Getter
-  private List<DrawSnake> snakesView = new ArrayList<>();
+  private final List<DrawSnake> snakesView = new ArrayList<>();
   @Getter
-  private DrawLose drawLose;
+  private final DrawLose drawLose;
   @Getter
-  private DrawWin drawWin;
-  private long update;
+  private final DrawWin drawWin;
+  private final long update;
 
   public InGameController(
       GraphicsContext gc,
@@ -56,8 +47,12 @@ public class InGameController implements Controller {
       long timeUpdate,
       List<Image> images,
       Image winImage,
-      Image loseImage
+      Image loseImage,
+      Media media
   ) {
+    if (media != null) {
+      player = new MediaPlayer(media);
+    }
     this.field = field;
     this.humanSnake = humanSnake;
     this.botSnakes = botSnakes;
@@ -82,7 +77,17 @@ public class InGameController implements Controller {
         )));
 
     this.images = images;
+
+    var losePath = getClass().getClassLoader().getResource("music/lose.mp3");
+    if (losePath != null) {
+      lose = new Media(losePath.toExternalForm());
+    }
     drawLose = new DrawLose(loseImage, field.getWidth(), field.getHeight());
+
+    var winPath = getClass().getClassLoader().getResource("music/win.mp3");
+    if (winPath != null) {
+      win = new Media(winPath.toExternalForm());
+    }
     drawWin = new DrawWin(winImage, field.getWidth(), field.getHeight());
   }
 
@@ -95,13 +100,13 @@ public class InGameController implements Controller {
   }
 
   public void load() {
+    player.play();
     food = Food.generate(0, field.getColumns(), 0, field.getRows(), field.getBarriers(), images);
     foodView.setFood(food);
     timer.schedule(new TimerTask() {
       @Override
       public void run() {
         view();
-
         if (snakes.size() == 0) {
           timer.cancel();
           return;
@@ -127,20 +132,17 @@ public class InGameController implements Controller {
             });
         view();
         if (humanSnake.isGameOver()) {
-          stop();
-          drawLose.draw(gc);
+          lose();
           return;
         }
         snakes = snakes.stream().filter(snake -> !snake.isGameOver()).toList();
         if (humanSnake.isWon()) {
-          stop();
-          drawWin.draw(gc);
+          win();
           return;
         }
-        for (var s : snakes) {
+        for (var s : botSnakes) {
           if (s.win()) {
-            stop();
-            drawLose.draw(gc);
+            lose();
             return;
           }
         }
@@ -149,7 +151,30 @@ public class InGameController implements Controller {
   }
 
   public void stop() {
+    player.stop();
     timer.cancel();
+  }
+
+  private void turnOnMusic(Media media) {
+    player.stop();
+    player = new MediaPlayer(media);
+    player.play();
+  }
+
+  private void win() {
+    stop();
+    drawWin.draw(gc);
+    if (win != null) {
+      turnOnMusic(win);
+    }
+  }
+
+  private void lose() {
+    stop();
+    drawLose.draw(gc);
+    if (lose != null) {
+      turnOnMusic(lose);
+    }
   }
 
   private boolean die(Snake snake) {

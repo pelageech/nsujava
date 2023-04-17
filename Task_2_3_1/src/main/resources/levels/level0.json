@@ -2,6 +2,7 @@
   "name" : "Tutorial",
   "squareSize": 45,
   "number" : 1,
+  "musicPath": "tutorial.mp3",
   "human" : {
     "spawn" : {
       "x" : 3.0,

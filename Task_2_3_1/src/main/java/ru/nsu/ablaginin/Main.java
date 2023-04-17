@@ -1,34 +1,24 @@
 package ru.nsu.ablaginin;
 
-import javafx.scene.canvas.GraphicsContext;
-import lombok.Cleanup;
-import lombok.Getter;
-import lombok.Setter;
-import ru.nsu.ablaginin.controller.Controller;
-import ru.nsu.ablaginin.controller.ingame.InGameController;
-import ru.nsu.ablaginin.controller.menu.MenuController;
-import ru.nsu.ablaginin.helper.MainHelper;
-import ru.nsu.ablaginin.model.ingame.BotSnake;
-import ru.nsu.ablaginin.model.ingame.Field;
-import ru.nsu.ablaginin.model.ingame.HumanSnake;
-import ru.nsu.ablaginin.model.ingame.bricks.Aim;
-import ru.nsu.ablaginin.model.ingame.bricks.Barrier;
-import ru.nsu.ablaginin.model.ingame.bricks.Direction;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import lombok.Cleanup;
+import lombok.Getter;
+import lombok.Setter;
+import java.nio.file.NoSuchFileException;
+import java.util.ArrayList;
+import java.util.List;
+import ru.nsu.ablaginin.controller.Controller;
+import ru.nsu.ablaginin.controller.menu.MenuController;
+import ru.nsu.ablaginin.helper.MainHelper;
 import ru.nsu.ablaginin.model.ingame.builder.LevelBuilder;
 import ru.nsu.ablaginin.model.menu.Menu;
 import ru.nsu.ablaginin.model.menu.bricks.Button;
 import ru.nsu.ablaginin.model.menu.builder.MenuBuilder;
-
-import java.awt.*;
-import java.nio.file.NoSuchFileException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Main starts an application. There can only be one working controller.
@@ -103,7 +93,7 @@ public final class Main extends Application {
   }
 
   @Override
-  public void stop() throws Exception {
+  public void stop() {
     currentController.stop();
   }
 }

@@ -2,8 +2,7 @@ package ru.nsu.ablaginin.model.ingame;
 
 import ru.nsu.ablaginin.model.ingame.bricks.Aim;
 import ru.nsu.ablaginin.model.ingame.bricks.Direction;
-
-import java.awt.*;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -27,14 +26,14 @@ public class BotSnake extends Snake {
     Direction priorityX = null;
     Direction priorityY = null;
 
-    if (food.getX() - head.x > 0) {
+    if (food.x() - head.x > 0) {
       priorityX = Direction.RIGHT;
-    } else if (food.getX() - head.x < 0) {
+    } else if (food.x() - head.x < 0) {
       priorityX = Direction.LEFT;
     }
-    if (food.getY() - head.y > 0) {
+    if (food.y() - head.y > 0) {
       priorityY = Direction.DOWN;
-    } else if (food.getY() - head.y < 0) {
+    } else if (food.y() - head.y < 0) {
       priorityY = Direction.UP;
     }
 

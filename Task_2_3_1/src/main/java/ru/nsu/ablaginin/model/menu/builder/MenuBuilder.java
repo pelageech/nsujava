@@ -2,14 +2,12 @@ package ru.nsu.ablaginin.model.menu.builder;
 
 import javafx.scene.canvas.GraphicsContext;
 import lombok.AllArgsConstructor;
-import ru.nsu.ablaginin.Main;
+import java.awt.Point;
+import java.util.List;
 import ru.nsu.ablaginin.controller.menu.MenuController;
 import ru.nsu.ablaginin.helper.MainHelper;
 import ru.nsu.ablaginin.model.menu.Menu;
 import ru.nsu.ablaginin.model.menu.bricks.Button;
-
-import java.awt.*;
-import java.util.List;
 
 import static ru.nsu.ablaginin.Main.HEIGHT;
 import static ru.nsu.ablaginin.Main.WIDTH;
@@ -26,6 +24,7 @@ public class MenuBuilder {
       for (var b : levelButtons) {
         MainHelper.putNode(b);
       }
+
       var newController = new MenuController(gc, new Menu(WIDTH, HEIGHT, levelButtons));
       MainHelper.replaceController(newController);
       newController.load();
