@@ -5,6 +5,8 @@ module ru.nsu.ablaginin {
   requires lombok;
   requires javafx.media;
   requires com.google.gson;
-  opens ru.nsu.ablaginin.model.ingame.builder to com.google.gson;
+  requires org.junit.jupiter;
+  requires org.junit.jupiter.engine;
+  requires org.junit.jupiter.api;
   exports ru.nsu.ablaginin;
 }
