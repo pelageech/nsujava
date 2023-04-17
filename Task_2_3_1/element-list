@@ -1,0 +1,15 @@
+module:ru.nsu.ablaginin
+ru.nsu.ablaginin
+ru.nsu.ablaginin.controller
+ru.nsu.ablaginin.controller.ingame
+ru.nsu.ablaginin.controller.menu
+ru.nsu.ablaginin.helper
+ru.nsu.ablaginin.model.ingame
+ru.nsu.ablaginin.model.ingame.bricks
+ru.nsu.ablaginin.model.ingame.builder
+ru.nsu.ablaginin.model.menu
+ru.nsu.ablaginin.model.menu.bricks
+ru.nsu.ablaginin.model.menu.builder
+ru.nsu.ablaginin.view
+ru.nsu.ablaginin.view.ingame
+ru.nsu.ablaginin.view.menu
