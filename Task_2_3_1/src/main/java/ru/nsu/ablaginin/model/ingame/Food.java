@@ -1,8 +1,6 @@
 package ru.nsu.ablaginin.model.ingame;
 
 import javafx.scene.image.Image;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 import java.awt.Point;
 import java.util.List;
 import java.util.Random;
