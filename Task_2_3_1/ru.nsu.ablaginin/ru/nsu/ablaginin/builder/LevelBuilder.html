@@ -78,6 +78,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">LevelBuilder</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Builds levels. Returns a button.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -127,12 +128,16 @@ loadScripts(document, 'script');</script>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#buildNewLevel(javafx.scene.canvas.GraphicsContext,java.io.InputStream,javafx.scene.Scene)" class="member-name-link">buildNewLevel</a><wbr>(javafx.scene.canvas.GraphicsContext&nbsp;gc,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/InputStream.html" title="class or interface in java.io" class="external-link">InputStream</a>&nbsp;is,
  javafx.scene.Scene&nbsp;scene)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Parses json to Config and builds a level.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../model/menu/bricks/Button.html" title="class in ru.nsu.ablaginin.model.menu.bricks">Button</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#buildNewLevel(javafx.scene.canvas.GraphicsContext,ru.nsu.ablaginin.builder.LevelBuilder.Config,javafx.scene.Scene)" class="member-name-link">buildNewLevel</a><wbr>(javafx.scene.canvas.GraphicsContext&nbsp;gc,
  <a href="LevelBuilder.Config.html" title="class in ru.nsu.ablaginin.builder">LevelBuilder.Config</a>&nbsp;config,
  javafx.scene.Scene&nbsp;scene)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Creates a button that loads a level.</div>
+</div>
 </div>
 </div>
 </div>
@@ -170,6 +175,16 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../model/menu/bricks/Button.html" title="class in ru.nsu.ablaginin.model.menu.bricks">Button</a></span>&nbsp;<span class="element-name">buildNewLevel</span><wbr><span class="parameters">(javafx.scene.canvas.GraphicsContext&nbsp;gc,
  <a href="LevelBuilder.Config.html" title="class in ru.nsu.ablaginin.builder">LevelBuilder.Config</a>&nbsp;config,
  javafx.scene.Scene&nbsp;scene)</span></div>
+<div class="block">Creates a button that loads a level.
+ Takes a config that is a record.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>gc</code> - graphical context</dd>
+<dd><code>config</code> - level configuration</dd>
+<dd><code>scene</code> - current scene</dd>
+<dt>Returns:</dt>
+<dd>a button for loading a level</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -178,6 +193,16 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../model/menu/bricks/Button.html" title="class in ru.nsu.ablaginin.model.menu.bricks">Button</a></span>&nbsp;<span class="element-name">buildNewLevel</span><wbr><span class="parameters">(javafx.scene.canvas.GraphicsContext&nbsp;gc,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/InputStream.html" title="class or interface in java.io" class="external-link">InputStream</a>&nbsp;is,
  javafx.scene.Scene&nbsp;scene)</span></div>
+<div class="block">Parses json to Config and builds a level.
+ Uses the previous function.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>gc</code> - graphical controller</dd>
+<dd><code>is</code> - input stream with json</dd>
+<dd><code>scene</code> - current scenes</dd>
+<dt>Returns:</dt>
+<dd>a button for loading a level</dd>
+</dl>
 </section>
 </li>
 </ul>
