@@ -7,11 +7,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * A snake bot that uses a strategy for controlling.
+ */
 public class BotSnake extends Snake {
+  /**
+   * Creates a single bot.
+   *
+   * @param initX x-spawn
+   * @param initY y-spawn
+   * @param velocity a velocity
+   * @param direction a spawn-direction
+   * @param aim an aim
+   */
   public BotSnake(int initX, int initY, int velocity, Direction direction, Aim aim) {
     super(initX, initY, velocity, direction, aim);
   }
 
+  /**
+   * A strategy for controlling a snake.
+   * Not an algorithm for honesty.
+   *
+   * @param field field
+   * @param food food
+   * @param snakes snakes
+   */
   public void analyze(Field field, Food food, List<Snake> snakes) {
     var head = this.getHead();
     var direction = this.getDirection();
