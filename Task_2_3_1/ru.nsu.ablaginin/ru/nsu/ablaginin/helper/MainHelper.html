@@ -78,6 +78,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">MainHelper</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Functions connected with Main class.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -107,13 +108,19 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#clearWindow()" class="member-name-link">clearWindow</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Clears the window but doesn't delete canvas.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#putNode(javafx.scene.Node)" class="member-name-link">putNode</a><wbr>(javafx.scene.Node&nbsp;node)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Puts a node to main's root.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#replaceController(ru.nsu.ablaginin.controller.Controller)" class="member-name-link">replaceController</a><wbr>(<a href="../controller/Controller.html" title="interface in ru.nsu.ablaginin.controller">Controller</a>&nbsp;controller)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Stops the current controller and puts a new one.</div>
+</div>
 </div>
 </div>
 </div>
@@ -149,18 +156,30 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="replaceController(ru.nsu.ablaginin.controller.Controller)">
 <h3>replaceController</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">replaceController</span><wbr><span class="parameters">(<a href="../controller/Controller.html" title="interface in ru.nsu.ablaginin.controller">Controller</a>&nbsp;controller)</span></div>
+<div class="block">Stops the current controller and puts a new one.
+ It doesn't load it.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>controller</code> - new controller</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="clearWindow()">
 <h3>clearWindow</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">clearWindow</span>()</div>
+<div class="block">Clears the window but doesn't delete canvas.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="putNode(javafx.scene.Node)">
 <h3>putNode</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">putNode</span><wbr><span class="parameters">(javafx.scene.Node&nbsp;node)</span></div>
+<div class="block">Puts a node to main's root.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>node</code> - new node</dd>
+</dl>
 </section>
 </li>
 </ul>

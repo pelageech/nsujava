@@ -80,6 +80,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">BotSnake</span>
 <span class="extends-implements">extends <a href="Snake.html" title="class in ru.nsu.ablaginin.model.ingame">Snake</a></span></div>
+<div class="block">A snake bot that uses a strategy for controlling.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -105,7 +106,9 @@ loadScripts(document, 'script');</script>
  int&nbsp;velocity,
  <a href="bricks/Direction.html" title="enum class in ru.nsu.ablaginin.model.ingame.bricks">Direction</a>&nbsp;direction,
  <a href="bricks/Aim.html" title="class in ru.nsu.ablaginin.model.ingame.bricks">Aim</a>&nbsp;aim)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a single bot.</div>
+</div>
 </div>
 </section>
 </li>
@@ -124,7 +127,9 @@ loadScripts(document, 'script');</script>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#analyze(ru.nsu.ablaginin.model.ingame.Field,ru.nsu.ablaginin.model.ingame.Food,java.util.List)" class="member-name-link">analyze</a><wbr>(<a href="Field.html" title="class in ru.nsu.ablaginin.model.ingame">Field</a>&nbsp;field,
  <a href="Food.html" title="class in ru.nsu.ablaginin.model.ingame">Food</a>&nbsp;food,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Snake.html" title="class in ru.nsu.ablaginin.model.ingame">Snake</a>&gt;&nbsp;snakes)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">A strategy for controlling a snake.</div>
+</div>
 </div>
 </div>
 </div>
@@ -153,6 +158,15 @@ loadScripts(document, 'script');</script>
  int&nbsp;velocity,
  <a href="bricks/Direction.html" title="enum class in ru.nsu.ablaginin.model.ingame.bricks">Direction</a>&nbsp;direction,
  <a href="bricks/Aim.html" title="class in ru.nsu.ablaginin.model.ingame.bricks">Aim</a>&nbsp;aim)</span></div>
+<div class="block">Creates a single bot.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>initX</code> - x-spawn</dd>
+<dd><code>initY</code> - y-spawn</dd>
+<dd><code>velocity</code> - a velocity</dd>
+<dd><code>direction</code> - a spawn-direction</dd>
+<dd><code>aim</code> - an aim</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -169,6 +183,14 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">analyze</span><wbr><span class="parameters">(<a href="Field.html" title="class in ru.nsu.ablaginin.model.ingame">Field</a>&nbsp;field,
  <a href="Food.html" title="class in ru.nsu.ablaginin.model.ingame">Food</a>&nbsp;food,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Snake.html" title="class in ru.nsu.ablaginin.model.ingame">Snake</a>&gt;&nbsp;snakes)</span></div>
+<div class="block">A strategy for controlling a snake.
+ Not an algorithm for honesty.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>field</code> - field</dd>
+<dd><code>food</code> - food</dd>
+<dd><code>snakes</code> - snakes</dd>
+</dl>
 </section>
 </li>
 </ul>
