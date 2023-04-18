@@ -15,10 +15,10 @@ import java.util.List;
 import ru.nsu.ablaginin.controller.Controller;
 import ru.nsu.ablaginin.controller.menu.MenuController;
 import ru.nsu.ablaginin.helper.MainHelper;
-import ru.nsu.ablaginin.model.ingame.builder.LevelBuilder;
+import ru.nsu.ablaginin.builder.LevelBuilder;
 import ru.nsu.ablaginin.model.menu.Menu;
 import ru.nsu.ablaginin.model.menu.bricks.Button;
-import ru.nsu.ablaginin.model.menu.builder.MenuBuilder;
+import ru.nsu.ablaginin.builder.MenuBuilder;
 
 /**
  * Main starts an application. There can only be one working controller.

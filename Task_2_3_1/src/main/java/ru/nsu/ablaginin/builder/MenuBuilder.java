@@ -1,4 +1,4 @@
-package ru.nsu.ablaginin.model.menu.builder;
+package ru.nsu.ablaginin.builder;
 
 import javafx.scene.canvas.GraphicsContext;
 import lombok.AllArgsConstructor;

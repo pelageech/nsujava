@@ -1,4 +1,4 @@
-package ru.nsu.ablaginin.model.ingame.builder;
+package ru.nsu.ablaginin.builder;
 
 import com.google.gson.Gson;
 import javafx.scene.Scene;
@@ -6,6 +6,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import lombok.AllArgsConstructor;
+import lombok.Cleanup;
 import ru.nsu.ablaginin.Main;
 import ru.nsu.ablaginin.controller.ingame.InGameController;
 import ru.nsu.ablaginin.helper.MainHelper;
