@@ -6,7 +6,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import lombok.AllArgsConstructor;
-import lombok.Cleanup;
 import ru.nsu.ablaginin.Main;
 import ru.nsu.ablaginin.controller.ingame.InGameController;
 import ru.nsu.ablaginin.helper.MainHelper;
@@ -17,7 +16,8 @@ import ru.nsu.ablaginin.model.ingame.bricks.Aim;
 import ru.nsu.ablaginin.model.ingame.bricks.Barrier;
 import ru.nsu.ablaginin.model.ingame.bricks.Direction;
 import ru.nsu.ablaginin.model.menu.bricks.Button;
-import java.awt.Point;
+
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -25,6 +25,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Builds levels. Returns a button.
+ */
 @AllArgsConstructor
 public class LevelBuilder {
   public record InitSnake(Point spawn, int velocity, String direction, int targetFood) {
@@ -46,6 +49,15 @@ public class LevelBuilder {
   private Image winImage;
   private Image loseImage;
 
+  /**
+   * Creates a button that loads a level.
+   * Takes a config that is a record.
+   *
+   * @param gc graphical context
+   * @param config level configuration
+   * @param scene current scene
+   * @return a button for loading a level
+   */
   public Button buildNewLevel(GraphicsContext gc, Config config, Scene scene) {
     var button = new Button(config.name(), new Point());
     button.setOnMouseClicked(event -> {
@@ -100,6 +112,15 @@ public class LevelBuilder {
     return button;
   }
 
+  /**
+   * Parses json to Config and builds a level.
+   * Uses the previous function.
+   *
+   * @param gc graphical controller
+   * @param is input stream with json
+   * @param scene current scenes
+   * @return a button for loading a level
+   */
   public Button buildNewLevel(GraphicsContext gc, InputStream is, Scene scene) {
     Gson gson = new Gson();
     var config = gson.fromJson(new BufferedReader(new InputStreamReader(is)), Config.class);

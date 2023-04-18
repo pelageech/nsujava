@@ -59,13 +59,17 @@ public final class Main extends Application {
     var exitButton = menuBuilder.buildNewMenu(gc);
 
     // build levels
-    @Cleanup var winIs = getClass().getClassLoader().getResourceAsStream("img/win.jpg");
+    @Cleanup var winIs = getClass()
+            .getClassLoader()
+            .getResourceAsStream("img/win.jpg");
     if (winIs == null) {
       throw new NoSuchFileException("no win image");
     }
     Image winImage = new Image(winIs);
 
-    @Cleanup var loseIs = getClass().getClassLoader().getResourceAsStream("img/dead.jpeg");
+    @Cleanup var loseIs = getClass()
+            .getClassLoader()
+            .getResourceAsStream("img/dead.jpeg");
     if (loseIs == null) {
       throw new NoSuchFileException("no lose image");
     }
@@ -74,7 +78,9 @@ public final class Main extends Application {
     LevelBuilder levelBuilder = new LevelBuilder(exitButton, images, winImage, loseImage);
 
     for (int i = 0; i < 10; i++) {
-      @Cleanup var is = getClass().getClassLoader().getResourceAsStream("levels/level" + i + ".json");
+      @Cleanup var is = getClass()
+              .getClassLoader()
+              .getResourceAsStream("levels/level" + i + ".json");
       if (is != null) {
         levelButtons.add(levelBuilder.buildNewLevel(gc, is, scene));
       }

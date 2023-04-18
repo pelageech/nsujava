@@ -12,11 +12,23 @@ import ru.nsu.ablaginin.model.menu.bricks.Button;
 import static ru.nsu.ablaginin.Main.HEIGHT;
 import static ru.nsu.ablaginin.Main.WIDTH;
 
+/**
+ * Builder for menu. Loads the buttons for loading a level.
+ *
+ * Creates a new controller and loads it.
+ */
 @AllArgsConstructor
 public class MenuBuilder {
 
   private List<Button> levelButtons;
 
+  /**
+   * Just takes a graphical context for
+   * setting up a controller and loads a menu.
+   *
+   * @param gc graphical context
+   * @return a button for loading a menu
+   */
   public Button buildNewMenu(GraphicsContext gc) {
     Button menuButton = new Button("Menu", new Point());
     menuButton.setOnMouseClicked(event -> {

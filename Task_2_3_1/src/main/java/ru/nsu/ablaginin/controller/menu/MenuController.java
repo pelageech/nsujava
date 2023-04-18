@@ -9,11 +9,20 @@ import ru.nsu.ablaginin.controller.Controller;
 import ru.nsu.ablaginin.model.menu.Menu;
 import ru.nsu.ablaginin.view.menu.DrawMenu;
 
+/**
+ * A controller for taking over the menu loading.
+ */
 public class MenuController implements Controller {
   private final GraphicsContext gc;
   private final DrawMenu drawMenu;
   private final MediaPlayer player;
 
+  /**
+   * Just draws a menu and starts the music.
+   *
+   * @param gc graphical context
+   * @param menu menu
+   */
   public MenuController(GraphicsContext gc, Menu menu) {
     this.gc = gc;
     drawMenu = new DrawMenu(menu, Color.web("AAD751"), Color.web("82A149"));
