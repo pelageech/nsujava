@@ -53,14 +53,11 @@ public class InGameController implements Controller {
     if (media != null) {
       player = new MediaPlayer(media);
     }
-    this.field = field;
-    this.humanSnake = humanSnake;
-    this.botSnakes = botSnakes;
-    snakes.add(humanSnake);
-    snakes.addAll(botSnakes);
-    this.update = timeUpdate;
     this.gc = gc;
+    this.update = timeUpdate;
+    this.images = images;
 
+    this.field = field;
     fieldView = new DrawField(
         field,
         Color.web("AAD751"),
@@ -68,6 +65,11 @@ public class InGameController implements Controller {
         Color.DARKSEAGREEN
     );
     foodView = new DrawFood(food, field.getSquareSize());
+
+    this.humanSnake = humanSnake;
+    this.botSnakes = botSnakes;
+    snakes.add(humanSnake);
+    snakes.addAll(botSnakes);
     snakes
         .forEach(snake -> snakesView.add(new DrawSnake(
             snake,
@@ -75,15 +77,16 @@ public class InGameController implements Controller {
             Color.web("A604E9"),
             field.getSquareSize()
         )));
+    snakesView.get(0).setHeadColor(Color.RED);
 
-    this.images = images;
-
+    // lose
     var losePath = getClass().getClassLoader().getResource("music/lose.mp3");
     if (losePath != null) {
       lose = new Media(losePath.toExternalForm());
     }
     drawLose = new DrawLose(loseImage, field.getWidth(), field.getHeight());
 
+    // win
     var winPath = getClass().getClassLoader().getResource("music/win.mp3");
     if (winPath != null) {
       win = new Media(winPath.toExternalForm());
