@@ -28,8 +28,8 @@ public enum Direction {
       case LEFT -> {
         return RIGHT;
       }
+      default -> throw new IllegalStateException("incorrect direction");
     }
-    throw new IllegalStateException();
   }
 
   /**
