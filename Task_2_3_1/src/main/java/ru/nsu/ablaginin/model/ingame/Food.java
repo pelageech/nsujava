@@ -26,7 +26,14 @@ public record Food(int x, int y, Image image) {
    * @param images images
    * @return new Food
    */
-  public static Food generate(int fromX, int toX, int fromY, int toY, List<? extends Point> except, List<Image> images) {
+  public static Food generate(
+          int fromX,
+          int toX,
+          int fromY,
+          int toY,
+          List<? extends Point> except,
+          List<Image> images
+  ) {
     Random random = new Random();
 
     int foodX;

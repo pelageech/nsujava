@@ -14,7 +14,6 @@ import static ru.nsu.ablaginin.Main.WIDTH;
 
 /**
  * Builder for menu. Loads the buttons for loading a level.
- *
  * Creates a new controller and loads it.
  */
 @AllArgsConstructor

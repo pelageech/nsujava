@@ -30,9 +30,28 @@ import java.util.List;
  */
 @AllArgsConstructor
 public class LevelBuilder {
+  /**
+   * The information from snake init.
+   *
+   * @param spawn spawn point
+   * @param velocity velocity
+   * @param direction direction
+   * @param targetFood target food aim
+   */
   public record InitSnake(Point spawn, int velocity, String direction, int targetFood) {
   }
 
+  /**
+   * The configuration of the level.
+   *
+   * @param name name
+   * @param squareSize square size
+   * @param number number
+   * @param musicPath music path
+   * @param human human
+   * @param bots bots
+   * @param barriers barriers
+   */
   public record Config(
       String name,
       int squareSize,

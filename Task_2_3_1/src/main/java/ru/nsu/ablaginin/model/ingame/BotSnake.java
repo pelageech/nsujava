@@ -33,9 +33,6 @@ public class BotSnake extends Snake {
    * @param snakes snakes
    */
   public void analyze(Field field, Food food, List<Snake> snakes) {
-    var head = this.getHead();
-    var direction = this.getDirection();
-
     List<Direction> allowedDirections = new ArrayList<>();
     allowedDirections.add(Direction.UP);
     allowedDirections.add(Direction.DOWN);
@@ -46,6 +43,7 @@ public class BotSnake extends Snake {
     Direction priorityX = null;
     Direction priorityY = null;
 
+    var head = this.getHead();
     if (food.x() - head.x > 0) {
       priorityX = Direction.RIGHT;
     } else if (food.x() - head.x < 0) {
@@ -94,12 +92,13 @@ public class BotSnake extends Snake {
       }
     }
 
+    var direction = this.getDirection();
     Point next = nextPoint(direction, head);
     List<Point> body = this.getBody();
     for (int i = 0; i < body.size(); i++) {
       Point p = body.get(i);
       if (next.x == p.x && next.y == p.y) {
-        var temp = this.getBody().get(i-1);
+        var temp = this.getBody().get(i - 1);
         var deltaX = temp.x - head.x;
         var deltaY = temp.y - head.y;
         if (deltaX == 1) {
@@ -134,6 +133,7 @@ public class BotSnake extends Snake {
       case RIGHT -> next.x++;
       case DOWN -> next.y++;
       case LEFT -> next.x--;
+      default -> throw new IllegalStateException("an incorrect direction");
     }
     return next;
   }

@@ -76,6 +76,7 @@ public class Snake {
         case RIGHT -> deltaX = -1;
         case DOWN -> deltaY = -1;
         case LEFT -> deltaX = 1;
+        default -> throw new IllegalStateException("incorrect direction");
       }
     } else {
       deltaX = body.get(body.size() - 2).x - body.get(body.size() - 1).x;
@@ -116,6 +117,7 @@ public class Snake {
       case DOWN -> head.y += velocity;
       case LEFT -> head.x -= velocity;
       case RIGHT -> head.x += velocity;
+      default -> throw new IllegalStateException("incorrect direction");
     }
   }
 

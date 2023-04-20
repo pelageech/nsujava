@@ -36,7 +36,7 @@ public class DrawMenu implements Drawable {
 
     for (int i = 0; i < levelButtons.size(); i++) {
       levelButtons.get(i).setMinSize(width, height);
-      levelButtons.get(i).setLayoutX(i*(width + 5));
+      levelButtons.get(i).setLayoutX(i * (width + 5));
       levelButtons.get(i).setLayoutY(400);
     }
   }

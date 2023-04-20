@@ -8,24 +8,24 @@ import ru.nsu.ablaginin.model.ingame.bricks.Direction;
  * Snake that's controlled by a human.
  */
 public class HumanSnake extends Snake {
-    /**
-     * Creates a single model of a human snake.
-     *
-     * @param initX spawnX
-     * @param initY spawnY
-     * @param velocity velocity
-     * @param direction direction
-     * @param aim aim
-     */
+  /**
+   * Creates a single model of a human snake.
+   *
+   * @param initX spawnX
+   * @param initY spawnY
+   * @param velocity velocity
+   * @param direction direction
+   * @param aim aim
+   */
   public HumanSnake(int initX, int initY, int velocity, Direction direction, Aim aim) {
     super(initX, initY, velocity, direction, aim);
   }
 
-    /**
-     * Configs the snake's behaviour on key pressing.
-     *
-     * @param scene the current scene
-     */
+  /**
+   * Configs the snake's behaviour on key pressing.
+   *
+   * @param scene the current scene
+   */
   public void configureChangingDirection(Scene scene) {
     scene.setOnKeyPressed(e -> {
         Direction newDirection = this.getDirection();
@@ -47,6 +47,9 @@ public class HumanSnake extends Snake {
               getBody().size() == 1 || getBody().get(0).x == getBody().get(1).x
                   ? Direction.RIGHT
                   : newDirection;
+          default -> {
+              return;
+          }
         }
         this.setDirection(newDirection);
     });
