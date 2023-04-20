@@ -9,6 +9,9 @@ import lombok.Setter;
 import ru.nsu.ablaginin.model.menu.Menu;
 import ru.nsu.ablaginin.view.Drawable;
 
+/**
+ * View module for drawing menu.
+ */
 @AllArgsConstructor
 public class DrawMenu implements Drawable {
   @Getter private final Menu menu;

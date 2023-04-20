@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Setter;
 import ru.nsu.ablaginin.view.Drawable;
 
+/**
+ * View module for drawing a loose screen.
+ */
 @AllArgsConstructor
 public class DrawLose implements Drawable {
   @Setter private Image loseImage;

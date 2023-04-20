@@ -10,6 +10,9 @@ import ru.nsu.ablaginin.view.Drawable;
 
 import java.util.stream.IntStream;
 
+/**
+ * View module for drawing snake.
+ */
 @AllArgsConstructor
 public class DrawSnake implements Drawable {
   @Getter private Snake snake;

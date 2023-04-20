@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Setter;
 import ru.nsu.ablaginin.view.Drawable;
 
+/**
+ * View module for drawing food.
+ */
 @AllArgsConstructor
 public class DrawFood implements Drawable {
   @Setter private Food food;

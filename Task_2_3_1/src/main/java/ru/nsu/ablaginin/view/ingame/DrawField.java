@@ -7,6 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Setter;
 import ru.nsu.ablaginin.view.Drawable;
 
+/**
+ * View module for drawing field.
+ */
 @AllArgsConstructor
 public class DrawField implements Drawable {
   private Field field;

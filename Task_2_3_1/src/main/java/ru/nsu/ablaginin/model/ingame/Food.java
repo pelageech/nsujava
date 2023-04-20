@@ -5,7 +5,27 @@ import java.awt.Point;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * The food that can be eaten by snakes.
+ *
+ * @param x x-coordinate
+ * @param y y-coordinate
+ * @param image food's image
+ */
 public record Food(int x, int y, Image image) {
+  /**
+   * Generates new food on the field set by fromX, toX, fromY and toY
+   * except some points.
+   * Puts a new random image for the food.
+   *
+   * @param fromX fromX
+   * @param toX toX
+   * @param fromY fromY
+   * @param toY toY
+   * @param except excepting points
+   * @param images images
+   * @return new Food
+   */
   public static Food generate(int fromX, int toX, int fromY, int toY, List<? extends Point> except, List<Image> images) {
     Random random = new Random();
 

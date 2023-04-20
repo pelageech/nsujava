@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Setter;
 import ru.nsu.ablaginin.view.Drawable;
 
+/**
+ * View module for drawing a win screen.
+ */
 @AllArgsConstructor
 public class DrawWin implements Drawable {
   @Setter
