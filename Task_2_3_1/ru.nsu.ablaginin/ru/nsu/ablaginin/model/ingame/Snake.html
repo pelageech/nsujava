@@ -82,6 +82,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Snake</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">A snake model. There are many parameters of snakes.
+ A snake has a particular behaviour like move, eat, win, lose.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -113,7 +115,9 @@ loadScripts(document, 'script');</script>
  int&nbsp;velocity,
  <a href="bricks/Direction.html" title="enum class in ru.nsu.ablaginin.model.ingame.bricks">Direction</a>&nbsp;direction,
  <a href="bricks/Aim.html" title="class in ru.nsu.ablaginin.model.ingame.bricks">Aim</a>&nbsp;aim)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a single snake model.</div>
+</div>
 </div>
 </section>
 </li>
@@ -130,19 +134,29 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#eatFood(ru.nsu.ablaginin.model.ingame.Food)" class="member-name-link">eatFood</a><wbr>(<a href="Food.html" title="class in ru.nsu.ablaginin.model.ingame">Food</a>&nbsp;food)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Checks if the snake can eat the food.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#growUp()" class="member-name-link">growUp</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Increases a length of the snake.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#move()" class="member-name-link">move</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Moves the snake depending on a snake's direction.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toStart()" class="member-name-link">toStart</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Put the snake to the start position.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#win()" class="member-name-link">win</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Checks if the snake achieved an aim.</div>
+</div>
 </div>
 </div>
 </div>
@@ -190,6 +204,15 @@ loadScripts(document, 'script');</script>
  int&nbsp;velocity,
  <a href="bricks/Direction.html" title="enum class in ru.nsu.ablaginin.model.ingame.bricks">Direction</a>&nbsp;direction,
  <a href="bricks/Aim.html" title="class in ru.nsu.ablaginin.model.ingame.bricks">Aim</a>&nbsp;aim)</span></div>
+<div class="block">Creates a single snake model.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>initX</code> - snake spawnX</dd>
+<dd><code>initY</code> - snake spawnY</dd>
+<dd><code>velocity</code> - velocity</dd>
+<dd><code>direction</code> - direction</dd>
+<dd><code>aim</code> - aim</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -204,30 +227,45 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="toStart()">
 <h3>toStart</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">toStart</span>()</div>
+<div class="block">Put the snake to the start position.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="growUp()">
 <h3>growUp</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">growUp</span>()</div>
+<div class="block">Increases a length of the snake.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="eatFood(ru.nsu.ablaginin.model.ingame.Food)">
 <h3>eatFood</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">eatFood</span><wbr><span class="parameters">(<a href="Food.html" title="class in ru.nsu.ablaginin.model.ingame">Food</a>&nbsp;food)</span></div>
+<div class="block">Checks if the snake can eat the food.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>food</code> - food</dd>
+<dt>Returns:</dt>
+<dd>if the food has been eaten</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="move()">
 <h3>move</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">move</span>()</div>
+<div class="block">Moves the snake depending on a snake's direction.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="win()">
 <h3>win</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">win</span>()</div>
+<div class="block">Checks if the snake achieved an aim.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>true if the snake has won</dd>
+</dl>
 </section>
 </li>
 </ul>

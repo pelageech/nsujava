@@ -77,9 +77,14 @@ loadScripts(document, 'script');</script>
 </div>
 </div>
 <section class="class-description" id="class-description">
+<dl class="notes">
+<dt>Record Components:</dt>
+<dd><code><span id="param-foodCollect">foodCollect</span></code> - how many foods snake should collect to win</dd>
+</dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public record </span><span class="element-name type-name-label">Aim</span>(int&nbsp;foodCollect)
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html" title="class or interface in java.lang" class="external-link">Record</a></span></div>
+<div class="block">An aim for win.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -93,7 +98,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int)" class="member-name-link">Aim</a><wbr>(int&nbsp;foodCollect)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Creates an instance of a <code>Aim</code> record class.</div>
+<div class="block">Checks if the food is not positive.</div>
 </div>
 </div>
 </section>
@@ -117,7 +122,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#foodCollect()" class="member-name-link">foodCollect</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>foodCollect</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-foodCollect"><code>foodCollect</code></a> record component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
@@ -150,10 +155,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(int)">
 <h3>Aim</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Aim</span><wbr><span class="parameters">(int&nbsp;foodCollect)</span></div>
-<div class="block">Creates an instance of a <code>Aim</code> record class.</div>
+<div class="block">Checks if the food is not positive.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>foodCollect</code> - the value for the <code>foodCollect</code> record component</dd>
+<dd><code>foodCollect</code> - food collect</dd>
 </dl>
 </section>
 </li>
@@ -210,10 +215,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="foodCollect()">
 <h3>foodCollect</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">foodCollect</span>()</div>
-<div class="block">Returns the value of the <code>foodCollect</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-foodCollect"><code>foodCollect</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>foodCollect</code> record component</dd>
+<dd>the value of the <a href="#param-foodCollect"><code>foodCollect</code></a> record component</dd>
 </dl>
 </section>
 </li>

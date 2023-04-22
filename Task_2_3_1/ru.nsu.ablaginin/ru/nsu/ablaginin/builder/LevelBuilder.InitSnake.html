@@ -78,12 +78,20 @@ loadScripts(document, 'script');</script>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
+<dt>Record Components:</dt>
+<dd><code><span id="param-spawn">spawn</span></code> - spawn point</dd>
+<dd><code><span id="param-velocity">velocity</span></code> - velocity</dd>
+<dd><code><span id="param-direction">direction</span></code> - direction</dd>
+<dd><code><span id="param-targetFood">targetFood</span></code> - target food aim</dd>
+</dl>
+<dl class="notes">
 <dt>Enclosing class:</dt>
 <dd><a href="LevelBuilder.html" title="class in ru.nsu.ablaginin.builder">LevelBuilder</a></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public static record </span><span class="element-name type-name-label">LevelBuilder.InitSnake</span>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/awt/Point.html" title="class or interface in java.awt" class="external-link">Point</a>&nbsp;spawn, int&nbsp;velocity, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;direction, int&nbsp;targetFood)
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html" title="class or interface in java.lang" class="external-link">Record</a></span></div>
+<div class="block">The information from snake init.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -119,7 +127,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#direction()" class="member-name-link">direction</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>direction</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-direction"><code>direction</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</code></div>
@@ -134,12 +142,12 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/awt/Point.html" title="class or interface in java.awt" class="external-link">Point</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#spawn()" class="member-name-link">spawn</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>spawn</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-spawn"><code>spawn</code></a> record component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#targetFood()" class="member-name-link">targetFood</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>targetFood</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-targetFood"><code>targetFood</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
@@ -149,7 +157,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#velocity()" class="member-name-link">velocity</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>velocity</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-velocity"><code>velocity</code></a> record component.</div>
 </div>
 </div>
 </div>
@@ -178,10 +186,10 @@ loadScripts(document, 'script');</script>
 <div class="block">Creates an instance of a <code>InitSnake</code> record class.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>spawn</code> - the value for the <code>spawn</code> record component</dd>
-<dd><code>velocity</code> - the value for the <code>velocity</code> record component</dd>
-<dd><code>direction</code> - the value for the <code>direction</code> record component</dd>
-<dd><code>targetFood</code> - the value for the <code>targetFood</code> record component</dd>
+<dd><code>spawn</code> - the value for the <a href="#param-spawn"><code>spawn</code></a> record component</dd>
+<dd><code>velocity</code> - the value for the <a href="#param-velocity"><code>velocity</code></a> record component</dd>
+<dd><code>direction</code> - the value for the <a href="#param-direction"><code>direction</code></a> record component</dd>
+<dd><code>targetFood</code> - the value for the <a href="#param-targetFood"><code>targetFood</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -238,10 +246,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="spawn()">
 <h3>spawn</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/awt/Point.html" title="class or interface in java.awt" class="external-link">Point</a></span>&nbsp;<span class="element-name">spawn</span>()</div>
-<div class="block">Returns the value of the <code>spawn</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-spawn"><code>spawn</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>spawn</code> record component</dd>
+<dd>the value of the <a href="#param-spawn"><code>spawn</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -249,10 +257,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="velocity()">
 <h3>velocity</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">velocity</span>()</div>
-<div class="block">Returns the value of the <code>velocity</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-velocity"><code>velocity</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>velocity</code> record component</dd>
+<dd>the value of the <a href="#param-velocity"><code>velocity</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -260,10 +268,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="direction()">
 <h3>direction</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">direction</span>()</div>
-<div class="block">Returns the value of the <code>direction</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-direction"><code>direction</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>direction</code> record component</dd>
+<dd>the value of the <a href="#param-direction"><code>direction</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -271,10 +279,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="targetFood()">
 <h3>targetFood</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">targetFood</span>()</div>
-<div class="block">Returns the value of the <code>targetFood</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-targetFood"><code>targetFood</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>targetFood</code> record component</dd>
+<dd>the value of the <a href="#param-targetFood"><code>targetFood</code></a> record component</dd>
 </dl>
 </section>
 </li>

@@ -77,9 +77,16 @@ loadScripts(document, 'script');</script>
 </div>
 </div>
 <section class="class-description" id="class-description">
+<dl class="notes">
+<dt>Record Components:</dt>
+<dd><code><span id="param-x">x</span></code> - x-coordinate</dd>
+<dd><code><span id="param-y">y</span></code> - y-coordinate</dd>
+<dd><code><span id="param-image">image</span></code> - food's image</dd>
+</dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public record </span><span class="element-name type-name-label">Food</span>(int&nbsp;x, int&nbsp;y, javafx.scene.image.Image&nbsp;image)
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html" title="class or interface in java.lang" class="external-link">Record</a></span></div>
+<div class="block">The food that can be eaten by snakes.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -123,7 +130,10 @@ loadScripts(document, 'script');</script>
  int&nbsp;toY,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/awt/Point.html" title="class or interface in java.awt" class="external-link">Point</a>&gt;&nbsp;except,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;javafx.scene.image.Image&gt;&nbsp;images)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Generates new food on the field set by fromX, toX, fromY and toY
+ except some points.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
@@ -132,7 +142,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>javafx.scene.image.Image</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#image()" class="member-name-link">image</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>image</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-image"><code>image</code></a> record component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
@@ -142,12 +152,12 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#x()" class="member-name-link">x</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>x</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-x"><code>x</code></a> record component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#y()" class="member-name-link">y</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>y</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-y"><code>y</code></a> record component.</div>
 </div>
 </div>
 </div>
@@ -175,9 +185,9 @@ loadScripts(document, 'script');</script>
 <div class="block">Creates an instance of a <code>Food</code> record class.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>x</code> - the value for the <code>x</code> record component</dd>
-<dd><code>y</code> - the value for the <code>y</code> record component</dd>
-<dd><code>image</code> - the value for the <code>image</code> record component</dd>
+<dd><code>x</code> - the value for the <a href="#param-x"><code>x</code></a> record component</dd>
+<dd><code>y</code> - the value for the <a href="#param-y"><code>y</code></a> record component</dd>
+<dd><code>image</code> - the value for the <a href="#param-image"><code>image</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -198,6 +208,20 @@ loadScripts(document, 'script');</script>
  int&nbsp;toY,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/awt/Point.html" title="class or interface in java.awt" class="external-link">Point</a>&gt;&nbsp;except,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;javafx.scene.image.Image&gt;&nbsp;images)</span></div>
+<div class="block">Generates new food on the field set by fromX, toX, fromY and toY
+ except some points.
+ Puts a new random image for the food.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>fromX</code> - fromX</dd>
+<dd><code>toX</code> - toX</dd>
+<dd><code>fromY</code> - fromY</dd>
+<dd><code>toY</code> - toY</dd>
+<dd><code>except</code> - excepting points</dd>
+<dd><code>images</code> - images</dd>
+<dt>Returns:</dt>
+<dd>new Food</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -245,10 +269,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="x()">
 <h3>x</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">x</span>()</div>
-<div class="block">Returns the value of the <code>x</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-x"><code>x</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>x</code> record component</dd>
+<dd>the value of the <a href="#param-x"><code>x</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -256,10 +280,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="y()">
 <h3>y</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">y</span>()</div>
-<div class="block">Returns the value of the <code>y</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-y"><code>y</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>y</code> record component</dd>
+<dd>the value of the <a href="#param-y"><code>y</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -267,10 +291,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="image()">
 <h3>image</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">javafx.scene.image.Image</span>&nbsp;<span class="element-name">image</span>()</div>
-<div class="block">Returns the value of the <code>image</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-image"><code>image</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>image</code> record component</dd>
+<dd>the value of the <a href="#param-image"><code>image</code></a> record component</dd>
 </dl>
 </section>
 </li>

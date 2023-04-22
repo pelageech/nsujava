@@ -78,12 +78,23 @@ loadScripts(document, 'script');</script>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
+<dt>Record Components:</dt>
+<dd><code><span id="param-name">name</span></code> - name</dd>
+<dd><code><span id="param-squareSize">squareSize</span></code> - square size</dd>
+<dd><code><span id="param-number">number</span></code> - number</dd>
+<dd><code><span id="param-musicPath">musicPath</span></code> - music path</dd>
+<dd><code><span id="param-human">human</span></code> - human</dd>
+<dd><code><span id="param-bots">bots</span></code> - bots</dd>
+<dd><code><span id="param-barriers">barriers</span></code> - barriers</dd>
+</dl>
+<dl class="notes">
 <dt>Enclosing class:</dt>
 <dd><a href="LevelBuilder.html" title="class in ru.nsu.ablaginin.builder">LevelBuilder</a></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public static record </span><span class="element-name type-name-label">LevelBuilder.Config</span>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name, int&nbsp;squareSize, int&nbsp;number, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;musicPath, <a href="LevelBuilder.InitSnake.html" title="class in ru.nsu.ablaginin.builder">LevelBuilder.InitSnake</a>&nbsp;human, <a href="LevelBuilder.InitSnake.html" title="class in ru.nsu.ablaginin.builder">LevelBuilder.InitSnake</a>[]&nbsp;bots, <a href="../model/ingame/bricks/Barrier.html" title="class in ru.nsu.ablaginin.model.ingame.bricks">Barrier</a>[]&nbsp;barriers)
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html" title="class or interface in java.lang" class="external-link">Record</a></span></div>
+<div class="block">The configuration of the level.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -122,12 +133,12 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../model/ingame/bricks/Barrier.html" title="class in ru.nsu.ablaginin.model.ingame.bricks">Barrier</a>[]</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#barriers()" class="member-name-link">barriers</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>barriers</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-barriers"><code>barriers</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="LevelBuilder.InitSnake.html" title="class in ru.nsu.ablaginin.builder">LevelBuilder.InitSnake</a>[]</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#bots()" class="member-name-link">bots</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>bots</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-bots"><code>bots</code></a> record component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</code></div>
@@ -142,27 +153,27 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="LevelBuilder.InitSnake.html" title="class in ru.nsu.ablaginin.builder">LevelBuilder.InitSnake</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#human()" class="member-name-link">human</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>human</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-human"><code>human</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#musicPath()" class="member-name-link">musicPath</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>musicPath</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-musicPath"><code>musicPath</code></a> record component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#name()" class="member-name-link">name</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>name</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-name"><code>name</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#number()" class="member-name-link">number</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>number</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-number"><code>number</code></a> record component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#squareSize()" class="member-name-link">squareSize</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>squareSize</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-squareSize"><code>squareSize</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
@@ -199,13 +210,13 @@ loadScripts(document, 'script');</script>
 <div class="block">Creates an instance of a <code>Config</code> record class.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>name</code> - the value for the <code>name</code> record component</dd>
-<dd><code>squareSize</code> - the value for the <code>squareSize</code> record component</dd>
-<dd><code>number</code> - the value for the <code>number</code> record component</dd>
-<dd><code>musicPath</code> - the value for the <code>musicPath</code> record component</dd>
-<dd><code>human</code> - the value for the <code>human</code> record component</dd>
-<dd><code>bots</code> - the value for the <code>bots</code> record component</dd>
-<dd><code>barriers</code> - the value for the <code>barriers</code> record component</dd>
+<dd><code>name</code> - the value for the <a href="#param-name"><code>name</code></a> record component</dd>
+<dd><code>squareSize</code> - the value for the <a href="#param-squareSize"><code>squareSize</code></a> record component</dd>
+<dd><code>number</code> - the value for the <a href="#param-number"><code>number</code></a> record component</dd>
+<dd><code>musicPath</code> - the value for the <a href="#param-musicPath"><code>musicPath</code></a> record component</dd>
+<dd><code>human</code> - the value for the <a href="#param-human"><code>human</code></a> record component</dd>
+<dd><code>bots</code> - the value for the <a href="#param-bots"><code>bots</code></a> record component</dd>
+<dd><code>barriers</code> - the value for the <a href="#param-barriers"><code>barriers</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -262,10 +273,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="name()">
 <h3>name</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">name</span>()</div>
-<div class="block">Returns the value of the <code>name</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-name"><code>name</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>name</code> record component</dd>
+<dd>the value of the <a href="#param-name"><code>name</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -273,10 +284,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="squareSize()">
 <h3>squareSize</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">squareSize</span>()</div>
-<div class="block">Returns the value of the <code>squareSize</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-squareSize"><code>squareSize</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>squareSize</code> record component</dd>
+<dd>the value of the <a href="#param-squareSize"><code>squareSize</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -284,10 +295,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="number()">
 <h3>number</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">number</span>()</div>
-<div class="block">Returns the value of the <code>number</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-number"><code>number</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>number</code> record component</dd>
+<dd>the value of the <a href="#param-number"><code>number</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -295,10 +306,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="musicPath()">
 <h3>musicPath</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">musicPath</span>()</div>
-<div class="block">Returns the value of the <code>musicPath</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-musicPath"><code>musicPath</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>musicPath</code> record component</dd>
+<dd>the value of the <a href="#param-musicPath"><code>musicPath</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -306,10 +317,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="human()">
 <h3>human</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="LevelBuilder.InitSnake.html" title="class in ru.nsu.ablaginin.builder">LevelBuilder.InitSnake</a></span>&nbsp;<span class="element-name">human</span>()</div>
-<div class="block">Returns the value of the <code>human</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-human"><code>human</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>human</code> record component</dd>
+<dd>the value of the <a href="#param-human"><code>human</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -317,10 +328,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="bots()">
 <h3>bots</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="LevelBuilder.InitSnake.html" title="class in ru.nsu.ablaginin.builder">LevelBuilder.InitSnake</a>[]</span>&nbsp;<span class="element-name">bots</span>()</div>
-<div class="block">Returns the value of the <code>bots</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-bots"><code>bots</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>bots</code> record component</dd>
+<dd>the value of the <a href="#param-bots"><code>bots</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -328,10 +339,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="barriers()">
 <h3>barriers</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../model/ingame/bricks/Barrier.html" title="class in ru.nsu.ablaginin.model.ingame.bricks">Barrier</a>[]</span>&nbsp;<span class="element-name">barriers</span>()</div>
-<div class="block">Returns the value of the <code>barriers</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-barriers"><code>barriers</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>barriers</code> record component</dd>
+<dd>the value of the <a href="#param-barriers"><code>barriers</code></a> record component</dd>
 </dl>
 </section>
 </li>
