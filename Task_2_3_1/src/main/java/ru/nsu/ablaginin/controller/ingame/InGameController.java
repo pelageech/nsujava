@@ -10,10 +10,7 @@ import ru.nsu.ablaginin.controller.Controller;
 import ru.nsu.ablaginin.model.ingame.*;
 import ru.nsu.ablaginin.view.ingame.*;
 import java.awt.Point;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 /**
  * An in-game controller that takes all the in-game
@@ -124,7 +121,11 @@ public class InGameController implements Controller {
 
   @Override
   public void load() {
+    Random random = new Random();
     player.play();
+    for (var b : botSnakes) {
+      b.setIndexHuntFood(random.nextInt(0, foods.size()));
+    }
 
     for (int i = 0; i < foods.size(); i++) {
       var food = Food.generate(
@@ -158,6 +159,9 @@ public class InGameController implements Controller {
                 }
                 for (var i = 0; i < foods.size(); i++) {
                   if (snake.eatFood(foods.get(i))) {
+                    if (snake instanceof BotSnake) {
+                      ((BotSnake) snake).setIndexHuntFood(random.nextInt(0, foods.size()));
+                    }
                     List<Point> points = new ArrayList<>(
                             snakes.stream().flatMap(s -> s.getBody().stream()).toList()
                     );
