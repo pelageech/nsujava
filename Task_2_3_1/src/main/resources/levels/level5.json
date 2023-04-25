@@ -2,7 +2,7 @@
   "name" : "Level 5",
   "squareSize": 27,
   "number" : 1,
-  "musicPath": "level1.mp3",
+  "musicPath": "level2.mp3",
   "human" : {
     "spawn" : {
       "x" : 15.0,
