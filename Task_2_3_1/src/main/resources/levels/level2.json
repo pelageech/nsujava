@@ -10,7 +10,7 @@
     },
     "velocity" : 1,
     "direction" : "right",
-    "targetFood" : 11
+    "targetFood" : 25
   },
   "bots" : [
     {
