@@ -165,9 +165,14 @@ public class InGameController implements Controller {
                     List<Point> points = new ArrayList<>(
                             snakes.stream().flatMap(s -> s.getBody().stream()).toList()
                     );
+
                     foods.set(i, null);
                     points.addAll(field.getBarriers());
-                    foods.set(i, Food.generate(0, field.getColumns(), 0, field.getRows(), points, foodToPoint(), images));
+                    foods.set(i, Food.generate(0,
+                            field.getColumns(), 0, field.getRows(),
+                            points, foodToPoint(),
+                            images)
+                    );
                     foodView.get(i).setFood(foods.get(i));
                   }
                 }
