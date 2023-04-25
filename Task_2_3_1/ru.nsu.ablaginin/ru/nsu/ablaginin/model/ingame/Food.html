@@ -124,11 +124,12 @@ loadScripts(document, 'script');</script>
 <div class="block">Indicates whether some other object is "equal to" this one.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="Food.html" title="class in ru.nsu.ablaginin.model.ingame">Food</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#generate(int,int,int,int,java.util.List,java.util.List)" class="member-name-link">generate</a><wbr>(int&nbsp;fromX,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#generate(int,int,int,int,java.util.List,java.util.List,java.util.List)" class="member-name-link">generate</a><wbr>(int&nbsp;fromX,
  int&nbsp;toX,
  int&nbsp;fromY,
  int&nbsp;toY,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/awt/Point.html" title="class or interface in java.awt" class="external-link">Point</a>&gt;&nbsp;except,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/awt/Point.html" title="class or interface in java.awt" class="external-link">Point</a>&gt;&nbsp;barriers,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/awt/Point.html" title="class or interface in java.awt" class="external-link">Point</a>&gt;&nbsp;foods,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;javafx.scene.image.Image&gt;&nbsp;images)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Generates new food on the field set by fromX, toX, fromY and toY
@@ -200,13 +201,14 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="generate(int,int,int,int,java.util.List,java.util.List)">
+<section class="detail" id="generate(int,int,int,int,java.util.List,java.util.List,java.util.List)">
 <h3>generate</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="Food.html" title="class in ru.nsu.ablaginin.model.ingame">Food</a></span>&nbsp;<span class="element-name">generate</span><wbr><span class="parameters">(int&nbsp;fromX,
  int&nbsp;toX,
  int&nbsp;fromY,
  int&nbsp;toY,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/awt/Point.html" title="class or interface in java.awt" class="external-link">Point</a>&gt;&nbsp;except,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/awt/Point.html" title="class or interface in java.awt" class="external-link">Point</a>&gt;&nbsp;barriers,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/awt/Point.html" title="class or interface in java.awt" class="external-link">Point</a>&gt;&nbsp;foods,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;javafx.scene.image.Image&gt;&nbsp;images)</span></div>
 <div class="block">Generates new food on the field set by fromX, toX, fromY and toY
  except some points.
@@ -217,7 +219,8 @@ loadScripts(document, 'script');</script>
 <dd><code>toX</code> - toX</dd>
 <dd><code>fromY</code> - fromY</dd>
 <dd><code>toY</code> - toY</dd>
-<dd><code>except</code> - excepting points</dd>
+<dd><code>barriers</code> - excepting points</dd>
+<dd><code>foods</code> - foods</dd>
 <dd><code>images</code> - images</dd>
 <dt>Returns:</dt>
 <dd>new Food</dd>

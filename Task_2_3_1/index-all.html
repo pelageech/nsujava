@@ -117,7 +117,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Clears the window but doesn't delete canvas.</div>
 </dd>
-<dt><a href="ru.nsu.ablaginin/ru/nsu/ablaginin/builder/LevelBuilder.Config.html#%3Cinit%3E(java.lang.String,int,int,java.lang.String,ru.nsu.ablaginin.builder.LevelBuilder.InitSnake,ru.nsu.ablaginin.builder.LevelBuilder.InitSnake%5B%5D,ru.nsu.ablaginin.model.ingame.bricks.Barrier%5B%5D)" class="member-name-link">Config(String, int, int, String, LevelBuilder.InitSnake, LevelBuilder.InitSnake[], Barrier[])</a> - Constructor for record class ru.nsu.ablaginin.builder.<a href="ru.nsu.ablaginin/ru/nsu/ablaginin/builder/LevelBuilder.Config.html" title="class in ru.nsu.ablaginin.builder">LevelBuilder.Config</a></dt>
+<dt><a href="ru.nsu.ablaginin/ru/nsu/ablaginin/builder/LevelBuilder.Config.html#%3Cinit%3E(java.lang.String,int,int,java.lang.String,ru.nsu.ablaginin.builder.LevelBuilder.InitSnake,ru.nsu.ablaginin.builder.LevelBuilder.InitSnake%5B%5D,ru.nsu.ablaginin.model.ingame.bricks.Barrier%5B%5D,int)" class="member-name-link">Config(String, int, int, String, LevelBuilder.InitSnake, LevelBuilder.InitSnake[], Barrier[], int)</a> - Constructor for record class ru.nsu.ablaginin.builder.<a href="ru.nsu.ablaginin/ru/nsu/ablaginin/builder/LevelBuilder.Config.html" title="class in ru.nsu.ablaginin.builder">LevelBuilder.Config</a></dt>
 <dd>
 <div class="block">Creates an instance of a <code>Config</code> record class.</div>
 </dd>
@@ -250,7 +250,7 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:G">G</h2>
 <dl class="index">
-<dt><a href="ru.nsu.ablaginin/ru/nsu/ablaginin/model/ingame/Food.html#generate(int,int,int,int,java.util.List,java.util.List)" class="member-name-link">generate(int, int, int, int, List&lt;? extends Point&gt;, List&lt;Image&gt;)</a> - Static method in record class ru.nsu.ablaginin.model.ingame.<a href="ru.nsu.ablaginin/ru/nsu/ablaginin/model/ingame/Food.html" title="class in ru.nsu.ablaginin.model.ingame">Food</a></dt>
+<dt><a href="ru.nsu.ablaginin/ru/nsu/ablaginin/model/ingame/Food.html#generate(int,int,int,int,java.util.List,java.util.List,java.util.List)" class="member-name-link">generate(int, int, int, int, List&lt;? extends Point&gt;, List&lt;Point&gt;, List&lt;Image&gt;)</a> - Static method in record class ru.nsu.ablaginin.model.ingame.<a href="ru.nsu.ablaginin/ru/nsu/ablaginin/model/ingame/Food.html" title="class in ru.nsu.ablaginin.model.ingame">Food</a></dt>
 <dd>
 <div class="block">Generates new food on the field set by fromX, toX, fromY and toY
  except some points.</div>
@@ -304,7 +304,7 @@ loadScripts(document, 'script');</script>
 <div class="block">An in-game controller that takes all the in-game
  models and uses views for drawing a level.</div>
 </dd>
-<dt><a href="ru.nsu.ablaginin/ru/nsu/ablaginin/controller/ingame/InGameController.html#%3Cinit%3E(javafx.scene.canvas.GraphicsContext,ru.nsu.ablaginin.model.ingame.Field,ru.nsu.ablaginin.model.ingame.HumanSnake,java.util.List,long,java.util.List,javafx.scene.image.Image,javafx.scene.image.Image,javafx.scene.media.Media)" class="member-name-link">InGameController(GraphicsContext, Field, HumanSnake, List&lt;BotSnake&gt;, long, List&lt;Image&gt;, Image, Image, Media)</a> - Constructor for class ru.nsu.ablaginin.controller.ingame.<a href="ru.nsu.ablaginin/ru/nsu/ablaginin/controller/ingame/InGameController.html" title="class in ru.nsu.ablaginin.controller.ingame">InGameController</a></dt>
+<dt><a href="ru.nsu.ablaginin/ru/nsu/ablaginin/controller/ingame/InGameController.html#%3Cinit%3E(javafx.scene.canvas.GraphicsContext,ru.nsu.ablaginin.model.ingame.Field,ru.nsu.ablaginin.model.ingame.HumanSnake,java.util.List,long,java.util.List,javafx.scene.image.Image,javafx.scene.image.Image,javafx.scene.media.Media,int)" class="member-name-link">InGameController(GraphicsContext, Field, HumanSnake, List&lt;BotSnake&gt;, long, List&lt;Image&gt;, Image, Image, Media, int)</a> - Constructor for class ru.nsu.ablaginin.controller.ingame.<a href="ru.nsu.ablaginin/ru/nsu/ablaginin/controller/ingame/InGameController.html" title="class in ru.nsu.ablaginin.controller.ingame">InGameController</a></dt>
 <dd>
 <div class="block">Creates a single InGameController.</div>
 </dd>
@@ -358,6 +358,10 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="ru.nsu.ablaginin/ru/nsu/ablaginin/helper/MainHelper.html#%3Cinit%3E()" class="member-name-link">MainHelper()</a> - Constructor for class ru.nsu.ablaginin.helper.<a href="ru.nsu.ablaginin/ru/nsu/ablaginin/helper/MainHelper.html" title="class in ru.nsu.ablaginin.helper">MainHelper</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="ru.nsu.ablaginin/ru/nsu/ablaginin/builder/LevelBuilder.Config.html#maxFood()" class="member-name-link">maxFood()</a> - Method in record class ru.nsu.ablaginin.builder.<a href="ru.nsu.ablaginin/ru/nsu/ablaginin/builder/LevelBuilder.Config.html" title="class in ru.nsu.ablaginin.builder">LevelBuilder.Config</a></dt>
+<dd>
+<div class="block">Returns the value of the <code>maxFood</code> record component.</div>
+</dd>
 <dt><a href="ru.nsu.ablaginin/ru/nsu/ablaginin/model/menu/Menu.html" class="type-name-link" title="class in ru.nsu.ablaginin.model.menu">Menu</a> - Class in <a href="ru.nsu.ablaginin/ru/nsu/ablaginin/model/menu/package-summary.html">ru.nsu.ablaginin.model.menu</a></dt>
 <dd>
 <div class="block">A menu model contains necessary functions for controlling menu.</div>
