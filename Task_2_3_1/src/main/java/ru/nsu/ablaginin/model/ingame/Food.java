@@ -22,7 +22,8 @@ public record Food(int x, int y, Image image) {
    * @param toX toX
    * @param fromY fromY
    * @param toY toY
-   * @param except excepting points
+   * @param barriers excepting points
+   * @param foods foods
    * @param images images
    * @return new Food
    */
@@ -31,9 +32,12 @@ public record Food(int x, int y, Image image) {
           int toX,
           int fromY,
           int toY,
-          List<? extends Point> except,
+          List<? extends Point> barriers,
+          List<Point> foods,
           List<Image> images
   ) {
+    List<Point> except = new java.util.ArrayList<>(List.copyOf(barriers));
+    except.addAll(foods);
     Random random = new Random();
 
     int foodX;

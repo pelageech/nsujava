@@ -59,7 +59,8 @@ public class LevelBuilder {
       String musicPath,
       InitSnake human,
       InitSnake[] bots,
-      Barrier[] barriers
+      Barrier[] barriers,
+      int maxFood
   ) {
   }
 
@@ -118,7 +119,7 @@ public class LevelBuilder {
           fruitImages,
           winImage,
           loseImage,
-          media
+          media, config.maxFood
       );
       MainHelper.replaceController(newController);
 

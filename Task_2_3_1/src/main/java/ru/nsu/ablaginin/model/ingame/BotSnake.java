@@ -1,5 +1,7 @@
 package ru.nsu.ablaginin.model.ingame;
 
+import lombok.Getter;
+import lombok.Setter;
 import ru.nsu.ablaginin.model.ingame.bricks.Aim;
 import ru.nsu.ablaginin.model.ingame.bricks.Direction;
 import java.awt.Point;
@@ -11,6 +13,9 @@ import java.util.Random;
  * A snake bot that uses a strategy for controlling.
  */
 public class BotSnake extends Snake {
+  @Getter
+  @Setter
+  private int indexHuntFood;
   /**
    * Creates a single bot.
    *

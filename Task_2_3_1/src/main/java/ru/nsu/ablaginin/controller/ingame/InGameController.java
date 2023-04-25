@@ -20,27 +20,35 @@ import java.util.TimerTask;
  * models and uses views for drawing a level.
  */
 public class InGameController implements Controller {
+  // graphics
   private final GraphicsContext gc;
-  private MediaPlayer player;
-  private Media lose;
-  private Media win;
-  private final Timer timer = new Timer("controller");
-  private final Field field;
   @Getter
   private final DrawField fieldView;
-  private Food food;
   @Getter
-  private final DrawFood foodView;
-  private final List<Image> images;
-  private final HumanSnake humanSnake;
-  private final List<BotSnake> botSnakes;
-  private List<Snake> snakes = new ArrayList<>();
+  private final List<DrawFood> foodView = new ArrayList<>();
   @Getter
   private final List<DrawSnake> snakesView = new ArrayList<>();
   @Getter
   private final DrawLose drawLose;
   @Getter
   private final DrawWin drawWin;
+
+  // models
+  private final Field field;
+  private final List<Food> foods = new ArrayList<>();
+  private final List<Image> images;
+  private final HumanSnake humanSnake;
+  private final List<BotSnake> botSnakes;
+  private List<Snake> snakes = new ArrayList<>();
+
+
+  // media
+  private MediaPlayer player;
+  private Media lose;
+  private Media win;
+
+  // frame params
+  private final Timer timer = new Timer("controller");
   private final long update;
 
   /**
@@ -65,7 +73,8 @@ public class InGameController implements Controller {
       List<Image> images,
       Image winImage,
       Image loseImage,
-      Media media
+      Media media,
+      int maxFood
   ) {
     turnOnMusic(media);
     this.gc = gc;
@@ -79,7 +88,6 @@ public class InGameController implements Controller {
         Color.web("A2D149"),
         Color.DARKSEAGREEN
     );
-    foodView = new DrawFood(food, field.getSquareSize());
 
     this.humanSnake = humanSnake;
     this.botSnakes = botSnakes;
@@ -107,13 +115,28 @@ public class InGameController implements Controller {
       win = new Media(winPath.toExternalForm());
     }
     drawWin = new DrawWin(winImage, field.getWidth(), field.getHeight());
+
+    // food
+    for (int i = 0; i < maxFood; i++) {
+      foods.add(null);
+    }
   }
 
   @Override
   public void load() {
     player.play();
-    food = Food.generate(0, field.getColumns(), 0, field.getRows(), field.getBarriers(), images);
-    foodView.setFood(food);
+
+    for (int i = 0; i < foods.size(); i++) {
+      var food = Food.generate(
+              0, field.getColumns(),
+              0, field.getRows(),
+              field.getBarriers(), foodToPoint(), images
+      );
+
+      foods.set(i, food);
+      foodView.add(new DrawFood(food, field.getSquareSize()));
+    }
+
     timer.schedule(new TimerTask() {
       @Override
       public void run() {
@@ -125,7 +148,7 @@ public class InGameController implements Controller {
 
         botSnakes.stream()
             .filter(snake -> !snake.isGameOver())
-            .forEach(snake -> snake.analyze(field, food, snakes));
+            .forEach(snake -> snake.analyze(field, foods.get(snake.getIndexHuntFood()), snakes));
 
         snakes
             .forEach(snake -> {
@@ -133,13 +156,16 @@ public class InGameController implements Controller {
                 if (die(snake)) {
                   snake.setGameOver(true);
                 }
-                if (snake.eatFood(food)) {
-                  List<Point> points = new ArrayList<>(
-                          snakes.stream().flatMap(s -> s.getBody().stream()).toList()
-                  );
-                  points.addAll(field.getBarriers());
-                  food = Food.generate(0, field.getColumns(), 0, field.getRows(), points, images);
-                  foodView.setFood(food);
+                for (var i = 0; i < foods.size(); i++) {
+                  if (snake.eatFood(foods.get(i))) {
+                    List<Point> points = new ArrayList<>(
+                            snakes.stream().flatMap(s -> s.getBody().stream()).toList()
+                    );
+                    foods.set(i, null);
+                    points.addAll(field.getBarriers());
+                    foods.set(i, Food.generate(0, field.getColumns(), 0, field.getRows(), points, foodToPoint(), images));
+                    foodView.get(i).setFood(foods.get(i));
+                  }
                 }
                 snake.setWon(snake.win());
             });
@@ -171,10 +197,23 @@ public class InGameController implements Controller {
 
   private void view() {
     fieldView.draw(gc);
-    foodView.draw(gc);
+    for (var v : foodView) {
+      v.draw(gc);
+    }
     snakesView
             .stream().filter(s -> !s.getSnake().isGameOver())
             .forEach(snakeView -> snakeView.draw(gc));
+  }
+
+  private List<Point> foodToPoint() {
+    List<Point> list = new ArrayList<>();
+    for (var f : foods) {
+      if (f == null) {
+        continue;
+      }
+      list.add(new Point(f.x(), f.y()));
+    }
+    return list;
   }
 
   private void turnOnMusic(Media media) {
