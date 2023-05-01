@@ -6,6 +6,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import lombok.AllArgsConstructor;
+import lombok.Cleanup;
 import ru.nsu.ablaginin.Main;
 import ru.nsu.ablaginin.controller.ingame.InGameController;
 import ru.nsu.ablaginin.helper.MainHelper;
@@ -143,7 +144,9 @@ public class LevelBuilder {
    */
   public Button buildNewLevel(GraphicsContext gc, InputStream is, Scene scene) {
     Gson gson = new Gson();
-    var config = gson.fromJson(new BufferedReader(new InputStreamReader(is)), Config.class);
+
+    @Cleanup var bufReader = new BufferedReader(new InputStreamReader(is));
+    var config = gson.fromJson(bufReader, Config.class);
     if (config == null) {
       throw new IllegalArgumentException("json wasn't parsed");
     }
