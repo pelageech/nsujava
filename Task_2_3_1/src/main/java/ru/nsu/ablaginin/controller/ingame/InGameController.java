@@ -122,6 +122,8 @@ public class InGameController implements Controller {
   @Override
   public void load() {
     Random random = new Random();
+
+    // preloader
     player.play();
     for (var b : botSnakes) {
       b.setIndexHuntFood(random.nextInt(0, foods.size()));
@@ -141,59 +143,7 @@ public class InGameController implements Controller {
     timer.schedule(new TimerTask() {
       @Override
       public void run() {
-        view();
-        if (snakes.size() == 0) {
-          timer.cancel();
-          return;
-        }
-
-        botSnakes.stream()
-            .filter(snake -> !snake.isGameOver())
-            .forEach(snake -> snake.analyze(field, foods.get(snake.getIndexHuntFood()), snakes));
-
-        snakes
-            .forEach(snake -> {
-                snake.move();
-                if (die(snake)) {
-                  snake.setGameOver(true);
-                }
-                for (var i = 0; i < foods.size(); i++) {
-                  if (snake.eatFood(foods.get(i))) {
-                    if (snake instanceof BotSnake) {
-                      ((BotSnake) snake).setIndexHuntFood(random.nextInt(0, foods.size()));
-                    }
-                    List<Point> points = new ArrayList<>(
-                            snakes.stream().flatMap(s -> s.getBody().stream()).toList()
-                    );
-
-                    foods.set(i, null);
-                    points.addAll(field.getBarriers());
-                    foods.set(i, Food.generate(0,
-                            field.getColumns(), 0, field.getRows(),
-                            points, foodToPoint(),
-                            images)
-                    );
-                    foodView.get(i).setFood(foods.get(i));
-                  }
-                }
-                snake.setWon(snake.win());
-            });
-        view();
-        if (humanSnake.isGameOver()) {
-          lose();
-          return;
-        }
-        snakes = snakes.stream().filter(snake -> !snake.isGameOver()).toList();
-        if (humanSnake.isWon()) {
-          win();
-          return;
-        }
-        for (var s : botSnakes) {
-          if (s.win()) {
-            lose();
-            return;
-          }
-        }
+        updateFrame(random);
       }
     }, 0, update);
   }
@@ -202,6 +152,51 @@ public class InGameController implements Controller {
   public void stop() {
     player.stop();
     timer.cancel();
+  }
+  
+  private void updateFrame(Random random) {
+    view();
+    if (snakes.size() == 0) {
+      timer.cancel();
+      return;
+    }
+
+    // choose the next direction for each bot
+    botSnakes.stream()
+          .filter(snake -> !snake.isGameOver())
+          .forEach(snake -> snake.analyze(field, foods.get(snake.getIndexHuntFood()), snakes));
+
+    // update snakes' state
+    snakes
+          .forEach(snake -> {
+            snake.move();
+            if (die(snake)) {
+              snake.setGameOver(true);
+            }
+            for (var i = 0; i < foods.size(); i++) {
+              ifFoodEaten(random, snake, i);
+            }
+            snake.setWon(snake.win());
+          });
+
+    view();
+
+    // handle win/lose human snake
+    if (humanSnake.isGameOver()) {
+      lose();
+      return;
+    }
+    snakes = snakes.stream().filter(snake -> !snake.isGameOver()).toList();
+    if (humanSnake.isWon()) {
+      win();
+      return;
+    }
+    for (var s : botSnakes) {
+      if (s.win()) {
+        lose();
+        return;
+      }
+    }
   }
 
   private void view() {
@@ -234,6 +229,26 @@ public class InGameController implements Controller {
     }
     player = new MediaPlayer(media);
     player.play();
+  }
+
+  private void ifFoodEaten(Random random, Snake snake, int foodIndex) {
+    if (snake.eatFood(foods.get(foodIndex))) {
+      if (snake instanceof BotSnake) {
+        ((BotSnake) snake).setIndexHuntFood(random.nextInt(0, foods.size()));
+      }
+      List<Point> points = new ArrayList<>(
+              snakes.stream().flatMap(s -> s.getBody().stream()).toList()
+      );
+
+      foods.set(foodIndex, null);
+      points.addAll(field.getBarriers());
+      foods.set(foodIndex, Food.generate(0,
+              field.getColumns(), 0, field.getRows(),
+              points, foodToPoint(),
+              images)
+      );
+      foodView.get(foodIndex).setFood(foods.get(foodIndex));
+    }
   }
 
   private void win() {
