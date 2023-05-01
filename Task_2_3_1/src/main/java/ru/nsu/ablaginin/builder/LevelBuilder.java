@@ -20,6 +20,7 @@ import ru.nsu.ablaginin.model.menu.bricks.Button;
 
 import java.awt.*;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -142,7 +143,7 @@ public class LevelBuilder {
    * @param scene current scenes
    * @return a button for loading a level
    */
-  public Button buildNewLevel(GraphicsContext gc, InputStream is, Scene scene) {
+  public Button buildNewLevel(GraphicsContext gc, InputStream is, Scene scene) throws IOException {
     Gson gson = new Gson();
 
     @Cleanup var bufReader = new BufferedReader(new InputStreamReader(is));
