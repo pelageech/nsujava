@@ -1,0 +1,36 @@
+{
+  "name" : "Level 4",
+  "squareSize": 90,
+  "number" : 1,
+  "musicPath": "level1.mp3",
+  "human" : {
+    "spawn" : {
+      "x" : 0.0,
+      "y" : 5.0
+    },
+    "velocity" : 1,
+    "direction" : "UP",
+    "targetFood" : 8
+  },
+  "bots" : [
+    {
+      "spawn" : {
+        "x" : 9.0,
+        "y" : 2.0
+      },
+      "velocity" : 1,
+      "direction" : "down",
+      "targetFood" : 8
+    }
+  ],
+  "barriers" : [
+    {
+      "x": 3,
+      "y": 1
+    },{
+      "x": 6,
+      "y": 4
+    }
+  ],
+  "maxFood": 2
+}
