@@ -1,0 +1,44 @@
+package ru.nsu.ablaginin.bricks;
+
+import groovy.lang.Closure;
+import lombok.Data;
+
+@Data
+public class Student {
+    private String nickname;
+    private String name;
+    private Group group;
+    private String url;
+    private MarkList markList = new MarkList();
+    private GivenTaskList givenTaskList = new GivenTaskList();
+    private ClassList classes = new ClassList();
+
+    public void group(Closure c) {
+        group = new Group();
+        c.setDelegate(group);
+        c.setResolveStrategy(Closure.DELEGATE_ONLY);
+        c.call();
+    }
+
+    public void marks(Closure c) {
+        c.setDelegate(markList);
+        c.setResolveStrategy(Closure.DELEGATE_ONLY);
+        c.call();
+    }
+
+    public void tasks(Closure c) {
+        c.setDelegate(givenTaskList);
+        c.setResolveStrategy(Closure.DELEGATE_ONLY);
+        c.call();
+    }
+
+    public void classes(Closure c) {
+        c.setDelegate(classes);
+        c.setResolveStrategy(Closure.DELEGATE_ONLY);
+        c.call();
+    }
+
+    public void methodMissing(String name, Object args) {
+        System.out.println(name + " was called with " + args.toString());
+    }
+}
