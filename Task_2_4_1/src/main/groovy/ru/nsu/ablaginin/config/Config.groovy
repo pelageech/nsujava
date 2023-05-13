@@ -1,21 +1,17 @@
 package ru.nsu.ablaginin.config
 
-import ru.nsu.ablaginin.dsl.bricks.MarkNum
-
-import java.time.LocalDate
-
 student {
     nickname = "fdfdf"
     name = "kavo"
     url = "fdfdf"
     marks {
         mark {
-            mark = MarkNum.EXCELLENT
-            date = LocalDate.now()
+            mark = 5
+            date = "11-05-2023"
         }
         mark {
-            mark = MarkNum.BAD
-            date = LocalDate.now()
+            mark = 2
+            date = "12-05-2023"
         }
     }
     tasks {
@@ -30,7 +26,7 @@ student {
     }
     classes {
         newClass {
-            date = LocalDate.now()
+            date = "11-05-2023"
             attendance = true
         }
     }
