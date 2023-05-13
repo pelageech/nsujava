@@ -1,6 +1,7 @@
-package ru.nsu.ablaginin.bricks;
+package ru.nsu.ablaginin.dsl.bricks.lists;
 
 import groovy.lang.Closure;
+import ru.nsu.ablaginin.dsl.bricks.Class;
 
 import java.util.ArrayList;
 import java.util.List;

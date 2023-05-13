@@ -1,4 +1,4 @@
-package ru.nsu.ablaginin.bricks;
+package ru.nsu.ablaginin.dsl.bricks;
 
 public enum MarkNum {
     EXCELLENT,

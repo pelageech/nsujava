@@ -1,7 +1,10 @@
-package ru.nsu.ablaginin.bricks;
+package ru.nsu.ablaginin.dsl.bricks;
 
 import groovy.lang.Closure;
 import lombok.Data;
+import ru.nsu.ablaginin.dsl.bricks.lists.ClassList;
+import ru.nsu.ablaginin.dsl.bricks.lists.GivenTaskList;
+import ru.nsu.ablaginin.dsl.bricks.lists.MarkList;
 
 @Data
 public class Student {
