@@ -22,8 +22,8 @@ public class MarkList {
 
     @Override
     public String toString() {
-        return "Marks{" +
-                "marks=" + marks +
-                '}';
+        return "Marks{"
+                + "marks=" + marks
+                + '}';
     }
 }

@@ -22,8 +22,8 @@ public class GivenTaskList {
 
     @Override
     public String toString() {
-        return "GivenTaskList{" +
-                "givenTaskList=" + givenTaskList +
-                '}';
+        return "GivenTaskList{"
+                + "givenTaskList=" + givenTaskList
+                + '}';
     }
 }

@@ -18,8 +18,8 @@ public class ClassList {
 
     @Override
     public String toString() {
-        return "ClassList{" +
-                "classList=" + classList +
-                '}';
+        return "ClassList{"
+                + "classList=" + classList
+                + '}';
     }
 }
