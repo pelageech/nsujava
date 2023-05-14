@@ -14,17 +14,13 @@ import java.util.Map;
 
 @Data
 public class DSL {
-    private StudentList students = new StudentList();
-    private Map<Group, Student> studentsByGroup = new HashMap<>();
+    private Student student;
     private TaskList taskList;
 
-    public void students(Closure c) {
-        c.setDelegate(students);
+    public void student(Closure c) {
+        c.setDelegate(student);
         c.setResolveStrategy(Closure.DELEGATE_ONLY);
         c.call();
-        for (var s : students.getStudentList()) {
-            studentsByGroup.put(s.getGroup(), s);
-        }
     }
 
     public void tasks(Closure c) {
