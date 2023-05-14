@@ -3,6 +3,6 @@ package ru.nsu.ablaginin.dsl.bricks;
 import lombok.Data;
 
 @Data
-class Group {
+public class Group {
     int number;
 }
