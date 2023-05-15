@@ -14,31 +14,22 @@ class GitWorks {
 
     public static final String DEFAULT_BRANCH = "master";
 
-    static Git init(String name) {
-        Path repoPath = Paths.get("./repos/"+name);
-
-        return Git.init().setDirectory(repoPath.toFile()).call()
-    }
-
-    static Git open(String name) {
-        Path repoPath = Paths.get("./repos/"+name);
-
-        return Git.open(repoPath.toFile())
-    }
-
     @SneakyThrows
     void pull(String remote, String name, String branch) {
 
     }
 
     @SneakyThrows
-    void clone(String remotePath, File localPath) {
+    void clone(String remotePath, File localPath, Optional<String> branch) {
+        var remoteBranch = branch.isPresent()
+                ? branch.get()
+                : DEFAULT_BRANCH;
         try {
             CloneCommand cloneCommand = new CloneCommand();
             cloneCommand.setURI(remotePath);
             cloneCommand.setProgressMonitor(new TextProgressMonitor())
             cloneCommand.setDirectory(localPath);
-            cloneCommand.setBranch(DEFAULT_BRANCH);
+            cloneCommand.setBranch(remoteBranch);
             cloneCommand.call();
         } catch (Exception e) {
             println e.getMessage()
