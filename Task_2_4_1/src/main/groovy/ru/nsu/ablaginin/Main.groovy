@@ -16,5 +16,4 @@ script.run()
 System.out.println(dsl.toString())
 
 var git = new GitWorks()
-git.clone("artyom.groovy")
-git.pull(dsl.getStudent().url, "master")
+git.clone(dsl.getStudent().url, new File("C:\\Users\\Mi\\Desktop\\localhost\\new"))

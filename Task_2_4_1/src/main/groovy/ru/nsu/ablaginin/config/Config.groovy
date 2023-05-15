@@ -1,9 +1,9 @@
 package ru.nsu.ablaginin.config
 
 student {
-    nickname = "fdfdf"
-    name = "kavo"
-    url = "fdfdf"
+    nickname = "pelageech"
+    name = "Artyom"
+    url = "https://github.com/pelageech/nsujava.git"
     marks {
         mark {
             mark = 5
