@@ -1,5 +1,6 @@
 plugins {
     id 'groovy'
+    id 'jacoco'
 }
 
 group 'org.example'
@@ -19,6 +20,19 @@ dependencies {
     implementation group: 'org.codehaus.groovy', name: 'groovy-all', version: '3.0.16', ext: 'pom'
     implementation('org.eclipse.jgit:org.eclipse.jgit:6.5.0.202303070854-r')
 }
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
+}
+
 
 test {
     useJUnitPlatform()
