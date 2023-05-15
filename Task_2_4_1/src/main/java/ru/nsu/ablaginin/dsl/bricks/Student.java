@@ -1,11 +1,17 @@
 package ru.nsu.ablaginin.dsl.bricks;
 
 import groovy.lang.Closure;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import ru.nsu.ablaginin.dsl.bricks.lists.ClassList;
 import ru.nsu.ablaginin.dsl.bricks.lists.GivenTaskList;
 import ru.nsu.ablaginin.dsl.bricks.lists.MarkList;
 
+import java.util.Objects;
+
+@AllArgsConstructor
 @Data
 public class Student {
     private String nickname;
@@ -15,6 +21,10 @@ public class Student {
     private MarkList markList = new MarkList();
     private GivenTaskList givenTaskList = new GivenTaskList();
     private ClassList classes = new ClassList();
+
+    public Student() {
+
+    }
 
     public void group(Closure c) {
         group = new Group();

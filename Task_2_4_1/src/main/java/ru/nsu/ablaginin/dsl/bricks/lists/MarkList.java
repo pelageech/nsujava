@@ -1,7 +1,10 @@
 package ru.nsu.ablaginin.dsl.bricks.lists;
 
 import groovy.lang.Closure;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import ru.nsu.ablaginin.dsl.bricks.Mark;
 import ru.nsu.ablaginin.dsl.bricks.MarkNum;
 import ru.nsu.ablaginin.helper.HelperDSL;
@@ -9,9 +12,11 @@ import ru.nsu.ablaginin.helper.HelperDSL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+@AllArgsConstructor
 public class MarkList {
-    private final List<Mark> marks = new ArrayList<>();
+    @Getter private final List<Mark> marks = new ArrayList<>();
 
     public void mark(Closure c) {
         var markString = new MarkString();
@@ -42,5 +47,18 @@ public class MarkList {
         return "Marks{"
                 + "marks=" + marks
                 + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MarkList markList = (MarkList) o;
+        return Objects.equals(marks, markList.marks);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(marks);
     }
 }
