@@ -14,12 +14,4 @@ class Compiler {
         script.run()
         return obj
     }
-
-    static void main(String[] args) {
-        Student student = compile(new File(
-                Compiler.class.getClassLoader().getResource("conf/artyom.groovy").toURI()
-        ), Student.class) as Student
-
-        print(student)
-    }
 }

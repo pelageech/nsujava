@@ -1,6 +1,6 @@
 nickname = "pelageech"
 name = "Blaginin Artyom Sergeevich"
-url = "github.com/pelageech/nsujava"
+url = "https://github.com/pelageech/nsujava.git"
 marks {
     mark {
         mark = 5

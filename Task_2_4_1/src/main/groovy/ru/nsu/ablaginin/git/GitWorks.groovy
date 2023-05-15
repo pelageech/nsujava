@@ -1,14 +1,8 @@
 package ru.nsu.ablaginin.git
 
-import lombok.Cleanup
-import lombok.SneakyThrows
-import org.eclipse.jgit.api.CloneCommand
-import org.eclipse.jgit.api.Git
-import org.eclipse.jgit.lib.ProgressMonitor
-import org.eclipse.jgit.lib.TextProgressMonitor
 
-import java.nio.file.Path
-import java.nio.file.Paths
+import org.eclipse.jgit.api.CloneCommand
+import org.eclipse.jgit.lib.TextProgressMonitor
 
 class GitWorks {
 
