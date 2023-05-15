@@ -14,12 +14,6 @@ class GitWorks {
 
     public static final String DEFAULT_BRANCH = "master";
 
-    @SneakyThrows
-    void pull(String remote, String name, String branch) {
-
-    }
-
-    @SneakyThrows
     void clone(String remotePath, File localPath, Optional<String> branch) {
         var remoteBranch = branch.isPresent()
                 ? branch.get()
@@ -34,9 +28,5 @@ class GitWorks {
         } catch (Exception e) {
             println e.getMessage()
         }
-    }
-
-    boolean logStudentsAttendance(Date monday, Date sunday, String repo) {
-
     }
 }
