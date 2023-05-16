@@ -1,6 +1,6 @@
 package ru.nsu.ablaginin
 
-import org.eclipse.jgit.api.Git
+
 import ru.nsu.ablaginin.builder.Builder
 import ru.nsu.ablaginin.dsl.Compiler
 import ru.nsu.ablaginin.dsl.bricks.Student

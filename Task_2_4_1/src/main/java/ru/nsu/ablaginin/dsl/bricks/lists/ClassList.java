@@ -4,7 +4,6 @@ import groovy.lang.Closure;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import ru.nsu.ablaginin.dsl.bricks.Class;
 import ru.nsu.ablaginin.helper.HelperDSL;
 
@@ -18,7 +17,7 @@ public class ClassList {
     @Getter
     private final List<Class> classList = new ArrayList<>();
 
-    public void newClass(Closure c) {
+    public void newClass(Closure<?> c) {
         var classString = new ClassString();
         c.setDelegate(classString);
         c.setResolveStrategy(Closure.DELEGATE_ONLY);

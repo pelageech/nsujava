@@ -4,7 +4,6 @@ import groovy.lang.Closure;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import ru.nsu.ablaginin.dsl.bricks.Mark;
 import ru.nsu.ablaginin.dsl.bricks.MarkNum;
 import ru.nsu.ablaginin.helper.HelperDSL;
@@ -18,7 +17,7 @@ import java.util.Objects;
 public class MarkList {
     @Getter private final List<Mark> marks = new ArrayList<>();
 
-    public void mark(Closure c) {
+    public void mark(Closure<?> c) {
         var markString = new MarkString();
         c.setDelegate(markString);
         c.setResolveStrategy(Closure.DELEGATE_ONLY);

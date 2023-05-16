@@ -2,10 +2,7 @@ package ru.nsu.ablaginin.dsl.bricks.lists;
 
 import groovy.lang.Closure;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import ru.nsu.ablaginin.dsl.bricks.GivenTask;
 import ru.nsu.ablaginin.dsl.bricks.Task;
 
 import java.util.ArrayList;
@@ -16,7 +13,7 @@ import java.util.Objects;
 public class TaskList {
     @Getter private final List<Task> taskList = new ArrayList<>();
 
-    public void task(Closure c) {
+    public void task(Closure<?> c) {
         var task = new Task();
         c.setDelegate(task);
         c.setResolveStrategy(Closure.DELEGATE_ONLY);

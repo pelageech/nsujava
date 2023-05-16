@@ -28,7 +28,7 @@ public class GitWorks {
         cloneCommand.setBranch(remoteBranch);
 
         //noinspection EmptyTryBlock
-        try (var git = cloneCommand.call()) {
+        try (var ignored = cloneCommand.call()) {
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
