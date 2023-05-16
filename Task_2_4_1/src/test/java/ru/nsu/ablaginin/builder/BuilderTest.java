@@ -21,7 +21,7 @@ public class BuilderTest {
                     f,
                     Optional.of("task-1-1-1")
             );
-            assertTrue(Builder.buildTest(new File(f.getPath() + "\\Task_1_1_1")));
+            assertTrue(Builder.buildTest(new File(f.getPath() + "/Task_1_1_1")));
             assertTrue(FileUtils.deleteRecursively(f));
         } catch (Exception e) {
             System.out.println(e.getMessage());
