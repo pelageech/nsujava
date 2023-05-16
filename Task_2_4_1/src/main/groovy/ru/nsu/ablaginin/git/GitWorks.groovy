@@ -8,7 +8,7 @@ class GitWorks {
 
     public static final String DEFAULT_BRANCH = "master";
 
-    void clone(String remotePath, File localPath, Optional<String> branch) {
+    static void clone(String remotePath, File localPath, Optional<String> branch) {
         var remoteBranch = branch.isPresent()
                 ? branch.get()
                 : DEFAULT_BRANCH;
