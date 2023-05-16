@@ -55,4 +55,5 @@ class CompilerTest {
 
         assertEquals(expected, student)
     }
+
 }
