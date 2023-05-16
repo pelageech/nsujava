@@ -21,7 +21,7 @@ dependencies {
     implementation('org.eclipse.jgit:org.eclipse.jgit:6.5.0.202303070854-r')
 // https://mvnrepository.com/artifact/org.gradle/gradle-tooling-api
     implementation 'org.gradle:gradle-tooling-api:7.3-20210825160000+0000'
-
+    implementation 'org.slf4j:slf4j-api:2.0.7'
 }
 
 java {

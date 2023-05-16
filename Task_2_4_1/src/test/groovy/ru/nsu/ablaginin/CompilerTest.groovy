@@ -1,6 +1,7 @@
-package ru.nsu.ablaginin;
+package ru.nsu.ablaginin
 
 import org.junit.jupiter.api.Test
+import ru.nsu.ablaginin.dsl.Compiler
 import ru.nsu.ablaginin.dsl.bricks.Class
 import ru.nsu.ablaginin.dsl.bricks.GivenTask
 import ru.nsu.ablaginin.dsl.bricks.Group
@@ -10,12 +11,11 @@ import ru.nsu.ablaginin.dsl.bricks.Student
 import ru.nsu.ablaginin.dsl.bricks.lists.ClassList
 import ru.nsu.ablaginin.dsl.bricks.lists.GivenTaskList
 import ru.nsu.ablaginin.dsl.bricks.lists.MarkList
-import ru.nsu.ablaginin.helper.HelperDSL;
+import ru.nsu.ablaginin.helper.HelperDSL
 
-import java.io.File
-import java.time.LocalDate;
+import java.time.LocalDate
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*
 
 class CompilerTest {
 
