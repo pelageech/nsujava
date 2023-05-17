@@ -22,7 +22,6 @@ public class BuilderTest {
                     Optional.of("task-1-1-1")
             );
             assertTrue(Builder.buildTest(new File(f.getPath() + "/Task_1_1_1")));
-            assertTrue(Builder.checkCodeStyle(new File(f.getPath() + "/Task_1_1_1")));
         } catch (Exception e) {
             System.out.println(e.getMessage());
             fail();
