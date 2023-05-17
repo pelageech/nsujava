@@ -35,46 +35,15 @@ public class Builder {
     }
 
     @SneakyThrows
-    public static void checkCodeStyle(File projectDir) {
-
-        // Create a Gradle connector and connect to the project
-        GradleConnector connector = GradleConnector.newConnector();
-        connector.forProjectDirectory(projectDir);
-
-        try (ProjectConnection connection = connector.connect()) {
-            // Get the build environment and project information
-//            BuildEnvironment buildEnvironment = connection.getModel(BuildEnvironment.class);
-//            BasicGradleProject project = connection.getModel(BasicGradleProject.class);
-
-            // Add the Checkstyle plugin and run the Checkstyle task
-            connection.newBuild()
-                    .withArguments(
-                            "--init-script",
-                            createInitScript(),
-                            "checkstyleMain"
-                    )
-                    .setStandardOutput(System.out)
-                    .setStandardError(System.err)
-                    .run();
+    public static boolean checkCodeStyle(File projectDir) {
+        try {
+            build(projectDir, "checkstyleMain");
+        } catch (Exception e) {
+            System.out.println("Failed to build");
+            System.out.println(e.getMessage());
+            return false;
         }
-    }
-
-    private static String createInitScript() {
-        return "initscript {" +
-                "  repositories {" +
-                "    mavenCentral()" +
-                "  }" +
-                "  dependencies {" +
-                "    classpath 'com.puppycrawl.tools:checkstyle:9.2'" +
-                "  }" +
-                "}" +
-                "allprojects {" +
-                "  apply plugin: com.puppycrawl.tools.checkstyle.CheckstylePlugin" +
-                "  checkstyle {" +
-                "    toolVersion = '9.2'" +
-                "    configFile = file('config/checkstyle/checkstyle.xml')" +
-                "  }" +
-                "}";
+        return true;
     }
 
     @SneakyThrows
