@@ -17,14 +17,14 @@ public class DSL {
     private Student student;
     private TaskList taskList;
 
-    public void student(Closure c) {
+    public void student(Closure<?> c) {
         student = new Student();
         c.setDelegate(student);
         c.setResolveStrategy(Closure.DELEGATE_ONLY);
         c.call();
     }
 
-    public void tasks(Closure c) {
+    public void tasks(Closure<?> c) {
         taskList = new TaskList();
         c.setDelegate(taskList);
         c.setResolveStrategy(Closure.DELEGATE_ONLY);
