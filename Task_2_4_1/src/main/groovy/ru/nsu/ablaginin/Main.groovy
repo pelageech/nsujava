@@ -1,41 +1,75 @@
 package ru.nsu.ablaginin
 
-
+import picocli.CommandLine
 import ru.nsu.ablaginin.builder.Builder
 import ru.nsu.ablaginin.dsl.Compiler
+import ru.nsu.ablaginin.dsl.DSL
 import ru.nsu.ablaginin.dsl.bricks.Student
 import ru.nsu.ablaginin.git.GitWorks
 import ru.nsu.ablaginin.helper.FileUtils
 
-b = !true
+import java.nio.file.Files
+import java.nio.file.Path
+import java.security.MessageDigest
+import java.util.concurrent.Callable
 
-if (b) {
-// create a new student
-    var student = Compiler.compile(
-            new File(getClass().getClassLoader().getResource("./conf/artyom.groovy").toURI()), Student.class
-    ) as Student
+@CommandLine.Command(name="labcheck", mixinStandardHelpOptions = true)
+class Main implements Callable<Integer> {
+    @CommandLine.Option(names = ["--config-dir"], description = "directory with all the config files")
+    File configDir
 
-// create a temp repo dir
-    var f = File.createTempDir("temp-repo")
-    f.deleteOnExit()
+    @CommandLine.Option(names = ["--config-file"], description = "config file")
+    File config
 
-// clone there
-    GitWorks.clone(student.url, f, Optional.of("task-1-2-3"))
+    @CommandLine.Option(names = ["-b", "--branch"], description = "branch", defaultValue = "master")
+    String branch
 
-// test the project
-    var path = f.path.concat("/Task_1_2_3")
-    try {
-        Builder.jacocoTestReport(new File(path))
-    } catch (Exception e) {
-        println e.getMessage()
+    Integer testConfig(File dslConfig) {
+        if (!dslConfig.exists()) {
+            println("File doesn't exist: " + dslConfig.getCanonicalPath())
+            return 1
+        }
+
+        try {
+            println("File " + dslConfig.getCanonicalPath() + " has got!")
+            DSL dsl = Compiler.compile(dslConfig, DSL.class) as DSL
+            if (dsl == null) {
+                println("Student info wasn't parsed. Skipping...")
+                return 2
+            }
+
+            Path p = Files.createTempDirectory("temp-repo")
+            File tempRepo = p.toFile()
+            tempRepo.deleteOnExit()
+
+            GitWorks.clone(dsl.student.getUrl(), tempRepo, Optional.of(branch))
+            Builder.checkCodeStyle(new File(p.toString().concat("/Task_1_1_1")))
+            if (!FileUtils.deleteRecursively(tempRepo)) {
+                println("Temp file has not been deleted: " + tempRepo.path)
+            }
+            println("Tests complete!")
+        } catch (Exception e) {
+            println(e.getMessage())
+            return 3
+        }
+        return 0
     }
-} else {
-    try {
-        Builder.checkCodeStyle(new File(
-                "C:\\Users\\Mi\\AppData\\Local\\Temp\\temp-repo12926346480599657874\\Task_1_2_3"
-        ))
-    } catch (Exception e) {
-        println e.getMessage()
+
+    static void main(String[] args) {
+        int exitCode = new CommandLine(new Main()).execute(args)
+        System.exit(exitCode)
+    }
+
+    @Override
+    Integer call() throws Exception {
+        if (configDir != null) {
+            for (f in configDir.listFiles()) {
+                testConfig(f)
+            }
+        }
+        if (config != null) {
+            testConfig(config)
+        }
+        return 0
     }
 }
-// FileUtils.deleteRecursively(f)
