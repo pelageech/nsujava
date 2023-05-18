@@ -1,8 +1,6 @@
 package ru.nsu.ablaginin.dsl
 
-
 import org.codehaus.groovy.control.CompilerConfiguration
-import ru.nsu.ablaginin.MainJava
 
 class Compiler {
     static Object compile(File file, Class clazz) {

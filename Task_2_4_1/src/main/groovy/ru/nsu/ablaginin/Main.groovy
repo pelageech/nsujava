@@ -54,7 +54,7 @@ class Main implements Callable<Integer> {
     }
 
     static void main(String[] args) {
-        int exitCode = new CommandLine(new MainJava()).execute(args)
+        int exitCode = new CommandLine(new Main()).execute(args)
         System.exit(exitCode)
     }
 
