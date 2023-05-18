@@ -4,13 +4,11 @@ import picocli.CommandLine
 import ru.nsu.ablaginin.builder.Builder
 import ru.nsu.ablaginin.dsl.Compiler
 import ru.nsu.ablaginin.dsl.DSL
-import ru.nsu.ablaginin.dsl.bricks.Student
 import ru.nsu.ablaginin.git.GitWorks
 import ru.nsu.ablaginin.helper.FileUtils
 
 import java.nio.file.Files
 import java.nio.file.Path
-import java.security.MessageDigest
 import java.util.concurrent.Callable
 
 @CommandLine.Command(name="labcheck", mixinStandardHelpOptions = true)
@@ -56,7 +54,7 @@ class Main implements Callable<Integer> {
     }
 
     static void main(String[] args) {
-        int exitCode = new CommandLine(new Main()).execute(args)
+        int exitCode = new CommandLine(new MainJava()).execute(args)
         System.exit(exitCode)
     }
 

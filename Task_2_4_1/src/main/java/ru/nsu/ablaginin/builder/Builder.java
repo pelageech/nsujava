@@ -1,12 +1,17 @@
 package ru.nsu.ablaginin.builder;
 
+import lombok.Cleanup;
 import lombok.SneakyThrows;
 import org.gradle.tooling.GradleConnector;
 import org.gradle.tooling.ProgressListener;
 import org.gradle.tooling.ProjectConnection;
+import org.w3c.dom.Node;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.beans.XMLDecoder;
+import java.io.*;
+import java.util.Objects;
 
 public class Builder {
 
@@ -47,7 +52,23 @@ public class Builder {
     }
 
     @SneakyThrows
-    public static void jacocoTestReport(File projectDir) {
-        build(projectDir, "jacocoTestReport");
+    public static void getJacocoTestReport(File projectDir) {
+        File testDir = new File(projectDir.getPath() + "/build/test-results/test");
+        if (!testDir.exists()) {
+            throw new FileNotFoundException(testDir.getAbsolutePath());
+        }
+
+        var files = testDir.listFiles(pathname -> !pathname.isDirectory());
+        if (files == null || files.length == 0) {
+            throw new IllegalStateException("there's no files to check");
+        }
+
+        for (var f : files) {
+            var docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            var document = docBuilder.parse(f);
+
+            Node root = document.getDocumentElement();
+            System.out.println(root.getAttributes().getNamedItem("name").getNodeValue());
+        }
     }
 }
