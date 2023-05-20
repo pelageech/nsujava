@@ -6,14 +6,17 @@ import org.gradle.tooling.GradleConnector;
 import org.gradle.tooling.ProgressListener;
 import org.gradle.tooling.ProjectConnection;
 import org.w3c.dom.Node;
+import ru.nsu.ablaginin.html.HTMLMake;
+import ru.nsu.ablaginin.html.HTMLTable;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.beans.XMLDecoder;
 import java.io.*;
-import java.util.Objects;
+import java.util.*;
 
 public class Builder {
+    private static final List<String> fields = List.of("name", "tests", "skipped", "failures", "errors", "timestamp", "time");
 
     @SneakyThrows
     public static void build(File projectDir, String task) {
@@ -52,7 +55,7 @@ public class Builder {
     }
 
     @SneakyThrows
-    public static void getJacocoTestReport(File projectDir) {
+    public static Map<String, String> getJacocoTestReport(File projectDir) {
         File testDir = new File(projectDir.getPath() + "/build/test-results/test");
         if (!testDir.exists()) {
             throw new FileNotFoundException(testDir.getAbsolutePath());
@@ -63,12 +66,26 @@ public class Builder {
             throw new IllegalStateException("there's no files to check");
         }
 
-        for (var f : files) {
-            var docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            var document = docBuilder.parse(f);
+        Map<String, String> table = new HashMap<>();
 
-            Node root = document.getDocumentElement();
-            System.out.println(root.getAttributes().getNamedItem("name").getNodeValue());
+        for (var f : files) {
+            try {
+                var docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+                var document = docBuilder.parse(f);
+
+                Node root = document.getDocumentElement();
+
+                var attrs = root.getAttributes();
+
+                for (var field : fields) {
+                    table.put(field, attrs.getNamedItem(field).getNodeValue());
+                }
+
+            } catch (Exception e) {
+                System.out.println("File " + f.getPath() + ": " + e.getMessage());
+            }
         }
+
+        return table;
     }
 }

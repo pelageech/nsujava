@@ -1,7 +1,7 @@
 package ru.nsu.ablaginin.config
 
 student {
-    nickname = "miqqra"
+    nickname = "pelageech"
     name = "Artyom"
     url = "https://github.com/pelageech/nsujava.git"
     marks {
@@ -16,15 +16,15 @@ student {
     }
     tasks {
         task {
-            id = "Task_1_2_3"
+            id = "Task_1_1_12"
             date = "11-09-2023"
         }
         task {
-            id = "Task_2_2_1"
+            id = "Task_1_2_2"
             date = "11-09-2023"
         }
         task {
-            id = "Task_1_3_1"
+            id = "Task_2_1_1"
             date = "11-09-2023"
         }
     }
