@@ -37,13 +37,17 @@ jacocoTestReport {
     reports {
         xml.required = true
     }
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    'ru/nsu/ablaginin/dsl/**',
+                    'ru/nsu/ablaginin/config/**',
+                    'ru/nsu/ablaginin/Main.groovy'
+            ])
+        }))
+    }
 }
 
 test {
     useJUnitPlatform()
-}
-
-configurations {
-    runtime.exclude group: "ru.nsu.ablaginin", module: "dsl"
-    // there are only objects. No need to test them
 }
