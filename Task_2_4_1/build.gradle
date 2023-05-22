@@ -42,7 +42,7 @@ jacocoTestReport {
             fileTree(dir: it, exclude: [
                     'ru/nsu/ablaginin/dsl/**',
                     'ru/nsu/ablaginin/config/**',
-                    'ru/nsu/ablaginin/Main.groovy'
+                    'ru/nsu/ablaginin/Main.groovy/**'
             ])
         }))
     }
