@@ -39,7 +39,11 @@ jacocoTestReport {
     }
 }
 
-
 test {
     useJUnitPlatform()
+}
+
+configurations {
+    runtime.exclude group: "ru.nsu.ablaginin", module: "dsl"
+    // there are only objects. No need to test them
 }
