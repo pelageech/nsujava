@@ -46,13 +46,13 @@ tasks {
         score = 10
     }
     task {
-        id = "task-1-2-1"
-        name = "stack"
+        id = "Task_1_2_2"
+        name = "Tree"
         score = 8
     }
     task {
-        id = "task-1-2-2"
-        name = "tree"
-        score = 10
+        id = "Task_2_1_1"
+        name = "Threads"
+        score = 6
     }
 }

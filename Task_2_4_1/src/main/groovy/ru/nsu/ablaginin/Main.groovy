@@ -47,9 +47,11 @@ class Main implements Callable<Integer> {
             localTable.th.addTh(v)
         }
 
+        var tasks = dsl.getTaskMap()
         var givenTasks = dsl.getStudent().getGivenTaskList().getGivenTaskList()
 
         for (t in givenTasks) {
+            var currentTask = tasks.getTaskMap().get(t.id)
             var nick = dsl.student.nickname
             var task = t.id
             var build = "N"
@@ -59,7 +61,7 @@ class Main implements Callable<Integer> {
             var failures = "-"
             var errors = "-"
             var time = "-"
-            var score = "0"
+            var score = "-"
 
             try {
                 var taskFile = new File(p.toString().concat("/" + t.getId()))
@@ -67,19 +69,29 @@ class Main implements Callable<Integer> {
                 // tests START
                 Builder.buildTest(taskFile)
                 var map = Builder.getJacocoTestReport(taskFile)
+
+                Double maxScore = -1
+                if (currentTask != null) {
+                    maxScore = currentTask.score
+                    task += " ($currentTask.name)"
+                }
+
                 build = "Y"
                 tests = map.get("tests")
                 skipped = map.get("skipped")
                 failures = map.get("failures")
                 errors = map.get("errors")
                 time = map.get("time")
-                score = "10"
+                if (maxScore != -1) {
+                    score = (maxScore * (1 - (Double.parseDouble(failures) + Double.parseDouble(errors)) /
+                            (Double.parseDouble(tests) - Double.parseDouble(skipped)))).toString() + "/" + maxScore.toString()
+                }
                 // tests END
                 // style STARTS
 
                 // style ENDS
 
-            } catch (FileNotFoundException e) {
+            } catch (Exception e) {
                 println "Task " + t.getId() + ": " + e.getMessage()
             }
             // table building STARTS
@@ -134,6 +146,7 @@ class Main implements Callable<Integer> {
         OutputStream os = new BufferedOutputStream(new FileOutputStream(file))
         os.write(globTable.build().getBytes())
         os.flush()
+        println "Your report is in " + file.getPath()
         return 0
     }
 }

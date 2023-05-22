@@ -5,20 +5,20 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import ru.nsu.ablaginin.dsl.bricks.Task;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 @AllArgsConstructor
-public class TaskList {
-    @Getter private final List<Task> taskList = new ArrayList<>();
+public class TaskMap {
+    @Getter private final Map<String, Task> taskMap = new HashMap<>();
 
     public void task(Closure<?> c) {
         var task = new Task();
         c.setDelegate(task);
         c.setResolveStrategy(Closure.DELEGATE_ONLY);
-        taskList.add(task);
         c.call();
+        taskMap.put(task.getId(), task);
     }
 
     public void methodMissing(String name, Object args) {
@@ -28,7 +28,7 @@ public class TaskList {
     @Override
     public String toString() {
         return "GivenTaskList{"
-                + "givenTaskList=" + taskList
+                + "givenTaskList=" + taskMap
                 + '}';
     }
 
@@ -36,12 +36,12 @@ public class TaskList {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TaskList taskList1 = (TaskList) o;
-        return Objects.equals(taskList, taskList1.taskList);
+        TaskMap taskList1 = (TaskMap) o;
+        return Objects.equals(taskMap, taskList1.taskMap);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(taskList);
+        return Objects.hash(taskMap);
     }
 }

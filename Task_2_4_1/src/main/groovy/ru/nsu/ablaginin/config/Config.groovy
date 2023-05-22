@@ -20,7 +20,7 @@ student {
             date = "11-09-2023"
         }
         task {
-            id = "Task_2_2_1"
+            id = "Task_2_3_1"
             date = "11-09-2023"
         }
         task {
@@ -41,17 +41,17 @@ student {
 
 tasks {
     task {
-        id = "task-1-1-1"
-        name = "heapsort"
-        score = 10
+        id = "Task_1_2_3"
+        name = "Graph"
+        score = 20
     }
     task {
-        id = "task-1-2-1"
-        name = "stack"
-        score = 8
+        id = "Task_2_3_1"
+        name = "Snake"
+        score = 15
     }
     task {
-        id = "task-1-2-2"
+        id = "Task_1_3_1"
         name = "tree"
         score = 10
     }

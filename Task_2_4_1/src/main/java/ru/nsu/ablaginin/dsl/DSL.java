@@ -2,20 +2,13 @@ package ru.nsu.ablaginin.dsl;
 
 import groovy.lang.Closure;
 import lombok.Data;
-import ru.nsu.ablaginin.dsl.bricks.Group;
 import ru.nsu.ablaginin.dsl.bricks.Student;
-import ru.nsu.ablaginin.dsl.bricks.lists.StudentList;
-import ru.nsu.ablaginin.dsl.bricks.lists.TaskList;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import ru.nsu.ablaginin.dsl.bricks.lists.TaskMap;
 
 @Data
 public class DSL {
     private Student student;
-    private TaskList taskList;
+    private TaskMap taskMap;
 
     public void student(Closure<?> c) {
         student = new Student();
@@ -25,8 +18,8 @@ public class DSL {
     }
 
     public void tasks(Closure<?> c) {
-        taskList = new TaskList();
-        c.setDelegate(taskList);
+        taskMap = new TaskMap();
+        c.setDelegate(taskMap);
         c.setResolveStrategy(Closure.DELEGATE_ONLY);
         c.call();
     }
