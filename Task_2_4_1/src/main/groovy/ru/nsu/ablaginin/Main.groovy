@@ -1,11 +1,12 @@
 package ru.nsu.ablaginin
 
 import picocli.CommandLine
-import ru.nsu.ablaginin.builder.Builder
+import ru.nsu.ablaginin.application.App
 import ru.nsu.ablaginin.dsl.Compiler
 import ru.nsu.ablaginin.dsl.DSL
 import ru.nsu.ablaginin.git.GitWorks
 import ru.nsu.ablaginin.helper.FileUtils
+import ru.nsu.ablaginin.html.HTMLMake
 import ru.nsu.ablaginin.html.HTMLTable
 
 import java.nio.file.Files
@@ -14,7 +15,6 @@ import java.util.concurrent.Callable
 
 @CommandLine.Command(name="labcheck", mixinStandardHelpOptions = true)
 class Main implements Callable<Integer> {
-    private static final List<String> fields = List.of("nickname", "task", "build", "style", "tests", "skipped", "failures", "errors", "time", "score")
 
     @CommandLine.Option(names = ["--config-dir"], description = "directory with all the config files")
     File configDir
@@ -22,100 +22,17 @@ class Main implements Callable<Integer> {
     @CommandLine.Option(names = ["--config-file"], description = "config file")
     File config
 
-    @CommandLine.Option(names = ["-b", "--branch"], description = "branch", defaultValue = "master")
+    @CommandLine.Option(names = ["-B", "--branch"], description = "branch", defaultValue = "master")
     String branch
 
-    HTMLTable testConfig(File dslConfig) {
-        if (!dslConfig.exists()) {
-            throw new FileNotFoundException("File doesn't exist: " + dslConfig.getCanonicalPath())
-        }
+    @CommandLine.Option(names = ["-s", "--style"], description = "is check style needed")
+    Boolean style = false
 
-        println("File " + dslConfig.getCanonicalPath() + " has got!")
-        DSL dsl = Compiler.compile(dslConfig, DSL.class) as DSL
-        if (dsl == null) {
-            throw new IllegalStateException("Student info wasn't parsed. Skipping...")
-        }
+    @CommandLine.Option(names = ["-d", "--javadoc"], description = "is javadoc gen needed")
+    Boolean javadoc = false
 
-        Path p = Files.createTempDirectory("temp-repo")
-        File tempRepo = p.toFile()
-        tempRepo.deleteOnExit()
-
-        GitWorks.clone(dsl.student.getUrl(), tempRepo, Optional.of(branch))
-
-        HTMLTable localTable = new HTMLTable()
-        for (v in fields) {
-            localTable.th.addTh(v)
-        }
-
-        var tasks = dsl.getTaskMap()
-        var givenTasks = dsl.getStudent().getGivenTaskList().getGivenTaskList()
-
-        for (t in givenTasks) {
-            var currentTask = tasks.getTaskMap().get(t.id)
-            var nick = dsl.student.nickname
-            var task = t.id
-            var build = "N"
-            var style = "N"
-            var tests = "-"
-            var skipped = "-"
-            var failures = "-"
-            var errors = "-"
-            var time = "-"
-            var score = "-"
-
-            try {
-                var taskFile = new File(p.toString().concat("/" + t.getId()))
-
-                // tests START
-                Builder.buildTest(taskFile)
-                var map = Builder.getJacocoTestReport(taskFile)
-
-                Double maxScore = -1
-                if (currentTask != null) {
-                    maxScore = currentTask.score
-                    task += " ($currentTask.name)"
-                }
-
-                build = "Y"
-                tests = map.get("tests")
-                skipped = map.get("skipped")
-                failures = map.get("failures")
-                errors = map.get("errors")
-                time = map.get("time")
-                if (maxScore != -1) {
-                    score = (maxScore * (1 - (Double.parseDouble(failures) + Double.parseDouble(errors)) /
-                            (Double.parseDouble(tests) - Double.parseDouble(skipped)))).toString() + "/" + maxScore.toString()
-                }
-                // tests END
-                // style STARTS
-
-                // style ENDS
-
-            } catch (Exception e) {
-                println "Task " + t.getId() + ": " + e.getMessage()
-            }
-            // table building STARTS
-            HTMLTable.Tr tr = new HTMLTable.Tr()
-            tr.addTd(nick) // nick
-            tr.addTd(task) // task
-            tr.addTd(build) // build
-            tr.addTd(style) // style
-            tr.addTd(tests) // tests
-            tr.addTd(skipped)
-            tr.addTd(failures)
-            tr.addTd(errors)
-            tr.addTd(time)
-            tr.addTd(score)
-            localTable.tbody.add(tr)
-            // table building ENDS
-        }
-
-        if (!FileUtils.deleteRecursively(tempRepo)) {
-            println("Temp file has not been deleted: " + tempRepo.path)
-        }
-        println("Tests complete!")
-        return localTable
-    }
+    @CommandLine.Option(names = ['-a', '--attendance'], description = 'should consider an attendance?')
+    Boolean attendance = false
 
     static void main(String[] args) {
         int exitCode = new CommandLine(new Main()).execute(args)
@@ -124,29 +41,74 @@ class Main implements Callable<Integer> {
 
     @Override
     Integer call() throws Exception {
+        HTMLMake make = new HTMLMake()
         HTMLTable globTable = new HTMLTable()
-        for (v in fields) {
+        for (v in App.fieldsTable) {
             globTable.th.addTh(v)
         }
 
+        HTMLTable attendanceTable = new HTMLTable()
+        for (v in App.fieldsAttendance) {
+            attendanceTable.th.addTh(v)
+        }
+
+        // iterate through directory of configs
         if (configDir != null) {
             for (f in configDir.listFiles()) {
                 try {
-                    globTable.merge(testConfig(f))
+                    buildProject(f, globTable, attendanceTable)
                 } catch (Exception e) {
                     println "Failed configure: " + f.getPath() + " " + e.getMessage()
                 }
             }
         }
+
+        // check only one config
         if (config != null) {
-            globTable.merge(testConfig(config))
+            if (!config.exists()) {
+                throw new FileNotFoundException("File doesn't exist: " + config.getCanonicalPath())
+            }
+            println("File " + config.getCanonicalPath() + " has got!")
+            try {
+                buildProject(config, globTable, attendanceTable)
+            } catch (Exception e) {
+                println "Failed configure: " + config.getPath() + " " + e.getMessage()
+            }
         }
 
+        make.addBuilder(globTable)
+        make.addBuilder(attendanceTable)
+
+        // put the table into file
         File file = Files.createTempFile("temp", ".html").toFile()
-        OutputStream os = new BufferedOutputStream(new FileOutputStream(file))
-        os.write(globTable.build().getBytes())
-        os.flush()
+        try (OutputStream os = new BufferedOutputStream(new FileOutputStream(file))) {
+            os.write(make.build().getBytes())
+            os.flush()
+        } catch (IOException e) {
+            println "Failed writing to file " + file.getPath() + " " + e.getMessage()
+        }
         println "Your report is in " + file.getPath()
         return 0
+    }
+
+    private void buildProject(File f, HTMLTable globTable, HTMLTable attendanceTable) {
+        DSL dsl = Compiler.compile(f, DSL.class) as DSL
+        if (dsl == null) {
+            throw new IllegalStateException("Student info wasn't parsed. Skipping...")
+        }
+        Path p = Files.createTempDirectory("temp-repo")
+        File tempRepo = p.toFile()
+        tempRepo.deleteOnExit()
+
+        GitWorks.clone(dsl.student.getUrl(), tempRepo, Optional.of(branch))
+        globTable.merge(App.testConfig(tempRepo, dsl, branch, style, javadoc))
+
+        if (attendance) {
+            attendanceTable.merge(App.attendance(
+                    tempRepo, dsl.student.nickname, dsl.student.classes.classList
+            ))
+        }
+
+        FileUtils.deleteRecursively(tempRepo)
     }
 }

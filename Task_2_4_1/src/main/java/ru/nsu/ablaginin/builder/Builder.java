@@ -55,6 +55,18 @@ public class Builder {
     }
 
     @SneakyThrows
+    public static boolean buildJavadoc(File projectDir) {
+        try {
+            build(projectDir, "javadoc");
+        } catch (Exception e) {
+            System.out.println("Failed to build");
+            System.out.println(e.getMessage());
+            return false;
+        }
+        return true;
+    }
+
+    @SneakyThrows
     public static Map<String, String> getJacocoTestReport(File projectDir) {
         File testDir = new File(projectDir.getPath() + "/build/test-results/test");
         if (!testDir.exists()) {

@@ -33,6 +33,18 @@ student {
             date = "11-05-2023"
             attendance = true
         }
+        newClass {
+            date = "11-02-2023"
+            attendance = true
+        }
+        newClass {
+            date = "11-11-2022"
+            attendance = true
+        }
+        newClass {
+            date = "01-10-2022"
+            attendance = true
+        }
     }
     group {
         number = 12

@@ -2,8 +2,8 @@ package ru.nsu.ablaginin.config
 
 student {
     nickname = "miqqra"
-    name = "Artyom"
-    url = "https://github.com/pelageech/nsujava.git"
+    name = "Michail"
+    url = "https://github.com/miqqra/OOP.git"
     marks {
         mark {
             mark = 5
@@ -20,7 +20,7 @@ student {
             date = "11-09-2023"
         }
         task {
-            id = "Task_2_3_1"
+            id = "Task_1_4_1"
             date = "11-09-2023"
         }
         task {
@@ -31,6 +31,18 @@ student {
     classes {
         newClass {
             date = "11-05-2023"
+            attendance = true
+        }
+        newClass {
+            date = "11-02-2023"
+            attendance = true
+        }
+        newClass {
+            date = "11-11-2022"
+            attendance = true
+        }
+        newClass {
+            date = "01-10-2022"
             attendance = true
         }
     }
@@ -46,13 +58,13 @@ tasks {
         score = 20
     }
     task {
-        id = "Task_2_3_1"
-        name = "Snake"
+        id = "Task_1_4_1"
+        name = "Student's book"
         score = 15
     }
     task {
         id = "Task_1_3_1"
-        name = "tree"
+        name = "Substring"
         score = 10
     }
 }
