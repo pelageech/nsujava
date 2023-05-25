@@ -3,19 +3,18 @@ package ru.nsu.ablaginin.html;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @NoArgsConstructor
-public class HTMLTable implements HTMLBuilder{
+public class HtmlTable implements HtmlBuilder {
     @Getter
     final Th th = new Th();
     @Getter final List<Tr> tbody = new ArrayList<>();
 
-    public boolean merge(HTMLTable table) {
+    public boolean merge(HtmlTable table) {
         if (!this.th.equals(table.th)) {
             return false;
         }
@@ -33,11 +32,11 @@ public class HTMLTable implements HTMLBuilder{
               + "</thead><tbody>"
               + tbody.stream().map(Tr::build).collect(Collectors.joining())
               + "</tbody></table>"
-              + "<style>table, th, td { border: 1px solid black; }</style>" ;
+              + "<style>table, th, td { border: 1px solid black; }</style>";
     }
 
     @Data
-    public static class Th implements HTMLBuilder {
+    public static class Th implements HtmlBuilder {
         private final List<String> ths = new ArrayList<>();
 
         public void addTh(String th) {
@@ -53,7 +52,7 @@ public class HTMLTable implements HTMLBuilder{
         }
     }
 
-    public static class Tr implements HTMLBuilder {
+    public static class Tr implements HtmlBuilder {
         private final List<String> tds = new ArrayList<>();
 
         public void addTd(String td) {

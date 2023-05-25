@@ -1,22 +1,18 @@
 package ru.nsu.ablaginin.builder;
 
-import lombok.Cleanup;
 import lombok.SneakyThrows;
 import org.gradle.tooling.GradleConnector;
 import org.gradle.tooling.ProgressListener;
-import org.gradle.tooling.ProjectConnection;
 import org.w3c.dom.Node;
-import ru.nsu.ablaginin.html.HTMLMake;
-import ru.nsu.ablaginin.html.HTMLTable;
 
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.beans.XMLDecoder;
 import java.io.*;
 import java.util.*;
 
 public class Builder {
-    private static final List<String> fields = List.of("name", "tests", "skipped", "failures", "errors", "timestamp", "time");
+    private static final List<String> fields = List.of(
+            "name", "tests", "skipped", "failures", "errors", "timestamp", "time"
+    );
 
     @SneakyThrows
     public static void build(File projectDir, String task) {

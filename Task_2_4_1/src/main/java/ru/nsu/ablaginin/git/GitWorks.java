@@ -32,9 +32,9 @@ public class GitWorks {
         cloneCommand.setProgressMonitor(new TextProgressMonitor());
         cloneCommand.setDirectory(localFile);
         cloneCommand.setBranch(remoteBranch);
-        //noinspection EmptyTryBlock
-        try (var ignored = cloneCommand.call()) {
 
+        try (var ignored = cloneCommand.call()) {
+            System.out.print(""); // reviewdog requires something here D:
         } catch (Exception e) {
             System.out.println(e.getMessage());
             throw e;

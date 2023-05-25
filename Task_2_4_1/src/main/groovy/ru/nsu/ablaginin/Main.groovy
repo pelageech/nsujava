@@ -3,11 +3,11 @@ package ru.nsu.ablaginin
 import picocli.CommandLine
 import ru.nsu.ablaginin.application.App
 import ru.nsu.ablaginin.dsl.Compiler
-import ru.nsu.ablaginin.dsl.DSL
+import ru.nsu.ablaginin.dsl.Dsl
 import ru.nsu.ablaginin.git.GitWorks
 import ru.nsu.ablaginin.helper.FileUtils
-import ru.nsu.ablaginin.html.HTMLMake
-import ru.nsu.ablaginin.html.HTMLTable
+import ru.nsu.ablaginin.html.HtmlMake
+import ru.nsu.ablaginin.html.HtmlTable
 
 import java.nio.file.Files
 import java.nio.file.Path
@@ -41,13 +41,13 @@ class Main implements Callable<Integer> {
 
     @Override
     Integer call() throws Exception {
-        HTMLMake make = new HTMLMake()
-        HTMLTable globTable = new HTMLTable()
+        HtmlMake make = new HtmlMake()
+        HtmlTable globTable = new HtmlTable()
         for (v in App.fieldsTable) {
             globTable.th.addTh(v)
         }
 
-        HTMLTable attendanceTable = new HTMLTable()
+        HtmlTable attendanceTable = new HtmlTable()
         for (v in App.fieldsAttendance) {
             attendanceTable.th.addTh(v)
         }
@@ -91,8 +91,8 @@ class Main implements Callable<Integer> {
         return 0
     }
 
-    private void buildProject(File f, HTMLTable globTable, HTMLTable attendanceTable) {
-        DSL dsl = Compiler.compile(f, DSL.class) as DSL
+    private void buildProject(File f, HtmlTable globTable, HtmlTable attendanceTable) {
+        Dsl dsl = Compiler.compile(f, Dsl.class) as Dsl
         if (dsl == null) {
             throw new IllegalStateException("Student info wasn't parsed. Skipping...")
         }

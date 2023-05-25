@@ -6,14 +6,14 @@ import lombok.Data;
 import lombok.Getter;
 import ru.nsu.ablaginin.dsl.bricks.Mark;
 import ru.nsu.ablaginin.dsl.bricks.MarkNum;
-import ru.nsu.ablaginin.helper.HelperDSL;
+import ru.nsu.ablaginin.helper.HelperDsl;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @AllArgsConstructor
+@Data
 public class MarkList {
     @Getter private final List<Mark> marks = new ArrayList<>();
 
@@ -26,7 +26,7 @@ public class MarkList {
 
         Mark mark = new Mark(
                 MarkNum.fromInt(markString.mark),
-                LocalDate.parse(markString.date, HelperDSL.FORMATTER)
+                LocalDate.parse(markString.date, HelperDsl.FORMATTER)
         );
         marks.add(mark);
     }
@@ -39,25 +39,5 @@ public class MarkList {
     private static class MarkString {
         private int mark;
         private String date;
-    }
-
-    @Override
-    public String toString() {
-        return "Marks{"
-                + "marks=" + marks
-                + '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        MarkList markList = (MarkList) o;
-        return Objects.equals(marks, markList.marks);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(marks);
     }
 }

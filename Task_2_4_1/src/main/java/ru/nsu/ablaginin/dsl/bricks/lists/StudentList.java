@@ -2,6 +2,7 @@ package ru.nsu.ablaginin.dsl.bricks.lists;
 
 import groovy.lang.Closure;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import ru.nsu.ablaginin.dsl.bricks.Student;
 
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
+@Data
 public class StudentList {
     @Getter
     private final List<Student> studentList = new ArrayList<>();
@@ -23,12 +25,5 @@ public class StudentList {
 
     public void methodMissing(String name, Object args) {
         System.out.println(name + " was called with " + args.toString());
-    }
-
-    @Override
-    public String toString() {
-        return "GivenTaskList{"
-                + "givenTaskList=" + studentList
-                + '}';
     }
 }

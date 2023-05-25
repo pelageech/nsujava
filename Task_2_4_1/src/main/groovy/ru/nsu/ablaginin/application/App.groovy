@@ -1,25 +1,21 @@
 package ru.nsu.ablaginin.application
 
 import ru.nsu.ablaginin.builder.Builder
-import ru.nsu.ablaginin.dsl.DSL
+import ru.nsu.ablaginin.dsl.Dsl
 import ru.nsu.ablaginin.dsl.bricks.Class
-import ru.nsu.ablaginin.dsl.bricks.lists.ClassList
 import ru.nsu.ablaginin.git.GitWorks
-import ru.nsu.ablaginin.helper.FileUtils
-import ru.nsu.ablaginin.html.HTMLTable
+import ru.nsu.ablaginin.html.HtmlTable
 
-import java.nio.file.Files
 import java.nio.file.Path
-import java.time.LocalDate
 
 class App {
     public static final List<String> fieldsTable = List.of("nickname", "task", "build", "style", "javadoc", "tests", "skipped", "failures", "errors", "time", "score")
     public static final List<String> fieldsAttendance = List.of("nickname", "date", "attendance")
 
-    static HTMLTable testConfig(File tempRepo, DSL dsl, String branch, Boolean styleCheck, Boolean javadocCheck) {
+    static HtmlTable testConfig(File tempRepo, Dsl dsl, String branch, Boolean styleCheck, Boolean javadocCheck) {
         Path p = tempRepo.toPath()
 
-        HTMLTable localTable = new HTMLTable()
+        HtmlTable localTable = new HtmlTable()
         for (v in fieldsTable) {
             localTable.th.addTh(v)
         }
@@ -89,7 +85,7 @@ class App {
                 println "Task " + t.getId() + ": " + e.getMessage()
             }
             // table building STARTS
-            HTMLTable.Tr tr = new HTMLTable.Tr()
+            HtmlTable.Tr tr = new HtmlTable.Tr()
             tr.addTd(nick) // nick
             tr.addTd(task) // task
             tr.addTd(build) // build
@@ -109,15 +105,15 @@ class App {
         return localTable
     }
 
-    static HTMLTable attendance(File repository, String nickname, List<Class> classList) {
-        HTMLTable localTable = new HTMLTable()
+    static HtmlTable attendance(File repository, String nickname, List<Class> classList) {
+        HtmlTable localTable = new HtmlTable()
         for (v in fieldsAttendance) {
             localTable.th.addTh(v)
         }
 
         for (c in classList) {
             var date = c.date
-            HTMLTable.Tr tr = new HTMLTable.Tr()
+            HtmlTable.Tr tr = new HtmlTable.Tr()
             tr.addTd(nickname)
             tr.addTd(date.toString())
 

@@ -5,14 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import ru.nsu.ablaginin.dsl.bricks.Class;
-import ru.nsu.ablaginin.helper.HelperDSL;
+import ru.nsu.ablaginin.helper.HelperDsl;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @AllArgsConstructor
+@Data
 public class ClassList {
     @Getter
     private final List<Class> classList = new ArrayList<>();
@@ -24,7 +24,7 @@ public class ClassList {
         c.call();
 
         Class newClass = new Class(
-                LocalDate.parse(classString.date, HelperDSL.FORMATTER),
+                LocalDate.parse(classString.date, HelperDsl.FORMATTER),
                 classString.attendance
         );
         classList.add(newClass);
@@ -34,25 +34,5 @@ public class ClassList {
     private static class ClassString {
         private String date;
         private boolean attendance;
-    }
-
-    @Override
-    public String toString() {
-        return "ClassList{"
-                + "classList=" + classList
-                + '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ClassList classList1 = (ClassList) o;
-        return Objects.equals(classList, classList1.classList);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(classList);
     }
 }

@@ -1,5 +1,5 @@
 package ru.nsu.ablaginin.html;
 
-public interface HTMLBuilder {
+public interface HtmlBuilder {
     String build();
 }

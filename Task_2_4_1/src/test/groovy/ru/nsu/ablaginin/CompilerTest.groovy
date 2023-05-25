@@ -11,7 +11,7 @@ import ru.nsu.ablaginin.dsl.bricks.Student
 import ru.nsu.ablaginin.dsl.bricks.lists.ClassList
 import ru.nsu.ablaginin.dsl.bricks.lists.GivenTaskList
 import ru.nsu.ablaginin.dsl.bricks.lists.MarkList
-import ru.nsu.ablaginin.helper.HelperDSL
+import ru.nsu.ablaginin.helper.HelperDsl
 
 import java.time.LocalDate
 
@@ -25,20 +25,20 @@ class CompilerTest {
                 getClass().getClassLoader().getResource("./conf/artyom.groovy").toURI()
         ), Student.class) as Student
 
-        var mark1 = new Mark(MarkNum.EXCELLENT, LocalDate.parse("11-05-2023", HelperDSL.FORMATTER))
-        var mark2 = new Mark(MarkNum.BAD, LocalDate.parse("12-05-2023", HelperDSL.FORMATTER))
+        var mark1 = new Mark(MarkNum.EXCELLENT, LocalDate.parse("11-05-2023", HelperDsl.FORMATTER))
+        var mark2 = new Mark(MarkNum.BAD, LocalDate.parse("12-05-2023", HelperDsl.FORMATTER))
 
         var task1 = new GivenTask(
                 "task-1-1-1",
-                LocalDate.parse("11-09-2023", HelperDSL.FORMATTER)
+                LocalDate.parse("11-09-2023", HelperDsl.FORMATTER)
         )
 
         var task2 = new GivenTask(
                 "task-1-2-1",
-                LocalDate.parse("11-09-2023", HelperDSL.FORMATTER)
+                LocalDate.parse("11-09-2023", HelperDsl.FORMATTER)
         )
 
-        var class1 = new Class(LocalDate.parse("11-05-2023", HelperDSL.FORMATTER), true)
+        var class1 = new Class(LocalDate.parse("11-05-2023", HelperDsl.FORMATTER), true)
 
         Student expected = new Student(
                 "pelageech",

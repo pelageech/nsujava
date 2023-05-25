@@ -6,7 +6,7 @@ import ru.nsu.ablaginin.dsl.bricks.Student;
 import ru.nsu.ablaginin.dsl.bricks.lists.TaskMap;
 
 @Data
-public class DSL {
+public class Dsl {
     private Student student;
     private TaskMap taskMap;
 
