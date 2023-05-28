@@ -86,6 +86,7 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public static class </span><span class="element-name type-name-label">HtmlTable.Th</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="HtmlBuilder.html" title="interface in ru.nsu.ablaginin.html">HtmlBuilder</a></span></div>
+<div class="block">Implementation of TH tag.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -115,10 +116,14 @@ implements <a href="HtmlBuilder.html" title="interface in ru.nsu.ablaginin.html"
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addTh(java.lang.String)" class="member-name-link">addTh</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;th)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Adds new TH tag.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#build()" class="member-name-link">build</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Builds an html string and returns it.</div>
+</div>
 </div>
 </div>
 </div>
@@ -154,15 +159,24 @@ implements <a href="HtmlBuilder.html" title="interface in ru.nsu.ablaginin.html"
 <section class="detail" id="addTh(java.lang.String)">
 <h3>addTh</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addTh</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;th)</span></div>
+<div class="block">Adds new TH tag.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>th</code> - th tag</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="build()">
 <h3>build</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">build</span>()</div>
+<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="HtmlBuilder.html#build()">HtmlBuilder</a></code></span></div>
+<div class="block">Builds an html string and returns it.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="HtmlBuilder.html#build()">build</a></code>&nbsp;in interface&nbsp;<code><a href="HtmlBuilder.html" title="interface in ru.nsu.ablaginin.html">HtmlBuilder</a></code></dd>
+<dt>Returns:</dt>
+<dd>html string</dd>
 </dl>
 </section>
 </li>

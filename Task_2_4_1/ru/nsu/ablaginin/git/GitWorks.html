@@ -123,12 +123,16 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#checkAttendance(java.io.File,java.time.LocalDate)" class="member-name-link">checkAttendance</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;repositoryDir,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/LocalDate.html" title="class or interface in java.time" class="external-link">LocalDate</a>&nbsp;date)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Checks if the student were on the classes.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#clone(java.lang.String,java.io.File,java.util.Optional)" class="member-name-link">clone</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;remotePath,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;localFile,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;branch)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Clones a repository to the particular folder.</div>
+</div>
 </div>
 </div>
 </div>
@@ -189,9 +193,14 @@ loadScripts(document, 'script');</script>
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;localFile,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;branch)</span>
                   throws <span class="exceptions">org.eclipse.jgit.api.errors.GitAPIException</span></div>
+<div class="block">Clones a repository to the particular folder.</div>
 <dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>remotePath</code> - remote, e.g. GitHub, URL</dd>
+<dd><code>localFile</code> - where to clone</dd>
+<dd><code>branch</code> - optional branch</dd>
 <dt>Throws:</dt>
-<dd><code>org.eclipse.jgit.api.errors.GitAPIException</code></dd>
+<dd><code>org.eclipse.jgit.api.errors.GitAPIException</code> - git api exception</dd>
 </dl>
 </section>
 </li>
@@ -200,6 +209,14 @@ loadScripts(document, 'script');</script>
 <h3>checkAttendance</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">checkAttendance</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;repositoryDir,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/LocalDate.html" title="class or interface in java.time" class="external-link">LocalDate</a>&nbsp;date)</span></div>
+<div class="block">Checks if the student were on the classes.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>repositoryDir</code> - repository</dd>
+<dd><code>date</code> - date to check</dd>
+<dt>Returns:</dt>
+<dd>if the student were present on the given date</dd>
+</dl>
 </section>
 </li>
 </ul>

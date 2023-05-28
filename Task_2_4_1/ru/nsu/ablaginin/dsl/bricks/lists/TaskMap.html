@@ -77,6 +77,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">TaskMap</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Map of classes that are parsed by Groovy.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -105,12 +106,10 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#methodMissing(java.lang.String,java.lang.Object)" class="member-name-link">methodMissing</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;args)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#task(groovy.lang.Closure)" class="member-name-link">task</a><wbr>(groovy.lang.Closure&lt;?&gt;&nbsp;c)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#task(groovy.lang.Closure)" class="member-name-link">task</a><wbr>(groovy.lang.Closure&lt;?&gt;&nbsp;c)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Parses a task and adds it to the map.</div>
+</div>
 </div>
 </div>
 </div>
@@ -146,13 +145,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="task(groovy.lang.Closure)">
 <h3>task</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">task</span><wbr><span class="parameters">(groovy.lang.Closure&lt;?&gt;&nbsp;c)</span></div>
-</section>
-</li>
-<li>
-<section class="detail" id="methodMissing(java.lang.String,java.lang.Object)">
-<h3>methodMissing</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">methodMissing</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;args)</span></div>
+<div class="block">Parses a task and adds it to the map.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>c</code> - closure</dd>
+</dl>
 </section>
 </li>
 </ul>
