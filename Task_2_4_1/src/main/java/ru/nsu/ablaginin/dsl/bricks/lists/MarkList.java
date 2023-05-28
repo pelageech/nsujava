@@ -25,6 +25,7 @@ public class MarkList {
      *
      * @param c closure
      */
+    @SuppressWarnings("unused")
     public void mark(Closure<?> c) {
         var markString = new MarkString();
         c.setDelegate(markString);

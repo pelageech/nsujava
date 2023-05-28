@@ -33,6 +33,7 @@ public class Student {
      *
      * @param c closure
      */
+    @SuppressWarnings("unused")
     public void group(Closure<?> c) {
         group = new Group();
         c.setDelegate(group);
@@ -45,6 +46,7 @@ public class Student {
      *
      * @param c closure
      */
+    @SuppressWarnings("unused")
     public void marks(Closure<?> c) {
         c.setDelegate(markList);
         c.setResolveStrategy(Closure.DELEGATE_ONLY);
@@ -56,6 +58,7 @@ public class Student {
      *
      * @param c closure
      */
+    @SuppressWarnings("unused")
     public void tasks(Closure<?> c) {
         c.setDelegate(givenTaskList);
         c.setResolveStrategy(Closure.DELEGATE_ONLY);
@@ -79,6 +82,7 @@ public class Student {
      * @param name function's name
      * @param args arguments
      */
+    @SuppressWarnings("unused")
     public void methodMissing(String name, Object args) {
         System.out.println(name + " was called with " + args.toString());
     }

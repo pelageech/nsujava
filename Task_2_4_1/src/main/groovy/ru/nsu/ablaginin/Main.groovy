@@ -101,7 +101,7 @@ class Main implements Callable<Integer> {
         tempRepo.deleteOnExit()
 
         GitWorks.clone(dsl.student.getUrl(), tempRepo, Optional.of(branch))
-        globTable.merge(App.testConfig(tempRepo, dsl, branch, style, javadoc))
+        globTable.merge(App.testConfig(tempRepo, dsl, style, javadoc))
 
         if (attendance) {
             attendanceTable.merge(App.attendance(

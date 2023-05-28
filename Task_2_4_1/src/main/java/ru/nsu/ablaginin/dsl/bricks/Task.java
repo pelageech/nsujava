@@ -16,8 +16,4 @@ public class Task {
     public Task() {
         
     }
-
-    public void methodMissing(String name, Object args) {
-        System.out.println(name + " was called with " + args.toString());
-    }
 }

@@ -25,6 +25,7 @@ public class ClassList {
      *
      * @param c closure
      */
+    @SuppressWarnings("unused")
     public void newClass(Closure<?> c) {
         var classString = new ClassString();
         c.setDelegate(classString);

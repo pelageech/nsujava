@@ -4,13 +4,15 @@ import org.junit.jupiter.api.Test;
 import ru.nsu.ablaginin.helper.FileUtils;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * Tests for GitWorks.
+ */
 public class GitWorksTest {
     @Test
     public void cloneTest() {

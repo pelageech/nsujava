@@ -2,7 +2,6 @@ package ru.nsu.ablaginin.builder;
 
 import org.junit.jupiter.api.Test;
 import ru.nsu.ablaginin.git.GitWorks;
-import ru.nsu.ablaginin.helper.FileUtils;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -11,6 +10,9 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * Tests for builder.
+ */
 public class BuilderTest {
     @Test
     public void builder() {

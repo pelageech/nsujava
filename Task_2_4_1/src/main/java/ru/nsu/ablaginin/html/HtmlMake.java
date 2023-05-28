@@ -14,7 +14,9 @@ public class HtmlMake implements HtmlBuilder {
     private final List<HtmlBuilder> builders = new ArrayList<>();
 
     /**
-     * @param builder adds new builder to the list.
+     * Adds new builder to the list.
+     *
+     * @param builder html builder
      */
     public void addBuilder(HtmlBuilder builder) {
         builders.add(builder);

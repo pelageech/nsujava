@@ -12,7 +12,7 @@ class App {
     public static final List<String> fieldsTable = List.of("nickname", "task", "build", "style", "javadoc", "tests", "skipped", "failures", "errors", "time", "score")
     public static final List<String> fieldsAttendance = List.of("nickname", "date", "attendance")
 
-    static HtmlTable testConfig(File tempRepo, Dsl dsl, String branch, Boolean styleCheck, Boolean javadocCheck) {
+    static HtmlTable testConfig(File tempRepo, Dsl dsl, Boolean styleCheck, Boolean javadocCheck) {
         Path p = tempRepo.toPath()
 
         HtmlTable localTable = new HtmlTable()

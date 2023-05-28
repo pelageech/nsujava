@@ -18,6 +18,7 @@ public class Dsl {
      *
      * @param c closure
      */
+    @SuppressWarnings("unused")
     public void student(Closure<?> c) {
         student = new Student();
         c.setDelegate(student);
@@ -30,6 +31,7 @@ public class Dsl {
      *
      * @param c closure
      */
+    @SuppressWarnings("unused")
     public void tasks(Closure<?> c) {
         taskMap = new TaskMap();
         c.setDelegate(taskMap);
