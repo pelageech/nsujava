@@ -3,6 +3,9 @@ package ru.nsu.ablaginin.dsl.bricks;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+/**
+ * A global task to do.
+ */
 @Data
 @AllArgsConstructor
 public class Task {
