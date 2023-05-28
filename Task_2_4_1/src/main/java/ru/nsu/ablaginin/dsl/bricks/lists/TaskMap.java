@@ -8,22 +8,25 @@ import ru.nsu.ablaginin.dsl.bricks.Task;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
+/**
+ * Map of classes that are parsed by Groovy.
+ */
 @AllArgsConstructor
 @Data
 public class TaskMap {
     @Getter private final Map<String, Task> taskMap = new HashMap<>();
 
+    /**
+     * Parses a task and adds it to the map.
+     *
+     * @param c closure
+     */
     public void task(Closure<?> c) {
         var task = new Task();
         c.setDelegate(task);
         c.setResolveStrategy(Closure.DELEGATE_ONLY);
         c.call();
         taskMap.put(task.getId(), task);
-    }
-
-    public void methodMissing(String name, Object args) {
-        System.out.println(name + " was called with " + args.toString());
     }
 }

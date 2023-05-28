@@ -9,11 +9,20 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.*;
 import java.util.*;
 
+/**
+ * Builder is a class os static functions for gradle builder.
+ */
 public class Builder {
     private static final List<String> fields = List.of(
             "name", "tests", "skipped", "failures", "errors", "timestamp", "time"
     );
 
+    /**
+     * Builds the project with the task.
+     *
+     * @param projectDir project directory
+     * @param task task that will be started
+     */
     @SneakyThrows
     public static void build(File projectDir, String task) {
         if (!projectDir.exists()) {
@@ -27,6 +36,12 @@ public class Builder {
         }
     }
 
+    /**
+     * Builds the task 'test'.
+     *
+     * @param projectDir project directory
+     * @return true if build is successful
+     */
     public static boolean buildTest(File projectDir) {
         try {
             build(projectDir, "test");
@@ -38,18 +53,12 @@ public class Builder {
         return true;
     }
 
-    @SneakyThrows
-    public static boolean checkCodeStyle(File projectDir) {
-        try {
-            build(projectDir, "checkstyleMain");
-        } catch (Exception e) {
-            System.out.println("Failed to build");
-            System.out.println(e.getMessage());
-            return false;
-        }
-        return true;
-    }
-
+    /**
+     * Builds the task 'javadoc'.
+     *
+     * @param projectDir project directory
+     * @return true if build is successful
+     */
     @SneakyThrows
     public static boolean buildJavadoc(File projectDir) {
         try {
@@ -62,6 +71,12 @@ public class Builder {
         return true;
     }
 
+    /**
+     * Takes a generated test-result file and parses it to a Map.
+     *
+     * @param projectDir project directory
+     * @return true if build is successful
+     */
     @SneakyThrows
     public static Map<String, String> getJacocoTestReport(File projectDir) {
         File testDir = new File(projectDir.getPath() + "/build/test-results/test");

@@ -19,6 +19,14 @@ import java.util.Optional;
 public class GitWorks {
     public static final String DEFAULT_BRANCH = "master";
 
+    /**
+     * Clones a repository to the particular folder.
+     *
+     * @param remotePath remote, e.g. GitHub, URL
+     * @param localFile where to clone
+     * @param branch optional branch
+     * @throws GitAPIException git api exception
+     */
     @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
     public static void clone(
             String remotePath,
@@ -41,6 +49,13 @@ public class GitWorks {
         }
     }
 
+    /**
+     * Checks if the student were on the classes.
+     *
+     * @param repositoryDir repository
+     * @param date date to check
+     * @return if the student were present on the given date
+     */
     @SneakyThrows
     public static boolean checkAttendance(
             File repositoryDir,

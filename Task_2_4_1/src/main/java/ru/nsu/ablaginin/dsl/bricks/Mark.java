@@ -5,6 +5,9 @@ import lombok.Data;
 
 import java.time.LocalDate;
 
+/**
+ * Marks are given for students.
+ */
 @Data
 @AllArgsConstructor
 public class Mark {

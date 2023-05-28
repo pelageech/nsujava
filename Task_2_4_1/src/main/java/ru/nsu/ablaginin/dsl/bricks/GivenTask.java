@@ -5,6 +5,9 @@ import lombok.Data;
 
 import java.time.LocalDate;
 
+/**
+ * Task is had students to do.
+ */
 @Data
 @AllArgsConstructor
 public class GivenTask {

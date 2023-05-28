@@ -7,6 +7,9 @@ import ru.nsu.ablaginin.dsl.bricks.lists.ClassList;
 import ru.nsu.ablaginin.dsl.bricks.lists.GivenTaskList;
 import ru.nsu.ablaginin.dsl.bricks.lists.MarkList;
 
+/**
+ * An object of an ordinary and peaceful student.
+ */
 @AllArgsConstructor
 @Data
 public class Student {
@@ -18,10 +21,18 @@ public class Student {
     private GivenTaskList givenTaskList = new GivenTaskList();
     private ClassList classes = new ClassList();
 
+    /**
+     * (ref.) See Group() constructor.
+     */
     public Student() {
 
     }
 
+    /**
+     * DSL parses a group.
+     *
+     * @param c closure
+     */
     public void group(Closure<?> c) {
         group = new Group();
         c.setDelegate(group);
@@ -29,24 +40,45 @@ public class Student {
         c.call();
     }
 
+    /**
+     * DSL parses marks.
+     *
+     * @param c closure
+     */
     public void marks(Closure<?> c) {
         c.setDelegate(markList);
         c.setResolveStrategy(Closure.DELEGATE_ONLY);
         c.call();
     }
 
+    /**
+     * DSL parses tasks.
+     *
+     * @param c closure
+     */
     public void tasks(Closure<?> c) {
         c.setDelegate(givenTaskList);
         c.setResolveStrategy(Closure.DELEGATE_ONLY);
         c.call();
     }
 
+    /**
+     * DSL parses classes.
+     *
+     * @param c closure
+     */
     public void classes(Closure<?> c) {
         c.setDelegate(classes);
         c.setResolveStrategy(Closure.DELEGATE_ONLY);
         c.call();
     }
 
+    /**
+     * An error handler.
+     *
+     * @param name function's name
+     * @param args arguments
+     */
     public void methodMissing(String name, Object args) {
         System.out.println(name + " was called with " + args.toString());
     }

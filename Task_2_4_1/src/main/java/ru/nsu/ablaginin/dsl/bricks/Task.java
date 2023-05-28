@@ -10,6 +10,9 @@ public class Task {
     private String name;
     private int score;
 
+    /**
+     * (ref.) See Group() constructor.
+     */
     public Task() {
         
     }

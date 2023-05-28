@@ -12,11 +12,19 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * List of classes that are parsed by Groovy.
+ */
 @AllArgsConstructor
 @Data
 public class MarkList {
     @Getter private final List<Mark> marks = new ArrayList<>();
 
+    /**
+     * Parses a mark and adds it to the lost.
+     *
+     * @param c closure
+     */
     public void mark(Closure<?> c) {
         var markString = new MarkString();
         c.setDelegate(markString);
@@ -31,10 +39,10 @@ public class MarkList {
         marks.add(mark);
     }
 
-    public void methodMissing(String name, Object args) {
-        System.out.println(name + " was called with " + args.toString());
-    }
-
+    /**
+     * The class that are parsed first. After that the function above
+     * parses the data to a convienient form and then adds to the list.
+     */
     @Data
     private static class MarkString {
         private int mark;

@@ -1,11 +1,20 @@
 package ru.nsu.ablaginin.dsl.bricks;
 
+/**
+ * A convienient form of Mark.
+ */
 public enum MarkNum {
     EXCELLENT,
     GOOD,
     SATISFYING,
     BAD;
 
+    /**
+     * Parses MarkNum from int.
+     *
+     * @param i a mark
+     * @return mark enum
+     */
     public static MarkNum fromInt(int i) {
         return switch (i) {
             case 2 -> BAD;

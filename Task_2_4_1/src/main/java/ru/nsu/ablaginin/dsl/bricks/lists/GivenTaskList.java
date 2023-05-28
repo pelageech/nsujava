@@ -11,11 +11,19 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * List of classes that are parsed by Groovy.
+ */
 @AllArgsConstructor
 @Data
 public class GivenTaskList {
     @Getter private final List<GivenTask> givenTaskList = new ArrayList<>();
 
+    /**
+     * Parses a task and adds it to the list.
+     *
+     * @param c closure
+     */
     public void task(Closure<?> c) {
         var givenTaskString = new GivenTaskString();
 
@@ -30,10 +38,10 @@ public class GivenTaskList {
         givenTaskList.add(givenTask);
     }
 
-    public void methodMissing(String name, Object args) {
-        System.out.println(name + " was called with " + args.toString());
-    }
-
+    /**
+     * The class that are parsed first. After that the function above
+     * parses the data to a convienient form and then adds to the list.
+     */
     @Data
     private static class GivenTaskString {
         private String id;
