@@ -1,0 +1,53 @@
+plugins {
+    id 'groovy'
+    id 'jacoco'
+    id 'java-library'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.apache.groovy:groovy:4.0.2'
+    compileOnly 'org.projectlombok:lombok:1.18.26'
+    annotationProcessor 'org.projectlombok:lombok:1.18.26'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    // https://mvnrepository.com/artifact/org.codehaus.groovy/groovy-all
+    implementation group: 'org.codehaus.groovy', name: 'groovy-all', version: '3.0.16', ext: 'pom'
+    implementation('org.eclipse.jgit:org.eclipse.jgit:6.5.0.202303070854-r')
+// https://mvnrepository.com/artifact/org.gradle/gradle-tooling-api
+    implementation 'org.gradle:gradle-tooling-api:7.3-20210825160000+0000'
+    // https://mvnrepository.com/artifact/info.picocli/picocli
+    implementation 'info.picocli:picocli:4.7.3'
+    annotationProcessor 'info.picocli:picocli-codegen:4.7.3'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    'ru/nsu/ablaginin/dsl/**',
+                    'ru/nsu/ablaginin/config/**',
+                    'ru/nsu/ablaginin/Main.groovy/**'
+            ])
+        }))
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
