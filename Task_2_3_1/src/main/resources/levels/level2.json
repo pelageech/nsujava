@@ -130,5 +130,14 @@
       "y": 15
     }
   ],
-  "maxFood": 10
+  "maxFood": 10,
+  "colors": {
+    "one": "AAD751",
+    "two": "A2D149",
+    "barrier": "0A8E2D",
+    "headBot": "4674E9",
+    "bodyBot": "A604E9",
+    "head": "000000",
+    "body": "FFFFFF"
+  }
 }

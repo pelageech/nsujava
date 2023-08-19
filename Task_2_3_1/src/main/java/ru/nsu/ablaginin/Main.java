@@ -11,11 +11,15 @@ import lombok.Getter;
 import lombok.Setter;
 import java.nio.file.NoSuchFileException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import ru.nsu.ablaginin.controller.Controller;
 import ru.nsu.ablaginin.controller.menu.MenuController;
 import ru.nsu.ablaginin.helper.MainHelper;
 import ru.nsu.ablaginin.builder.LevelBuilder;
+import ru.nsu.ablaginin.model.ingame.Snake;
 import ru.nsu.ablaginin.model.menu.Menu;
 import ru.nsu.ablaginin.model.menu.bricks.Button;
 import ru.nsu.ablaginin.builder.MenuBuilder;
@@ -67,15 +71,36 @@ public final class Main extends Application {
     }
     Image winImage = new Image(winIs);
 
-    @Cleanup var loseIs = getClass()
+    var imgs = new HashMap<Snake.DeathType, Image>();
+
+    /////////////////
+    @Cleanup var loseIs1 = getClass()
             .getClassLoader()
-            .getResourceAsStream("img/dead.jpeg");
-    if (loseIs == null) {
+            .getResourceAsStream("img/pomer_bar.png");
+    if (loseIs1 == null) {
       throw new NoSuchFileException("no lose image");
     }
-    Image loseImage = new Image(loseIs);
+    imgs.put(Snake.DeathType.BUMP_BARRIER, new Image(loseIs1));
 
-    LevelBuilder levelBuilder = new LevelBuilder(exitButton, images, winImage, loseImage);
+    /////////////////
+    @Cleanup var loseIs2 = getClass()
+            .getClassLoader()
+            .getResourceAsStream("img/pomer_self.png");
+    if (loseIs2 == null) {
+      throw new NoSuchFileException("no lose image");
+    }
+    imgs.put(Snake.DeathType.SELF_EATEN, new Image(loseIs2));
+
+    /////////////////
+    @Cleanup var loseIs3 = getClass()
+            .getClassLoader()
+            .getResourceAsStream("img/pomer_another.png");
+    if (loseIs3 == null) {
+      throw new NoSuchFileException("no lose image");
+    }
+    imgs.put(Snake.DeathType.BUMP_SNAKE, new Image(loseIs3));
+
+    LevelBuilder levelBuilder = new LevelBuilder(exitButton, images, winImage, imgs);
 
     for (int i = 0; i < 10; i++) {
       @Cleanup var is = getClass()
