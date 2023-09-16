@@ -13,7 +13,6 @@ import java.nio.file.NoSuchFileException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import ru.nsu.ablaginin.controller.Controller;
 import ru.nsu.ablaginin.controller.menu.MenuController;
@@ -27,13 +26,14 @@ import ru.nsu.ablaginin.builder.MenuBuilder;
 /**
  * Main starts an application. There can only be one working controller.
  */
+@Getter
 public final class Main extends Application {
   public static final int WIDTH = 900;
   public static final int HEIGHT = 540;
-  @Getter @Setter
+  @Setter
   private Controller currentController;
-  @Getter private final List<Button> levelButtons = new ArrayList<>();
-  @Getter private final Group root = new Group();
+  private final List<Button> levelButtons = new ArrayList<>();
+  private final Group root = new Group();
 
   public static void main(String[] args) {
     launch(args);
@@ -99,6 +99,15 @@ public final class Main extends Application {
       throw new NoSuchFileException("no lose image");
     }
     imgs.put(Snake.DeathType.BUMP_SNAKE, new Image(loseIs3));
+
+    /////////////////
+    @Cleanup var loseIs4 = getClass()
+            .getClassLoader()
+            .getResourceAsStream("img/pomer_lost.png");
+    if (loseIs4 == null) {
+      throw new NoSuchFileException("no lose image");
+    }
+    imgs.put(Snake.DeathType.ANOTHER_SNAKE_GOT_TARGET, new Image(loseIs4));
 
     LevelBuilder levelBuilder = new LevelBuilder(exitButton, images, winImage, imgs);
 

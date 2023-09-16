@@ -1,10 +1,12 @@
 package ru.nsu.ablaginin.controller.ingame;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import lombok.Getter;
 import ru.nsu.ablaginin.controller.Controller;
 import ru.nsu.ablaginin.model.ingame.*;
@@ -165,7 +167,7 @@ public class InGameController implements Controller {
   
   private void updateFrame(Random random) {
     view();
-    if (snakes.size() == 0) {
+    if (snakes.isEmpty()) {
       timer.cancel();
       return;
     }
@@ -204,6 +206,11 @@ public class InGameController implements Controller {
         return;
       }
     }
+    gc.setEffect(new DropShadow());
+    gc.setFont(new Font("Verdana", 15));
+    gc.setFill(Color.WHITE);
+    gc.fillText("Eaten: " + humanSnake.getEaten() + "/" + humanSnake.getAim().foodCollect(), 0, field.getHeight()-10);
+    gc.setEffect(null);
   }
 
   private void view() {
