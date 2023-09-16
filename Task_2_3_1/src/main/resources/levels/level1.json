@@ -10,7 +10,7 @@
     },
     "velocity" : 1,
     "direction" : "UP",
-    "targetFood" : 10
+    "targetFood" : 25
   },
   "bots" : [
     {
@@ -113,5 +113,14 @@
       "y": 19
     }
   ],
-  "maxFood": 3
+  "maxFood": 3,
+  "colors": {
+    "one": "acb78e",
+    "two": "95a36f",
+    "barrier": "434a2f",
+    "headBot": "FFF",
+    "bodyBot": "333",
+    "head": "333",
+    "body": "FFF"
+  }
 }

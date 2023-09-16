@@ -26,6 +26,19 @@ public class Snake {
   @Getter private final int initX;
   @Getter private final int initY;
 
+
+  @Setter
+  @Getter
+  private DeathType deathType = DeathType.NONE;
+
+  public enum DeathType {
+    BUMP_BARRIER,
+    SELF_EATEN,
+    BUMP_SNAKE,
+    ANOTHER_SNAKE_GOT_TARGET,
+    NONE,
+  }
+
   /**
    * Creates a single snake model.
    *

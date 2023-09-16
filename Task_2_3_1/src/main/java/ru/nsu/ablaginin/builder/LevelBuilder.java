@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.media.Media;
+import javafx.scene.paint.Color;
 import lombok.AllArgsConstructor;
 import lombok.Cleanup;
 import ru.nsu.ablaginin.Main;
@@ -13,6 +14,7 @@ import ru.nsu.ablaginin.helper.MainHelper;
 import ru.nsu.ablaginin.model.ingame.BotSnake;
 import ru.nsu.ablaginin.model.ingame.Field;
 import ru.nsu.ablaginin.model.ingame.HumanSnake;
+import ru.nsu.ablaginin.model.ingame.Snake;
 import ru.nsu.ablaginin.model.ingame.bricks.Aim;
 import ru.nsu.ablaginin.model.ingame.bricks.Barrier;
 import ru.nsu.ablaginin.model.ingame.bricks.Direction;
@@ -20,12 +22,12 @@ import ru.nsu.ablaginin.model.menu.bricks.Button;
 
 import java.awt.*;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Builds levels. Returns a button.
@@ -41,6 +43,10 @@ public class LevelBuilder {
    * @param targetFood target food aim
    */
   public record InitSnake(Point spawn, int velocity, String direction, int targetFood) {
+  }
+
+  public record Colors(String one, String two, String barrier, String headBot, String bodyBot, String head, String body) {
+
   }
 
   /**
@@ -62,14 +68,15 @@ public class LevelBuilder {
       InitSnake human,
       InitSnake[] bots,
       Barrier[] barriers,
-      int maxFood
+      int maxFood,
+      Colors colors
   ) {
   }
 
   private Button exitButton;
   private List<Image> fruitImages;
   private Image winImage;
-  private Image loseImage;
+  private Map<Snake.DeathType, Image> loseImage;
 
   /**
    * Creates a button that loads a level.
@@ -121,7 +128,14 @@ public class LevelBuilder {
           fruitImages,
           winImage,
           loseImage,
-          media, config.maxFood
+          media, config.maxFood,
+              Color.web(config.colors.one),
+              Color.web(config.colors.two),
+              Color.web(config.colors.body),
+              Color.web(config.colors.head),
+              Color.web(config.colors.bodyBot),
+              Color.web(config.colors.headBot),
+              Color.web(config.colors.barrier)
       );
       MainHelper.replaceController(newController);
 
@@ -143,7 +157,7 @@ public class LevelBuilder {
    * @param scene current scenes
    * @return a button for loading a level
    */
-  public Button buildNewLevel(GraphicsContext gc, InputStream is, Scene scene) throws IOException {
+  public Button buildNewLevel(GraphicsContext gc, InputStream is, Scene scene) {
     Gson gson = new Gson();
 
     @Cleanup var bufReader = new BufferedReader(new InputStreamReader(is));

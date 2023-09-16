@@ -1,10 +1,12 @@
 package ru.nsu.ablaginin.controller.ingame;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import lombok.Getter;
 import ru.nsu.ablaginin.controller.Controller;
 import ru.nsu.ablaginin.model.ingame.*;
@@ -62,16 +64,23 @@ public class InGameController implements Controller {
    * @param media a music for a game
    */
   public InGameController(
-      GraphicsContext gc,
-      Field field,
-      HumanSnake humanSnake,
-      List<BotSnake> botSnakes,
-      long timeUpdate,
-      List<Image> images,
-      Image winImage,
-      Image loseImage,
-      Media media,
-      int maxFood
+          GraphicsContext gc,
+          Field field,
+          HumanSnake humanSnake,
+          List<BotSnake> botSnakes,
+          long timeUpdate,
+          List<Image> images,
+          Image winImage,
+          Map<Snake.DeathType, Image> loseImage,
+          Media media,
+          int maxFood,
+          Color fieldColorOne,
+          Color fieldColorTwo,
+          Color snakeBody,
+          Color snakeHead,
+          Color botBody,
+          Color botHead,
+          Color barrier
   ) {
     turnOnMusic(media);
     this.gc = gc;
@@ -81,10 +90,11 @@ public class InGameController implements Controller {
     this.field = field;
     fieldView = new DrawField(
         field,
-        Color.web("AAD751"),
-        Color.web("A2D149"),
+            fieldColorOne,
+        fieldColorTwo,
         Color.DARKSEAGREEN
     );
+    fieldView.setColorBarrier(barrier);
 
     this.humanSnake = humanSnake;
     this.botSnakes = botSnakes;
@@ -93,18 +103,19 @@ public class InGameController implements Controller {
     snakes
         .forEach(snake -> snakesView.add(new DrawSnake(
             snake,
-            Color.web("4674E9"),
-            Color.web("A604E9"),
+            botHead,
+            botBody,
             field.getSquareSize()
         )));
-    snakesView.get(0).setHeadColor(Color.RED);
+    snakesView.get(0).setHeadColor(snakeHead);
+    snakesView.get(0).setBodyColor(snakeBody);
 
     // lose
     var losePath = getClass().getClassLoader().getResource("music/lose.mp3");
     if (losePath != null) {
       lose = new Media(losePath.toExternalForm());
     }
-    drawLose = new DrawLose(loseImage, field.getWidth(), field.getHeight());
+    drawLose = new DrawLose(Snake.DeathType.NONE, loseImage, field.getWidth(), field.getHeight());
 
     // win
     var winPath = getClass().getClassLoader().getResource("music/win.mp3");
@@ -156,7 +167,7 @@ public class InGameController implements Controller {
   
   private void updateFrame(Random random) {
     view();
-    if (snakes.size() == 0) {
+    if (snakes.isEmpty()) {
       timer.cancel();
       return;
     }
@@ -170,9 +181,7 @@ public class InGameController implements Controller {
     snakes
           .forEach(snake -> {
             snake.move();
-            if (die(snake)) {
-              snake.setGameOver(true);
-            }
+            die(snake);
             for (var i = 0; i < foods.size(); i++) {
               ifFoodEaten(random, snake, i);
             }
@@ -183,7 +192,7 @@ public class InGameController implements Controller {
 
     // handle win/lose human snake
     if (humanSnake.isGameOver()) {
-      lose();
+      lose(humanSnake.getDeathType());
       return;
     }
     snakes = snakes.stream().filter(snake -> !snake.isGameOver()).toList();
@@ -193,10 +202,15 @@ public class InGameController implements Controller {
     }
     for (var s : botSnakes) {
       if (s.win()) {
-        lose();
+        lose(Snake.DeathType.ANOTHER_SNAKE_GOT_TARGET);
         return;
       }
     }
+    gc.setEffect(new DropShadow());
+    gc.setFont(new Font("Verdana", 15));
+    gc.setFill(Color.WHITE);
+    gc.fillText("Eaten: " + humanSnake.getEaten() + "/" + humanSnake.getAim().foodCollect(), 0, field.getHeight()-10);
+    gc.setEffect(null);
   }
 
   private void view() {
@@ -259,21 +273,22 @@ public class InGameController implements Controller {
     }
   }
 
-  private void lose() {
+  private void lose(Snake.DeathType deathType) {
     stop();
+    drawLose.setDeathType(deathType);
     drawLose.draw(gc);
     if (lose != null) {
       turnOnMusic(lose);
     }
   }
 
-  private boolean die(Snake snake) {
+  private void die(Snake snake) {
     var head = snake.getHead();
 
     // out of field
     if (head.x < 0 || head.y < 0 || head.x >= field.getColumns() || head.y >= field.getRows()) {
+      snake.setDeathType(Snake.DeathType.BUMP_BARRIER);
       snake.setGameOver(true);
-      return true;
     }
 
     // bumped into another snake
@@ -284,7 +299,7 @@ public class InGameController implements Controller {
       for (var p : s.getBody()) {
         if (p.x == head.x && p.y == head.y) {
           snake.setGameOver(true);
-          return true;
+          snake.setDeathType(Snake.DeathType.BUMP_SNAKE);
         }
       }
     }
@@ -295,7 +310,7 @@ public class InGameController implements Controller {
       Point p = body.get(i);
       if (p.x == head.x && p.y == head.y) {
         snake.setGameOver(true);
-        return true;
+        snake.setDeathType(Snake.DeathType.SELF_EATEN);
       }
     }
 
@@ -303,9 +318,8 @@ public class InGameController implements Controller {
     for (var p : field.getBarriers()) {
       if (p.x == head.x && p.y == head.y) {
         snake.setGameOver(true);
-        return true;
+        snake.setDeathType(Snake.DeathType.BUMP_BARRIER);
       }
     }
-    return false;
   }
 }

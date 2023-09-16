@@ -2,7 +2,7 @@
   "name" : "CHAOS",
   "squareSize": 12,
   "number" : 1,
-  "musicPath": "CHAOS.mp3",
+  "musicPath": "level9.m4a",
   "human" : {
     "spawn" : {
       "x" : 15.0,
@@ -10,7 +10,7 @@
     },
     "velocity" : 1,
     "direction" : "UP",
-    "targetFood" : 12
+    "targetFood" : 100
   },
   "bots" : [
     {
@@ -20,7 +20,7 @@
       },
       "velocity" : 1,
       "direction" : "UP",
-      "targetFood" : 15
+      "targetFood" : 70
     },
     {
       "spawn" : {
@@ -29,7 +29,7 @@
       },
       "velocity" : 1,
       "direction" : "UP",
-      "targetFood" : 15
+      "targetFood" : 70
     },
     {
       "spawn" : {
@@ -38,7 +38,7 @@
       },
       "velocity" : 1,
       "direction" : "UP",
-      "targetFood" : 15
+      "targetFood" : 70
     },
     {
       "spawn" : {
@@ -47,7 +47,7 @@
       },
       "velocity" : 1,
       "direction" : "UP",
-      "targetFood" : 15
+      "targetFood" : 70
     },
     {
       "spawn" : {
@@ -56,7 +56,7 @@
       },
       "velocity" : 1,
       "direction" : "UP",
-      "targetFood" : 15
+      "targetFood" : 70
     },
     {
       "spawn" : {
@@ -65,7 +65,7 @@
       },
       "velocity" : 1,
       "direction" : "UP",
-      "targetFood" : 15
+      "targetFood" : 70
     },
     {
       "spawn" : {
@@ -74,7 +74,7 @@
       },
       "velocity" : 1,
       "direction" : "UP",
-      "targetFood" : 15
+      "targetFood" : 70
     },
     {
       "spawn" : {
@@ -83,7 +83,7 @@
       },
       "velocity" : 1,
       "direction" : "UP",
-      "targetFood" : 15
+      "targetFood" : 70
     },
     {
       "spawn" : {
@@ -92,7 +92,7 @@
       },
       "velocity" : 1,
       "direction" : "UP",
-      "targetFood" : 15
+      "targetFood" : 70
     },
     {
       "spawn" : {
@@ -101,7 +101,7 @@
       },
       "velocity" : 1,
       "direction" : "UP",
-      "targetFood" : 15
+      "targetFood" : 70
     },
     {
       "spawn" : {
@@ -110,10 +110,19 @@
       },
       "velocity" : 1,
       "direction" : "UP",
-      "targetFood" : 15
+      "targetFood" : 70
     }
   ],
   "barriers" : [
   ],
-  "maxFood":20
+  "maxFood":20,
+  "colors": {
+    "one": "670C0D",
+    "two": "59080D",
+    "barrier": "0A8E2D",
+    "headBot": "D27300",
+    "bodyBot": "8A427D",
+    "head": "D27300",
+    "body": "1C6721"
+  }
 }

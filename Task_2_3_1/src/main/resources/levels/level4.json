@@ -2,7 +2,7 @@
   "name" : "Level 4",
   "squareSize": 90,
   "number" : 1,
-  "musicPath": "level1.mp3",
+  "musicPath": "level4.m4a",
   "human" : {
     "spawn" : {
       "x" : 0.0,
@@ -32,5 +32,14 @@
       "y": 4
     }
   ],
-  "maxFood": 2
+  "maxFood": 2,
+  "colors": {
+    "one": "ba55d3",
+    "two": "cb7ede",
+    "barrier": "4a1b41",
+    "headBot": "1c1119",
+    "bodyBot": "8a3e4c",
+    "head": "231a24",
+    "body": "795a7d"
+  }
 }

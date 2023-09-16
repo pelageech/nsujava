@@ -11,11 +11,14 @@ import lombok.Getter;
 import lombok.Setter;
 import java.nio.file.NoSuchFileException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
 import ru.nsu.ablaginin.controller.Controller;
 import ru.nsu.ablaginin.controller.menu.MenuController;
 import ru.nsu.ablaginin.helper.MainHelper;
 import ru.nsu.ablaginin.builder.LevelBuilder;
+import ru.nsu.ablaginin.model.ingame.Snake;
 import ru.nsu.ablaginin.model.menu.Menu;
 import ru.nsu.ablaginin.model.menu.bricks.Button;
 import ru.nsu.ablaginin.builder.MenuBuilder;
@@ -23,13 +26,14 @@ import ru.nsu.ablaginin.builder.MenuBuilder;
 /**
  * Main starts an application. There can only be one working controller.
  */
+@Getter
 public final class Main extends Application {
   public static final int WIDTH = 900;
   public static final int HEIGHT = 540;
-  @Getter @Setter
+  @Setter
   private Controller currentController;
-  @Getter private final List<Button> levelButtons = new ArrayList<>();
-  @Getter private final Group root = new Group();
+  private final List<Button> levelButtons = new ArrayList<>();
+  private final Group root = new Group();
 
   public static void main(String[] args) {
     launch(args);
@@ -67,15 +71,45 @@ public final class Main extends Application {
     }
     Image winImage = new Image(winIs);
 
-    @Cleanup var loseIs = getClass()
+    var imgs = new HashMap<Snake.DeathType, Image>();
+
+    /////////////////
+    @Cleanup var loseIs1 = getClass()
             .getClassLoader()
-            .getResourceAsStream("img/dead.jpeg");
-    if (loseIs == null) {
+            .getResourceAsStream("img/pomer_bar.png");
+    if (loseIs1 == null) {
       throw new NoSuchFileException("no lose image");
     }
-    Image loseImage = new Image(loseIs);
+    imgs.put(Snake.DeathType.BUMP_BARRIER, new Image(loseIs1));
 
-    LevelBuilder levelBuilder = new LevelBuilder(exitButton, images, winImage, loseImage);
+    /////////////////
+    @Cleanup var loseIs2 = getClass()
+            .getClassLoader()
+            .getResourceAsStream("img/pomer_self.png");
+    if (loseIs2 == null) {
+      throw new NoSuchFileException("no lose image");
+    }
+    imgs.put(Snake.DeathType.SELF_EATEN, new Image(loseIs2));
+
+    /////////////////
+    @Cleanup var loseIs3 = getClass()
+            .getClassLoader()
+            .getResourceAsStream("img/pomer_another.png");
+    if (loseIs3 == null) {
+      throw new NoSuchFileException("no lose image");
+    }
+    imgs.put(Snake.DeathType.BUMP_SNAKE, new Image(loseIs3));
+
+    /////////////////
+    @Cleanup var loseIs4 = getClass()
+            .getClassLoader()
+            .getResourceAsStream("img/pomer_lost.png");
+    if (loseIs4 == null) {
+      throw new NoSuchFileException("no lose image");
+    }
+    imgs.put(Snake.DeathType.ANOTHER_SNAKE_GOT_TARGET, new Image(loseIs4));
+
+    LevelBuilder levelBuilder = new LevelBuilder(exitButton, images, winImage, imgs);
 
     for (int i = 0; i < 10; i++) {
       @Cleanup var is = getClass()

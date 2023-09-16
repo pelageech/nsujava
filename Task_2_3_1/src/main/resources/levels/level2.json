@@ -20,7 +20,7 @@
       },
       "velocity" : 1,
       "direction" : "UP",
-      "targetFood" : 18
+      "targetFood" : 15
     },
     {
       "spawn" : {
@@ -29,7 +29,7 @@
       },
       "velocity" : 1,
       "direction" : "UP",
-      "targetFood" : 18
+      "targetFood" : 15
     }
   ],
   "barriers" : [
@@ -130,5 +130,14 @@
       "y": 15
     }
   ],
-  "maxFood": 10
+  "maxFood": 10,
+  "colors": {
+    "one": "fcdd76",
+    "two": "fce9a9",
+    "barrier": "d19c1f",
+    "headBot": "36382a",
+    "bodyBot": "69755e",
+    "head": "bf6f39",
+    "body": "dd9475"
+  }
 }

@@ -1,6 +1,8 @@
 package ru.nsu.ablaginin.model.ingame;
 
 import javafx.scene.Scene;
+import lombok.Getter;
+import lombok.Setter;
 import ru.nsu.ablaginin.model.ingame.bricks.Aim;
 import ru.nsu.ablaginin.model.ingame.bricks.Direction;
 
@@ -8,6 +10,7 @@ import ru.nsu.ablaginin.model.ingame.bricks.Direction;
  * Snake that's controlled by a human.
  */
 public class HumanSnake extends Snake {
+
   /**
    * Creates a single model of a human snake.
    *

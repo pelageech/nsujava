@@ -12,11 +12,12 @@ import ru.nsu.ablaginin.view.Drawable;
 /**
  * View module for drawing menu.
  */
+@Getter
 @AllArgsConstructor
 public class DrawMenu implements Drawable {
-  @Getter private final Menu menu;
-  @Getter @Setter private Color bgColor;
-  @Getter @Setter private Color textColor;
+  private final Menu menu;
+  @Setter private Color bgColor;
+  @Setter private Color textColor;
 
   @Override
   public void draw(GraphicsContext gc) {
@@ -24,7 +25,7 @@ public class DrawMenu implements Drawable {
     gc.fillRect(0, 0, menu.getWidth(), menu.getHeight());
     gc.setFill(textColor);
     gc.setFont(new Font("Comic Sans MS", 65));
-    gc.fillText("SnakeFX", menu.getWidth() / 3., menu.getHeight() / 4.);
+    gc.fillText("SnakeFX v1.1", menu.getWidth() / 3.6, menu.getHeight() / 4.);
 
     var exitButtonPoint = menu.getExitButton().getPoint();
     menu.getExitButton().setLayoutX(exitButtonPoint.x);

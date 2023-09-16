@@ -2,116 +2,127 @@
   "name" : "Level 8",
   "squareSize": 27,
   "number" : 1,
-  "musicPath": "level1.mp3",
+  "musicPath": "level8.m4a",
   "human" : {
     "spawn" : {
-      "x" : 15.0,
+      "x" : 30.0,
       "y" : 15.0
     },
     "velocity" : 1,
     "direction" : "UP",
-    "targetFood" : 15
+    "targetFood" : 25
   },
   "bots" : [
     {
       "spawn" : {
         "x" : 5.0,
+        "y" : 15.0
+      },
+      "velocity" : 1,
+      "direction" : "UP",
+      "targetFood" : 25
+    },
+    {
+      "spawn" : {
+        "x" : 15.0,
         "y" : 5.0
       },
       "velocity" : 1,
       "direction" : "UP",
-      "targetFood" : 15
+      "targetFood" : 25
+    },
+    {
+      "spawn" : {
+        "x" : 10.0,
+        "y" : 5.0
+      },
+      "velocity" : 1,
+      "direction" : "UP",
+      "targetFood" : 25
+    },
+    {
+      "spawn" : {
+        "x" : 5.0,
+        "y" : 10.0
+      },
+      "velocity" : 1,
+      "direction" : "UP",
+      "targetFood" : 25
+    },
+    {
+      "spawn" : {
+        "x" : 10.0,
+        "y" : 15.0
+      },
+      "velocity" : 1,
+      "direction" : "UP",
+      "targetFood" : 25
+    },
+    {
+      "spawn" : {
+        "x" : 15.0,
+        "y" : 25.0
+      },
+      "velocity" : 1,
+      "direction" : "UP",
+      "targetFood" : 25
+    },
+    {
+      "spawn" : {
+        "x" : 25.0,
+        "y" : 10.0
+      },
+      "velocity" : 1,
+      "direction" : "UP",
+      "targetFood" : 25
+    },
+    {
+      "spawn" : {
+        "x" : 25.0,
+        "y" : 10.0
+      },
+      "velocity" : 1,
+      "direction" : "UP",
+      "targetFood" : 25
+    },
+    {
+      "spawn" : {
+        "x" : 30.0,
+        "y" : 15.0
+      },
+      "velocity" : 1,
+      "direction" : "UP",
+      "targetFood" : 25
+    },
+    {
+      "spawn" : {
+        "x" : 25.0,
+        "y" : 20.0
+      },
+      "velocity" : 1,
+      "direction" : "UP",
+      "targetFood" : 25
+    },
+    {
+      "spawn" : {
+        "x" : 35.0,
+        "y" : 10.0
+      },
+      "velocity" : 1,
+      "direction" : "UP",
+      "targetFood" : 25
     }
   ],
   "barriers" : [
-    {
-      "x" : 4,
-      "y" : 0
-    },
-    {
-      "x": 4,
-      "y": 1
-    },
-    {
-      "x": 4,
-      "y": 2
-    },
-    {
-      "x" : 4,
-      "y" : 6
-    },
-    {
-      "x": 4,
-      "y": 7
-    },
-    {
-      "x": 4,
-      "y": 8
-    },
-    {
-      "x": 4,
-      "y": 12
-    },
-    {
-      "x": 4,
-      "y": 13
-    },
-    {
-      "x": 4,
-      "y": 14
-    },
-    {
-      "x": 4,
-      "y": 18
-    },
-    {
-      "x": 4,
-      "y": 19
-    },
-    {
-      "x" : 20,
-      "y" : 0
-    },
-    {
-      "x": 20,
-      "y": 1
-    },
-    {
-      "x": 20,
-      "y": 2
-    },
-    {
-      "x" : 20,
-      "y" : 6
-    },
-    {
-      "x": 20,
-      "y": 7
-    },
-    {
-      "x": 20,
-      "y": 8
-    },
-    {
-      "x": 20,
-      "y": 12
-    },
-    {
-      "x": 20,
-      "y": 13
-    },
-    {
-      "x": 20,
-      "y": 14
-    },
-    {
-      "x": 20,
-      "y": 18
-    },
-    {
-      "x": 20,
-      "y": 19
-    }
   ],
-  "maxFood": 1
+  "maxFood": 9,
+  "colors": {
+    "one": "111",
+    "two": "000",
+    "barrier": "000",
+    "headBot": "fff",
+    "bodyBot": "000",
+    "head": "fff",
+    "body": "000"
+  }
 }
